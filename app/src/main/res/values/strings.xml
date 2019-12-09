@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">MvvmApp</string>
+
 
     <!--Toolbar menus-->
     <string name="clear">Clear</string>
@@ -43,7 +43,7 @@
     <!--Login-->
     <string name="login_dummy">Login Dummy</string>
     <string name="login">Login</string>
-    <string name="email">Email</string>
+
     <string name="password">Password</string>
 
     <!--Login Validation-->
@@ -83,4 +83,20 @@
     <string name="empty_screen">We do not have anything\nhere right now.</string>
     <string name="please_retry">Please Retry</string>
     <string name="retry">Retry</string>
+
+
+    <!---Our String-->
+    <string name="app_name">MyProjectTest</string>
+    <string name="forget_password"><u>Forgot Password</u></string>
+    <string name="edittext_hint"><font size="5">Answer</font></string>
+    <string name="hint"><font size="12">Any other thing you would like us to know?</font></string>
+    <string name="second_hint"><font size="12">Enter Customer Feedback</font></string>
+    <string name="third_hint"><font size="12">Enter Number of Bottles returned</font></string>
+    <string name="first_name"><font size="5">First Name</font></string>
+    <string name="last_name"><font size="5">Last Name</font></string>
+    <string name="email"><font size="5">Email</font></string>
+    <string name="phone_number"><font size="5">Phone Number</font></string>
+    <string name="adress"><font size="5">Address</font></string>
+
+
 </resources>
