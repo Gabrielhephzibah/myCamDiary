@@ -44,10 +44,10 @@ public class LogoutResponse {
 
         LogoutResponse that = (LogoutResponse) object;
 
-        if (statusCode != null ? !statusCode.equals(that.statusCode) : that.statusCode != null) {
+        if (statusCode != null ? !that.statusCode.equals(statusCode) : that.statusCode != null) {
             return false;
         }
-        return message != null ? message.equals(that.message) : that.message == null;
+        return message != null ? that.message.equals(message) : that.message == null;
 
     }
 
