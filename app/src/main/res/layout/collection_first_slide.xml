@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/collector_first_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dip"
+                android:orientation="vertical"
+                android:layout_marginTop="17dip">
+                <TextView
+                    android:id="@+id/today_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:textSize="7sp"
+                    android:textColor="#4F4F4F" />
+
+                <TextView
+                    android:id="@+id/volume_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Volume Accepted"
+                    android:letterSpacing="0.03"
+                    android:textColor="#21523C"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/azo_san" />
+
+                <TextView
+                    android:id="@+id/litres_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2200 Liters"
+                    android:textColor="#21523C"
+                    android:textSize="25dp"
+                    android:letterSpacing="-0.03"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:paddingTop="13dip"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</LinearLayout>

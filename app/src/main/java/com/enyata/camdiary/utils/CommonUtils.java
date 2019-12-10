@@ -37,7 +37,8 @@ import java.util.Locale;
  * Created by amitshekhar on 07/07/17.
  */
 
-public final class CommonUtils {
+public final class
+CommonUtils {
 
     private CommonUtils() {
         // This utility class is not publicly instantiable
