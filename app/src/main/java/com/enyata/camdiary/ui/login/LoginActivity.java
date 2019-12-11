@@ -19,7 +19,6 @@ package com.enyata.camdiary.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,12 +27,15 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
+import com.enyata.camdiary.utils.Alert;
 
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by hephzibah and tomiwa on 10/12/19.
  */
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
@@ -69,22 +71,30 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
-    public void login() {
-//        String email = mActivityLoginBinding.etEmail.getText().toString();
-//        String password = mActivityLoginBinding.etPassword.getText().toString();
-//        if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {
-//            hideKeyboard();
-//            mLoginViewModel.login(email, password);
-//        } else {
-//            Toast.makeText(this, getString(R.string.invalid_email_password), Toast.LENGTH_SHORT).show();
-//        }
-    }
-
-    @Override
     public void openMainActivity() {
         Intent intent = MainActivity.newIntent(LoginActivity.this);
         startActivity(intent);
         finish();
+    }
+
+
+    @Override
+    public void loginClick() {
+        String email = mActivityLoginBinding.emailTextView.getText().toString();
+        String password = mActivityLoginBinding.passwordTextView.getText().toString();
+        if (mLoginViewModel.isEmailAndPasswordValid(email,password)){
+            hideKeyboard();
+            mLoginViewModel.goToCollectorBarCode();
+        }else{
+            Alert.showFailed(getApplicationContext(),"Please fill all fields");
+        }
+
+    }
+
+    @Override
+    public void goToCollectorScanBarcode() {
+        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -34,19 +34,29 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         super(dataManager, schedulerProvider);
     }
 
-    public boolean isEmailAndPasswordValid(String email, String password) {
+    public String isempty(String email, String password) {
+
+        String message = "";
+
         // validate email and password
-        if (TextUtils.isEmpty(email)) {
-            return false;
+        if (email .isEmpty()) {
+            return message + "Email is empty";
         }
         if (!CommonUtils.isEmailValid(email)) {
-            return false;
+            return message + "Invalid_Email";
         }
         if (TextUtils.isEmpty(password)) {
-            return false;
+            return message + "Password is Empty";
         }
+        return message;
+    }
+
+
+    public boolean isEmailAndPasswordValid(String email, String password) {
+        if (TextUtils.isEmpty(email) || !CommonUtils.isEmailValid(email) || TextUtils.isEmpty(password)) return true;
         return true;
     }
+
 
     public void login(String email, String password) {
         setIsLoading(true);
@@ -118,6 +128,15 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     }
 
     public void onServerLoginClick() {
-        getNavigator().login();
+        //getNavigator().login();
     }
+
+    public void onLoginClick() {
+        getNavigator().loginClick();
+    }
+    public void goToCollectorBarCode(){
+        getNavigator().goToCollectorScanBarcode();
+    }
+
 }
+

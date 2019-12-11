@@ -5,6 +5,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.ui.about.AboutViewModel;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardViewModel;
+import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
+import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsViewModel;
+import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.feed.FeedViewModel;
 import com.enyata.camdiary.ui.feed.blogs.BlogViewModel;
 import com.enyata.camdiary.ui.feed.opensource.OpenSourceViewModel;
@@ -23,48 +28,61 @@ import javax.inject.Singleton;
 @Singleton
 public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFactory {
 
-  private final DataManager dataManager;
-  private final SchedulerProvider schedulerProvider;
+    private final DataManager dataManager;
+    private final SchedulerProvider schedulerProvider;
 
-  @Inject
-  public ViewModelProviderFactory(DataManager dataManager,
-      SchedulerProvider schedulerProvider) {
-    this.dataManager = dataManager;
-    this.schedulerProvider = schedulerProvider;
-  }
+    @Inject
+    public ViewModelProviderFactory(DataManager dataManager,
+                                    SchedulerProvider schedulerProvider) {
+        this.dataManager = dataManager;
+        this.schedulerProvider = schedulerProvider;
+    }
 
 
-  @Override
-  public <T extends ViewModel> T create(Class<T> modelClass) {
-    if (modelClass.isAssignableFrom(AboutViewModel.class)) {
-      //noinspection unchecked
-      return (T) new AboutViewModel(dataManager,schedulerProvider);
-    } else if (modelClass.isAssignableFrom(FeedViewModel.class)) {
-      //noinspection unchecked
-      return (T) new FeedViewModel(dataManager,schedulerProvider);
-    } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-      //noinspection unchecked
-      return (T) new LoginViewModel(dataManager,schedulerProvider);
-    } else if (modelClass.isAssignableFrom(MainViewModel.class)) {
-      //noinspection unchecked
-      return (T) new MainViewModel(dataManager,schedulerProvider);
+    @Override
+    public <T extends ViewModel> T create(Class<T> modelClass) {
+        if (modelClass.isAssignableFrom(AboutViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AboutViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(FeedViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FeedViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+            //noinspection unchecked
+            return (T) new LoginViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(BarcodeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BarcodeViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(FarmerDetailsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FarmerDetailsViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(FarmerIdViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FarmerIdViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(DashboardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DashboardViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(EnterVolumeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EnterVolumeViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(MainViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MainViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(BlogViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BlogViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RateUsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new RateUsViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(OpenSourceViewModel.class)) {
+            //noinspection unchecked
+            return (T) new OpenSourceViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SplashViewModel(dataManager, schedulerProvider);
+        }
+        throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
-    else if (modelClass.isAssignableFrom(BlogViewModel.class)) {
-      //noinspection unchecked
-      return (T) new BlogViewModel(dataManager,schedulerProvider);
-    }
-    else if (modelClass.isAssignableFrom(RateUsViewModel.class)) {
-      //noinspection unchecked
-      return (T) new RateUsViewModel(dataManager,schedulerProvider);
-    }
-    else if (modelClass.isAssignableFrom(OpenSourceViewModel.class)) {
-      //noinspection unchecked
-      return (T) new OpenSourceViewModel(dataManager,schedulerProvider);
-    }
-    else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
-      //noinspection unchecked
-      return (T) new SplashViewModel(dataManager,schedulerProvider);
-    }
-    throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
-  }
 }

@@ -17,6 +17,12 @@
 package com.enyata.camdiary.di.builder;
 
 import com.enyata.camdiary.ui.about.AboutFragmentProvider;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
+import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
+import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
+import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
 import com.enyata.camdiary.ui.feed.FeedActivity;
 import com.enyata.camdiary.ui.feed.FeedActivityModule;
 import com.enyata.camdiary.ui.feed.blogs.BlogFragmentProvider;
@@ -43,6 +49,24 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();
+
+    @ContributesAndroidInjector
+    abstract BarcodeActivity bindBarcodeActivity();
+
+    @ContributesAndroidInjector
+    abstract FarmerDetailsActivity bindFarmerDetailsActivity();
+
+    @ContributesAndroidInjector
+    abstract FarmerIdActivity bindFarmerIdActivity();
+
+    @ContributesAndroidInjector
+    abstract SuccessfulActivity bindSuccessfulActivity();
+
+    @ContributesAndroidInjector
+    abstract EnterVolumeActivity bindEnterVolumeActivity();
+
+    @ContributesAndroidInjector
+    abstract DashboardActivity bindDashboardActivity();
 
     @ContributesAndroidInjector(modules = {
             AboutFragmentProvider.class,
