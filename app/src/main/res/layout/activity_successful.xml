@@ -4,6 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.collections.successfulcollection.SuccessfulActivity">
 
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel" />
+    </data>
+
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -109,6 +117,7 @@
 
 
             <Button
+                android:onClick="@{() -> viewModel.onHome()}"
                 android:id="@+id/back2home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

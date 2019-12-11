@@ -417,6 +417,8 @@
 
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
@@ -428,7 +430,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="17dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginBottom="13dp"
                     android:layout_gravity="center">
@@ -440,7 +442,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content">
                         <ImageView
-
+                            android:onClick="@{() -> viewModel.onHistory()}"
                             android:id="@+id/history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -463,6 +465,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:onClick="@{() -> viewModel.onScancode()}"
                             android:id="@+id/scanbarcode"
                             android:layout_marginLeft="6dp"
                             android:layout_width="wrap_content"
@@ -481,8 +484,6 @@
 
                     </RelativeLayout>
 
-
-
                     <RelativeLayout
                         android:layout_weight="1"
 
@@ -490,6 +491,8 @@
                         android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content">
                         <ImageView
+
+                            android:onClick="@{() -> viewModel.onDataCollection()}"
                             android:layout_marginLeft="13dp"
                             android:id="@+id/data_collection"
                             android:layout_width="wrap_content"
@@ -534,6 +537,11 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+
+
+
+
 
 
         </RelativeLayout>

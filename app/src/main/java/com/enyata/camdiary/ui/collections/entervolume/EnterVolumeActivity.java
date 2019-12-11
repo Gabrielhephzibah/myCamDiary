@@ -10,12 +10,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityEnterVolumeBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
 
 import javax.inject.Inject;
@@ -79,6 +79,13 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
             }
         });
+
+    }
+
+    @Override
+    public void reject() {
+        Intent intent = new Intent(getApplicationContext(),ReasonActivity.class);
+        startActivity(intent);
 
     }
 }
