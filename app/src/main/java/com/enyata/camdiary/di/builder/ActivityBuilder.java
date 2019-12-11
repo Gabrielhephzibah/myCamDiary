@@ -17,11 +17,21 @@
 package com.enyata.camdiary.di.builder;
 
 import com.enyata.camdiary.ui.about.AboutFragmentProvider;
+import com.enyata.camdiary.ui.aggregations.barcode.collectorID.CollectorIdActivity;
+import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
+import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.constant.ConstantLayoutActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
+import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
+import com.enyata.camdiary.ui.collections.data.dataSubmission.SubmissionActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
+import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
+import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
 import com.enyata.camdiary.ui.feed.FeedActivity;
 import com.enyata.camdiary.ui.feed.FeedActivityModule;
@@ -67,6 +77,38 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract DashboardActivity bindDashboardActivity();
+
+    @ContributesAndroidInjector
+    abstract DataCollectionActivity bindDataCollectionActivity();
+
+    @ContributesAndroidInjector
+    abstract HistoryActivity bindHistoryActivity();
+
+    @ContributesAndroidInjector
+    abstract ConstantLayoutActivity bindConstantLayoutActivity();
+
+    @ContributesAndroidInjector
+    abstract RejectsuccessActivity bindRejectsuccessActivity();
+
+    @ContributesAndroidInjector
+    abstract SubmissionActivity bindSubmissionActivity();
+
+    @ContributesAndroidInjector
+    abstract ReasonActivity bindReasonActivity();
+
+    @ContributesAndroidInjector
+    abstract ScanActivity bindScanActivity();
+
+    @ContributesAndroidInjector
+    abstract CollectorDetailActivity bindCollectorDetailActivity();
+
+    @ContributesAndroidInjector
+    abstract CollectorIdActivity bindCollectorIdActivity();
+
+
+
+    @ContributesAndroidInjector
+    abstract AggregatorDashboardActivity bindAggregatorDashboardActivity();
 
     @ContributesAndroidInjector(modules = {
             AboutFragmentProvider.class,

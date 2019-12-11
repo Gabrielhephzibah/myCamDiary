@@ -5,11 +5,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.ui.about.AboutViewModel;
+import com.enyata.camdiary.ui.aggregations.barcode.collectorID.ColectorIdViewModel;
+import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
+import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
+import com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardViewModel;
+import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionViewModel;
+import com.enyata.camdiary.ui.collections.data.dataSubmission.SubmissionViewModel;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
+import com.enyata.camdiary.ui.collections.rejection.reason.ReasonViewModel;
+import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessViewModel;
+import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel;
 import com.enyata.camdiary.ui.feed.FeedViewModel;
 import com.enyata.camdiary.ui.feed.blogs.BlogViewModel;
 import com.enyata.camdiary.ui.feed.opensource.OpenSourceViewModel;
@@ -60,6 +70,50 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(FarmerIdViewModel.class)) {
             //noinspection unchecked
             return (T) new FarmerIdViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(SubmissionViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SubmissionViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(RejectsuccessViewModel.class)) {
+            //noinspection unchecked
+            return (T) new RejectsuccessViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ConstantLayoutViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ConstantLayoutViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ReasonViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ReasonViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(SuccessfulViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SuccessfulViewModel(dataManager, schedulerProvider);
+
+
+        } else if (modelClass.isAssignableFrom(ScanViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ScanViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ColectorIdViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ColectorIdViewModel(dataManager, schedulerProvider);
+
+
+
+        } else if (modelClass.isAssignableFrom(CollectorDetailViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CollectorDetailViewModel(dataManager, schedulerProvider);
+
+
+
+        } else if (modelClass.isAssignableFrom(AggregatorDashboardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AggregatorDashboardViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(DataCollectionViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataCollectionViewModel(dataManager, schedulerProvider);
 
         } else if (modelClass.isAssignableFrom(DashboardViewModel.class)) {
             //noinspection unchecked

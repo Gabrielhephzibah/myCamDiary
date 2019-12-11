@@ -26,8 +26,10 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.constant.ConstantLayoutActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -35,7 +37,7 @@ import com.enyata.camdiary.utils.Alert;
 import javax.inject.Inject;
 
 /**
- * Created by hephzibah and tomiwa on 10/12/19.
+ * Created by hephzibah on 10/12/19.
  */
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToCollectorScanBarcode() {
-        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
     }
 
