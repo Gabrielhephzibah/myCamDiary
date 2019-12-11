@@ -11,4 +11,8 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
     public void onAccept(){
         getNavigator().accept();
     }
+
+    public void onReject(){
+        getNavigator().reject();
+    }
 }

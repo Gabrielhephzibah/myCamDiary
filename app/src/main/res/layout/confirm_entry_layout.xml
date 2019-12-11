@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Confirm Entry"
-                    android:textSize="26sp"
+                    android:textSize="24sp"
                     android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/azo_san_bold"
                     android:textStyle="bold"
