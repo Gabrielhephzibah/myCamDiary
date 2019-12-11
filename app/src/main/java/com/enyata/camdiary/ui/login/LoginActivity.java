@@ -84,7 +84,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         String password = mActivityLoginBinding.passwordTextView.getText().toString();
         if (mLoginViewModel.isEmailAndPasswordValid(email,password)){
             hideKeyboard();
-            mLoginViewModel.goToCollectorBarCode();
+            mLoginViewModel.login(email,password);
         }else{
             Alert.showFailed(getApplicationContext(),"Please fill all fields");
         }

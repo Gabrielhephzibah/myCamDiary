@@ -86,7 +86,7 @@
 
 
     <!---Our String-->
-    <string name="app_name">MyProjectTest</string>
+    <string name="app_name">CamDiary</string>
     <string name="forget_password"><u>Forgot Password</u></string>
     <string name="edittext_hint"><font size="5">Answer</font></string>
     <string name="hint"><font size="12">Any other thing you would like us to know?</font></string>

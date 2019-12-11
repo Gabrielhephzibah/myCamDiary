@@ -20,6 +20,7 @@ import android.text.TextUtils;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.LoginRequest;
+import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
@@ -53,7 +54,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
 
     public boolean isEmailAndPasswordValid(String email, String password) {
-        if (TextUtils.isEmpty(email) || !CommonUtils.isEmailValid(email) || TextUtils.isEmpty(password)) return true;
+        if (TextUtils.isEmpty(email) || !CommonUtils.isEmailValid(email) || TextUtils.isEmpty(password)) return false;
         return true;
     }
 
@@ -61,20 +62,17 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void login(String email, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doServerLoginApiCall(new LoginRequest.ServerLoginRequest(email, password))
-                .doOnSuccess(response -> getDataManager()
-                        .updateUserInfo(
-                                response.getAccessToken(),
-                                response.getUserId(),
-                                DataManager.LoggedInMode.LOGGED_IN_MODE_SERVER,
-                                response.getUserName(),
-                                response.getUserEmail(),
-                                response.getGoogleProfilePicUrl()))
+                .login(new CamLoginRequest.Request(email, password))
+                .doOnSuccess(response -> {
+                    System.out.println("DATA "+response.getData());
+                    System.out.println("MESSAGE "+ response.getMessage());
+                    System.out.println("STATUS "+ response.getStatus());
+                })
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     setIsLoading(false);
-                    getNavigator().openMainActivity();
+                    getNavigator().goToCollectorScanBarcode();
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -134,6 +132,31 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void onLoginClick() {
         getNavigator().loginClick();
     }
+
+    public void loginClick(String email, String password) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doServerLoginApiCall(new LoginRequest.ServerLoginRequest(email, password))
+                .doOnSuccess(response -> getDataManager()
+                        .updateUserInfo(
+                                response.getAccessToken(),
+                                response.getUserId(),
+                                DataManager.LoggedInMode.LOGGED_IN_MODE_SERVER,
+                                response.getUserName(),
+                                response.getUserEmail(),
+                                response.getGoogleProfilePicUrl()))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().openMainActivity();
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
+
     public void goToCollectorBarCode(){
         getNavigator().goToCollectorScanBarcode();
     }

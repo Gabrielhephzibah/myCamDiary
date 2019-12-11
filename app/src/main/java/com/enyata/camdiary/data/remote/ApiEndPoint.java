@@ -36,6 +36,8 @@ public final class ApiEndPoint {
 
     public static final String ENDPOINT_SERVER_LOGIN = BuildConfig.BASE_URL + "/588d15f5100000a8072d2945";
 
+    public static final String LOGIN_URL = BuildConfig.BASE_URL + "/";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

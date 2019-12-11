@@ -14,7 +14,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", '"http://www.mocky.io/v2"')
+            buildConfigField("String", "BASE_URL", '"http://stagingcamuserapi.enyata.com/v1"')
             buildConfigField("String", "API_KEY", '"http://www.mocky.io/v2"')
         }
         release {

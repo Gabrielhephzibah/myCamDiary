@@ -21,6 +21,8 @@ import com.enyata.camdiary.data.model.api.LoginRequest;
 import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
+import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import javax.inject.Inject;
@@ -96,5 +98,13 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(OpenSourceResponse.class);
+    }
+
+    @Override
+    public Single<CamLoginResponse> login(CamLoginRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.LOGIN_URL + "auth/signin")
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(CamLoginResponse.class);
     }
 }

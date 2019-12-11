@@ -18,6 +18,8 @@ package com.enyata.camdiary.data;
 
 import android.content.Context;
 
+import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.google.gson.reflect.TypeToken;
@@ -177,6 +179,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<OpenSourceResponse> getOpenSourceApiCall() {
         return mApiHelper.getOpenSourceApiCall();
+    }
+
+    @Override
+    public Single<CamLoginResponse> login(CamLoginRequest.Request request) {
+        return mApiHelper.login(request);
     }
 
     @Override

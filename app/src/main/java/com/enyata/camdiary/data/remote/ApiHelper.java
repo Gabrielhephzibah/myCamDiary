@@ -21,6 +21,8 @@ import com.enyata.camdiary.data.model.api.LoginRequest;
 import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
+import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 
 import io.reactivex.Single;
 
@@ -43,4 +45,7 @@ public interface ApiHelper {
     Single<BlogResponse> getBlogApiCall();
 
     Single<OpenSourceResponse> getOpenSourceApiCall();
+
+    // Cam Diary Requests and response
+    Single<CamLoginResponse> login(CamLoginRequest.Request request);
 }
