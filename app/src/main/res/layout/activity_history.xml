@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.collections.history.HistoryActivity">
 
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.collections.history.HistoryViewModel" />
+    </data>
 
 
     <LinearLayout
@@ -31,7 +37,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="43dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="vertical"
                     android:layout_marginLeft="29dp">
 
@@ -39,18 +45,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+
+
+                        <ImageView
+                            android:onClick="@{() -> viewModel.onBack()}"
+                            android:id="@+id/back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_green_arrow"
+                            android:gravity="start" />
+
+
                         <TextView
                             android:id="@+id/forgotPassword"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
-                            android:paddingTop="5dip"
+                            android:layout_marginTop="40dp"
                             android:fontFamily="@font/azo_sans_light"
                             android:gravity="center_vertical"
                             android:lines="1"
                             android:text="Hey, Ade"
                             android:textColor="#21523C"
-                            android:textSize="34sp" />
+                            android:textSize="30sp" />
 
                         <TextView
                             android:paddingTop="25dp"
@@ -101,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:text="23/08/2020"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp"
+                        android:textSize="8sp"
                         />
 
 
@@ -115,104 +132,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
-
-
-
-
-                    <RelativeLayout
-                        android:layout_margin="12dp"
-                        android:id="@+id/parent_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 litres"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:layout_marginTop="22dp"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="38dp"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/farmerId"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Rejected"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId"
-                                android:fontFamily="@font/azo_san" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
 
@@ -273,7 +193,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="38dp"
+                            android:layout_marginTop="40dp"
                             android:layout_marginLeft="75dp">
 
                             <TextView
@@ -302,8 +222,6 @@
                 </LinearLayout>
 
 
-
-
                 <LinearLayout
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
@@ -311,7 +229,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
 
@@ -372,7 +290,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="38dp"
+                            android:layout_marginTop="40dp"
                             android:layout_marginLeft="75dp">
 
                             <TextView
@@ -402,22 +320,6 @@
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="29dp">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="23/08/2020"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="10sp"
-                        />
-                </LinearLayout>
-
 
                 <LinearLayout
                     android:background="@drawable/addboxshawdow"
@@ -426,7 +328,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
 
@@ -487,7 +389,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="38dp"
+                            android:layout_marginTop="40dp"
                             android:layout_marginLeft="75dp">
 
                             <TextView
@@ -515,6 +417,25 @@
 
                 </LinearLayout>
 
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="29dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="23/08/2020"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="8sp"
+                        />
+                </LinearLayout>
+
+
                 <LinearLayout
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
@@ -522,13 +443,13 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
 
 
                     <RelativeLayout
-                        android:layout_margin="10dp"
+                        android:layout_margin="12dp"
                         android:id="@+id/parent_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -583,7 +504,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="38dp"
+                            android:layout_marginTop="40dp"
                             android:layout_marginLeft="75dp">
 
                             <TextView
@@ -611,7 +532,108 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="20dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="10dp"
+                        android:id="@+id/parent_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/farmer_details"
+                            android:layout_alignParentLeft="true"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Akin, Solomon"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:id="@+id/litres"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:layout_alignRight="@+id/name"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Xamsatde"
+                                android:layout_marginTop="22dp"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rejected"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:layout_alignRight="@id/farmerId"
+                                android:fontFamily="@font/azo_san" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
+
+
+
+
+
 
 
             <LinearLayout
@@ -625,18 +647,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginBottom="13dp"
                     android:layout_gravity="center">
 
                     <RelativeLayout
-                        android:layout_marginLeft="20dp"
+
                         android:layout_weight="1"
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content">
                         <ImageView
-
+                            android:layout_marginTop="5dp"
                             android:id="@+id/history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -646,7 +669,7 @@
                             android:layout_height="wrap_content"
                             android:text="History"
                             android:fontFamily="@font/azo_san"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
                             />
@@ -659,8 +682,10 @@
                         android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="@{() -> viewModel.onScancode()}"
                             android:id="@+id/scanbarcode"
+                            android:layout_marginLeft="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_scanbarcode"/>
@@ -669,15 +694,13 @@
                             android:layout_height="wrap_content"
                             android:text="Scan Barcode"
                             android:fontFamily="@font/azo_san"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:gravity="left"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
                             />
 
                     </RelativeLayout>
-
-
 
                     <RelativeLayout
                         android:layout_weight="1"
@@ -686,7 +709,9 @@
                         android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="@{() -> viewModel.onDataCollection()}"
+                            android:layout_marginLeft="9dp"
                             android:id="@+id/data_collection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -695,7 +720,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data Collection"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:fontFamily="@font/azo_san"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
@@ -706,11 +731,11 @@
 
                     <RelativeLayout
                         android:layout_weight="1"
-
                         android:layout_width="0dp"
                         android:layout_marginLeft="30dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"/>
@@ -718,7 +743,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Log Out"
-                            android:textSize="10sp"
+                            android:textSize="7sp"
                             android:fontFamily="@font/azo_san"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
@@ -736,14 +761,12 @@
 
 
 
-
-
         </RelativeLayout>
 
 
 
-    </LinearLayout>
 
+    </LinearLayout>
 
 
 

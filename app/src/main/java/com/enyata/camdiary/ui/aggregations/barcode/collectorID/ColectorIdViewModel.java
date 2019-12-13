@@ -13,4 +13,8 @@ public class ColectorIdViewModel extends BaseViewModel<CollectorIdNavigator> {
     public  void onAccept(){
         getNavigator().accept();
     }
+
+    public  void  onBack(){
+        getNavigator().back();
+    }
 }

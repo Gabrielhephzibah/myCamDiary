@@ -11,6 +11,7 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityCollectorDetailBinding;
+import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
@@ -54,6 +55,12 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     @Override
     public void proceed() {
         Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
         startActivity(intent);
     }
 }

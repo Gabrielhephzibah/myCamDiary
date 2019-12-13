@@ -1,0 +1,219 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.deliveries.deliveries_delivery.feedback.FeedbackActivity">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.deliveries.deliveries_delivery.feedback.FeedbackViewModel" />
+    </data>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="top"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="top"
+                    android:baselineAligned="true"
+                    android:layout_height="match_parent">
+
+
+
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fillViewport="true">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+
+
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_marginLeft="29dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Delivery"
+                                    android:letterSpacing="0.03"
+                                    android:layout_marginTop="20dp"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="30sp"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Successful"
+                                    android:letterSpacing="0.03"
+                                    android:layout_marginTop="2dp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="30sp"
+                                    />
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="28dp"
+                                    android:layout_marginRight="29dp"
+                                    android:background="@drawable/text_area_background">
+
+                                    <EditText
+                                        android:id="@+id/edit_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:hint="@string/second_hint"
+                                        android:textColorHint="@color/hint_color"
+                                        android:inputType="text|textMultiLine"
+                                        android:backgroundTint="#fff"
+                                        android:gravity="top"/>
+
+                                </LinearLayout>
+
+
+
+                                <Button
+                                    android:onClick="@{() -> viewModel.onBottle()}"
+                                    android:id="@+id/returnedBottles"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="90dip"
+                                    android:layout_marginTop="40dip"
+                                    android:layout_gravity="center"
+                                    android:layout_marginRight="100dip"
+                                    android:background="@drawable/bg_and_nobg_button"
+                                    android:text="Returning Bottles"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+
+                                <Button
+                                    android:onClick="@{() -> viewModel.onFinish()}"
+                                    android:id="@+id/finish"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="90dip"
+                                    android:layout_marginTop="24dip"
+                                    android:layout_gravity="center"
+                                    android:layout_marginRight="100dip"
+                                    android:background="@drawable/bg_and_nobg_button"
+                                    android:text="Finish"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+
+
+
+
+
+
+
+
+                            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+<!--                <include-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    layout="@layout/delivery_successful_scroll">-->
+<!--                </include>-->
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/down">
+
+                <include
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/delivery_down_img">
+
+                </include>
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

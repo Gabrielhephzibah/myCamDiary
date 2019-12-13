@@ -13,4 +13,8 @@ public class ReasonViewModel extends BaseViewModel<ReasonNavigator> {
    public void onSubmit(){
         getNavigator().submit();
    }
+
+   public  void onBack(){
+        getNavigator().back();
+   }
 }

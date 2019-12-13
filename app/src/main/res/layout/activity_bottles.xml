@@ -1,0 +1,139 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.deliveries.bottles.BottlesActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel" />
+    </data>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/delivery_feedback_img"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitXY"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="29dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Returned"
+                        android:letterSpacing="0.03"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/azo_san_bold"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bottles"
+                        android:letterSpacing="0.03"
+                        android:layout_marginTop="2dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/azo_san_bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="29dp"
+                        android:background="@drawable/text_area_background">
+
+                        <EditText
+                            android:id="@+id/edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="@string/third_hint"
+                            android:textColorHint="@color/hint_color"
+                            android:inputType="text|textMultiLine"
+                            android:backgroundTint="#fff"
+                            android:gravity="top"/>
+
+                    </LinearLayout>
+
+
+
+                    <Button
+                        android:onClick="@{() -> viewModel.onFinish()}"
+                        android:id="@+id/finish"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="90dip"
+                        android:layout_marginTop="45dip"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="100dip"
+                        android:background="@drawable/hover_button"
+                        android:text="Finish"
+                        android:fontFamily="@font/azo_san"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/changing_text"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</layout>

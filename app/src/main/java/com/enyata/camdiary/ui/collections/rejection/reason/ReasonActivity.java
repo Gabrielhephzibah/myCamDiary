@@ -16,6 +16,7 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityReasonBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.base.BaseViewModel;
+import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
@@ -91,5 +92,11 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         });
 
 
+    }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), EnterVolumeActivity.class);
+        startActivity(intent);
     }
 }

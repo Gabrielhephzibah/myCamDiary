@@ -66,4 +66,10 @@ public class ScanActivity extends BaseActivity<ActivityScanBinding,ScanViewModel
         startActivity(intent);
 
     }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
+        startActivity(intent);
+    }
 }

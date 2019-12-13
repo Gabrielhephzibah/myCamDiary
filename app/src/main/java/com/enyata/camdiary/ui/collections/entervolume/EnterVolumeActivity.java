@@ -88,4 +88,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         startActivity(intent);
 
     }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(),FarmerDetailsActivity.class);
+        startActivity(intent);
+    }
 }

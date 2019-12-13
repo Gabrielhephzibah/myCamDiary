@@ -19,8 +19,13 @@ package com.enyata.camdiary.di.builder;
 import com.enyata.camdiary.ui.about.AboutFragmentProvider;
 import com.enyata.camdiary.ui.aggregations.barcode.collectorID.CollectorIdActivity;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
+import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
+import com.enyata.camdiary.ui.aggregations.collection.success.CollectionSuccessActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
+import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
+import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
+import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.constant.ConstantLayoutActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
@@ -33,6 +38,16 @@ import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
+import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.feedback.FeedbackActivity;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
+import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
+import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationActivity;
+import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessActivity;
+import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.feed.FeedActivity;
 import com.enyata.camdiary.ui.feed.FeedActivityModule;
 import com.enyata.camdiary.ui.feed.blogs.BlogFragmentProvider;
@@ -105,7 +120,53 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector
     abstract CollectorIdActivity bindCollectorIdActivity();
 
+    @ContributesAndroidInjector
+    abstract ProductActivity bindProductActivity();
 
+    @ContributesAndroidInjector
+    abstract VolumeActivity bindVolumeActivity();
+
+    @ContributesAndroidInjector
+    abstract AggregatorHIstoryActivity bindAggregatorHIstoryActivity();
+
+
+    @ContributesAndroidInjector
+    abstract CollectionSuccessActivity bindCollectionSuccessActivity();
+
+    @ContributesAndroidInjector
+    abstract LastCollectionActivity bindLastCollectionActivity();
+
+    @ContributesAndroidInjector
+    abstract DeliveryActivity bindDeliveryActivity();
+
+    @ContributesAndroidInjector
+    abstract DeliveryDashboardActivity bindDeliveryDashboardActivity();
+
+    @ContributesAndroidInjector
+    abstract SignupActivity bindSignupActivity();
+
+    @ContributesAndroidInjector
+    abstract ConfirmationActivity bindConfirmationActivity();
+
+    @ContributesAndroidInjector
+    abstract SignsuccessActivity bindSignsuccessActivity();
+
+    @ContributesAndroidInjector
+    abstract DeliveryHistoryActivity bindDeliveryHistoryActivity();
+
+
+
+    @ContributesAndroidInjector
+    abstract BottlesActivity bindBottlesActivity();
+
+    @ContributesAndroidInjector
+    abstract FinishActivity bindFinishActivity();
+
+    @ContributesAndroidInjector
+    abstract FeedbackActivity bindFeedbackActivity();
+
+    @ContributesAndroidInjector
+    abstract DetailsActivity bindDetailsActivity();
 
     @ContributesAndroidInjector
     abstract AggregatorDashboardActivity bindAggregatorDashboardActivity();

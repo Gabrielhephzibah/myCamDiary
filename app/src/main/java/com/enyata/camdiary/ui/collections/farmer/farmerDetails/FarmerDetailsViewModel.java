@@ -14,5 +14,9 @@ public class FarmerDetailsViewModel extends BaseViewModel<FarmerDetailsNavigator
 
     }
 
+    public void onGoScan(){
+        getNavigator().goscan();
+    }
+
 
 }

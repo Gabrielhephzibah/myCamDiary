@@ -4,4 +4,6 @@ public interface AggregatorDashboardNavigator {
     void history();
     void scan();
     void out();
+    void  createSliderDash(int current_position);
+
 }

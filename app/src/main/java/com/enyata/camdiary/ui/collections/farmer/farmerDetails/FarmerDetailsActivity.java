@@ -11,6 +11,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityFarmerDetailsBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
 
 import javax.inject.Inject;
@@ -49,6 +50,12 @@ public class FarmerDetailsActivity extends BaseActivity<ActivityFarmerDetailsBin
     @Override
     public void proceed() {
         Intent intent =  new Intent(getApplicationContext(), EnterVolumeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void goscan() {
+        Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
         startActivity(intent);
     }
 }

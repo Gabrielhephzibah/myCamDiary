@@ -16,4 +16,8 @@ public class ScanViewModel extends BaseViewModel<ScanNavigator> {
     public void onEnterId(){
         getNavigator().enterId();
     }
+
+    public  void  onBack(){
+        getNavigator().back();
+    }
 }

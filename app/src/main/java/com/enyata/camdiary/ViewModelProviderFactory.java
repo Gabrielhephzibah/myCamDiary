@@ -7,8 +7,13 @@ import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.ui.about.AboutViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.collectorID.ColectorIdViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
+import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionViewModel;
+import com.enyata.camdiary.ui.aggregations.collection.success.CollectionSuccessViewModel;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
+import com.enyata.camdiary.ui.aggregations.entervolume.VolumeViewModel;
+import com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryViewModel;
+import com.enyata.camdiary.ui.aggregations.product.ProductViewModel;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
 import com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardViewModel;
@@ -17,9 +22,20 @@ import com.enyata.camdiary.ui.collections.data.dataSubmission.SubmissionViewMode
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
+import com.enyata.camdiary.ui.collections.history.HistoryViewModel;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonViewModel;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessViewModel;
 import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel;
+import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.feedback.FeedbackViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardViewModel;
+import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
+import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationViewModel;
+import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessViewModel;
+import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.feed.FeedViewModel;
 import com.enyata.camdiary.ui.feed.blogs.BlogViewModel;
 import com.enyata.camdiary.ui.feed.opensource.OpenSourceViewModel;
@@ -99,11 +115,79 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             //noinspection unchecked
             return (T) new ColectorIdViewModel(dataManager, schedulerProvider);
 
+        } else if (modelClass.isAssignableFrom(VolumeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new VolumeViewModel(dataManager, schedulerProvider);
 
+        } else if (modelClass.isAssignableFrom(AggregatorHistoryViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AggregatorHistoryViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(DeliveryDashboardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DeliveryDashboardViewModel(dataManager, schedulerProvider);
 
         } else if (modelClass.isAssignableFrom(CollectorDetailViewModel.class)) {
             //noinspection unchecked
             return (T) new CollectorDetailViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ProductViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ProductViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(CollectionSuccessViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CollectionSuccessViewModel(dataManager, schedulerProvider);
+
+
+        } else if (modelClass.isAssignableFrom(DeliveryViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DeliveryViewModel(dataManager, schedulerProvider);
+
+
+        } else if (modelClass.isAssignableFrom(SignupViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SignupViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(FinishViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FinishViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(SignsuccessViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SignsuccessViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ConfirmationViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ConfirmationViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(DeliveryHistoryViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DeliveryHistoryViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(HistoryViewModel.class)) {
+            //noinspection unchecked
+            return (T) new HistoryViewModel(dataManager, schedulerProvider);
+
+
+        } else if (modelClass.isAssignableFrom(DetailsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DetailsViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(FeedbackViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FeedbackViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(BottlesViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BottlesViewModel(dataManager, schedulerProvider);
+
+
+
+
+        } else if (modelClass.isAssignableFrom(LastCollectionViewModel.class)) {
+            //noinspection unchecked
+            return (T) new LastCollectionViewModel(dataManager, schedulerProvider);
 
 
 

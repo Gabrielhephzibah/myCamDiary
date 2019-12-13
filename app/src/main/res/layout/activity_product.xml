@@ -5,6 +5,15 @@
     tools:context=".ui.aggregations.product.ProductActivity">
 
 
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.aggregations.product.ProductViewModel" />
+    </data>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +36,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="43dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="vertical"
                     android:layout_marginLeft="29dp">
 
@@ -38,6 +47,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
+                            <ImageView
+                                android:onClick="@{() -> viewModel.onBack()}"
+                                android:id="@+id/back"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_green_arrow"
+                                android:gravity="start" />
 
 
 
@@ -78,7 +95,7 @@
 
 
                 <LinearLayout
-
+                    android:onClick="@{() -> viewModel.onProduct()}"
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -169,7 +186,7 @@
 
 
                 <LinearLayout
-
+                    android:onClick="@{() -> viewModel.onProduct()}"
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -262,7 +279,7 @@
 
 
                 <LinearLayout
-
+                    android:onClick="@{() -> viewModel.onProduct()}"
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -352,7 +369,7 @@
 
 
                 <LinearLayout
-
+                    android:onClick="@{() -> viewModel.onProduct()}"
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -441,7 +458,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-
+                    android:onClick="@{() -> viewModel.onProduct()}"
                     android:background="@drawable/addboxshawdow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
