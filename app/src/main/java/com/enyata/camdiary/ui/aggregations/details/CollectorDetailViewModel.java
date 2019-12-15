@@ -12,4 +12,8 @@ public class CollectorDetailViewModel extends BaseViewModel<CollectorDetailNavig
     public void onProceed(){
         getNavigator().proceed();
     }
+
+    public  void onBack(){
+        getNavigator().back();
+    }
 }

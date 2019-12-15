@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="13dp"
+                android:layout_gravity="center">
+
+                <RelativeLayout
+
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+
+                        android:id="@+id/sigup"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_signup"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sign Up"
+                        android:fontFamily="@font/azo_san"
+                        android:textSize="8sp"
+                        android:layout_alignParentBottom="true"
+                        android:textColor="#fff"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/delivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_delivery"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Deliveries"
+                        android:fontFamily="@font/azo_san"
+                        android:textSize="8sp"
+                        android:gravity="left"
+                        android:layout_alignParentBottom="true"
+                        android:textColor="#fff"
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_delivery_history"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="History"
+                        android:textSize="8sp"
+                        android:fontFamily="@font/azo_san"
+                        android:layout_alignParentBottom="true"
+                        android:textColor="#fff"
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

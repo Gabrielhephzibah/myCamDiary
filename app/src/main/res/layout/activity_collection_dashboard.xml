@@ -36,7 +36,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="42dip"
+                    android:layout_marginTop="30dip"
                     android:layout_marginLeft="28dp">
 
                     <TextView
@@ -152,7 +152,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="24dip"
                     android:layout_marginBottom="12dp"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
                     <RelativeLayout
@@ -258,7 +258,7 @@
                     android:layout_marginLeft="24dip"
                     android:background="@drawable/boxshadow"
                     android:layout_marginBottom="12dp"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="20dip">
 
 
                     <RelativeLayout
@@ -365,7 +365,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginLeft="24dip"
-                    android:layout_marginRight="26dip">
+                    android:layout_marginRight="23dip">
 
 
                     <RelativeLayout
@@ -430,7 +430,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginBottom="13dp"
                     android:layout_gravity="center">
@@ -439,9 +439,9 @@
 
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:layout_marginTop="5dp"
                             android:onClick="@{() -> viewModel.onHistory()}"
                             android:id="@+id/history"
                             android:layout_width="wrap_content"
@@ -452,7 +452,7 @@
                             android:layout_height="wrap_content"
                             android:text="History"
                             android:fontFamily="@font/azo_san"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
                             />
@@ -465,6 +465,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:layout_marginTop="5dp"
                             android:onClick="@{() -> viewModel.onScancode()}"
                             android:id="@+id/scanbarcode"
                             android:layout_marginLeft="6dp"
@@ -476,7 +477,7 @@
                             android:layout_height="wrap_content"
                             android:text="Scan Barcode"
                             android:fontFamily="@font/azo_san"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:gravity="left"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
@@ -491,9 +492,9 @@
                         android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content">
                         <ImageView
-
+                            android:layout_marginTop="5dp"
                             android:onClick="@{() -> viewModel.onDataCollection()}"
-                            android:layout_marginLeft="13dp"
+                            android:layout_marginLeft="9dp"
                             android:id="@+id/data_collection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -502,7 +503,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data Collection"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:fontFamily="@font/azo_san"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"
@@ -517,6 +518,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"/>
@@ -524,7 +526,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Log Out"
-                            android:textSize="8sp"
+                            android:textSize="7sp"
                             android:fontFamily="@font/azo_san"
                             android:layout_alignParentBottom="true"
                             android:textColor="#fff"

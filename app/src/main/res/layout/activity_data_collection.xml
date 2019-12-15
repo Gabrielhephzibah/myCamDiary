@@ -39,11 +39,12 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="32dp"
+                            android:layout_marginTop="30dp"
                             android:orientation="vertical"
                             android:layout_marginLeft="29dp">
 
                             <ImageView
+                                android:onClick="@{() -> viewModel.onBack()}"
                                 android:id="@+id/back"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -261,12 +262,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/down">
 
-<!--                <data>-->
-<!--                    <import type="android.view.View" />-->
-<!--                    <variable-->
-<!--                        name="viewModel"-->
-<!--                        type="com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel" />-->
-<!--                </data>-->
 
 
                 <include
@@ -274,7 +269,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/activity_constant_layout">
+                    layout="@layout/collector_fixed_view">
 
                 </include>
 

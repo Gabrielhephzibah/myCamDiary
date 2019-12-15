@@ -12,6 +12,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityBarcodeBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
 
@@ -59,6 +60,12 @@ public class BarcodeActivity  extends BaseActivity<ActivityBarcodeBinding, Barco
         Intent intent = new Intent(getApplicationContext(), FarmerIdActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        startActivity(intent);
     }
 
     @Override

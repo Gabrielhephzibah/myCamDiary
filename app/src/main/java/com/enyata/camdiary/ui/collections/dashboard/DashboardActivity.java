@@ -42,7 +42,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         return new Intent(context, FarmerDetailsActivity.class);
     }
 
-
     @Override
     public int getBindingVariable() {
         return BR.viewModel;
@@ -87,9 +86,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
             }
         });
-
-
-
 
     }
 

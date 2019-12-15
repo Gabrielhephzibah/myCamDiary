@@ -20,4 +20,6 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
     public void onLogout(){
         getNavigator().out();
     }
+
+
 }

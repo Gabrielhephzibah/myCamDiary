@@ -17,6 +17,10 @@ public class BarcodeViewModel extends BaseViewModel<BarcodeNavigator> {
         getNavigator().enterid();
     }
 
+    public void onGoback(){
+        getNavigator().back();
+    }
+
 }
 
 

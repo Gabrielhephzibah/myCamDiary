@@ -1,0 +1,697 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.aggregations.history.AggregatorHIstoryActivity">
+
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="29dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:onClick="@{() -> viewModel.onBack()}"
+                            android:id="@+id/back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_green_arrow" />
+
+                        <TextView
+                            android:id="@+id/forgotPassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="35dp"
+                            android:fontFamily="@font/azo_sans_light"
+                            android:gravity="center_vertical"
+                            android:lines="1"
+                            android:text="Hey, Mark"
+                            android:textColor="#21523C"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:paddingTop="25dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/azo_san"
+                            android:text="Here’s how far you’ve done"
+                            android:textAllCaps="false"
+                            android:layout_alignBottom="@+id/forgotPassword"
+                            android:textColor="#3333"
+                            android:layout_marginBottom="-26dp"
+                            android:textSize="14sp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/circle"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            app:cardCornerRadius="35dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_toLeftOf="@id/forgotPassword"
+                            android:layout_alignParentRight="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/circular_image"
+                                android:scaleType="fitCenter"
+                                android:layout_toLeftOf="@id/forgotPassword"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/aggregator_mark" />
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginLeft="29dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="23/08/2020"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="8sp"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/parent"
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="26dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="12dp"
+                        android:id="@+id/parent_layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_alignParentLeft="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:scaleType="fitCenter"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/farmer_ade" />
+                        </androidx.cardview.widget.CardView>
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Adetoyin, Gabriel"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="22dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="26dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="12dp"
+                        android:id="@+id/parent_layout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_alignParentLeft="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:scaleType="fitCenter"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/farmer_ade" />
+                        </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Akin, Solomon"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="22dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="26dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="12dp"
+                        android:id="@+id/parent_layout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_alignParentLeft="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:scaleType="fitCenter"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/farmer_ade" />
+                        </androidx.cardview.widget.CardView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Akin, Solomon"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:layout_marginTop="22dp"
+                                android:textColor="@color/colorPrimary"
+                                android:layout_alignParentRight="true"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="29dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="23/08/2020"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="8sp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="26dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="12dp"
+                        android:id="@+id/parent_layout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_alignParentLeft="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:scaleType="fitCenter"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/farmer_ade" />
+                        </androidx.cardview.widget.CardView>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Akin, Solomon"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="22dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/addboxshawdow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="24dip"
+                    android:layout_marginRight="26dip">
+
+
+
+
+                    <RelativeLayout
+                        android:layout_margin="10dp"
+                        android:id="@+id/parent_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="20dp"
+                            app:strokeWidth="1dp"
+                            android:layout_marginRight="27dp"
+                            android:layout_alignParentLeft="true">
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:scaleType="fitCenter"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/farmer_ade" />
+                        </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Akin, Solomon"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="40 litres"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="22dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="75dp">
+
+                            <TextView
+                                android:id="@+id/farmerId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="X3478JND8992"
+                                android:textColor="#CECECE"
+                                android:textSize="8sp"
+                                android:fontFamily="@font/azo_san"
+                                />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_gravity="center">
+
+                    <RelativeLayout
+
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/history"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_history"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="History"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="7sp"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="#fff"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:onClick="@{() -> viewModel.onScancode()}"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/scanbarcode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_scanbarcode"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Scan Barcode"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="7sp"
+                            android:gravity="left"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="#fff"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="45dp"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_logout"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Log Out"
+                            android:textSize="7sp"
+                            android:fontFamily="@font/azo_san"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="#fff"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+</layout>

@@ -13,5 +13,9 @@ public class DataCollectionViewModel extends BaseViewModel<DataCollectionNavigat
         getNavigator().submit();
     }
 
+    public  void onBack(){
+        getNavigator().back();
+    }
+
 
 }

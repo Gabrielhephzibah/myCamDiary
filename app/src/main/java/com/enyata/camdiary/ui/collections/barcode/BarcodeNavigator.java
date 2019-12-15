@@ -5,4 +5,5 @@ public interface BarcodeNavigator {
     void barcodeClick();
     void scan();
     void enterid();
+    void back();
 }

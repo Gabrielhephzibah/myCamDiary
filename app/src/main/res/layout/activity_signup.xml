@@ -1,0 +1,357 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.deliveries.signcustomer.signup.SignupActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="top"
+                android:layout_height="wrap_content">
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dip"
+                                android:layout_marginLeft="28dp">
+
+                                <TextView
+                                    android:id="@+id/forgotPassword"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:paddingTop="5dip"
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:gravity="center_vertical"
+                                    android:lines="1"
+                                    android:text="Hey, Susan"
+                                    android:textColor="@color/deliveryColor"
+                                    android:textSize="30sp" />
+
+                                <TextView
+                                    android:paddingTop="25dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:text="Sign Up a New Customer"
+                                    android:textAllCaps="false"
+                                    android:layout_alignBottom="@+id/forgotPassword"
+                                    android:textColor="#3333"
+                                    android:layout_marginBottom="-26dp"
+                                    android:textSize="14sp"
+
+
+                                    />
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/circle"
+                                    android:layout_width="75dp"
+                                    android:layout_height="75dp"
+                                    app:cardCornerRadius="50dp"
+                                    app:strokeWidth="1dp"
+                                    android:layout_marginRight="27dp"
+                                    android:layout_toLeftOf="@id/forgotPassword"
+                                    android:layout_alignParentRight="true">
+                                    <ImageView
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:id="@+id/circular_image"
+                                        android:scaleType="fitCenter"
+                                        android:layout_toLeftOf="@id/forgotPassword"
+                                        android:layout_alignParentRight="true"
+                                        android:src="@drawable/delivery_susan" />
+                                </androidx.cardview.widget.CardView>
+                            </RelativeLayout>
+
+
+
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="28dp"
+                            android:layout_marginRight="28dp">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintTextAppearance= "@style/MyAppearance"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                app:boxStrokeWidth="10dp"
+                                android:hint="@string/first_name"
+                                app:boxCornerRadiusBottomEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusTopStart="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password1"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+
+
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:inputType="textPassword"
+                                    android:textColor="#21523C"
+                                    android:textCursorDrawable= "@null" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="20dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintTextAppearance= "@style/MyAppearance"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                app:boxStrokeWidth="10dp"
+                                app:boxCornerRadiusBottomEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusTopStart="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password2"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:hint="@string/last_name"
+
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:inputType="textPassword"
+                                    android:textColor="#21523C"
+                                    android:textCursorDrawable= "@null" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="20dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintTextAppearance= "@style/MyAppearance"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                app:boxStrokeWidth="10dp"
+                                app:boxCornerRadiusBottomEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusTopStart="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password3"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:hint="@string/email"
+
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:inputType="text"
+                                    android:textColor="#21523C"
+                                    android:textCursorDrawable= "@null" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <CheckBox
+                                android:layout_marginTop="-10dp"
+                                android:id="@+id/checkbox4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/azo_san"
+                                android:buttonTint="@color/colorPrimary"
+                                android:text="Keep you updated on news and offers"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="10sp"
+                                android:scaleX="0.70"
+                                android:scaleY="0.70"
+                                />
+
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintTextAppearance= "@style/MyAppearance"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                app:boxStrokeWidth="10dp"
+                                app:boxCornerRadiusBottomEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusTopStart="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password4"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:hint="@string/phone_number"
+
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:inputType="textPassword"
+                                    android:textColor="#21523C"
+                                    android:textCursorDrawable= "@null" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                            <TextView
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Optional"
+                                android:textColor="#F7C9AB"
+                                android:fontFamily="@font/azo_san"
+                                android:letterSpacing="-0.03"
+                                android:textSize="10sp"/>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintTextAppearance= "@style/MyAppearance"
+                                app:boxStrokeColor="@color/colorPrimary"
+                                app:boxStrokeWidth="10dp"
+                                app:boxCornerRadiusBottomEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusTopStart="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:hint="@string/adress"
+
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:inputType="text"
+                                    android:textColor="#21523C"
+                                    android:textCursorDrawable= "@null" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:layout_marginLeft="24dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fontawesome_awesome"
+                                android:text="\uf05a  The address provided will also serve as your preferred delivery address"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="8sp" />
+
+
+                            <Button
+                                android:onClick="@{() -> viewModel.onSubmit()}"
+                                android:id="@+id/submit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="90dip"
+                                android:layout_marginTop="15dip"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="90dip"
+                                android:background="@drawable/hover_button"
+                                android:text="Submit"
+                                android:fontFamily="@font/azo_san_bold"
+                                android:textAllCaps="false"
+                                android:textColor="@drawable/changing_text"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/down">
+
+                <include
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/delivery_fixed_view">
+
+                </include>
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</layout>

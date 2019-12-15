@@ -38,6 +38,8 @@ public final class ApiEndPoint {
 
     public static final String LOGIN_URL = BuildConfig.BASE_URL + "/";
 
+    public static final String ACCEPTED_VOLUME_URL = BuildConfig.BASE_URL + "/";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }
