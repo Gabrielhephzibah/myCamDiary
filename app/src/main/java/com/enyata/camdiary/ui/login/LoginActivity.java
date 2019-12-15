@@ -98,7 +98,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToCollectorScanBarcode() {
-        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
     }
 

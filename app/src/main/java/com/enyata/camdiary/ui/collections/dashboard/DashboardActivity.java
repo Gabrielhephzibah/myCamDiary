@@ -8,10 +8,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
@@ -24,9 +26,18 @@ import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding,DashboardViewModel>implements DashboardNavigator {
+    DashboardCollectorAdapter dashboardCollectorAdapter;
+    ListView listView;
+    ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
 
     DashboardAdapter dashboardAdapter;
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
@@ -65,6 +76,86 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         dashboardViewModel.setNavigator(this);
         pager =findViewById(R.id.pager);
         slideLayout = findViewById(R.id.slideLayout);
+        listView = findViewById(R.id.listView);
+
+
+        JSONObject collector1 = new JSONObject();
+        try {
+            collector1.put("fullName", "Akin, Solomon");
+            collector1.put("companyName", "Xamsatde");
+            collector1.put("companyId", "X3478JND8992");
+            collector1.put("status", "Rejected");
+            collector1.put("myLitres", "40 litres");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        JSONObject collector2 = new JSONObject();
+        try {
+            collector2.put("fullName", "Akin, Solomon");
+            collector2.put("companyName", "Xamsatde");
+            collector2.put("companyId", "X3478JND8992");
+            collector2.put("status", "Rejected");
+            collector2.put("myLitres", "40 litres");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JSONObject collector3 = new JSONObject();
+        try {
+            collector3.put("fullName", "Akin, Solomon");
+            collector3.put("companyName", "Xamsatde");
+            collector3.put("companyId", "X3478JND8992");
+            collector3.put("status", "Rejected");
+            collector3.put("myLitres", "40 litres");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray array = new JSONArray();
+        array.put(collector1);
+        array.put(collector2);
+        array.put(collector3);
+        array.put(collector2);
+        array.put(collector1);
+        array.put(collector3);
+
+
+        for (int i = 0; i < array.length(); i++) {
+
+            try {
+                Log.i("message", array.toString());
+
+                JSONObject object = array.getJSONObject(i);
+                String fullName = object.getString("fullName");
+                String companyName = object.getString("companyName");
+                String companyId= object.getString("companyId");
+                String status= object.getString("status");
+                String myLitres = object.getString("myLitres");
+
+
+
+                dashboardCollectorLists.add(new DashboardCollectorList(fullName,companyName,companyId,status,myLitres));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+
+
+        dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
+        listView.setAdapter(dashboardCollectorAdapter);
+
+
+
 
         dashboardAdapter = new DashboardAdapter(layouts, DashboardActivity.this);
         pager.setAdapter(dashboardAdapter);

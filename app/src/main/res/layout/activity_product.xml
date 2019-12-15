@@ -93,458 +93,471 @@
 
                 </LinearLayout>
 
+                <ListView
+                    android:layout_marginTop="11dp"
+                    android:id="@+id/listView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-                <LinearLayout
-                    android:onClick="@{() -> viewModel.onProduct()}"
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="12dip">
-
 
 
-
-                    <RelativeLayout
-                        android:layout_margin="8dp"
-                        android:id="@+id/parent_layout1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <ImageView
-                            android:layout_marginTop="12dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp"
-                            android:layout_marginTop="20dp">
-
-                            <TextView
-                                android:id="@+id/name1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name1"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="43dp"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/farmerId1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Litres"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId1"
-                                android:fontFamily="@font/azo_san" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:onClick="@{() -> viewModel.onProduct()}"
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="12dip">
-
 
 
 
-                    <RelativeLayout
-                        android:layout_margin="8dp"
-                        android:id="@+id/parent_layout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
+<!--                <LinearLayout-->
+<!--                    android:onClick="@{() -> viewModel.onProduct()}"-->
+<!--                    android:background="@drawable/addboxshawdow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginTop="0dp"-->
+<!--                    android:layout_marginLeft="24dip"-->
+<!--                    android:layout_marginRight="12dip">-->
 
-                        <ImageView
-                            android:layout_marginTop="12dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp"
-                            android:layout_marginTop="20dp"
-                            >
 
-                            <TextView
-                                android:id="@+id/name2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name2"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
 
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="43dp"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/farmerId2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Litres"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId2"
-                                android:fontFamily="@font/azo_san" />
+<!--                    <RelativeLayout-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/parent_layout1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-
-
-                <LinearLayout
-                    android:onClick="@{() -> viewModel.onProduct()}"
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="12dip">
 
+<!--                        <ImageView-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/farmer_details"-->
+<!--                            android:layout_alignParentLeft="true"/>-->
 
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            android:layout_marginTop="20dp">-->
 
+<!--                            <TextView-->
+<!--                                android:id="@+id/name1"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Akin, Solomon"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
 
-                    <RelativeLayout
-                        android:layout_margin="8dp"
-                        android:id="@+id/parent_layout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+<!--                            <TextView-->
+<!--                                android:id="@+id/litres1"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="X3478JND8992"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:layout_alignRight="@+id/name1"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
 
 
-                        <ImageView
-                            android:layout_marginTop="12dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp"
-                            android:layout_marginTop="20dp">
-
-                            <TextView
-                                android:id="@+id/name3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name3"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="43dp"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/farmerId3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Litres"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId3"
-                                android:fontFamily="@font/azo_san" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:onClick="@{() -> viewModel.onProduct()}"
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="12dip">
-
-
-
-
-                    <RelativeLayout
-                        android:layout_margin="8dp"
-                        android:id="@+id/parent_layout4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <ImageView
-                            android:layout_marginTop="12dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp"
-                            android:layout_marginTop="20dp">
-
-                            <TextView
-                                android:id="@+id/name4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name4"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="43dp"
-                            android:layout_marginLeft="75dp"
-                            >
-
-                            <TextView
-                                android:id="@+id/farmerId4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Litres"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId4"
-                                android:fontFamily="@font/azo_san" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:onClick="@{() -> viewModel.onProduct()}"
-                    android:background="@drawable/addboxshawdow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="24dip"
-                    android:layout_marginRight="12dip">
-
-
-
-
-                    <RelativeLayout
-                        android:layout_margin="10dp"
-                        android:id="@+id/parent_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <ImageView
-                            android:layout_marginTop="8dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/farmer_details"
-                            android:layout_alignParentLeft="true"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="75dp"
-                            android:layout_marginTop="20dp">
-
-                            <TextView
-                                android:id="@+id/name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akin, Solomon"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:id="@+id/litres"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="X3478JND8992"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="12sp"
-                                android:layout_alignRight="@+id/name"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-
-
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="43dp"
-                            android:layout_marginLeft="75dp">
-
-                            <TextView
-                                android:id="@+id/farmerId"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Xamsatde"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="40 Litres"
-                                android:textColor="#CECECE"
-                                android:textSize="8sp"
-                                android:layout_alignRight="@id/farmerId"
-                                android:fontFamily="@font/azo_san" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="43dp"-->
+<!--                            android:layout_marginLeft="75dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/farmerId1"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Xamsatde"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="40 Litres"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:layout_alignRight="@id/farmerId1"-->
+<!--                                android:fontFamily="@font/azo_san" />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+
+
+<!--                <LinearLayout-->
+<!--                    android:onClick="@{() -> viewModel.onProduct()}"-->
+<!--                    android:background="@drawable/addboxshawdow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginLeft="24dip"-->
+<!--                    android:layout_marginRight="12dip">-->
+
+
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/parent_layout2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+
+<!--                        <ImageView-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/farmer_details"-->
+<!--                            android:layout_alignParentLeft="true"/>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            android:layout_marginTop="20dp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/name2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Akin, Solomon"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/litres2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="X3478JND8992"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:layout_alignRight="@+id/name2"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="43dp"-->
+<!--                            android:layout_marginLeft="75dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/farmerId2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Xamsatde"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="40 Litres"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:layout_alignRight="@id/farmerId2"-->
+<!--                                android:fontFamily="@font/azo_san" />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+
+
+<!--                <LinearLayout-->
+<!--                    android:onClick="@{() -> viewModel.onProduct()}"-->
+<!--                    android:background="@drawable/addboxshawdow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginLeft="24dip"-->
+<!--                    android:layout_marginRight="12dip">-->
+
+
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/parent_layout3"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+
+<!--                        <ImageView-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/farmer_details"-->
+<!--                            android:layout_alignParentLeft="true"/>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            android:layout_marginTop="20dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/name3"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Akin, Solomon"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/litres3"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="X3478JND8992"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:layout_alignRight="@+id/name3"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="43dp"-->
+<!--                            android:layout_marginLeft="75dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/farmerId3"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Xamsatde"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="40 Litres"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:layout_alignRight="@id/farmerId3"-->
+<!--                                android:fontFamily="@font/azo_san" />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+
+<!--                <LinearLayout-->
+<!--                    android:onClick="@{() -> viewModel.onProduct()}"-->
+<!--                    android:background="@drawable/addboxshawdow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginLeft="24dip"-->
+<!--                    android:layout_marginRight="12dip">-->
+
+
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:id="@+id/parent_layout4"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+
+<!--                        <ImageView-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/farmer_details"-->
+<!--                            android:layout_alignParentLeft="true"/>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            android:layout_marginTop="20dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/name4"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Akin, Solomon"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/litres4"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="X3478JND8992"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:layout_alignRight="@+id/name4"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="43dp"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/farmerId4"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Xamsatde"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="40 Litres"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:layout_alignRight="@id/farmerId4"-->
+<!--                                android:fontFamily="@font/azo_san" />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:onClick="@{() -> viewModel.onProduct()}"-->
+<!--                    android:background="@drawable/addboxshawdow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginLeft="24dip"-->
+<!--                    android:layout_marginRight="12dip">-->
+
+
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:id="@+id/parent_layout"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+
+<!--                        <ImageView-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/farmer_details"-->
+<!--                            android:layout_alignParentLeft="true"/>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="75dp"-->
+<!--                            android:layout_marginTop="20dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/name"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Akin, Solomon"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/litres"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="X3478JND8992"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="12sp"-->
+<!--                                android:layout_alignRight="@+id/name"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="43dp"-->
+<!--                            android:layout_marginLeft="75dp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/farmerId"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Xamsatde"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="40 Litres"-->
+<!--                                android:textColor="#CECECE"-->
+<!--                                android:textSize="8sp"-->
+<!--                                android:layout_alignRight="@id/farmerId"-->
+<!--                                android:fontFamily="@font/azo_san" />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
 
             </LinearLayout>
 
