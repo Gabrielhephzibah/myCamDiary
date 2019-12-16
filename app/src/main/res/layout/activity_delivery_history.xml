@@ -24,7 +24,9 @@
             >
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:gravity="bottom">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,114 +107,122 @@
 
                     </LinearLayout>
 
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ListView
+                        android:layout_marginTop="11dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="29dp"
-                        android:layout_marginTop="27dp">
+                        android:id="@+id/listView"/>
+
+
+
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:layout_marginLeft="29dp"-->
+<!--                        android:layout_marginTop="27dp">-->
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="23/08/2020"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="8sp"
-                            android:fontFamily="@font/azo_san"
-                            />
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="23/08/2020"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:textSize="8sp"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            />-->
+<!--                    </LinearLayout>-->
 
-                        <LinearLayout
+<!--                        <LinearLayout-->
 
-                            android:background="@drawable/addboxshawdow"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="20dip">
+<!--                            android:background="@drawable/addboxshawdow"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginTop="0dp"-->
+<!--                            android:layout_marginLeft="24dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:layout_marginRight="20dip">-->
 
 
 
 
-                            <RelativeLayout
-                                android:layout_margin="12dp"
-                                android:id="@+id/parent_layout1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+<!--                            <RelativeLayout-->
+<!--                                android:layout_margin="12dp"-->
+<!--                                android:id="@+id/parent_layout1"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content">-->
 
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/delivery_img"
-                                    android:layout_alignParentLeft="true"/>
+<!--                                <ImageView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:src="@drawable/delivery_img"-->
+<!--                                    android:layout_alignParentLeft="true"/>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/name1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Devon, Samuel"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/name1"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="Devon, Samuel"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="24dp"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/farmerId1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="+2348033237685"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/farmer"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="+2348033237685"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="4 items"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:layout_alignRight="@id/farmerId1"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="4 items"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:layout_alignRight="@id/farmer"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                    <TextView
-                                        android:id="@+id/middle1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="64ERT234KI89"
-                                        android:layout_marginTop="18dp"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/middle1"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="64ERT234KI89"-->
+<!--                                        android:layout_marginTop="18dp"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
 
 
@@ -220,102 +230,102 @@
 
 
 
-                            </RelativeLayout>
+<!--                            </RelativeLayout>-->
 
 
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
-                        <LinearLayout
+<!--                        <LinearLayout-->
 
-                            android:background="@drawable/addboxshawdow"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="20dip">
+<!--                            android:background="@drawable/addboxshawdow"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginTop="0dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:layout_marginRight="20dip">-->
 
 
 
 
-                            <RelativeLayout
-                                android:layout_margin="12dp"
-                                android:id="@+id/parent_layout2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+<!--                            <RelativeLayout-->
+<!--                                android:layout_margin="12dp"-->
+<!--                                android:id="@+id/parent_layout2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content">-->
 
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/delivery_img"
-                                    android:layout_alignParentLeft="true"/>
+<!--                                <ImageView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:src="@drawable/delivery_img"-->
+<!--                                    android:layout_alignParentLeft="true"/>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/name2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Devon, Samuel"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/name2"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="Devon, Samuel"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="24dp"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/farmerId2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="+2348033237685"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/farmerId2"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="+2348033237685"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="4 items"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:layout_alignRight="@id/farmerId2"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="4 items"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:layout_alignRight="@id/farmerId2"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                    <TextView
-                                        android:id="@+id/middle2"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="64ERT234KI89"
-                                        android:layout_marginTop="18dp"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/middle2"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="64ERT234KI89"-->
+<!--                                        android:layout_marginTop="18dp"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
 
 
@@ -323,207 +333,207 @@
 
 
 
-                            </RelativeLayout>
+<!--                            </RelativeLayout>-->
 
 
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
-                        <LinearLayout
+<!--                        <LinearLayout-->
 
-                            android:background="@drawable/addboxshawdow"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="20dip">
+<!--                            android:background="@drawable/addboxshawdow"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginTop="0dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:layout_marginRight="20dip">-->
 
 
 
 
-                            <RelativeLayout
-                                android:layout_margin="12dp"
-                                android:id="@+id/parent_layout3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+<!--                            <RelativeLayout-->
+<!--                                android:layout_margin="12dp"-->
+<!--                                android:id="@+id/parent_layout3"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content">-->
 
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/delivery_img"
-                                    android:layout_alignParentLeft="true"/>
+<!--                                <ImageView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:src="@drawable/delivery_img"-->
+<!--                                    android:layout_alignParentLeft="true"/>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/name3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Devon, Samuel"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/name3"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="Devon, Samuel"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="24dp"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/farmerId3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="+2348033237685"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/farmerId3"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="+2348033237685"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="4 items"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:layout_alignRight="@id/farmerId3"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="4 items"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:layout_alignRight="@id/farmerId3"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                    <TextView
-                                        android:id="@+id/middle3"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="64ERT234KI89"
-                                        android:layout_marginTop="18dp"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/middle3"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="64ERT234KI89"-->
+<!--                                        android:layout_marginTop="18dp"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
 
-                            </RelativeLayout>
+<!--                            </RelativeLayout>-->
 
 
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="23/08/2020"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="8sp"
-                            android:fontFamily="@font/azo_san"
-                            />
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="23/08/2020"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:textSize="8sp"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            />-->
 
 
-                        <LinearLayout
+<!--                        <LinearLayout-->
 
-                            android:background="@drawable/addboxshawdow"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="20dip">
+<!--                            android:background="@drawable/addboxshawdow"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginTop="0dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:layout_marginRight="20dip">-->
 
 
 
 
-                            <RelativeLayout
-                                android:layout_margin="12dp"
-                                android:id="@+id/parent_layout4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+<!--                            <RelativeLayout-->
+<!--                                android:layout_margin="12dp"-->
+<!--                                android:id="@+id/parent_layout4"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content">-->
 
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/delivery_img"
-                                    android:layout_alignParentLeft="true"/>
+<!--                                <ImageView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:src="@drawable/delivery_img"-->
+<!--                                    android:layout_alignParentLeft="true"/>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/name4"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Devon, Samuel"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/name4"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="Devon, Samuel"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="24dp"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/farmerId4"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="+2348033237685"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/farmerId4"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="+2348033237685"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="4 items"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:layout_alignRight="@id/farmerId4"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="4 items"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:layout_alignRight="@id/farmerId4"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                    <TextView
-                                        android:id="@+id/middle4"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="64ERT234KI89"
-                                        android:layout_marginTop="18dp"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/middle4"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="64ERT234KI89"-->
+<!--                                        android:layout_marginTop="18dp"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
 
 
@@ -531,101 +541,101 @@
 
 
 
-                            </RelativeLayout>
+<!--                            </RelativeLayout>-->
 
 
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
-                        <LinearLayout
-                            android:background="@drawable/addboxshawdow"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="20dip">
+<!--                        <LinearLayout-->
+<!--                            android:background="@drawable/addboxshawdow"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginTop="0dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:layout_marginRight="20dip">-->
 
 
 
 
-                            <RelativeLayout
-                                android:layout_margin="12dp"
-                                android:id="@+id/parent_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+<!--                            <RelativeLayout-->
+<!--                                android:layout_margin="12dp"-->
+<!--                                android:id="@+id/parent_layout"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content">-->
 
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/delivery_img"
-                                    android:layout_alignParentLeft="true"/>
+<!--                                <ImageView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:src="@drawable/delivery_img"-->
+<!--                                    android:layout_alignParentLeft="true"/>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/name"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Devon, Samuel"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/name"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="Devon, Samuel"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    android:layout_marginLeft="75dp">
+<!--                                <RelativeLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="24dp"-->
+<!--                                    android:layout_marginLeft="75dp">-->
 
-                                    <TextView
-                                        android:id="@+id/farmerId"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="+2348033237685"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/farmerId"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="+2348033237685"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="4 items"
-                                        android:textColor="@color/deliveryColor"
-                                        android:textSize="12sp"
-                                        android:layout_alignRight="@id/farmerId"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="4 items"-->
+<!--                                        android:textColor="@color/deliveryColor"-->
+<!--                                        android:textSize="12sp"-->
+<!--                                        android:layout_alignRight="@id/farmerId"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
-                                    <TextView
-                                        android:id="@+id/middle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="64ERT234KI89"
-                                        android:layout_marginTop="20dp"
-                                        android:textColor="#CECECE"
-                                        android:textSize="8sp"
-                                        android:fontFamily="@font/azo_san"
-                                        />
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/middle"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="64ERT234KI89"-->
+<!--                                        android:layout_marginTop="20dp"-->
+<!--                                        android:textColor="#CECECE"-->
+<!--                                        android:textSize="8sp"-->
+<!--                                        android:fontFamily="@font/azo_san"-->
+<!--                                        />-->
 
 
 
 
 
-                                </RelativeLayout>
+<!--                                </RelativeLayout>-->
 
 
 
@@ -633,12 +643,12 @@
 
 
 
-                            </RelativeLayout>
+<!--                            </RelativeLayout>-->
 
 
 
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
 
@@ -648,7 +658,7 @@
 
 
 
-                    </LinearLayout>
+
 
 
 

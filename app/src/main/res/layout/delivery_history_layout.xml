@@ -5,59 +5,65 @@
 
 
     <LinearLayout
-       android:id="@+id/proceed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="27dp">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="23/08/2020"
+            android:textColor="@color/colorPrimary"
+            android:textSize="8sp"
+            android:fontFamily="@font/azo_san"
+            />
+
+        </LinearLayout>
+
+    <LinearLayout
+
         android:background="@drawable/addboxshawdow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="0dp"
-        android:layout_marginLeft="24dip"
-        android:layout_marginRight="12dip">
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="20dip">
 
 
 
 
         <RelativeLayout
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:id="@+id/parent_layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <ImageView
-                android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/farmer_details"
+                android:src="@drawable/delivery_img"
                 android:layout_alignParentLeft="true"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginLeft="75dp">
 
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Akin, Solomon"
-                    android:textColor="@color/colorPrimary"
+                    android:text="Devon, Samuel"
+                    android:textColor="@color/deliveryColor"
                     android:textSize="12sp"
                     android:fontFamily="@font/azo_san"
                     />
-
-                <TextView
-                    android:id="@+id/farmerId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="X3478JND8992"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"
-                    android:layout_alignRight="@+id/name"
-                    android:fontFamily="@font/azo_san"
-                    />
-
 
 
 
@@ -66,33 +72,64 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginLeft="75dp">
 
                 <TextView
-                    android:id="@+id/companyname"
+                    android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Xamsatde"
+                    android:text="+2348033237685"
                     android:textColor="#CECECE"
                     android:textSize="8sp"
                     android:fontFamily="@font/azo_san"
                     />
 
                 <TextView
-                    android:id="@+id/litres"
+                    android:id="@+id/items"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="40 Litres"
+                    android:text="4 items"
+                    android:textColor="@color/deliveryColor"
+                    android:textSize="12sp"
+                    android:layout_alignRight="@id/number"
+                    android:fontFamily="@font/azo_san"
+                    />
+
+
+                <TextView
+                    android:id="@+id/itemsId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="64ERT234KI89"
+                    android:layout_marginTop="18dp"
                     android:textColor="#CECECE"
                     android:textSize="8sp"
-                    android:layout_alignRight="@id/companyname"
-                    android:fontFamily="@font/azo_san" />
+                    android:fontFamily="@font/azo_san"
+                    />
+
+
+
+
 
             </RelativeLayout>
 
+
+
+
+
+
+
         </RelativeLayout>
+
+
+
 
     </LinearLayout>
 
-</LinearLayout>
+
+
+
+
+
+    </LinearLayout>

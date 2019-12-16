@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.enyata.camdiary.BR;
@@ -140,6 +142,14 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
         productAdapter = new ProductAdapter(ProductActivity.this, productLists);
         listView.setAdapter(productAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(),VolumeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
