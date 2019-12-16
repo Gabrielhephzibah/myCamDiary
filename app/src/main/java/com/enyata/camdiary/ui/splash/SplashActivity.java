@@ -26,6 +26,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivitySplashBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
 
@@ -67,7 +68,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     public void openMainActivity() {
-        Intent intent = MainActivity.newIntent(SplashActivity.this);
+        Intent intent = new Intent(getApplicationContext(),DashboardActivity.class);
         startActivity(intent);
         finish();
     }

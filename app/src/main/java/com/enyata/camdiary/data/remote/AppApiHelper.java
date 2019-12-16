@@ -22,12 +22,16 @@ import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
 import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
@@ -107,4 +111,37 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectSingle(CamLoginResponse.class);
     }
+
+    @Override
+    public Single<VolumeResponse> getAcceptedVolume() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ACCEPTED_VOLUME_URL)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(VolumeResponse.class);
+    }
+
+    @Override
+    public Single<VolumeResponse> getRejectedVolume() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.REJECTED_VOLUME_URL)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(VolumeResponse.class);
+    }
+
+    @Override
+    public Single<AllEntries> getAllEntries() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ALL_ENTRIES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(AllEntries.class);
+    }
+
+    @Override
+    public Flowable<TodayCollectionResponse> getTodaysCollection() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.TODAYS_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(TodayCollectionResponse.class);
+    }
+
 }

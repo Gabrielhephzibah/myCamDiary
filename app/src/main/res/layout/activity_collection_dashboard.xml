@@ -40,7 +40,7 @@
                     android:layout_marginLeft="28dp">
 
                     <TextView
-                        android:id="@+id/forgotPassword"
+                        android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -59,7 +59,7 @@
                         android:fontFamily="@font/azo_san"
                         android:text="How's it going?"
                         android:textAllCaps="false"
-                        android:layout_alignBottom="@+id/forgotPassword"
+                        android:layout_alignBottom="@+id/username"
                         android:textColor="#3333"
                         android:layout_marginBottom="-26dp"
                         android:textSize="14sp"
@@ -133,6 +133,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/today"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="23/08/2020"
@@ -263,6 +264,7 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:layout_marginTop="5dp"
+                            android:onClick="@{() -> viewModel.onLogout()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"/>

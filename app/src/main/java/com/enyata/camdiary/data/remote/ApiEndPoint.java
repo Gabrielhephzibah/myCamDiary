@@ -38,7 +38,13 @@ public final class ApiEndPoint {
 
     public static final String LOGIN_URL = BuildConfig.BASE_URL + "/";
 
-    public static final String ACCEPTED_VOLUME_URL = BuildConfig.BASE_URL + "/";
+    public static final String ACCEPTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection/accepted";
+
+    public static final String REJECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection/rejected";
+
+    public static final String TODAYS_COLLECTION= BuildConfig.INVENTORY_BASE_URL + "/collection/today";
+
+    public static final String ALL_ENTRIES = BuildConfig.INVENTORY_BASE_URL + "/collection";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

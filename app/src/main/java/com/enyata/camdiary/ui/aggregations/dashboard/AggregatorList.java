@@ -1,10 +1,10 @@
 package com.enyata.camdiary.ui.aggregations.dashboard;
 
 public class AggregatorList {
+
     private String fullName;
     private String companyId;
     private  String myLitres;
-
 
     public  AggregatorList(String myName, String id,String milkLitres){
         fullName = myName;
@@ -15,7 +15,6 @@ public class AggregatorList {
 
     }
 
-
     public  void setFullName(String myName){
         fullName= myName;
     }
@@ -24,9 +23,6 @@ public class AggregatorList {
         return fullName;
     }
 
-
-
-
     public  void setCompanyId(String id){
         companyId = id;
     }
@@ -34,9 +30,6 @@ public class AggregatorList {
     public String getCompanyId(){
         return companyId;
     }
-
-
-
 
     public  void  setMyLitres(String milkLitres){
         myLitres = milkLitres;

@@ -36,13 +36,11 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregatorDashboardBinding,AggregatorDashboardViewModel>implements AggregatorDashboardNavigator {
+public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregatorDashboardBinding, AggregatorDashboardViewModel> implements AggregatorDashboardNavigator {
 
     AggregatorListAdapter aggregatorListAdapter;
     ListView listView;
     ArrayList<AggregatorList> aggregatorLists = new ArrayList<>();
-
-
 
     @Inject
     ViewModelProviderFactory factory;
@@ -70,7 +68,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public AggregatorDashboardViewModel getViewModel() {
-        aggregatorDashboardViewModel = ViewModelProviders.of(this,factory).get(AggregatorDashboardViewModel.class);
+        aggregatorDashboardViewModel = ViewModelProviders.of(this, factory).get(AggregatorDashboardViewModel.class);
         return aggregatorDashboardViewModel;
     }
 
@@ -94,7 +92,6 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
 
         JSONObject collector2 = new JSONObject();
@@ -139,13 +136,11 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
                 JSONObject object = array.getJSONObject(i);
                 String fullName = object.getString("fullName");
 
-                String companyId= object.getString("companyId");
+                String companyId = object.getString("companyId");
 
                 String myLitres = object.getString("myLitres");
 
-
-
-                aggregatorLists.add(new AggregatorList(fullName,companyId,myLitres));
+                aggregatorLists.add(new AggregatorList(fullName, companyId, myLitres));
 
 
             } catch (Exception e) {
@@ -155,11 +150,8 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         }
 
 
-        aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this,aggregatorLists);
+        aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
         listView.setAdapter(aggregatorListAdapter);
-
-
-
 
 
         aggregatorDashboardAdapter = new AggregatorDashboardAdapter(layouts, AggregatorDashboardActivity.this);
@@ -214,16 +206,16 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             slideLayout.removeAllViews();
 
         slider_dash = new ImageView[layouts.length];
-        for (int i = 0; i < layouts.length; i++){
+        for (int i = 0; i < layouts.length; i++) {
             slider_dash[i] = new ImageView(this);
-            if (i == current_position){
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this,R.drawable.active_slider_dash));
-            }else{
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this,R.drawable.default_slider_dash));
+            if (i == current_position) {
+                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.active_slider_dash));
+            } else {
+                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.default_slider_dash));
             }
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(4,0,4,0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(4, 0, 4, 0);
             params.gravity = Gravity.CENTER_HORIZONTAL;
             slideLayout.setLayoutParams(params);
 

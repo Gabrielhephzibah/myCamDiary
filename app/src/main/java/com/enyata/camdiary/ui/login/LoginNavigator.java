@@ -29,5 +29,11 @@ public interface LoginNavigator {
     void loginClick();
 
     void goToCollectorScanBarcode();
+
+    void goToCollectionDashBoard();
+
+    void getAcceptedCollection();
+
+    void getRejectedCollection();
 }
 

@@ -17,6 +17,8 @@
 package com.enyata.camdiary.ui.base;
 
 import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.enyata.camdiary.data.DataManager;

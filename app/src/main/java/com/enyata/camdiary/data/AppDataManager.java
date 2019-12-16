@@ -19,7 +19,10 @@ package com.enyata.camdiary.data;
 import android.content.Context;
 
 import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +48,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -103,7 +107,7 @@ public class AppDataManager implements DataManager {
     @Override
     public void setAccessToken(String accessToken) {
         mPreferencesHelper.setAccessToken(accessToken);
-        mApiHelper.getApiHeader().getProtectedApiHeader().setAccessToken(accessToken);
+        mApiHelper.getApiHeader().getProtectedApiHeader().setAuthorization(accessToken);
     }
 
     @Override
@@ -184,6 +188,26 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<CamLoginResponse> login(CamLoginRequest.Request request) {
         return mApiHelper.login(request);
+    }
+
+    @Override
+    public Single<VolumeResponse> getAcceptedVolume() {
+        return mApiHelper.getAcceptedVolume();
+    }
+
+    @Override
+    public Single<VolumeResponse> getRejectedVolume() {
+        return mApiHelper.getRejectedVolume();
+    }
+
+    @Override
+    public Single<AllEntries> getAllEntries() {
+        return mApiHelper.getAllEntries();
+    }
+
+    @Override
+    public Flowable<TodayCollectionResponse> getTodaysCollection() {
+        return mApiHelper.getTodaysCollection();
     }
 
     @Override
@@ -268,37 +292,35 @@ public class AppDataManager implements DataManager {
 
     @Override
     public void setUserAsLoggedOut() {
-        updateUserInfo(
-                null,
-                null,
-                DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
-                null,
-                null,
-                null);
+
     }
+
 
     @Override
     public void updateApiHeader(Long userId, String accessToken) {
-        mApiHelper.getApiHeader().getProtectedApiHeader().setUserId(userId);
-        mApiHelper.getApiHeader().getProtectedApiHeader().setAccessToken(accessToken);
+        mApiHelper.getApiHeader().getProtectedApiHeader().setAuthorization(accessToken);
     }
 
     @Override
     public void updateUserInfo(
             String accessToken,
-            Long userId,
-            LoggedInMode loggedInMode,
-            String userName,
-            String email,
-            String profilePicPath) {
+            String firstname,
+            String email) {
 
         setAccessToken(accessToken);
-        setCurrentUserId(userId);
-        setCurrentUserLoggedInMode(loggedInMode);
-        setCurrentUserName(userName);
+//        setCurrentUserId(userId);
+//        setCurrentUserLoggedInMode(loggedInMode);
+        setCurrentUserName(firstname);
         setCurrentUserEmail(email);
-        setCurrentUserProfilePicUrl(profilePicPath);
-
-        updateApiHeader(userId, accessToken);
+//        setCurrentUserProfilePicUrl(profilePicPath);
+//
+//        updateApiHeader(userId, accessToken);
     }
+
+    @Override
+    public void updateLoginStatus(LoggedInMode loggedInMode) {
+         setCurrentUserLoggedInMode(loggedInMode);
+    }
+
+
 }

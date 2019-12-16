@@ -3,6 +3,8 @@ package com.enyata.camdiary.data.model.api.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
+
 public class CamLoginResponse {
 
     @Expose
@@ -15,48 +17,26 @@ public class CamLoginResponse {
 
     @Expose
     @SerializedName("data")
-    private String data;
+    private User data;
 
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-
-        CamLoginResponse that = (CamLoginResponse) object;
-
-        if (status != null ? !that.status.equals(status) : that.status != null) {
-            return false;
-        }
-        if (data != null ? !that.data.equals(data) : that.data != null) {
-            return false;
-        }
-        return message != null ? that.message.equals(message) : that.message == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = status != null ? status.hashCode() : 0;
-        result = 31 * result + (data != null ? data.hashCode() : 0);
-        result = 31 * result + (message != null ? message.hashCode() : 0);
-        return result;
-    }
+    @Expose
+    @SerializedName("error")
+    private String error;
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
-    public String getData() {
-        return data;
+    public User getData() {
+        return this.data;
+    }
+
+    public String getError() {
+        return this.error;
     }
 
     public String getStatus() {
-        return status;
+        return this.status;
     }
 
 }

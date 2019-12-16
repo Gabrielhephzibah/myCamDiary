@@ -10,27 +10,40 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AllEntries;
+import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
+import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
+import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -40,10 +53,14 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
 
     DashboardAdapter dashboardAdapter;
+    private ActivityCollectionDashboardBinding mActivityDashboardBinding;
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
     LinearLayout slideLayout;
     ImageView[] slider_dash;
     ViewPager pager;
+
+    @Inject
+    Gson gson;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -70,94 +87,38 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     }
 
     @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
+            Alert.showFailed(getApplicationContext(),response.getResponseMessage());
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dashboardViewModel.setNavigator(this);
-        pager =findViewById(R.id.pager);
+        pager = findViewById(R.id.pager);
         slideLayout = findViewById(R.id.slideLayout);
         listView = findViewById(R.id.listView);
+        TextView username = findViewById(R.id.username);
+        TextView today = findViewById(R.id.today);
+        today.setText(dashboardViewModel.getCurrentDate());
+        username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
 
-
-        JSONObject collector1 = new JSONObject();
-        try {
-            collector1.put("fullName", "Akin, Solomon");
-            collector1.put("companyName", "Xamsatde");
-            collector1.put("companyId", "X3478JND8992");
-            collector1.put("status", "Rejected");
-            collector1.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (!isNetworkConnected()) {
+            Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
+            return;
+        }else{
+            dashboardViewModel.getVolumeOfAcceptedCollection();
+            dashboardViewModel.getVolumeOfRejectedCollection();
+            dashboardViewModel.getTodaysCollection();
+            dashboardViewModel.getAllEntries();
         }
 
-
-
-        JSONObject collector2 = new JSONObject();
-        try {
-            collector2.put("fullName", "Akin, Solomon");
-            collector2.put("companyName", "Xamsatde");
-            collector2.put("companyId", "X3478JND8992");
-            collector2.put("status", "Rejected");
-            collector2.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject collector3 = new JSONObject();
-        try {
-            collector3.put("fullName", "Akin, Solomon");
-            collector3.put("companyName", "Xamsatde");
-            collector3.put("companyId", "X3478JND8992");
-            collector3.put("status", "Rejected");
-            collector3.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray array = new JSONArray();
-        array.put(collector1);
-        array.put(collector2);
-        array.put(collector3);
-        array.put(collector2);
-        array.put(collector1);
-        array.put(collector3);
-
-
-        for (int i = 0; i < array.length(); i++) {
-
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String fullName = object.getString("fullName");
-                String companyName = object.getString("companyName");
-                String companyId= object.getString("companyId");
-                String status= object.getString("status");
-                String myLitres = object.getString("myLitres");
-
-
-
-                dashboardCollectorLists.add(new DashboardCollectorList(fullName,companyName,companyId,status,myLitres));
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-
-
-        dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
-        listView.setAdapter(dashboardCollectorAdapter);
-
-
-
-
-        dashboardAdapter = new DashboardAdapter(layouts, DashboardActivity.this);
-        pager.setAdapter(dashboardAdapter);
+        DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
+        pager.setAdapter(viewPagerAdapter);
         createSliderDash(0);
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -222,5 +183,41 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     public void dataCollection() {
         Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void logout() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void displayAcceptedVolume(VolumeResponse volume) {
+        dashboardViewModel.setAcceptedVolume(volume.getData());
+    }
+
+    @Override
+    public void displayRejectedVolume(VolumeResponse volume) {
+        dashboardViewModel.setRejectedVolume(volume.getData());
+    }
+
+    @Override
+    public void getAllEntries(AllEntries entries) {
+        dashboardViewModel.setEntries(entries.getCount());
+    }
+
+    @Override
+    public void getTodayCollection(TodayCollectionResponse todayCollectionResponse) {
+        for (CollectionResponse response : todayCollectionResponse.getData()) {
+            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume())));
+            dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
+            listView.setAdapter(dashboardCollectorAdapter);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dashboardViewModel.dispose();
     }
 }

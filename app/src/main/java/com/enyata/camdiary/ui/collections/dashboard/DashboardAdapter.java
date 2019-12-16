@@ -6,54 +6,36 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 
-public class DashboardAdapter extends PagerAdapter {
+public class DashboardAdapter extends FragmentPagerAdapter {
 
-    private int[] layouts;
     Context context;
-    LayoutInflater layoutInflater;
 
-
-    public DashboardAdapter(int[] layouts, Context context) {
-        this.layouts = layouts;
+    public DashboardAdapter(Context context, FragmentManager fm) {
+        super(fm);
         this.context = context;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     @Override
     public int getCount() {
-
-
-        return layouts.length;
-
-    }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
+        return 3;
     }
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Fragment getItem(int position) {
 
-        View view = layoutInflater.inflate(layouts[position], container, false);
-
-        switch (position) {
-
+        if (position == 0) {
+            return DashboardSlideOneFragment.newInstance();
+        } else if(position == 1) {
+            return DashboardSlideTwoFragment.newInstance();
+        }else{
+            return DashboardSlideThreeFragment.newInstance();
         }
-
-        container.addView(view);
-
-
-        return view;
     }
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        View view = (View) object;
-        container.removeView(view);
-    }
 }

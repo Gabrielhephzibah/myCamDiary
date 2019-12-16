@@ -19,12 +19,15 @@ package com.enyata.camdiary.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
@@ -36,6 +39,7 @@ import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryAc
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
@@ -44,6 +48,9 @@ import javax.inject.Inject;
  */
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
+
+    @Inject
+    Gson gson;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -72,7 +79,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void handleError(Throwable throwable) {
-        // handle error
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
+            Log.d("ERROR_LOGIN",String.valueOf(response));
+            Log.d("ERROR_LOGIN_ONE",String.valueOf(response.getStatus()));
+            Log.d("ERROR_LOGIN_TWO",String.valueOf(response.getError()));
+            Alert.showFailed(getApplicationContext(),response.getError());
+        }
     }
 
     @Override
@@ -88,6 +102,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         String email = mActivityLoginBinding.emailTextView.getText().toString();
         String password = mActivityLoginBinding.passwordTextView.getText().toString();
         if (mLoginViewModel.isEmailAndPasswordValid(email,password)){
+            if (!isNetworkConnected()) {
+                Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
+                return;
+            }
             hideKeyboard();
             mLoginViewModel.login(email,password);
         }else{
@@ -103,9 +121,26 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
+    public void goToCollectionDashBoard() {
+        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void getAcceptedCollection() {
+
+    }
+
+    @Override
+    public void getRejectedCollection() {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityLoginBinding = getViewDataBinding();
         mLoginViewModel.setNavigator(this);
+
     }
 }
