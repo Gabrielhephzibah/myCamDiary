@@ -87,7 +87,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         try {
             collector1.put("fullName", "Akin, Solomon");
 
-            collector1.put("companyId", "X3478JND8992");
+            collector1.put("companyId", "64ERT234KI89");
 
             collector1.put("myLitres", "40 litres");
 
@@ -101,7 +101,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         try {
             collector2.put("fullName", "Akin, Solomon");
 
-            collector2.put("companyId", "X3478JND8992");
+            collector2.put("companyId", "64ERT234KI89");
 
             collector2.put("myLitres", "40 litres");
 
@@ -114,7 +114,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         try {
             collector3.put("fullName", "Akin, Solomon");
 
-            collector3.put("companyId", "X3478JND8992");
+            collector3.put("companyId", "64ERT234KI89");
 
             collector3.put("myLitres", "40 litres");
 

@@ -7,22 +7,42 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityDeliveryDashboardBinding;
+import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
+import com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryAdapter;
+import com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryList;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemAdapter;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemList;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDashboardBinding,DeliveryDashboardViewModel>implements DeliveryDashboardNavigator {
+
+
+
+    DeliveryListAdapter deliveryListAdapter;
+    ListView listView;
+    ArrayList<DeliveryList> deliveryLists = new ArrayList<>();
+
 
     @Inject
     ViewModelProviderFactory factory;
@@ -60,6 +80,102 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         deliveryDashboardViewModel.setNavigator(this);
         pager = findViewById(R.id.pager);
         slideLayout = findViewById(R.id.slideLayout);
+        listView = findViewById(R.id.listView);
+
+
+
+
+        JSONObject delivery1 = new JSONObject();
+        try {
+            delivery1.put("myName", "Devon, Samuel");
+
+            delivery1.put("items", "4 items");
+
+            delivery1.put("number", "+2348033237685");
+
+            delivery1.put("itemId", "64ERT234KI89");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        JSONObject delivery2 = new JSONObject();
+        try {
+            delivery2.put("myName", "Devon, Samuel");
+
+            delivery2.put("items", "4 items");
+
+            delivery2.put("number", "+2348033237685");
+
+            delivery2.put("itemId", "64ERT234KI89");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        JSONObject delivery3 = new JSONObject();
+        try {
+            delivery3.put("myName", "Devon, Samuel");
+
+            delivery3.put("items", "4 items");
+
+            delivery3.put("number", "+2348033237685");
+
+            delivery3.put("itemId", "64ERT234KI89");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        JSONArray array = new JSONArray();
+        array.put(delivery1);
+        array.put(delivery2);
+        array.put(delivery3);
+        array.put(delivery2);
+        array.put(delivery1);
+        array.put(delivery3);
+
+
+        for (int i = 0; i < array.length(); i++) {
+
+            try {
+                Log.i("message", array.toString());
+
+                JSONObject object = array.getJSONObject(i);
+                String myName = object.getString("myName");
+                String items= object.getString("items");
+
+                String number = object.getString("number");
+                String itemId = object.getString("itemId");
+
+
+
+                deliveryLists.add(new DeliveryList(myName,items,number,itemId));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+
+        deliveryListAdapter= new DeliveryListAdapter(DeliveryDashboardActivity.this, deliveryLists);
+        listView.setAdapter(deliveryListAdapter);
+
 
 
 
