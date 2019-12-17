@@ -48,6 +48,5 @@ public class DashboardSlideOneFragment  extends Fragment {
                 acceptedVolumeTextView.setText(String.format("%s Litres", s));
             }
         });
-
     }
 }

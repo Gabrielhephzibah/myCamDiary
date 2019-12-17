@@ -1,64 +1,40 @@
 package com.enyata.camdiary.ui.collections.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
-import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
-import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
-import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.inject.Inject;
 
-public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding,DashboardViewModel>implements DashboardNavigator {
-    DashboardCollectorAdapter dashboardCollectorAdapter;
-    ListView listView;
-    ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
 
-
-    DashboardAdapter dashboardAdapter;
-    private ActivityCollectionDashboardBinding mActivityDashboardBinding;
-    int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
-    LinearLayout slideLayout;
-    ImageView[] slider_dash;
-    ViewPager pager;
+public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
     @Inject
     Gson gson;
@@ -66,6 +42,12 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     @Inject
     ViewModelProviderFactory factory;
     private DashboardViewModel dashboardViewModel;
+    private ActivityCollectionDashboardBinding activityCollectionDashboardBinding;
+    private ListView listView;
+    private ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
+    private LinearLayout slideLayout;
+
+    int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerDetailsActivity.class);
@@ -83,7 +65,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public DashboardViewModel getViewModel() {
-        dashboardViewModel = ViewModelProviders.of(this,factory).get(DashboardViewModel.class);
+        dashboardViewModel = ViewModelProviders.of(this, factory).get(DashboardViewModel.class);
         return dashboardViewModel;
     }
 
@@ -92,7 +74,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         if (throwable != null) {
             ANError error = (ANError) throwable;
             VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
-            Alert.showFailed(getApplicationContext(),response.getResponseMessage());
+            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
         }
     }
 
@@ -100,28 +82,18 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dashboardViewModel.setNavigator(this);
-        pager = findViewById(R.id.pager);
-        slideLayout = findViewById(R.id.slideLayout);
-        listView = findViewById(R.id.listView);
-        TextView username = findViewById(R.id.username);
-        TextView today = findViewById(R.id.today);
+        activityCollectionDashboardBinding = getViewDataBinding();
+        ViewPager pager = activityCollectionDashboardBinding.pager;
+        slideLayout = activityCollectionDashboardBinding.slideLayout;
+        listView = activityCollectionDashboardBinding.listView;
+        TextView username = activityCollectionDashboardBinding.username;
+        TextView today = activityCollectionDashboardBinding.today;
         today.setText(dashboardViewModel.getCurrentDate());
         username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
-
-        if (!isNetworkConnected()) {
-            Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
-            return;
-        }else{
-            dashboardViewModel.getVolumeOfAcceptedCollection();
-            dashboardViewModel.getVolumeOfRejectedCollection();
-            dashboardViewModel.getTodaysCollection();
-            dashboardViewModel.getAllEntries();
-        }
 
         DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
         pager.setAdapter(viewPagerAdapter);
         createSliderDash(0);
-
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -140,6 +112,17 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             }
         });
 
+        if (!isNetworkConnected()) {
+            Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
+            return;
+        }
+
+        dashboardViewModel.getVolumeOfAcceptedCollection();
+        dashboardViewModel.getVolumeOfRejectedCollection();
+        dashboardViewModel.getTodaysCollection();
+        dashboardViewModel.getAllEntries();
+
+
     }
 
 
@@ -148,17 +131,17 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         if (slideLayout != null)
             slideLayout.removeAllViews();
 
-        slider_dash = new ImageView[layouts.length];
-        for (int i = 0; i < layouts.length; i++){
+        ImageView[] slider_dash = new ImageView[layouts.length];
+        for (int i = 0; i < layouts.length; i++) {
             slider_dash[i] = new ImageView(this);
-            if (i == current_position){
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this,R.drawable.active_slider_dash));
-            }else{
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this,R.drawable.default_slider_dash));
+            if (i == current_position) {
+                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.active_slider_dash));
+            } else {
+                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.default_slider_dash));
             }
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(4,0,4,0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(4, 0, 4, 0);
             params.gravity = Gravity.CENTER_HORIZONTAL;
             slideLayout.setLayoutParams(params);
 
@@ -211,7 +194,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     public void getTodayCollection(TodayCollectionResponse todayCollectionResponse) {
         for (CollectionResponse response : todayCollectionResponse.getData()) {
             dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume())));
-            dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
+            DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }
     }

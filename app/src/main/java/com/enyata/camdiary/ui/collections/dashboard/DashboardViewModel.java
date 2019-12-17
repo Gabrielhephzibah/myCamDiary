@@ -1,13 +1,11 @@
 package com.enyata.camdiary.ui.collections.dashboard;
 
 import android.text.format.DateFormat;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.enyata.camdiary.data.DataManager;
-import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 

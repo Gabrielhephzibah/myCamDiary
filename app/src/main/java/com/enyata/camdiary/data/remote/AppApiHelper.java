@@ -21,10 +21,12 @@ import com.enyata.camdiary.data.model.api.LoginRequest;
 import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
-import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
+import com.enyata.camdiary.data.model.api.request.CamLogin;
+import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
@@ -107,11 +109,20 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<CamLoginResponse> login(CamLoginRequest.Request request) {
+    public Single<CamLoginResponse> login(CamLogin.Request request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.LOGIN_URL + "auth/signin")
                 .addBodyParameter(request)
                 .build()
                 .getObjectSingle(CamLoginResponse.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> doCreateCollection(Collection.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.NEW_COLLECTION)
+                .addBodyParameter(request)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
     }
 
     @Override

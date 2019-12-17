@@ -46,6 +46,8 @@ public final class ApiEndPoint {
 
     public static final String ALL_ENTRIES = BuildConfig.INVENTORY_BASE_URL + "/collection";
 
+    public static final String NEW_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

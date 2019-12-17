@@ -19,8 +19,7 @@ package com.enyata.camdiary.ui.login;
 import android.text.TextUtils;
 
 import com.enyata.camdiary.data.DataManager;
-import com.enyata.camdiary.data.model.api.LoginRequest;
-import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
@@ -45,7 +44,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void login(String email, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .login(new CamLoginRequest.Request(email, password))
+                .login(new CamLogin.Request(email, password))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {

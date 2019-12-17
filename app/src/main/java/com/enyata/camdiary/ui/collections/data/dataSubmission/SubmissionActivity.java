@@ -1,23 +1,18 @@
 package com.enyata.camdiary.ui.collections.data.dataSubmission;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.databinding.ActivitySubmissionBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
-import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel;
-import com.enyata.camdiary.ui.login.LoginViewModel;
 
 import javax.inject.Inject;
 

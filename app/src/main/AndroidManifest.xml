@@ -40,7 +40,7 @@
         <activity android:name=".ui.collections.data.dataSubmission.SubmissionActivity" />
         <activity android:name=".ui.collections.data.dataCollection.DataCollectionActivity" />
         <activity android:name=".ui.collections.history.HistoryActivity" />
-        <activity android:name=".ui.collections.successfulcollection.SuccessfulActivity" />
+        <activity android:name=".ui.collections.statusofcollection.StatusOfCollectionActivity" />
         <activity android:name=".ui.collections.entervolume.EnterVolumeActivity" />
         <activity android:name=".ui.collections.farmer.farmerId.FarmerIdActivity" />
         <activity android:name=".ui.collections.barcode.BarcodeActivity" />

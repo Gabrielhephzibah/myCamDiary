@@ -10,21 +10,33 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AllEntries;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityEnterVolumeBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
-import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
+import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
+import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
 public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding,EnterVolumeViewModel>implements EnterVolumeNavigator {
 
     @Inject
+    Gson gson;
+
+    @Inject
     ViewModelProviderFactory factory;
     private EnterVolumeViewModel enterVolumeViewModel;
+    private ActivityEnterVolumeBinding enterVolumeBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerDetailsActivity.class);
@@ -49,6 +61,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        enterVolumeBinding = getViewDataBinding();
         enterVolumeViewModel.setNavigator(this);
     }
 
@@ -59,25 +72,15 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
         dialog.setView(dialogView);
         dialog.setCancelable(false);
-        TextView cancel =(TextView) dialogView.findViewById(R.id.cancel);
-        TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
+        TextView cancel = dialogView.findViewById(R.id.cancel);
+        TextView continuee = dialogView.findViewById(R.id.continuee);
         final AlertDialog alertDialog =dialog.create();
         alertDialog.show();
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        continuee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent success = new Intent(getApplicationContext(), SuccessfulActivity.class);
-                startActivity(success);
-
-            }
+        cancel.setOnClickListener(v -> alertDialog.dismiss());
+        continuee.setOnClickListener(v -> {
+            String volume = enterVolumeBinding.volumeEditText.getText().toString();
+            enterVolumeViewModel.createCollection(new JSONObject());
         });
 
     }
@@ -93,5 +96,27 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     public void back() {
         Intent intent = new Intent(getApplicationContext(),FarmerDetailsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+        }
+    }
+
+    @Override
+    public void displayResponse(NewCollectionResponse response) {
+        //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
+        Intent success = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
+        startActivity(success);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        enterVolumeViewModel.dispose();
     }
 }

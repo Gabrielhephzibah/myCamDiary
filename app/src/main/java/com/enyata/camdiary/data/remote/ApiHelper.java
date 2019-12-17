@@ -21,10 +21,12 @@ import com.enyata.camdiary.data.model.api.LoginRequest;
 import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
-import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.request.CamLogin;
+import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
@@ -52,8 +54,10 @@ public interface ApiHelper {
 
     Single<OpenSourceResponse> getOpenSourceApiCall();
 
-    // Cam Diary Requests and response
-    Single<CamLoginResponse> login(CamLoginRequest.Request request);
+    // Login
+    Single<CamLoginResponse> login(CamLogin.Request request);
+    // Create Collection
+    Single<NewCollectionResponse> doCreateCollection(Collection.Request request);
     // Get accepted Volume
     Single<VolumeResponse> getAcceptedVolume();
     //get aggregation volume

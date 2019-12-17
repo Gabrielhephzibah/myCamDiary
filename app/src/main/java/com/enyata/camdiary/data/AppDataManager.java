@@ -17,11 +17,12 @@
 package com.enyata.camdiary.data;
 
 import android.content.Context;
-
-import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
+import com.enyata.camdiary.data.model.api.request.CamLogin;
+import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
@@ -188,8 +189,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<CamLoginResponse> login(CamLoginRequest.Request request) {
+    public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> doCreateCollection(Collection.Request request) {
+        return mApiHelper.doCreateCollection(request);
     }
 
     @Override
