@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="Xamsatde"
                     android:textColor="#CECECE"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="40 Litres"
                     android:textColor="#CECECE"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:layout_alignRight="@id/companyname"
                     android:fontFamily="@font/azo_san" />
 

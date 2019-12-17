@@ -30,7 +30,7 @@ public interface LoginNavigator {
 
     void goToCollectorScanBarcode();
 
-    void goToCollectionDashBoard();
+    void goToDashBoard(String type);
 
     void getAcceptedCollection();
 

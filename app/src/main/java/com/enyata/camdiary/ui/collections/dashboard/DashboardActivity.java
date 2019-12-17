@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.inject.Inject;
 
+
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
     @Inject

@@ -55,10 +55,14 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     String firstname = response.getData().getFirstName();
                     getDataManager().updateUserInfo(token,firstname,userEmail);
                     if(response.getData().getUserType().equals("collectors")){
-                        getNavigator().goToCollectionDashBoard();
-                    }else {
-
+                        getNavigator().goToDashBoard("collectors");
+                    }else if(response.getData().getUserType().equals("aggregator")){
+                        getNavigator().goToDashBoard("aggregator");
+                    }else if (response.getData().getUserType().equals("delivery")){
+                        getNavigator().goToDashBoard("delivery");
                     }
+
+
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);

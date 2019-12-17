@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:text="+2348033237685"
                     android:textColor="#CECECE"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
 
@@ -105,7 +105,7 @@
                     android:text="64ERT234KI89"
                     android:layout_marginTop="18dp"
                     android:textColor="#CECECE"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
 

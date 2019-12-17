@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="64ERT234KI89"
                     android:textColor="#CECECE"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
 
