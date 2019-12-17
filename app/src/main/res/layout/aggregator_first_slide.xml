@@ -40,7 +40,7 @@
                     android:fontFamily="@font/azo_san" />
 
                 <TextView
-                    android:id="@+id/litres_first"
+                    android:id="@+id/aggregator_litres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2200 Liters"

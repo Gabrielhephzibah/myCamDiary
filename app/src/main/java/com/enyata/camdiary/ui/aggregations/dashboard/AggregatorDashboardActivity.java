@@ -1,6 +1,5 @@
 package com.enyata.camdiary.ui.aggregations.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -14,19 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AggregationVolume;
+import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.databinding.ActivityAggregatorDashboardBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
-import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorAdapter;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
+import com.enyata.camdiary.utils.Alert;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +38,9 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     AggregatorListAdapter aggregatorListAdapter;
     ListView listView;
     ArrayList<AggregatorList> aggregatorLists = new ArrayList<>();
+    AggregatorHomepageAdapter aggregatorHomepageAdapter;
+    TextView aggregatorName;
+    TextView date;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -79,6 +79,20 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         pager = findViewById(R.id.pager);
         slideLayout = findViewById(R.id.slideLayout);
         listView = findViewById(R.id.listView);
+        aggregatorName = findViewById(R.id.aggregator_name);
+        date = findViewById(R.id.date);
+        date.setText(aggregatorDashboardViewModel.getCurrentDate());
+        aggregatorName.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
+
+
+
+        if (!isNetworkConnected()) {
+            Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
+            return;
+        }else{
+            aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
+            aggregatorDashboardViewModel.getTotalNumberOfCollectors();
+        }
 
 
         JSONObject collector1 = new JSONObject();
@@ -154,8 +168,8 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         listView.setAdapter(aggregatorListAdapter);
 
 
-        aggregatorDashboardAdapter = new AggregatorDashboardAdapter(layouts, AggregatorDashboardActivity.this);
-        pager.setAdapter(aggregatorDashboardAdapter);
+        aggregatorHomepageAdapter = new AggregatorHomepageAdapter(this, getSupportFragmentManager());
+        pager.setAdapter(aggregatorHomepageAdapter);
         createSliderDash(0);
 
 
@@ -177,6 +191,11 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             }
         });
 
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
 
     }
 
@@ -223,6 +242,17 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             slideLayout.addView(slider_dash[i], params);
         }
 
+
+    }
+
+    @Override
+    public void displayAggregatorVolume(AggregationVolume volume) {
+        aggregatorDashboardViewModel.setAggregatorVolume(volume.getData());
+    }
+
+    @Override
+    public void noOfCollectors(NoOfCollectors aggregation) {
+        aggregatorDashboardViewModel.setTotalAggregation(aggregation.getCount());
 
     }
 

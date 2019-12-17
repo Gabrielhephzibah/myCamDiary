@@ -1,4 +1,4 @@
-package com.enyata.camdiary.ui.collections.dashboard;
+package com.enyata.camdiary.ui.aggregations.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,40 +13,43 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.enyata.camdiary.R;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideTwoFragment;
 
-public class DashboardSlideOneFragment  extends Fragment {
+public class AggregatorSlideTwoFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    AggregatorDashboardViewModel aggregatorDashboardViewModel;
 
-    public DashboardSlideOneFragment() {
-        // Required empty public constructor
+    public  AggregatorSlideTwoFragment(){
+        //no constructor needed
+
     }
 
-    public static DashboardSlideOneFragment newInstance() {
-        return new DashboardSlideOneFragment();
+    public static AggregatorSlideTwoFragment newInstance() {
+        return new AggregatorSlideTwoFragment();
     }
 
     @Override public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // init ViewModel
-        dashboardViewModel = ViewModelProviders.of(requireActivity()).get(DashboardViewModel.class);
+        aggregatorDashboardViewModel = ViewModelProviders.of(requireActivity()).get(AggregatorDashboardViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.collection_first_slide, container, false);
+        return inflater.inflate(R.layout.aggregator_second_slide, container, false);
     }
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView acceptedVolumeTextView = view.findViewById(R.id.litres_first);
-        dashboardViewModel.getAcceptedVolume().observe(requireActivity(), new Observer<String>() {
+        TextView totalAggregationTextView= view.findViewById(R.id.total_aggregation);
+        aggregatorDashboardViewModel.getTotalAggregation().observe(requireActivity(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                acceptedVolumeTextView.setText(String.format("%s Litres", s));
+                totalAggregationTextView.setText(String.format(s));
             }
         });
+
     }
 }
