@@ -100,7 +100,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/password"
+                                    android:id="@+id/volumeEditText"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Volume"

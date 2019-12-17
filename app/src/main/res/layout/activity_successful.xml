@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.collections.successfulcollection.SuccessfulActivity">
+    tools:context=".ui.collections.statusofcollection.StatusOfCollectionActivity">
 
 
     <data>
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel" />
+            type="com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionViewModel" />
     </data>
 
     <LinearLayout

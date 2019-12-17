@@ -37,7 +37,7 @@ import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
-import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulActivity;
+import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishActivity;
@@ -85,7 +85,7 @@ public abstract class ActivityBuilder {
     abstract FarmerIdActivity bindFarmerIdActivity();
 
     @ContributesAndroidInjector
-    abstract SuccessfulActivity bindSuccessfulActivity();
+    abstract StatusOfCollectionActivity bindSuccessfulActivity();
 
     @ContributesAndroidInjector
     abstract EnterVolumeActivity bindEnterVolumeActivity();

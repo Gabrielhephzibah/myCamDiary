@@ -14,6 +14,7 @@ import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeViewModel;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryViewModel;
 import com.enyata.camdiary.ui.aggregations.product.ProductViewModel;
+import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionViewModel;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
 import com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardViewModel;
@@ -25,7 +26,6 @@ import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryViewModel;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonViewModel;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessViewModel;
-import com.enyata.camdiary.ui.collections.successfulcollection.SuccessfulViewModel;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishViewModel;
@@ -102,9 +102,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             //noinspection unchecked
             return (T) new ReasonViewModel(dataManager, schedulerProvider);
 
-        } else if (modelClass.isAssignableFrom(SuccessfulViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(StatusOfCollectionViewModel.class)) {
             //noinspection unchecked
-            return (T) new SuccessfulViewModel(dataManager, schedulerProvider);
+            return (T) new StatusOfCollectionViewModel(dataManager, schedulerProvider);
 
 
         } else if (modelClass.isAssignableFrom(ScanViewModel.class)) {

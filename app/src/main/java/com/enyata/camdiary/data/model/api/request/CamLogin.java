@@ -4,9 +4,9 @@ import android.util.Log;
 
 import com.google.gson.annotations.Expose;
 
-public class CamLoginRequest {
+public class CamLogin {
 
-    private CamLoginRequest() {
+    private CamLogin() {
         // don't instantiate
     }
 
@@ -44,7 +44,7 @@ public class CamLoginRequest {
                 return false;
             }
 
-            Request request = (Request) obj;
+            CamLogin.Request request = (CamLogin.Request) obj;
 
             if (email != null ? !email.equals(request.email) : request.email != null) {
                 return false;

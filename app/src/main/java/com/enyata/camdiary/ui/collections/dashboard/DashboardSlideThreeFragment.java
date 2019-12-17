@@ -54,7 +54,5 @@ public class DashboardSlideThreeFragment extends Fragment {
                 entries.setText(s);
             }
         });
-
-
     }
 }
