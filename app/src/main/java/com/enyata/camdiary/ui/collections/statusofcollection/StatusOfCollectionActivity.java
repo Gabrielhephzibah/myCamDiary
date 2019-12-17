@@ -45,6 +45,7 @@ public class StatusOfCollectionActivity extends BaseActivity<ActivitySuccessfulB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         successfulViewModel.setNavigator(this);
+
     }
 
     @Override

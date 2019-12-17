@@ -35,9 +35,11 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     }
 
     public boolean isEmailAndPasswordValid(String email, String password) {
-        if (TextUtils.isEmpty(email) || !CommonUtils.isEmailValid(email) || TextUtils.isEmpty(password))
-            return false;
-        return true;
+        return !TextUtils.isEmpty(email) && CommonUtils.isEmailValid(email) && !TextUtils.isEmpty(password);
+    }
+
+    public boolean isLengthEqualsToSeven(String password) {
+        return password.length() >= 7;
     }
 
 

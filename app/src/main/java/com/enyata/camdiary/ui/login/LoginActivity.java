@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public LoginViewModel getViewModel() {
-        mLoginViewModel = ViewModelProviders.of(this,factory).get(LoginViewModel.class);
+        mLoginViewModel = ViewModelProviders.of(this, factory).get(LoginViewModel.class);
         return mLoginViewModel;
     }
 
@@ -82,10 +82,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         if (throwable != null) {
             ANError error = (ANError) throwable;
             CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
-            Log.d("ERROR_LOGIN",String.valueOf(response));
-            Log.d("ERROR_LOGIN_ONE",String.valueOf(response.getStatus()));
-            Log.d("ERROR_LOGIN_TWO",String.valueOf(response.getError()));
-            Alert.showFailed(getApplicationContext(),response.getError());
+            Log.d("ERROR_LOGIN", String.valueOf(response));
+            Log.d("ERROR_LOGIN_ONE", String.valueOf(response.getStatus()));
+            Log.d("ERROR_LOGIN_TWO", String.valueOf(response.getError()));
+            Alert.showFailed(getApplicationContext(), response.getError());
         }
     }
 
@@ -101,17 +101,20 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void loginClick() {
         String email = mActivityLoginBinding.emailTextView.getText().toString();
         String password = mActivityLoginBinding.passwordTextView.getText().toString();
-        if (mLoginViewModel.isEmailAndPasswordValid(email,password)){
-            if (!isNetworkConnected()) {
-                Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
-                return;
+        if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {
+            if (mLoginViewModel.isLengthEqualsToSeven(password)) {
+                if (!isNetworkConnected()) {
+                    Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
+                    return;
+                }
+                hideKeyboard();
+                mLoginViewModel.login(email, password);
+            } else {
+                Alert.showInfo(getApplicationContext(), "Password length must be seven or more");
             }
-            hideKeyboard();
-            mLoginViewModel.login(email,password);
-        }else{
-            Alert.showFailed(getApplicationContext(),"Please fill all fields");
+        } else {
+            Alert.showFailed(getApplicationContext(), "Please fill all fields");
         }
-
     }
 
     @Override

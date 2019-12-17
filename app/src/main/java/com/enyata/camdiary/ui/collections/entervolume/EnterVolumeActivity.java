@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import javax.inject.Inject;
 
-public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding,EnterVolumeViewModel>implements EnterVolumeNavigator {
+public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding, EnterVolumeViewModel> implements EnterVolumeNavigator {
 
     @Inject
     Gson gson;
@@ -54,7 +54,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public EnterVolumeViewModel getViewModel() {
-        enterVolumeViewModel = ViewModelProviders.of(this,factory).get(EnterVolumeViewModel.class);
+        enterVolumeViewModel = ViewModelProviders.of(this, factory).get(EnterVolumeViewModel.class);
         return enterVolumeViewModel;
     }
 
@@ -74,27 +74,38 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         dialog.setCancelable(false);
         TextView cancel = dialogView.findViewById(R.id.cancel);
         TextView continuee = dialogView.findViewById(R.id.continuee);
-        final AlertDialog alertDialog =dialog.create();
+        final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
         cancel.setOnClickListener(v -> alertDialog.dismiss());
         continuee.setOnClickListener(v -> {
             String volume = enterVolumeBinding.volumeEditText.getText().toString();
-            enterVolumeViewModel.createCollection(new JSONObject());
+            try {
+                JSONObject params = new JSONObject();
+                params.put("farmer_id", "2");
+                params.put("status_of_collection", "accepted");
+                params.put("volume", volume);
+                params.put("testOne", "passed");
+                params.put("testTwo", "passed");
+                params.put("testThree", "passed");
+                params.put("approved_container", "true");
+                params.put("message", "nil");
+                enterVolumeViewModel.createCollection(params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
-
     }
 
     @Override
     public void reject() {
-        Intent intent = new Intent(getApplicationContext(),ReasonActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
         startActivity(intent);
-
     }
 
     @Override
     public void back() {
-        Intent intent = new Intent(getApplicationContext(),FarmerDetailsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
         startActivity(intent);
     }
 
@@ -110,8 +121,9 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     @Override
     public void displayResponse(NewCollectionResponse response) {
         //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
-        Intent success = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
-        startActivity(success);
+        Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
+        status.putExtra("responseCode",response.getResponseCode());
+        startActivity(status);
     }
 
     @Override
