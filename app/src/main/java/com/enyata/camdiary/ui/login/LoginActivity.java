@@ -30,6 +30,7 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
@@ -83,7 +84,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             ANError error = (ANError) throwable;
             CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
             Log.d("ERROR_LOGIN",String.valueOf(response));
-            Log.d("ERROR_LOGIN_ONE",String.valueOf(response.getStatus()));
+           Log.d("ERROR_LOGIN_ONE",String.valueOf(response.getStatus()));
             Log.d("ERROR_LOGIN_TWO",String.valueOf(response.getError()));
             Alert.showFailed(getApplicationContext(),response.getError());
         }
@@ -121,8 +122,15 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
-    public void goToCollectionDashBoard() {
-        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+    public void goToDashBoard(String type) {
+        Intent intent = null;
+        if(type.equals("collectors")){
+            intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        }else if(type.equals("aggregator")){
+            intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
+        }else if(type.equals("delivery")){
+            intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
+        }
         startActivity(intent);
     }
 

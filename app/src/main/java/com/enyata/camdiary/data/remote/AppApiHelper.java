@@ -22,9 +22,11 @@ import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
 import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -118,6 +120,22 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(VolumeResponse.class);
+    }
+
+    @Override
+    public Single<AggregationVolume> getAggregationVolume() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ACCEPTED_VOLUME_URL)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(AggregationVolume.class);
+    }
+
+    @Override
+    public Single<NoOfCollectors> getTotalAggregation() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ACCEPTED_VOLUME_URL)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(NoOfCollectors.class);
     }
 
     @Override

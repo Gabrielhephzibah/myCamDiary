@@ -52,6 +52,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     ListView listView;
     ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
 
+
     DashboardAdapter dashboardAdapter;
     private ActivityCollectionDashboardBinding mActivityDashboardBinding;
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};

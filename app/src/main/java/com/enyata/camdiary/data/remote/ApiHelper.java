@@ -22,9 +22,11 @@ import com.enyata.camdiary.data.model.api.LoginResponse;
 import com.enyata.camdiary.data.model.api.LogoutResponse;
 import com.enyata.camdiary.data.model.api.OpenSourceResponse;
 import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
 import io.reactivex.Flowable;
@@ -54,6 +56,12 @@ public interface ApiHelper {
     Single<CamLoginResponse> login(CamLoginRequest.Request request);
     // Get accepted Volume
     Single<VolumeResponse> getAcceptedVolume();
+    //get aggregation volume
+
+    Single<AggregationVolume> getAggregationVolume();
+
+    Single<NoOfCollectors> getTotalAggregation();
+
     // Get rejected Volume
     Single<VolumeResponse> getRejectedVolume();
     // Get All Entries

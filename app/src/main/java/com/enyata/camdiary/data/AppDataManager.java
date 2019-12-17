@@ -19,9 +19,11 @@ package com.enyata.camdiary.data;
 import android.content.Context;
 
 import com.enyata.camdiary.data.model.api.request.CamLoginRequest;
+import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
@@ -193,6 +195,16 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<VolumeResponse> getAcceptedVolume() {
         return mApiHelper.getAcceptedVolume();
+    }
+
+    @Override
+    public Single<AggregationVolume> getAggregationVolume() {
+        return mApiHelper.getAggregationVolume();
+    }
+
+    @Override
+    public Single<NoOfCollectors> getTotalAggregation() {
+        return mApiHelper.getTotalAggregation();
     }
 
     @Override
