@@ -193,7 +193,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     @Override
     public void getTodayCollection(TodayCollectionResponse todayCollectionResponse) {
         for (CollectionResponse response : todayCollectionResponse.getData()) {
-            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume())));
+            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }
