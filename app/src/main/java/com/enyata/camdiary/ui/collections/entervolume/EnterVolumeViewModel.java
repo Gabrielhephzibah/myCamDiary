@@ -26,13 +26,13 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
     }
 
     public void createCollection(JSONObject params) {
-        String farmerId = params.optString("farmerId");
-        String statusOfCollection = params.optString("status");
+        String farmerId = params.optString("farmer_id");
+        String statusOfCollection = params.optString("status_of_collection");
         String volume = params.optString("volume");
-        String testOne = params.optString("testOne");
-        String testTwo = params.optString("testTwo");
-        String testThree = params.optString("testThree");
-        String approvedContainer = params.optString("approved");
+        String testOne = params.optString("test_one");
+        String testTwo = params.optString("test_two");
+        String testThree = params.optString("test_three");
+        String approvedContainer = params.optString("approved_container");
         String message = params.optString("message");
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()

@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.Collection;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
@@ -22,6 +26,8 @@ import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActi
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
+import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +38,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,HistoryViewModel>implements HistoryNavigator {
+
+    @Inject
+    Gson gson;
 
     CollectorHistoryAdapter collectorHistoryAdapter;
     ListView listView;
@@ -71,86 +80,23 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
         listView = findViewById(R.id.listView);
 
 
-
-        JSONObject collector1 = new JSONObject();
-        try {
-            collector1.put("fullName", "Akin, Solomon");
-            collector1.put("companyName", "Xamsatde");
-            collector1.put("companyId", "X3478JND8992");
-            collector1.put("status", "Rejected");
-            collector1.put("myLitres", "40 litres");
-            collector1.put("date", "23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (!isNetworkConnected()) {
+            Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
+            return;
         }
 
+       historyViewModel.getAllCollection();
 
 
-        JSONObject collector2 = new JSONObject();
-        try {
-            collector2.put("fullName", "Akin, Solomon");
-            collector2.put("companyName", "Xamsatde");
-            collector2.put("companyId", "X3478JND8992");
-            collector2.put("status", "Rejected");
-            collector2.put("myLitres", "40 litres");
-            collector2.put("date", "23/08/2020");
+    }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+    @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
+            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
         }
-
-
-        JSONObject collector3 = new JSONObject();
-        try {
-            collector3.put("fullName", "Akin, Solomon");
-            collector3.put("companyName", "Xamsatde");
-            collector3.put("companyId", "X3478JND8992");
-            collector3.put("status", "Rejected");
-            collector3.put("myLitres", "40 litres");
-            collector3.put("date", "23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray array = new JSONArray();
-        array.put(collector1);
-        array.put(collector2);
-        array.put(collector3);
-        array.put(collector2);
-        array.put(collector1);
-        array.put(collector3);
-
-
-        for (int i = 0; i < array.length(); i++) {
-
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String fullName = object.getString("fullName");
-                String companyName = object.getString("companyName");
-                String companyId= object.getString("companyId");
-                String status= object.getString("status");
-                String myLitres = object.getString("myLitres");
-                String date = object.getString("date");
-
-
-
-                collectorHistoryLists.add(new CollectorHistoryList(fullName,companyName,companyId,status,myLitres,date));
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-
-        collectorHistoryAdapter = new CollectorHistoryAdapter(HistoryActivity.this, collectorHistoryLists);
-        listView.setAdapter(collectorHistoryAdapter);
-
-
 
     }
 
@@ -174,5 +120,24 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
         Intent back = new Intent(getApplicationContext(), DashboardActivity.class);
         startActivity(back);
 
+    }
+
+    @Override
+    public void getAllCollections(CollectionResponse allCollections) {
+        for (Collection response : allCollections.getData()) {
+            String[] formatted = response.getCreatedAt().split(" ");
+            String[] formattedDate = formatted[0].split("-");
+            String date = formattedDate[2] +"/"+formattedDate[1]+"/"+formattedDate[0];
+            collectorHistoryLists.add(new CollectorHistoryList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), response.getVolume()+ " litres",  date));
+            collectorHistoryAdapter = new CollectorHistoryAdapter(HistoryActivity.this, collectorHistoryLists);
+            listView.setAdapter(collectorHistoryAdapter);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        historyViewModel.dispose();
     }
 }

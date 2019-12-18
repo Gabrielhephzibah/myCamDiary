@@ -3,6 +3,7 @@ package com.enyata.camdiary.ui.collections.entervolume;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import javax.inject.Inject;
 
 public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding, EnterVolumeViewModel> implements EnterVolumeNavigator {
+    String volume;
 
     @Inject
     Gson gson;
@@ -72,6 +74,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
         dialog.setView(dialogView);
         dialog.setCancelable(false);
+        TextView message = (TextView) dialogView.findViewById(R.id.message);
+        volume = enterVolumeBinding.volumeEditText.getText().toString();
+        message.setText("You have collected "+volume +" litres of product \nfrom Akin Solomon.\nPlease tap continue to confirm \nCollection");
+
         TextView cancel = dialogView.findViewById(R.id.cancel);
         TextView continuee = dialogView.findViewById(R.id.continuee);
         final AlertDialog alertDialog = dialog.create();
@@ -79,28 +85,45 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
         cancel.setOnClickListener(v -> alertDialog.dismiss());
         continuee.setOnClickListener(v -> {
-            String volume = enterVolumeBinding.volumeEditText.getText().toString();
-            try {
-                JSONObject params = new JSONObject();
-                params.put("farmer_id", "2");
-                params.put("status_of_collection", "accepted");
-                params.put("volume", volume);
-                params.put("testOne", "passed");
-                params.put("testTwo", "passed");
-                params.put("testThree", "passed");
-                params.put("approved_container", "true");
-                params.put("message", "nil");
-                enterVolumeViewModel.createCollection(params);
-            } catch (Exception e) {
-                e.printStackTrace();
+            alertDialog.dismiss();
+
+            if (TextUtils.isEmpty(volume)) {
+                Alert.showInfo(getApplicationContext(), "Please enter volume");
+                return;
+            } else {
+                try {
+                    JSONObject params = new JSONObject();
+                    params.put("farmer_id", 2);
+                    params.put("status_of_collection", "accepted");
+                    params.put("volume", volume);
+                    params.put("test_one", "passed");
+                    params.put("test_two", "passed");
+                    params.put("test_three", "passed");
+                    params.put("approved_container", "true");
+                    params.put("message", "nil");
+                    enterVolumeViewModel.createCollection(params);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     @Override
     public void reject() {
-        Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
-        startActivity(intent);
+         volume = enterVolumeBinding.volumeEditText.getText().toString();
+
+        if (TextUtils.isEmpty(volume)){
+            Alert.showInfo(getApplicationContext(),"Please enter volume");
+            return;
+        } else {
+            Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
+            intent.putExtra("volume",volume);
+            startActivity(intent);
+
+
+        }
+
     }
 
     @Override
@@ -122,7 +145,8 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     public void displayResponse(NewCollectionResponse response) {
         //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
-        status.putExtra("responseCode",response.getResponseCode());
+        status.putExtra("responseCode", response.getResponseCode());
+        status.putExtra("volume",volume);
         startActivity(status);
     }
 

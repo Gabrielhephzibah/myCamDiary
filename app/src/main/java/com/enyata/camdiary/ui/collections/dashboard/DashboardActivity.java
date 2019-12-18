@@ -17,8 +17,8 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
+import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -187,13 +187,13 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void getAllEntries(AllEntries entries) {
-        dashboardViewModel.setEntries(entries.getCount());
+        dashboardViewModel.setEntries(entries.getData());
     }
 
     @Override
-    public void getTodayCollection(TodayCollectionResponse todayCollectionResponse) {
-        for (CollectionResponse response : todayCollectionResponse.getData()) {
-            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume())));
+    public void getTodayCollection(CollectionResponse todayCollectionResponse) {
+        for (Collection response : todayCollectionResponse.getData()) {
+            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }

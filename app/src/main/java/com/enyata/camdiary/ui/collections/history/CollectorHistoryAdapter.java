@@ -62,11 +62,8 @@ public class CollectorHistoryAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(collectorHistoryLists.size() > 10){
-            return 5;
-        }else{
-            return collectorHistoryLists.size();
-        }
+        return collectorHistoryLists.size();
+
     }
 
 }

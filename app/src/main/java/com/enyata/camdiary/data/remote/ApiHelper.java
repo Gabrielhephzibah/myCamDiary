@@ -26,8 +26,11 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerDetails;
+import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
@@ -58,19 +61,23 @@ public interface ApiHelper {
     Single<CamLoginResponse> login(CamLogin.Request request);
     // Create Collection
     Single<NewCollectionResponse> doCreateCollection(Collection.Request request);
+
+
     // Get accepted Volume
     Single<VolumeResponse> getAcceptedVolume();
     //get aggregation volume
-
     Single<AggregationVolume> getAggregationVolume();
-
+    // Get All Collectors
     Single<NoOfCollectors> getTotalAggregation();
-
-    // Get rejected Volume
+    // Get Rejected Volume
     Single<VolumeResponse> getRejectedVolume();
     // Get All Entries
     Single<AllEntries> getAllEntries();
     // Get Today's collection
-    Flowable<TodayCollectionResponse> getTodaysCollection();
+    Flowable<CollectionResponse> getTodaysCollection();
+    // Get All Collections
+    Flowable<CollectionResponse> getAllCollection();
+    //Get Farmer Details
+    Single<DetailsResponse> getFarmerDetails(String id);
 
 }
