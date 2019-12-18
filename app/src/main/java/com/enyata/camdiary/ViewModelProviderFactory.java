@@ -82,7 +82,6 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(FarmerDetailsViewModel.class)) {
             //noinspection unchecked
             return (T) new FarmerDetailsViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(FarmerIdViewModel.class)) {
             //noinspection unchecked
             return (T) new FarmerIdViewModel(dataManager, schedulerProvider);
@@ -105,7 +104,6 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(StatusOfCollectionViewModel.class)) {
             //noinspection unchecked
             return (T) new StatusOfCollectionViewModel(dataManager, schedulerProvider);
-
 
         } else if (modelClass.isAssignableFrom(ScanViewModel.class)) {
             //noinspection unchecked
@@ -168,28 +166,19 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(HistoryViewModel.class)) {
             //noinspection unchecked
             return (T) new HistoryViewModel(dataManager, schedulerProvider);
-
-
         } else if (modelClass.isAssignableFrom(DetailsViewModel.class)) {
             //noinspection unchecked
             return (T) new DetailsViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(FeedbackViewModel.class)) {
             //noinspection unchecked
             return (T) new FeedbackViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(BottlesViewModel.class)) {
             //noinspection unchecked
             return (T) new BottlesViewModel(dataManager, schedulerProvider);
 
-
-
-
         } else if (modelClass.isAssignableFrom(LastCollectionViewModel.class)) {
             //noinspection unchecked
             return (T) new LastCollectionViewModel(dataManager, schedulerProvider);
-
-
 
         } else if (modelClass.isAssignableFrom(AggregatorDashboardViewModel.class)) {
             //noinspection unchecked

@@ -120,7 +120,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public void displayResponse(NewCollectionResponse response) {
-        //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode",response.getResponseCode());
         startActivity(status);

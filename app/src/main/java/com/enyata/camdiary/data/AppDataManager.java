@@ -184,6 +184,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public String getFarmerId() {
+        return mPreferencesHelper.getFarmerId();
+    }
+
+    @Override
+    public void setFarmerId(String id) {
+        mPreferencesHelper.setFarmerId(id);
+    }
+
+    @Override
     public Single<OpenSourceResponse> getOpenSourceApiCall() {
         return mApiHelper.getOpenSourceApiCall();
     }
@@ -236,7 +246,7 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<List<QuestionCardData>> getQuestionCardData() {
         return mDbHelper.getAllQuestions()
-                .flatMap(questions -> Observable.fromIterable(questions))
+                .flatMap(Observable::fromIterable)
                 .flatMap(question -> Observable.zip(
                         mDbHelper.getOptionsForQuestionId(question.id),
                         Observable.just(question),

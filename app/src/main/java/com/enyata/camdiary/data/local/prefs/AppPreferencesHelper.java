@@ -43,6 +43,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE";
 
+    private static final String PREF_KEY_FARMER_ID = "PREF_KEY_FARMER_ID";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -111,5 +113,15 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public void setCurrentUserProfilePicUrl(String profilePicUrl) {
         mPrefs.edit().putString(PREF_KEY_CURRENT_USER_PROFILE_PIC_URL, profilePicUrl).apply();
+    }
+
+    @Override
+    public String getFarmerId() {
+        return mPrefs.getString(PREF_KEY_FARMER_ID,null);
+    }
+
+    @Override
+    public void setFarmerId(String id) {
+        mPrefs.edit().putString(PREF_KEY_FARMER_ID,id).apply();
     }
 }
