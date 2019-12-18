@@ -22,8 +22,10 @@ import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerDetails;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
@@ -234,9 +236,20 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Flowable<TodayCollectionResponse> getTodaysCollection() {
+    public Flowable<CollectionResponse> getTodaysCollection() {
         return mApiHelper.getTodaysCollection();
     }
+
+    @Override
+    public Flowable<CollectionResponse> getAllCollection() {
+        return mApiHelper.getAllCollection();
+    }
+
+    @Override
+    public Single<DetailsResponse> getFarmerDetails(String id) {
+        return  mApiHelper.getFarmerDetails(id);
+    }
+
 
     @Override
     public Observable<List<Option>> getOptionsForQuestionId(Long questionId) {

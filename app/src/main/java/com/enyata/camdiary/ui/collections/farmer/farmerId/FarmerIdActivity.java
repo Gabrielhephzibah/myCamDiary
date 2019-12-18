@@ -3,23 +3,40 @@ package com.enyata.camdiary.ui.collections.farmer.farmerId;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.EditText;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerDetails;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityFarmerIdBinding;
+import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
+import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
-public class FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,FarmerIdViewModel>implements FarmerIdNavigator {
+public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,FarmerIdViewModel>implements FarmerIdNavigator {
+
+    @Inject
+    Gson gson;
+
+    EditText farmerId;
 
     @Inject
     ViewModelProviderFactory factory;
     private FarmerIdViewModel farmerIdViewModel;
+    ActivityFarmerIdBinding activityFarmerIdBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerIdActivity.class);
@@ -43,13 +60,53 @@ public class FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farme
 
     @Override
     public void accept() {
+        String id = activityFarmerIdBinding.farmerId.getText().toString();
+        if(TextUtils.isEmpty(id)){
+            Alert.showFailed(getApplicationContext(),"Please enter farmer id");
+            return;
+        }
+
+        farmerIdViewModel.getFarmerDetails(id);
+
+
+    }
+
+    @Override
+    public void onResponse(DetailsResponse data) {
         Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
+        FarmerDetails response = data.getData();
+       Log.d("first_name ", response.getFirstName());
+        Log.d("last_name ", response.getLastName());
+        Log.d("NO ", response.getContactNo());
+        Log.d("NO ", response.getVerificationId());
+        Log.d("NO ", response.getCooperativeName());
+
+        intent.putExtra("first_name",response.getFirstName());
+        intent.putExtra("last_name",response.getLastName());
+        intent.putExtra("phone_no", response.getContactNo());
+        intent.putExtra("coperative_name", response.getCooperativeName());
+        intent.putExtra("farmer_id",response.getVerificationId());
         startActivity(intent);
+    }
+
+
+    @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            FarmerDetails response = gson.fromJson(error.getErrorBody(), FarmerDetails.class);
+            Alert.showFailed(getApplicationContext(), response.getError());
+        }
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         farmerIdViewModel.setNavigator(this);
+        activityFarmerIdBinding = getViewDataBinding();
+        farmerId = activityFarmerIdBinding.farmerId;
+        //farmerIdViewModel.getFarmerDetails();
     }
+
 }

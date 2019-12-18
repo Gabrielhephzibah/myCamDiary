@@ -26,8 +26,10 @@ import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerDetails;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.TodayCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -166,11 +168,27 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Flowable<TodayCollectionResponse> getTodaysCollection() {
+    public Flowable<CollectionResponse> getTodaysCollection() {
         return Rx2AndroidNetworking.get(ApiEndPoint.TODAYS_COLLECTION)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
-                .getObjectFlowable(TodayCollectionResponse.class);
+                .getObjectFlowable(CollectionResponse.class);
+    }
+
+    @Override
+    public Flowable<CollectionResponse> getAllCollection() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ALL_COLLECTIONS)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(CollectionResponse.class);
+    }
+
+    @Override
+    public Single<DetailsResponse> getFarmerDetails(String id) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_INFO_URL+"/"+id)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(DetailsResponse.class);
     }
 
 }

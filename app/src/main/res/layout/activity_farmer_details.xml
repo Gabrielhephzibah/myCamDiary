@@ -81,6 +81,7 @@
                 android:layout_marginTop="55dp">
             </LinearLayout>
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
@@ -92,6 +93,7 @@
                 />
 
             <TextView
+                android:id="@+id/farmerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Akin, Solomon"
@@ -116,6 +118,7 @@
                 />
 
             <TextView
+                android:id="@+id/farmerNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+2347032457893"
@@ -129,6 +132,7 @@
 
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cooperative Name"
@@ -141,6 +145,7 @@
                 />
 
             <TextView
+                android:id="@+id/coperateName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Xamstade"
@@ -167,6 +172,7 @@
                 />
 
             <TextView
+                android:id="@+id/verificationNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="X3478JND8992"

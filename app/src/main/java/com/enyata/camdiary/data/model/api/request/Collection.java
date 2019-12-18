@@ -11,47 +11,47 @@ public class Collection {
     public static class Request {
 
         @Expose
-        private String farmerId;
+        private String farmer_id;
 
         @Expose
-        private String statusOfCollection;
+        private String status_of_collection;
 
         @Expose
         private String volume;
 
         @Expose
-        private String testOne;
+        private String test_one;
 
         @Expose
-        private String testTwo;
+        private String test_two;
 
         @Expose
-        private String testThree;
+        private String test_three;
 
         @Expose
-        private String approvedContainer;
+        private String approved_container;
 
         @Expose
         private String message;
 
         public Request(String farmerId, String statusOfCollection, String volume, String testOne, String testTwo,String testThree, String approvedContainer, String message) {
-            this.farmerId = farmerId;
-            this.statusOfCollection = statusOfCollection;
+            this.farmer_id = farmerId;
+            this.status_of_collection = statusOfCollection;
             this.volume = volume;
-            this.testOne = testOne;
-            this.testTwo = testTwo;
-            this.testThree = testThree;
-            this.approvedContainer = approvedContainer;
+            this.test_one = testOne;
+            this.test_two = testTwo;
+            this.test_three = testThree;
+            this.approved_container = approvedContainer;
             this.message = message;
         }
 
 
         public String getFarmerId() {
-            return farmerId;
+            return farmer_id;
         }
 
         public String getStatusOfCollection() {
-            return statusOfCollection;
+            return status_of_collection;
         }
 
         public String getVolume() {
@@ -59,19 +59,19 @@ public class Collection {
         }
 
         public String getTestOne() {
-            return testOne;
+            return test_one;
         }
 
         public String getTestTwo() {
-            return testTwo;
+            return test_two;
         }
 
         public String getTestThree() {
-            return testThree;
+            return test_three;
         }
 
         public String getApprovedContainer() {
-            return approvedContainer;
+            return approved_container;
         }
 
         public String getMessage() {
@@ -90,11 +90,11 @@ public class Collection {
 
            Collection.Request request = (Collection.Request) obj;
 
-            if (farmerId != null ? !farmerId.equals(request.farmerId) : request.farmerId != null) {
+            if (farmer_id != null ? !farmer_id.equals(request.farmer_id) : request.farmer_id != null) {
                 return false;
             }
 
-            if (statusOfCollection != null ? !statusOfCollection.equals(request.statusOfCollection) : request.statusOfCollection != null) {
+            if (status_of_collection != null ? !status_of_collection.equals(request.status_of_collection) : request.status_of_collection != null) {
                 return false;
             }
 
@@ -102,19 +102,19 @@ public class Collection {
                 return false;
             }
 
-            if (testOne != null ? !testOne.equals(request.testOne) : request.testOne != null) {
+            if (test_one != null ? !test_one.equals(request.test_one) : request.test_one != null) {
                 return false;
             }
 
-            if (testTwo != null ? !testTwo.equals(request.testTwo) : request.testTwo != null) {
+            if (test_two != null ? !test_two.equals(request.test_two) : request.test_two != null) {
                 return false;
             }
 
-            if (testThree != null ? !testThree.equals(request.testThree) : request.testThree != null) {
+            if (test_three != null ? !test_three.equals(request.test_three) : request.test_three != null) {
                 return false;
             }
 
-            if (approvedContainer != null ? !approvedContainer.equals(request.approvedContainer) : request.approvedContainer != null) {
+            if (approved_container != null ? !approved_container.equals(request.approved_container) : request.approved_container != null) {
                 return false;
             }
 
@@ -124,13 +124,13 @@ public class Collection {
         @Override
         public int hashCode() {
             int result = 0;
-            result = 31 * result + (farmerId != null ? farmerId.hashCode() : 0);
-            result = 31 * result + (statusOfCollection != null ? statusOfCollection.hashCode() : 0);
+            result = 31 * result + (farmer_id != null ? farmer_id.hashCode() : 0);
+            result = 31 * result + (status_of_collection != null ? status_of_collection.hashCode() : 0);
             result = 31 * result + (volume != null ? volume.hashCode() : 0);
-            result = 31 * result + (testOne != null ? testOne.hashCode() : 0);
-            result = 31 * result + (testTwo != null ? testTwo.hashCode() : 0);
-            result = 31 * result + (testThree != null ? testThree.hashCode() : 0);
-            result = 31 * result + (approvedContainer != null ? approvedContainer.hashCode() : 0);
+            result = 31 * result + (test_one != null ? test_one.hashCode() : 0);
+            result = 31 * result + (test_two != null ? test_two.hashCode() : 0);
+            result = 31 * result + (test_three != null ? test_three.hashCode() : 0);
+            result = 31 * result + (approved_container != null ? approved_container.hashCode() : 0);
             result = 31 * result + (message != null ? message.hashCode() : 0);
             return result;
         }

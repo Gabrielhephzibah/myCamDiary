@@ -44,9 +44,13 @@ public final class ApiEndPoint {
 
     public static final String TODAYS_COLLECTION= BuildConfig.INVENTORY_BASE_URL + "/collection/today";
 
-    public static final String ALL_ENTRIES = BuildConfig.INVENTORY_BASE_URL + "/collection";
+    public static final String ALL_COLLECTIONS = BuildConfig.INVENTORY_BASE_URL + "/collection";
+
+    public static final String ALL_ENTRIES = BuildConfig.INVENTORY_BASE_URL + "/collection/entries";
 
     public static final String NEW_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection";
+
+    public static final String FARMER_INFO_URL = BuildConfig.BASE_URL + "/farmer";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable
