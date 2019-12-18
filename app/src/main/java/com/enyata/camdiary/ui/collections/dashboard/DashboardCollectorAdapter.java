@@ -24,8 +24,8 @@ public class DashboardCollectorAdapter extends ArrayAdapter<DashboardCollectorLi
 
     public ArrayList<DashboardCollectorList> dashboardCollectorLists;
 
-    public DashboardCollectorAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DashboardCollectorList>list) {
-        super(context, 0 , list);
+    public DashboardCollectorAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DashboardCollectorList> list) {
+        super(context, 0, list);
         mcontext = context;
         dashboardCollectorLists = list;
     }
@@ -35,8 +35,8 @@ public class DashboardCollectorAdapter extends ArrayAdapter<DashboardCollectorLi
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
-        if(listItem == null)
-            listItem = LayoutInflater.from(mcontext).inflate(R.layout.collector_list_layout,parent,false);
+        if (listItem == null)
+            listItem = LayoutInflater.from(mcontext).inflate(R.layout.collector_list_layout, parent, false);
 
         DashboardCollectorList collector = dashboardCollectorLists.get(position);
         TextView name = listItem.findViewById(R.id.name);
@@ -45,10 +45,10 @@ public class DashboardCollectorAdapter extends ArrayAdapter<DashboardCollectorLi
         TextView litres = listItem.findViewById(R.id.litres);
         litres.setText(collector.getMyLitres());
 
-        TextView companyName  = listItem.findViewById(R.id.companyname);
+        TextView companyName = listItem.findViewById(R.id.companyname);
         companyName.setText(collector.getCompanyName());
 
-        TextView farmerId  = listItem.findViewById(R.id.farmerId);
+        TextView farmerId = listItem.findViewById(R.id.farmerId);
         farmerId.setText(collector.getCompanyId());
 
         TextView status = listItem.findViewById(R.id.status);
@@ -59,15 +59,10 @@ public class DashboardCollectorAdapter extends ArrayAdapter<DashboardCollectorLi
 
     @Override
     public int getCount() {
-        if(dashboardCollectorLists.size() > 10){
-            return 5;
-        }else{
-            return dashboardCollectorLists.size();
-        }
+
+        return dashboardCollectorLists.size();
+
     }
-
-
-
 
 
 }

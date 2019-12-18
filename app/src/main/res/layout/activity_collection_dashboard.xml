@@ -74,14 +74,14 @@
                         app:cardCornerRadius="35dp"
                         app:strokeWidth="1dp"
                         android:layout_marginRight="27dp"
-                        android:layout_toLeftOf="@id/forgotPassword"
+                        android:layout_toLeftOf="@id/username"
                         android:layout_alignParentRight="true">
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/circular_image"
                             android:scaleType="fitCenter"
-                            android:layout_toLeftOf="@id/forgotPassword"
+                            android:layout_toLeftOf="@id/username"
                             android:layout_alignParentRight="true"
                             android:src="@drawable/farmer_ade" />
                     </androidx.cardview.widget.CardView>

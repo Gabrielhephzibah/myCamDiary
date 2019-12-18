@@ -47,4 +47,8 @@ public interface PreferencesHelper {
     String getCurrentUserProfilePicUrl();
 
     void setCurrentUserProfilePicUrl(String profilePicUrl);
+
+    String getFarmerID();
+
+    void setFarmerId(String id);
 }

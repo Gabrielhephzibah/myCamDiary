@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 public class AllEntries {
 
     @Expose
-    @SerializedName("count")
-    private String count;
+    @SerializedName("data")
+    private String data;
 
-    public String getCount() {
-        return this.count;
+    public String getData() {
+        return this.data;
     }
 }

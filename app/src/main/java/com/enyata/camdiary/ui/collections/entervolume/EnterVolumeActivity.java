@@ -85,6 +85,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
         cancel.setOnClickListener(v -> alertDialog.dismiss());
         continuee.setOnClickListener(v -> {
+            alertDialog.dismiss();
 
             if (TextUtils.isEmpty(volume)) {
                 Alert.showInfo(getApplicationContext(), "Please enter volume");
@@ -117,7 +118,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             return;
         } else {
             Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
+            intent.putExtra("volume",volume);
             startActivity(intent);
+
+
         }
 
     }

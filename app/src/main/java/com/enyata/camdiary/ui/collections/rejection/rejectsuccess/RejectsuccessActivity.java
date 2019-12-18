@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.widget.TextView;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
@@ -20,9 +21,12 @@ import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionView
 import javax.inject.Inject;
 
 public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBinding,RejectsuccessViewModel>implements RejectsuccessNavigator {
+    String volume;
+
     @Inject
     ViewModelProviderFactory factory;
     private RejectsuccessViewModel rejectsuccessViewModel;
+    ActivityRejectsuccessBinding activityRejectsuccessBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, RejectsuccessActivity.class);
@@ -49,6 +53,11 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rejectsuccessViewModel.setNavigator(this);
+        activityRejectsuccessBinding = getViewDataBinding();
+        TextView volumetext = activityRejectsuccessBinding.volume;
+        volume = getIntent().getStringExtra("volume");
+        volumetext.setText(volume + " Litres" );
+
     }
 
     @Override
