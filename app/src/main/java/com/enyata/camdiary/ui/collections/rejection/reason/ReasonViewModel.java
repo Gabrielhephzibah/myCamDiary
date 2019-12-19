@@ -52,4 +52,8 @@ public class ReasonViewModel extends BaseViewModel<ReasonNavigator> {
     public void dispose(){
         onCleared();
     }
+
+    public String getFarmerId(){
+        return getDataManager().getFarmerId();
+    }
 }

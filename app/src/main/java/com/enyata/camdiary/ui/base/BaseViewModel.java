@@ -29,7 +29,7 @@ import java.lang.ref.WeakReference;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public abstract class BaseViewModel<N> extends ViewModel {

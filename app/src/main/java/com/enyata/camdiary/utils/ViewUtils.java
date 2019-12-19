@@ -26,7 +26,7 @@ import androidx.core.content.ContextCompat;
 import com.enyata.camdiary.R;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public final class ViewUtils {

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.enyata.camdiary.data.DataManager;
-import com.enyata.camdiary.ui.about.AboutViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.collectorID.ColectorIdViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionViewModel;
@@ -36,18 +35,11 @@ import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
-import com.enyata.camdiary.ui.feed.FeedViewModel;
-import com.enyata.camdiary.ui.feed.blogs.BlogViewModel;
-import com.enyata.camdiary.ui.feed.opensource.OpenSourceViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
-import com.enyata.camdiary.ui.main.MainViewModel;
-import com.enyata.camdiary.ui.main.rating.RateUsViewModel;
 import com.enyata.camdiary.ui.splash.SplashViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 /**
  * Created by Sanni Michael Tomiwa 3/12/2019.
  */
@@ -67,13 +59,7 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(AboutViewModel.class)) {
-            //noinspection unchecked
-            return (T) new AboutViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(FeedViewModel.class)) {
-            //noinspection unchecked
-            return (T) new FeedViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             //noinspection unchecked
             return (T) new LoginViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(BarcodeViewModel.class)) {
@@ -82,7 +68,6 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(FarmerDetailsViewModel.class)) {
             //noinspection unchecked
             return (T) new FarmerDetailsViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(FarmerIdViewModel.class)) {
             //noinspection unchecked
             return (T) new FarmerIdViewModel(dataManager, schedulerProvider);
@@ -105,7 +90,6 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(StatusOfCollectionViewModel.class)) {
             //noinspection unchecked
             return (T) new StatusOfCollectionViewModel(dataManager, schedulerProvider);
-
 
         } else if (modelClass.isAssignableFrom(ScanViewModel.class)) {
             //noinspection unchecked
@@ -139,11 +123,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             //noinspection unchecked
             return (T) new CollectionSuccessViewModel(dataManager, schedulerProvider);
 
-
         } else if (modelClass.isAssignableFrom(DeliveryViewModel.class)) {
             //noinspection unchecked
             return (T) new DeliveryViewModel(dataManager, schedulerProvider);
-
 
         } else if (modelClass.isAssignableFrom(SignupViewModel.class)) {
             //noinspection unchecked
@@ -168,28 +150,19 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(HistoryViewModel.class)) {
             //noinspection unchecked
             return (T) new HistoryViewModel(dataManager, schedulerProvider);
-
-
         } else if (modelClass.isAssignableFrom(DetailsViewModel.class)) {
             //noinspection unchecked
             return (T) new DetailsViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(FeedbackViewModel.class)) {
             //noinspection unchecked
             return (T) new FeedbackViewModel(dataManager, schedulerProvider);
-
         } else if (modelClass.isAssignableFrom(BottlesViewModel.class)) {
             //noinspection unchecked
             return (T) new BottlesViewModel(dataManager, schedulerProvider);
 
-
-
-
         } else if (modelClass.isAssignableFrom(LastCollectionViewModel.class)) {
             //noinspection unchecked
             return (T) new LastCollectionViewModel(dataManager, schedulerProvider);
-
-
 
         } else if (modelClass.isAssignableFrom(AggregatorDashboardViewModel.class)) {
             //noinspection unchecked
@@ -205,18 +178,6 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(EnterVolumeViewModel.class)) {
             //noinspection unchecked
             return (T) new EnterVolumeViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            //noinspection unchecked
-            return (T) new MainViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(BlogViewModel.class)) {
-            //noinspection unchecked
-            return (T) new BlogViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(RateUsViewModel.class)) {
-            //noinspection unchecked
-            return (T) new RateUsViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(OpenSourceViewModel.class)) {
-            //noinspection unchecked
-            return (T) new OpenSourceViewModel(dataManager, schedulerProvider);
         } else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
             //noinspection unchecked
             return (T) new SplashViewModel(dataManager, schedulerProvider);

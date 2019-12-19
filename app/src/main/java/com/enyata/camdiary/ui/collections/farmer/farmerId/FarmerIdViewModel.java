@@ -22,7 +22,7 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     getNavigator().onResponse(response);
-                    getDataManager().setFarmerId(String.valueOf(response.getData()));
+                    getDataManager().setFarmerId(String.valueOf(response.getData().getId()));
                 }, throwable -> {
                     getNavigator().handleError(throwable);
                 }));

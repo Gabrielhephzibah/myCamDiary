@@ -51,4 +51,8 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
     public void dispose(){
         onCleared();
     }
+
+    public String getFarmerId(){
+        return getDataManager().getFarmerId();
+    }
 }

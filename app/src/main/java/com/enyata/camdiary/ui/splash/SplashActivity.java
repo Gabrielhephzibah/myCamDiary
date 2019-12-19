@@ -28,7 +28,6 @@ import com.enyata.camdiary.databinding.ActivitySplashBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
-import com.enyata.camdiary.ui.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -67,16 +66,15 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     }
 
     @Override
-    public void openMainActivity() {
+    public void openDashboardActivity() {
         Intent intent = new Intent(getApplicationContext(),DashboardActivity.class);
         startActivity(intent);
-        finish();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSplashViewModel.setNavigator(this);
-        mSplashViewModel.startSeeding();
+        mSplashViewModel.decideNextActivity();
     }
 }

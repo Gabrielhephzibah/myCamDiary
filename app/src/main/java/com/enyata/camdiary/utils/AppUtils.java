@@ -23,7 +23,7 @@ import android.net.Uri;
 import com.enyata.camdiary.R;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public final class AppUtils {
