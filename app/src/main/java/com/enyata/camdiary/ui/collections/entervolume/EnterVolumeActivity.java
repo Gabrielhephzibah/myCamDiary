@@ -77,12 +77,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         coperateName = getIntent().getStringExtra("coperate_name");
         verificationNumber = getIntent().getStringExtra("farmer_id");
         farmer_id= getIntent().getStringExtra("farmer_identity");
-
-//        int farmer_idInt = Integer.parseInt(farmer_id);
-
-
-
-         fullName = first_name + " " + last_name;
+        fullName = first_name + " " + last_name;
     }
 
     @Override
@@ -139,8 +134,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             intent.putExtra("first_name",first_name);
             intent.putExtra("last_name", last_name);
             startActivity(intent);
-
-
         }
 
     }
