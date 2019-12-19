@@ -122,7 +122,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         dashboardViewModel.getTodaysCollection();
         dashboardViewModel.getAllEntries();
 
-
     }
 
 
@@ -193,7 +192,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     @Override
     public void getTodayCollection(CollectionResponse todayCollectionResponse) {
         for (Collection response : todayCollectionResponse.getData()) {
-            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
+            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), response.getVolume()+ " litres"));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }

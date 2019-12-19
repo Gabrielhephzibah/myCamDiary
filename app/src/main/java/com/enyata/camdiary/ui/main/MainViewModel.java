@@ -15,10 +15,7 @@
  */
 
 package com.enyata.camdiary.ui.main;
-
 import androidx.databinding.ObservableField;
-
-
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
