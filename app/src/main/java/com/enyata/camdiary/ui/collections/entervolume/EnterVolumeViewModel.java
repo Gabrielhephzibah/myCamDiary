@@ -34,6 +34,7 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
         String testThree = params.optString("test_three");
         String approvedContainer = params.optString("approved_container");
         String message = params.optString("message");
+
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .doCreateCollection(new Collection.Request(farmerId, statusOfCollection, volume, testOne, testTwo, testThree, approvedContainer, message))
