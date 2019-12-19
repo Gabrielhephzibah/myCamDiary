@@ -38,6 +38,9 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
     @Inject
     Gson gson;
     String volume;
+    String firstName;
+    String lastName;
+
 
     String infoMessage;
 
@@ -81,8 +84,12 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         activityReasonBinding = getViewDataBinding();
         textarea = activityReasonBinding.textarea;
         volume = getIntent().getStringExtra("volume");
+        firstName = getIntent().getStringExtra("first_name");
+        lastName = getIntent().getStringExtra("last_name");
         infoMessage = "nil";
         Log.d("volume ", volume);
+
+
 
 
         test_one = "failed";
@@ -110,7 +117,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         TextView entry = (TextView) dialogView.findViewById(R.id.entry);
         TextView message = (TextView) dialogView.findViewById(R.id.message);
         entry.setText("Rejection Accepted");
-        message.setText("You have rejected "+ volume + " litres of product \nfrom Akin Solomon.\nPlease tap continue to confirm \nrejection");
+        message.setText("You have rejected "+ volume + " litres of product \nfrom " + firstName +" "+ lastName + ".\nPlease tap continue to confirm \nrejection");
 
         TextView cancel =(TextView) dialogView.findViewById(R.id.cancel);
         TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
@@ -206,6 +213,8 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
     public void onResponse(NewCollectionResponse response) {
         Intent intent = new Intent(getApplicationContext(), RejectsuccessActivity.class);
         intent.putExtra("volume",volume);
+        intent.putExtra("first_name", firstName);
+        intent.putExtra("last_name", lastName);
         startActivity(intent);
 
     }

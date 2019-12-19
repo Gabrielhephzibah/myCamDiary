@@ -11,6 +11,10 @@
             name="viewModel"
             type="com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel" />
     </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -134,6 +138,8 @@
 
 
     </LinearLayout>
+
+    </ScrollView>
 
 
 

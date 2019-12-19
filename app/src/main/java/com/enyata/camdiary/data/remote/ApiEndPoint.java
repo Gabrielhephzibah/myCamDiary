@@ -38,7 +38,14 @@ public final class ApiEndPoint {
 
     public static final String NEW_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection";
 
+    public static final String COLLECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/aggregation/volume";
+
+    public static final String NO_OF_COLLECTORS = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collectors";
+
+    public static final String AGGREGATOR_TODAY_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/aggregation/today";
+
     public static final String FARMER_INFO_URL = BuildConfig.BASE_URL + "/farmer";
+
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

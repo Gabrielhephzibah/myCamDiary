@@ -46,11 +46,27 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getNavigator().noOfCollectors(response);
+                    getNavigator().numberOfCollectors(response);
                 }, throwable -> {
                     getNavigator().handleError(throwable);
                 }));
     }
+
+
+    public void  getAggregatorTodayCollection(){
+        getCompositeDisposable().add(getDataManager()
+        .getAggregatorTodayCollection()
+        .subscribeOn(getSchedulerProvider().io())
+         .observeOn(getSchedulerProvider().ui())
+         .subscribe(response ->{
+             getNavigator().getAggregatorTodayCollection(response);
+         },throwable -> {
+             getNavigator().handleError(throwable);
+
+         }));
+
+    }
+
 
 
 
@@ -82,9 +98,10 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
         return aggregatorVolume;
     }
 
-    public  void  setTotalAggregation(String noOfCollectors){
-        totalAggregation.setValue(noOfCollectors);
+    public  void  setTotalAggregation(String numberOfCollectors){
+        totalAggregation.setValue(numberOfCollectors);
     }
+
 
 
     public LiveData<String>getTotalAggregation(){
