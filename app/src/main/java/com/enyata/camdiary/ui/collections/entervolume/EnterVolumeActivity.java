@@ -31,6 +31,13 @@ import javax.inject.Inject;
 
 public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding, EnterVolumeViewModel> implements EnterVolumeNavigator {
     String volume;
+    String first_name;
+    String last_name;
+    String fullName;
+    String coperateName;
+    String verificationNumber;
+    String farmer_id;
+
 
     @Inject
     Gson gson;
@@ -65,6 +72,12 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         super.onCreate(savedInstanceState);
         enterVolumeBinding = getViewDataBinding();
         enterVolumeViewModel.setNavigator(this);
+        first_name = getIntent().getStringExtra("first_name");
+        last_name = getIntent().getStringExtra("last_name");
+        coperateName = getIntent().getStringExtra("coperate_name");
+        verificationNumber = getIntent().getStringExtra("farmer_id");
+        farmer_id= getIntent().getStringExtra("farmer_identity");
+        fullName = first_name + " " + last_name;
     }
 
     @Override
@@ -76,7 +89,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         dialog.setCancelable(false);
         TextView message = (TextView) dialogView.findViewById(R.id.message);
         volume = enterVolumeBinding.volumeEditText.getText().toString();
-        message.setText("You have collected "+volume +" litres of product \nfrom Akin Solomon.\nPlease tap continue to confirm \nCollection");
+        message.setText("You have collected "+volume +" litres of product \nfrom "+ fullName+ " .\nPlease tap continue to confirm \nCollection");
 
         TextView cancel = dialogView.findViewById(R.id.cancel);
         TextView continuee = dialogView.findViewById(R.id.continuee);
@@ -100,7 +113,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
                     params.put("test_two", "passed");
                     params.put("test_three", "passed");
                     params.put("approved_container", "true");
-                    params.put("message", "nil");
                     enterVolumeViewModel.createCollection(params);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -119,9 +131,9 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         } else {
             Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
             intent.putExtra("volume",volume);
+            intent.putExtra("first_name",first_name);
+            intent.putExtra("last_name", last_name);
             startActivity(intent);
-
-
         }
 
     }
@@ -146,6 +158,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
+        status.putExtra("first_name",first_name);
+        status.putExtra("last_name", last_name);
+        status.putExtra("coperate_name",coperateName);
+        status.putExtra("farmer_id",verificationNumber);
         startActivity(status);
     }
 

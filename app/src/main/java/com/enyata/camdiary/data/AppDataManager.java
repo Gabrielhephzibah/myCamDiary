@@ -17,15 +17,18 @@
 package com.enyata.camdiary.data;
 
 import android.content.Context;
+
+import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
+import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
 import com.enyata.camdiary.data.local.db.DbHelper;
@@ -162,7 +165,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<NoOfCollectors> getTotalAggregation() {
+    public Single<NumberOfCollectors> getTotalAggregation() {
         return mApiHelper.getTotalAggregation();
     }
 
@@ -179,6 +182,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<CollectionResponse> getTodaysCollection() {
         return mApiHelper.getTodaysCollection();
+    }
+
+    @Override
+    public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
+        return mApiHelper.getAggregatorTodayCollection();
     }
 
     @Override

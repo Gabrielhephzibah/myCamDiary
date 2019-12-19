@@ -75,17 +75,13 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
     public void onResponse(DetailsResponse data) {
         Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
         FarmerDetails response = data.getData();
-       Log.d("first_name ", response.getFirstName());
-        Log.d("last_name ", response.getLastName());
-        Log.d("NO ", response.getContactNo());
-        Log.d("NO ", response.getVerificationId());
-        Log.d("NO ", response.getCooperativeName());
 
         intent.putExtra("first_name",response.getFirstName());
         intent.putExtra("last_name",response.getLastName());
         intent.putExtra("phone_no", response.getContactNo());
-        intent.putExtra("coperative_name", response.getCooperativeName());
+        intent.putExtra("coperate_name", response.getCooperativeName());
         intent.putExtra("farmer_id",response.getVerificationId());
+        intent.putExtra("farmer_identity",response.getId());
         startActivity(intent);
     }
 
@@ -109,4 +105,9 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
         //farmerIdViewModel.getFarmerDetails();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        farmerIdViewModel.dispose();
+    }
 }
