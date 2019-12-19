@@ -15,12 +15,11 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
 
-import org.w3c.dom.Text;
-
 import javax.inject.Inject;
 
 public class FarmerDetailsActivity extends BaseActivity<ActivityFarmerDetailsBinding, FarmerDetailsViewModel>implements FarmerDetailsNavigator {
-   String firstName;
+
+    String firstName;
    String phonenumber;
    String coperateName;
    String verificationNumber;
@@ -65,8 +64,6 @@ public class FarmerDetailsActivity extends BaseActivity<ActivityFarmerDetailsBin
         farmer_id = getIntent().getStringExtra("farmer_identity");
 
         String fullname = firstName + "  " + lastname;
-
-
 
         TextView farmerName = activityFarmerDetailsBinding.farmerName;
         TextView farmerNumber = activityFarmerDetailsBinding.farmerNumber;

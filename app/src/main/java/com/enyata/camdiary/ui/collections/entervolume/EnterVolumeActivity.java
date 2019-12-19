@@ -111,16 +111,13 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             } else {
                 try {
                     JSONObject params = new JSONObject();
-                    params.put("farmer_id",2);
+                    params.put("farmer_id",enterVolumeViewModel.getFarmerId());
                     params.put("status_of_collection", "accepted");
                     params.put("volume", volume);
                     params.put("test_one", "passed");
                     params.put("test_two", "passed");
                     params.put("test_three", "passed");
                     params.put("approved_container", "true");
-
-
-
                     enterVolumeViewModel.createCollection(params);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -165,7 +162,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public void displayResponse(NewCollectionResponse response) {
-        //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
@@ -181,4 +177,5 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         super.onDestroy();
         enterVolumeViewModel.dispose();
     }
+
 }

@@ -143,7 +143,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
 
             try {
                 JSONObject params = new JSONObject();
-                params.put("farmer_id", 2);
+                params.put("farmer_id", reasonViewModel.getFarmerId());
                 params.put("status_of_collection", "rejected");
                 params.put("volume",volume);
                 params.put("test_one",test_one);

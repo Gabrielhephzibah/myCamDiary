@@ -16,11 +16,6 @@
 
 package com.enyata.camdiary.data.remote;
 
-import com.enyata.camdiary.data.model.api.BlogResponse;
-import com.enyata.camdiary.data.model.api.LoginRequest;
-import com.enyata.camdiary.data.model.api.LoginResponse;
-import com.enyata.camdiary.data.model.api.LogoutResponse;
-import com.enyata.camdiary.data.model.api.OpenSourceResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -42,7 +37,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 @Singleton
@@ -55,60 +50,10 @@ public class AppApiHelper implements ApiHelper {
         mApiHeader = apiHeader;
     }
 
-    @Override
-    public Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_FACEBOOK_LOGIN)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addBodyParameter(request)
-                .build()
-                .getObjectSingle(LoginResponse.class);
-    }
-
-    @Override
-    public Single<LoginResponse> doGoogleLoginApiCall(LoginRequest.GoogleLoginRequest request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GOOGLE_LOGIN)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addBodyParameter(request)
-                .build()
-                .getObjectSingle(LoginResponse.class);
-    }
-
-    @Override
-    public Single<LogoutResponse> doLogoutApiCall() {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_LOGOUT)
-                .addHeaders(mApiHeader.getProtectedApiHeader())
-                .build()
-                .getObjectSingle(LogoutResponse.class);
-    }
-
-    @Override
-    public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LOGIN)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addBodyParameter(request)
-                .build()
-                .getObjectSingle(LoginResponse.class);
-    }
 
     @Override
     public ApiHeader getApiHeader() {
         return mApiHeader;
-    }
-
-    @Override
-    public Single<BlogResponse> getBlogApiCall() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_BLOG)
-                .addHeaders(mApiHeader.getProtectedApiHeader())
-                .build()
-                .getObjectSingle(BlogResponse.class);
-    }
-
-    @Override
-    public Single<OpenSourceResponse> getOpenSourceApiCall() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_OPEN_SOURCE)
-                .addHeaders(mApiHeader.getProtectedApiHeader())
-                .build()
-                .getObjectSingle(OpenSourceResponse.class);
     }
 
     @Override

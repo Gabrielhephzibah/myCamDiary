@@ -27,15 +27,15 @@ import com.enyata.camdiary.data.model.db.Question;
 import com.enyata.camdiary.data.model.db.User;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
-@Database(entities = {User.class, Question.class, Option.class}, version = 2)
+@Database(entities = {User.class, Question.class, Option.class}, version = 2,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract OptionDao optionDao();
-
-    public abstract QuestionDao questionDao();
-
-    public abstract UserDao userDao();
+//    public abstract OptionDao optionDao();
+//
+//    public abstract QuestionDao questionDao();
+//
+//    public abstract UserDao userDao();
 }
