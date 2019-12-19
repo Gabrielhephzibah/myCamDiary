@@ -18,13 +18,15 @@ package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
+import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
+import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
 import io.reactivex.Flowable;
@@ -46,13 +48,16 @@ public interface ApiHelper {
     //get aggregation volume
     Single<AggregationVolume> getAggregationVolume();
     // Get All Collectors
-    Single<NoOfCollectors> getTotalAggregation();
+    Single<NumberOfCollectors> getTotalAggregation();
     // Get Rejected Volume
     Single<VolumeResponse> getRejectedVolume();
     // Get All Entries
     Single<AllEntries> getAllEntries();
     // Get Today's collection
     Flowable<CollectionResponse> getTodaysCollection();
+    //GET Aggregator today's collection
+    Flowable<AggregationCollectionResponse>getAggregatorTodayCollection();
+
     // Get All Collections
     Flowable<CollectionResponse> getAllCollection();
     //Get Farmer Details

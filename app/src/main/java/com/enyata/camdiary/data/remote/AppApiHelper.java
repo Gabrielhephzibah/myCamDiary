@@ -16,15 +16,17 @@
 
 package com.enyata.camdiary.data.remote;
 
+import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
+import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -81,18 +83,18 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<AggregationVolume> getAggregationVolume() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ACCEPTED_VOLUME_URL)
+        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTED_VOLUME_URL)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(AggregationVolume.class);
     }
 
     @Override
-    public Single<NoOfCollectors> getTotalAggregation() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ACCEPTED_VOLUME_URL)
+    public Single<NumberOfCollectors> getTotalAggregation() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.NO_OF_COLLECTORS)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
-                .getObjectSingle(NoOfCollectors.class);
+                .getObjectSingle(NumberOfCollectors.class);
     }
 
     @Override
@@ -117,6 +119,14 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(CollectionResponse.class);
+    }
+
+    @Override
+    public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_TODAY_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(AggregationCollectionResponse.class);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.enyata.camdiary.data.model.api.request;
 
 import com.google.gson.annotations.Expose;
 
+import java.net.PortUnreachableException;
+
 public class Collection {
 
     private Collection() {
@@ -34,6 +36,9 @@ public class Collection {
         @Expose
         private String message;
 
+
+
+
         public Request(String farmerId, String statusOfCollection, String volume, String testOne, String testTwo,String testThree, String approvedContainer, String message) {
             this.farmer_id = farmerId;
             this.status_of_collection = statusOfCollection;
@@ -43,6 +48,8 @@ public class Collection {
             this.test_three = testThree;
             this.approved_container = approvedContainer;
             this.message = message;
+
+
         }
 
 
@@ -77,6 +84,11 @@ public class Collection {
         public String getMessage() {
             return message;
         }
+
+
+
+
+
 
         @Override
         public boolean equals(Object obj) {
@@ -118,6 +130,11 @@ public class Collection {
                 return false;
             }
 
+
+
+
+
+
             return message != null ? !message.equals(request.message) : request.message != null;
         }
 
@@ -131,6 +148,7 @@ public class Collection {
             result = 31 * result + (test_two != null ? test_two.hashCode() : 0);
             result = 31 * result + (test_three != null ? test_three.hashCode() : 0);
             result = 31 * result + (approved_container != null ? approved_container.hashCode() : 0);
+
             result = 31 * result + (message != null ? message.hashCode() : 0);
             return result;
         }

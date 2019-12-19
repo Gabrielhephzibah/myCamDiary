@@ -36,7 +36,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.inject.Inject;
 
-
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
     String firstName;
@@ -105,6 +104,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         verification_number = getIntent().getStringExtra("farmer_id");
 
         fullName = firstName + " "+ lastName;
+
 
 //        farmerIdViewModel.getFarmerDetails();
 
@@ -214,7 +214,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     @Override
     public void getTodayCollection(CollectionResponse todayCollectionResponse) {
         for (Collection response : todayCollectionResponse.getData()) {
-            dashboardCollectorLists.add(new DashboardCollectorList(fullName, coperateName, verification_number, response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
+            dashboardCollectorLists.add(new DashboardCollectorList("Tolu Johnson", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }

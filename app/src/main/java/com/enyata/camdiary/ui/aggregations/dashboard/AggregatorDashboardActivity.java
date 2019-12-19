@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
-import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
+import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.databinding.ActivityAggregatorDashboardBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
@@ -92,80 +94,81 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         }else{
             aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
             aggregatorDashboardViewModel.getTotalNumberOfCollectors();
+            aggregatorDashboardViewModel.getAggregatorTodayCollection();
         }
 
 
-        JSONObject collector1 = new JSONObject();
-        try {
-            collector1.put("fullName", "Akin, Solomon");
+//        JSONObject collector1 = new JSONObject();
+//        try {
+//            collector1.put("fullName", "Akin, Solomon");
+//
+//            collector1.put("companyId", "64ERT234KI89");
+//
+//            collector1.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
-            collector1.put("companyId", "64ERT234KI89");
-
-            collector1.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject collector2 = new JSONObject();
-        try {
-            collector2.put("fullName", "Akin, Solomon");
-
-            collector2.put("companyId", "64ERT234KI89");
-
-            collector2.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject collector3 = new JSONObject();
-        try {
-            collector3.put("fullName", "Akin, Solomon");
-
-            collector3.put("companyId", "64ERT234KI89");
-
-            collector3.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray array = new JSONArray();
-        array.put(collector1);
-        array.put(collector2);
-        array.put(collector3);
-        array.put(collector2);
-        array.put(collector1);
-        array.put(collector3);
+//
+//        JSONObject collector2 = new JSONObject();
+//        try {
+//            collector2.put("fullName", "Akin, Solomon");
+//
+//            collector2.put("companyId", "64ERT234KI89");
+//
+//            collector2.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
 
-        for (int i = 0; i < array.length(); i++) {
+//        JSONObject collector3 = new JSONObject();
+//        try {
+//            collector3.put("fullName", "Akin, Solomon");
+//
+//            collector3.put("companyId", "64ERT234KI89");
+//
+//            collector3.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String fullName = object.getString("fullName");
-
-                String companyId = object.getString("companyId");
-
-                String myLitres = object.getString("myLitres");
-
-                aggregatorLists.add(new AggregatorList(fullName, companyId, myLitres));
+//        JSONArray array = new JSONArray();
+//        array.put(collector1);
+//        array.put(collector2);
+//        array.put(collector3);
+//        array.put(collector2);
+//        array.put(collector1);
+//        array.put(collector3);
 
 
-            } catch (Exception e) {
-                e.printStackTrace();
+//        for (int i = 0; i < array.length(); i++) {
+//
+//            try {
+//                Log.i("message", array.toString());
+//
+//                JSONObject object = array.getJSONObject(i);
+//                String fullName = object.getString("fullName");
+//
+//                String companyId = object.getString("companyId");
+//
+//                String myLitres = object.getString("myLitres");
+//
+//                aggregatorLists.add(new AggregatorList(fullName, companyId, myLitres));
+//
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//
+//            }
+//        }
 
-            }
-        }
 
-
-        aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
-        listView.setAdapter(aggregatorListAdapter);
+//        aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
+//        listView.setAdapter(aggregatorListAdapter);
 
 
         aggregatorHomepageAdapter = new AggregatorHomepageAdapter(this, getSupportFragmentManager());
@@ -251,8 +254,20 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     }
 
     @Override
-    public void noOfCollectors(NoOfCollectors aggregation) {
-        aggregatorDashboardViewModel.setTotalAggregation(aggregation.getCount());
+    public void numberOfCollectors(NumberOfCollectors aggregation) {
+        aggregatorDashboardViewModel.setTotalAggregation(aggregation.getData());
+
+    }
+
+    @Override
+    public void getAggregatorTodayCollection(AggregationCollectionResponse todayCollection) {
+        for (AggregatorCollections response : todayCollection.getData() ) {
+            aggregatorLists.add(new AggregatorList("Tolu Ajibade", "XXXX", response.getVolume()+ "litres" ));
+            aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this,aggregatorLists);
+            listView.setAdapter(aggregatorListAdapter);
+
+        }
+
 
     }
 

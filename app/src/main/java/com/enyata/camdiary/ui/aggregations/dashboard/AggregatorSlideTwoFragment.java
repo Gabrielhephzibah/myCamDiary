@@ -47,7 +47,7 @@ public class AggregatorSlideTwoFragment extends Fragment {
         aggregatorDashboardViewModel.getTotalAggregation().observe(requireActivity(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                totalAggregationTextView.setText(String.format(s));
+                totalAggregationTextView.setText(s);
             }
         });
 

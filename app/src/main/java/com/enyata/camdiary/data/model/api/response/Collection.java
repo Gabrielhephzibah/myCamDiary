@@ -53,6 +53,8 @@ public class Collection {
     @SerializedName("message")
     private String message;
 
+
+
     public int getId() {
         return id;
     }
