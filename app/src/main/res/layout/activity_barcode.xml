@@ -1,3 +1,4 @@
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.collections.barcode.BarcodeActivity">
@@ -8,12 +9,20 @@
             name="viewModel"
             type="com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel" />
     </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
+
+
 
 
     <LinearLayout
@@ -108,5 +117,8 @@
 
 </LinearLayout>
 
+    </ScrollView>
+
 
 </layout>
+

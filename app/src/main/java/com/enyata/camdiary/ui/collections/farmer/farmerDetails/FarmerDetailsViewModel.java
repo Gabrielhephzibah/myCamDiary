@@ -18,5 +18,8 @@ public class FarmerDetailsViewModel extends BaseViewModel<FarmerDetailsNavigator
         getNavigator().goscan();
     }
 
+    public void dispose(){
+        onCleared();
+    }
 
 }

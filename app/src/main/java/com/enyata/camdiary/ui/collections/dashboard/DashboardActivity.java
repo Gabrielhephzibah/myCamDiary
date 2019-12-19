@@ -16,6 +16,7 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.request.FarmerId;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -25,6 +26,8 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsViewModel;
+import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -36,11 +39,18 @@ import javax.inject.Inject;
 
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
+    String firstName;
+    String lastName;
+    String coperateName;
+    String verification_number;
+    String fullName;
+
     @Inject
     Gson gson;
 
     @Inject
     ViewModelProviderFactory factory;
+    FarmerIdViewModel farmerIdViewModel;
     private DashboardViewModel dashboardViewModel;
     private ActivityCollectionDashboardBinding activityCollectionDashboardBinding;
     private ListView listView;
@@ -89,6 +99,17 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         TextView username = activityCollectionDashboardBinding.username;
         TextView today = activityCollectionDashboardBinding.today;
         today.setText(dashboardViewModel.getCurrentDate());
+        firstName = getIntent().getStringExtra("first_name");
+        lastName = getIntent().getStringExtra("last_name");
+        coperateName = getIntent().getStringExtra("coperate_name");
+        verification_number = getIntent().getStringExtra("farmer_id");
+
+        fullName = firstName + " "+ lastName;
+
+//        farmerIdViewModel.getFarmerDetails();
+
+
+
         username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
 
         DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
@@ -193,7 +214,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     @Override
     public void getTodayCollection(CollectionResponse todayCollectionResponse) {
         for (Collection response : todayCollectionResponse.getData()) {
-            dashboardCollectorLists.add(new DashboardCollectorList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
+            dashboardCollectorLists.add(new DashboardCollectorList(fullName, coperateName, verification_number, response.getStatusOfCollection(), String.valueOf(response.getVolume()+ " litres")));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
             listView.setAdapter(dashboardCollectorAdapter);
         }

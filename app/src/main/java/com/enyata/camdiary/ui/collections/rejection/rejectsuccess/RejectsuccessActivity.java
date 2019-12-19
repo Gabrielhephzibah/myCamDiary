@@ -22,6 +22,9 @@ import javax.inject.Inject;
 
 public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBinding,RejectsuccessViewModel>implements RejectsuccessNavigator {
     String volume;
+    String firstName;
+    String lastName;
+
 
     @Inject
     ViewModelProviderFactory factory;
@@ -55,14 +58,21 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
         rejectsuccessViewModel.setNavigator(this);
         activityRejectsuccessBinding = getViewDataBinding();
         TextView volumetext = activityRejectsuccessBinding.volume;
+        TextView farmerName = activityRejectsuccessBinding.farmerName;
         volume = getIntent().getStringExtra("volume");
+        firstName = getIntent().getStringExtra("first_name");
+        lastName = getIntent().getStringExtra("last_name");
+
         volumetext.setText(volume + " Litres" );
+        farmerName.setText(firstName+ " "+lastName);
 
     }
 
     @Override
     public void home() {
         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+        intent.putExtra("first_name", firstName);
+        intent.putExtra("last_name", lastName);
         startActivity(intent);
     }
 }

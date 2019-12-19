@@ -31,6 +31,13 @@ import javax.inject.Inject;
 
 public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding, EnterVolumeViewModel> implements EnterVolumeNavigator {
     String volume;
+    String first_name;
+    String last_name;
+    String fullName;
+    String coperateName;
+    String verificationNumber;
+    String farmer_id;
+
 
     @Inject
     Gson gson;
@@ -65,6 +72,17 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         super.onCreate(savedInstanceState);
         enterVolumeBinding = getViewDataBinding();
         enterVolumeViewModel.setNavigator(this);
+        first_name = getIntent().getStringExtra("first_name");
+        last_name = getIntent().getStringExtra("last_name");
+        coperateName = getIntent().getStringExtra("coperate_name");
+        verificationNumber = getIntent().getStringExtra("farmer_id");
+        farmer_id= getIntent().getStringExtra("farmer_identity");
+
+//        int farmer_idInt = Integer.parseInt(farmer_id);
+
+
+
+         fullName = first_name + " " + last_name;
     }
 
     @Override
@@ -76,7 +94,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         dialog.setCancelable(false);
         TextView message = (TextView) dialogView.findViewById(R.id.message);
         volume = enterVolumeBinding.volumeEditText.getText().toString();
-        message.setText("You have collected "+volume +" litres of product \nfrom Akin Solomon.\nPlease tap continue to confirm \nCollection");
+        message.setText("You have collected "+volume +" litres of product \nfrom "+ fullName+ " .\nPlease tap continue to confirm \nCollection");
 
         TextView cancel = dialogView.findViewById(R.id.cancel);
         TextView continuee = dialogView.findViewById(R.id.continuee);
@@ -93,7 +111,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             } else {
                 try {
                     JSONObject params = new JSONObject();
-                    params.put("farmer_id", 2);
+                    params.put("farmer_id",2);
                     params.put("status_of_collection", "accepted");
                     params.put("volume", volume);
                     params.put("test_one", "passed");
@@ -119,6 +137,8 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         } else {
             Intent intent = new Intent(getApplicationContext(), ReasonActivity.class);
             intent.putExtra("volume",volume);
+            intent.putExtra("first_name",first_name);
+            intent.putExtra("last_name", last_name);
             startActivity(intent);
 
 
@@ -147,6 +167,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
+        status.putExtra("first_name",first_name);
+        status.putExtra("last_name", last_name);
+        status.putExtra("coperate_name",coperateName);
+        status.putExtra("farmer_id",verificationNumber);
         startActivity(status);
     }
 

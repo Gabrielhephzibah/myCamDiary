@@ -28,4 +28,9 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
                 }));
 
     }
+
+
+    public void dispose(){
+        onCleared();
+    }
 }
