@@ -23,42 +23,23 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
-import com.enyata.camdiary.data.model.api.response.FarmerDetails;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
-import com.google.gson.internal.$Gson$Types;
-import com.google.gson.reflect.TypeToken;
 import com.enyata.camdiary.data.local.db.DbHelper;
 import com.enyata.camdiary.data.local.prefs.PreferencesHelper;
-import com.enyata.camdiary.data.model.api.BlogResponse;
-import com.enyata.camdiary.data.model.api.LoginRequest;
-import com.enyata.camdiary.data.model.api.LoginResponse;
-import com.enyata.camdiary.data.model.api.LogoutResponse;
-import com.enyata.camdiary.data.model.api.OpenSourceResponse;
-import com.enyata.camdiary.data.model.db.Option;
-import com.enyata.camdiary.data.model.db.Question;
-import com.enyata.camdiary.data.model.db.User;
-import com.enyata.camdiary.data.model.others.QuestionCardData;
 import com.enyata.camdiary.data.remote.ApiHeader;
 import com.enyata.camdiary.data.remote.ApiHelper;
-import com.enyata.camdiary.utils.AppConstants;
-import com.enyata.camdiary.utils.CommonUtils;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 @Singleton
 public class AppDataManager implements DataManager {
@@ -85,26 +66,6 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest request) {
-        return mApiHelper.doFacebookLoginApiCall(request);
-    }
-
-    @Override
-    public Single<LoginResponse> doGoogleLoginApiCall(LoginRequest.GoogleLoginRequest request) {
-        return mApiHelper.doGoogleLoginApiCall(request);
-    }
-
-    @Override
-    public Single<LogoutResponse> doLogoutApiCall() {
-        return mApiHelper.doLogoutApiCall();
-    }
-
-    @Override
-    public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
-        return mApiHelper.doServerLoginApiCall(request);
-    }
-
-    @Override
     public String getAccessToken() {
         return mPreferencesHelper.getAccessToken();
     }
@@ -116,23 +77,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<List<Question>> getAllQuestions() {
-        return mDbHelper.getAllQuestions();
-    }
-
-    @Override
-    public Observable<List<User>> getAllUsers() {
-        return mDbHelper.getAllUsers();
-    }
-
-    @Override
     public ApiHeader getApiHeader() {
         return mApiHelper.getApiHeader();
-    }
-
-    @Override
-    public Single<BlogResponse> getBlogApiCall() {
-        return mApiHelper.getBlogApiCall();
     }
 
     @Override
@@ -196,11 +142,6 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<OpenSourceResponse> getOpenSourceApiCall() {
-        return mApiHelper.getOpenSourceApiCall();
-    }
-
-    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -250,92 +191,10 @@ public class AppDataManager implements DataManager {
         return  mApiHelper.getFarmerDetails(id);
     }
 
-
-    @Override
-    public Observable<List<Option>> getOptionsForQuestionId(Long questionId) {
-        return mDbHelper.getOptionsForQuestionId(questionId);
-    }
-
-    @Override
-    public Observable<List<QuestionCardData>> getQuestionCardData() {
-        return mDbHelper.getAllQuestions()
-                .flatMap(Observable::fromIterable)
-                .flatMap(question -> Observable.zip(
-                        mDbHelper.getOptionsForQuestionId(question.id),
-                        Observable.just(question),
-                        (options, question1) -> new QuestionCardData(question1, options)))
-                .toList()
-                .toObservable();
-    }
-
-    @Override
-    public Observable<Boolean> insertUser(User user) {
-        return mDbHelper.insertUser(user);
-    }
-
-    @Override
-    public Observable<Boolean> isOptionEmpty() {
-        return mDbHelper.isOptionEmpty();
-    }
-
-    @Override
-    public Observable<Boolean> isQuestionEmpty() {
-        return mDbHelper.isQuestionEmpty();
-    }
-
-    @Override
-    public Observable<Boolean> saveOption(Option option) {
-        return mDbHelper.saveOption(option);
-    }
-
-    @Override
-    public Observable<Boolean> saveOptionList(List<Option> optionList) {
-        return mDbHelper.saveOptionList(optionList);
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestion(Question question) {
-        return mDbHelper.saveQuestion(question);
-    }
-
-    @Override
-    public Observable<Boolean> saveQuestionList(List<Question> questionList) {
-        return mDbHelper.saveQuestionList(questionList);
-    }
-
-    @Override
-    public Observable<Boolean> seedDatabaseOptions() {
-        return mDbHelper.isOptionEmpty()
-                .concatMap(isEmpty -> {
-                    if (isEmpty) {
-                        Type type = new TypeToken<List<Option>>() {
-                        }.getType();
-                        List<Option> optionList = mGson.fromJson(CommonUtils.loadJSONFromAsset(mContext, AppConstants.SEED_DATABASE_OPTIONS), type);
-                        return saveOptionList(optionList);
-                    }
-                    return Observable.just(false);
-                });
-    }
-
-    @Override
-    public Observable<Boolean> seedDatabaseQuestions() {
-        return mDbHelper.isQuestionEmpty()
-                .concatMap(isEmpty -> {
-                    if (isEmpty) {
-                        Type type = $Gson$Types.newParameterizedTypeWithOwner(null, List.class, Question.class);
-                        List<Question> questionList = mGson
-                                .fromJson(CommonUtils.loadJSONFromAsset(mContext, AppConstants.SEED_DATABASE_QUESTIONS), type);
-                        return saveQuestionList(questionList);
-                    }
-                    return Observable.just(false);
-                });
-    }
-
     @Override
     public void setUserAsLoggedOut() {
 
     }
-
 
     @Override
     public void updateApiHeader(Long userId, String accessToken) {
@@ -349,13 +208,8 @@ public class AppDataManager implements DataManager {
             String email) {
 
         setAccessToken(accessToken);
-//        setCurrentUserId(userId);
-//        setCurrentUserLoggedInMode(loggedInMode);
         setCurrentUserName(firstname);
         setCurrentUserEmail(email);
-//        setCurrentUserProfilePicUrl(profilePicPath);
-//
-//        updateApiHeader(userId, accessToken);
     }
 
     @Override

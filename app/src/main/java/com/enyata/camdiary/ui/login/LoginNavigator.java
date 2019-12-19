@@ -17,23 +17,16 @@
 package com.enyata.camdiary.ui.login;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by Sanni Michael on 10/12/2019.
  */
 
 public interface LoginNavigator {
 
     void handleError(Throwable throwable);
 
-    void openMainActivity();
-
     void loginClick();
-
-    void goToCollectorScanBarcode();
 
     void goToDashBoard(String type);
 
-    void getAcceptedCollection();
-
-    void getRejectedCollection();
 }
 

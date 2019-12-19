@@ -21,7 +21,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 @Entity(tableName = "users")
 public class User {

@@ -19,7 +19,7 @@ package com.enyata.camdiary.utils.rx;
 import io.reactivex.Scheduler;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public interface SchedulerProvider {

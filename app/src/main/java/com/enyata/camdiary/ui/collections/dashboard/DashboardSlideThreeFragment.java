@@ -13,8 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.enyata.camdiary.R;
-import com.enyata.camdiary.databinding.FragmentAboutBinding;
-
 public class DashboardSlideThreeFragment extends Fragment {
 
     DashboardSlideThreeFragment dashboardSlideThreeFragment;

@@ -18,24 +18,14 @@ package com.enyata.camdiary.data;
 
 import com.enyata.camdiary.data.local.db.DbHelper;
 import com.enyata.camdiary.data.local.prefs.PreferencesHelper;
-import com.enyata.camdiary.data.model.others.QuestionCardData;
 import com.enyata.camdiary.data.remote.ApiHelper;
 
-import java.util.List;
-
-import io.reactivex.Observable;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
-
-    Observable<List<QuestionCardData>> getQuestionCardData();
-
-    Observable<Boolean> seedDatabaseOptions();
-
-    Observable<Boolean> seedDatabaseQuestions();
 
     void setUserAsLoggedOut();
 

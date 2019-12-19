@@ -30,13 +30,8 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
-import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
-import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
-import com.enyata.camdiary.ui.collections.constant.ConstantLayoutActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -83,16 +78,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         if (throwable != null) {
             ANError error = (ANError) throwable;
             CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
-            Alert.showFailed(getApplicationContext(),response.getMessage());
+            Alert.showFailed(getApplicationContext(),response.getError());
         }
     }
 
-    @Override
-    public void openMainActivity() {
-        Intent intent = MainActivity.newIntent(LoginActivity.this);
-        startActivity(intent);
-        finish();
-    }
 
 
     @Override
@@ -116,12 +105,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
-    public void goToCollectorScanBarcode() {
-        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
     public void goToDashBoard(String type) {
         Intent intent = null;
         if(type.equals("collectors")){
@@ -132,16 +115,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         }
         startActivity(intent);
-    }
-
-    @Override
-    public void getAcceptedCollection() {
-
-    }
-
-    @Override
-    public void getRejectedCollection() {
-
     }
 
     @Override

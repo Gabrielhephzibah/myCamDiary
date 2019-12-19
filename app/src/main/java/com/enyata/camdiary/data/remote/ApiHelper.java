@@ -16,19 +16,12 @@
 
 package com.enyata.camdiary.data.remote;
 
-import com.enyata.camdiary.data.model.api.BlogResponse;
-import com.enyata.camdiary.data.model.api.LoginRequest;
-import com.enyata.camdiary.data.model.api.LoginResponse;
-import com.enyata.camdiary.data.model.api.LogoutResponse;
-import com.enyata.camdiary.data.model.api.OpenSourceResponse;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
-import com.enyata.camdiary.data.model.api.response.FarmerDetails;
-import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NoOfCollectors;
@@ -38,31 +31,16 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public interface ApiHelper {
 
-    Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest request);
-
-    Single<LoginResponse> doGoogleLoginApiCall(LoginRequest.GoogleLoginRequest request);
-
-    Single<LogoutResponse> doLogoutApiCall();
-
-    Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request);
-
     ApiHeader getApiHeader();
-
-    Single<BlogResponse> getBlogApiCall();
-
-    Single<OpenSourceResponse> getOpenSourceApiCall();
-
     // Login
     Single<CamLoginResponse> login(CamLogin.Request request);
     // Create Collection
     Single<NewCollectionResponse> doCreateCollection(Collection.Request request);
-
-
     // Get accepted Volume
     Single<VolumeResponse> getAcceptedVolume();
     //get aggregation volume

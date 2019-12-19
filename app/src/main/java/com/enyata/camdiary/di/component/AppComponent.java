@@ -29,7 +29,7 @@ import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 @Singleton
 @Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})
