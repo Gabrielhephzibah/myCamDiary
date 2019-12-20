@@ -23,7 +23,9 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
     }
 
     public void onLogout(){
-        getNavigator().out();
+        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        getNavigator().onLogOut();
+
     }
 
 

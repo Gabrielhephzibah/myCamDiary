@@ -26,7 +26,7 @@ import com.enyata.camdiary.utils.AppConstants;
 import javax.inject.Inject;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
  */
 
 public class AppPreferencesHelper implements PreferencesHelper {

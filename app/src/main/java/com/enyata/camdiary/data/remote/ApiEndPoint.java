@@ -19,7 +19,7 @@ package com.enyata.camdiary.data.remote;
 import com.enyata.camdiary.BuildConfig;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
  */
 
 public final class ApiEndPoint {
