@@ -75,11 +75,16 @@ public interface ApiHelper {
     Single<AllEntries> getAllEntries();
     // Get Today's collection
     Flowable<CollectionResponse> getTodaysCollection();
+
+    // Get collector collection
+    Flowable<CollectionResponse>getCollectorCollection();
     //GET Aggregator today's collection
     Flowable<AggregationCollectionResponse>getAggregatorTodayCollection();
 
     // Get All Collections
     Flowable<CollectionResponse> getAllCollection();
+    //Get Collectors Details
+    Single<DetailsResponse>getCollectorDetails(String verification_id);
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
 

@@ -200,6 +200,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public String getCollectorId() {
+        return mPreferencesHelper.getCollectorId();
+    }
+
+    @Override
+    public void setCollectorId(String verification_id) {
+        mPreferencesHelper.setCollectorId(verification_id);
+
+    }
+
+    @Override
     public Single<OpenSourceResponse> getOpenSourceApiCall() {
         return mApiHelper.getOpenSourceApiCall();
     }
@@ -245,6 +256,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Flowable<CollectionResponse> getCollectorCollection() {
+        return mApiHelper.getCollectorCollection();
+    }
+
+    @Override
     public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
         return mApiHelper.getAggregatorTodayCollection();
     }
@@ -252,6 +268,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<CollectionResponse> getAllCollection() {
         return mApiHelper.getAllCollection();
+    }
+
+    @Override
+    public Single<DetailsResponse> getCollectorDetails(String verification_id) {
+        return mApiHelper.getCollectorDetails(verification_id);
     }
 
     @Override

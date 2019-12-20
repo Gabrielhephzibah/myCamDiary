@@ -51,4 +51,10 @@ public interface PreferencesHelper {
     String getFarmerID();
 
     void setFarmerId(String id);
+
+
+     String getCollectorId();
+
+     void  setCollectorId( String verification_id);
+
 }

@@ -69,11 +69,6 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
 
 
 
-
-
-
-
-
     public String getCurrentDate(){
         return (String) DateFormat.format("dd/MM/yyyy", new java.util.Date());
     }

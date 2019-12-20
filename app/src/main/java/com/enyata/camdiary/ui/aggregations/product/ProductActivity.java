@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.Collection;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
@@ -24,6 +28,8 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorAdapter;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
+import com.enyata.camdiary.utils.Alert;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +44,9 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
     ProductAdapter productAdapter;
     ListView listView;
     ArrayList<ProductList> productLists = new ArrayList<>();
+
+    @Inject
+    Gson gson;
 
 
     @Inject
@@ -70,78 +79,79 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
         listView = findViewById(R.id.listView);
+        productViewModel.getCollectorCollection();
 
-
-        JSONObject collector1 = new JSONObject();
-        try {
-            collector1.put("fullName", "Akin, Solomon");
-            collector1.put("companyName", "Xamsatde");
-            collector1.put("companyId", "X3478JND8992");
-            collector1.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
-        JSONObject collector2 = new JSONObject();
-        try {
-            collector2.put("fullName", "Akin, Solomon");
-            collector2.put("companyName", "Xamsatde");
-            collector2.put("companyId", "X3478JND8992");
-            collector2.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject collector3 = new JSONObject();
-        try {
-            collector3.put("fullName", "Akin, Solomon");
-            collector3.put("companyName", "Xamsatde");
-            collector3.put("companyId", "X3478JND8992");
-            collector3.put("myLitres", "40 litres");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray array = new JSONArray();
-        array.put(collector1);
-        array.put(collector2);
-        array.put(collector3);
-        array.put(collector2);
-        array.put(collector1);
-        array.put(collector3);
-
-
-        for (int i = 0; i < array.length(); i++) {
-
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String fullName = object.getString("fullName");
-                String companyName = object.getString("companyName");
-                String companyId= object.getString("companyId");
-                String myLitres = object.getString("myLitres");
+//
+//        JSONObject collector1 = new JSONObject();
+//        try {
+//            collector1.put("fullName", "Akin, Solomon");
+//            collector1.put("companyName", "Xamsatde");
+//            collector1.put("companyId", "X3478JND8992");
+//            collector1.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
 
 
-                productLists.add(new ProductList(fullName,companyName,companyId,myLitres));
+//        JSONObject collector2 = new JSONObject();
+//        try {
+//            collector2.put("fullName", "Akin, Solomon");
+//            collector2.put("companyName", "Xamsatde");
+//            collector2.put("companyId", "X3478JND8992");
+//            collector2.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+
+//        JSONObject collector3 = new JSONObject();
+//        try {
+//            collector3.put("fullName", "Akin, Solomon");
+//            collector3.put("companyName", "Xamsatde");
+//            collector3.put("companyId", "X3478JND8992");
+//            collector3.put("myLitres", "40 litres");
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+//        JSONArray array = new JSONArray();
+//        array.put(collector1);
+//        array.put(collector2);
+//        array.put(collector3);
+//        array.put(collector2);
+//        array.put(collector1);
+//        array.put(collector3);
 
 
-            } catch (Exception e) {
-                e.printStackTrace();
+//        for (int i = 0; i < array.length(); i++) {
+//
+//            try {
+//                Log.i("message", array.toString());
+//
+//                JSONObject object = array.getJSONObject(i);
+//                String fullName = object.getString("fullName");
+//                String companyName = object.getString("companyName");
+//                String companyId= object.getString("companyId");
+//                String myLitres = object.getString("myLitres");
+//
+//
+//
+//                productLists.add(new ProductList(fullName,companyName,companyId,myLitres));
+//
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//
+//            }
+//        }
 
-            }
-        }
 
-
-        productAdapter = new ProductAdapter(ProductActivity.this, productLists);
-        listView.setAdapter(productAdapter);
+//        productAdapter = new ProductAdapter(ProductActivity.this, productLists);
+//        listView.setAdapter(productAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,6 +168,15 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
     }
 
     @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
+            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+        }
+    }
+
+    @Override
     public void product() {
         Intent intent = new Intent(getApplicationContext(), VolumeActivity.class);
         startActivity(intent);
@@ -167,5 +186,15 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
     public void back() {
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void getCollectorCollection(CollectionResponse response) {
+        for (Collection data : response.getData()){
+            productLists.add(new ProductList("Tolu James","XXXXX","Enyata",data.getVolume()+"litres"));
+            productAdapter = new ProductAdapter(ProductActivity.this,productLists);
+            listView.setAdapter(productAdapter);
+        }
+
     }
 }

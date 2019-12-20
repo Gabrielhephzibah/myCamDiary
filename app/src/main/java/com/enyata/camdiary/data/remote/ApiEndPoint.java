@@ -56,6 +56,11 @@ public final class ApiEndPoint {
 
     public static final String AGGREGATOR_TODAY_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/aggregation/today";
 
+    public static final String COLLECTORS_DETAILS = BuildConfig.BASE_URL + "/collectors/verify";
+
+    public static final String COLLECTORS_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/all";
+
+
     public static final String FARMER_INFO_URL = BuildConfig.BASE_URL + "/farmer";
 
 
