@@ -77,12 +77,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         coperateName = getIntent().getStringExtra("coperate_name");
         verificationNumber = getIntent().getStringExtra("farmer_id");
         farmer_id= getIntent().getStringExtra("farmer_identity");
-
-//        int farmer_idInt = Integer.parseInt(farmer_id);
-
-
-
-         fullName = first_name + " " + last_name;
+        fullName = first_name + " " + last_name;
     }
 
     @Override
@@ -111,16 +106,19 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             } else {
                 try {
                     JSONObject params = new JSONObject();
-                    params.put("farmer_id",2);
+                    params.put("farmer_id",enterVolumeViewModel.getFarmerId());
                     params.put("status_of_collection", "accepted");
                     params.put("volume", volume);
                     params.put("test_one", "passed");
                     params.put("test_two", "passed");
                     params.put("test_three", "passed");
                     params.put("approved_container", "true");
+<<<<<<< HEAD
                     params.put("message","nil");
 
 
+=======
+>>>>>>> 79d75c4c439a0ac2cbdd619e3207976e32f6cce5
                     enterVolumeViewModel.createCollection(params);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -142,8 +140,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             intent.putExtra("first_name",first_name);
             intent.putExtra("last_name", last_name);
             startActivity(intent);
-
-
         }
 
     }
@@ -165,7 +161,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public void displayResponse(NewCollectionResponse response) {
-        //Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
@@ -181,4 +176,5 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         super.onDestroy();
         enterVolumeViewModel.dispose();
     }
+
 }

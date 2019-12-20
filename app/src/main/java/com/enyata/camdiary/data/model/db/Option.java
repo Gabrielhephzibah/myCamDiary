@@ -25,7 +25,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by Sanni Michael on 10/12/2019.
  */
 @Entity(
         tableName = "options",

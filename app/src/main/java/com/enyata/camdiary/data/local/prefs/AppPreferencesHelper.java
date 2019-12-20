@@ -26,7 +26,7 @@ import com.enyata.camdiary.utils.AppConstants;
 import javax.inject.Inject;
 
 /**
- * Created by amitshekhar on 07/07/17.
+ * Created by Sanni Michael on 10/12/2019
  */
 
 public class AppPreferencesHelper implements PreferencesHelper {
@@ -43,7 +43,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE";
 
-    private static final String PREF_FARMER_ID= "PREF_KEY_FARMER_ID";
+    private static final String PREF_KEY_FARMER_ID = "PREF_KEY_FARMER_ID";
 
     private static final String PREF_COLLECTOR_ID= "PREF_KEY_COLLECTOR_ID";
 
@@ -118,15 +118,13 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public String getFarmerID() {
-        return  mPrefs.getString(PREF_FARMER_ID, null);
-
+    public String getFarmerId() {
+        return mPrefs.getString(PREF_KEY_FARMER_ID,null);
     }
 
     @Override
     public void setFarmerId(String id) {
-        mPrefs.edit().putString(PREF_FARMER_ID,id).apply();
-
+        mPrefs.edit().putString(PREF_KEY_FARMER_ID,id).apply();
     }
 
     @Override
@@ -139,6 +137,4 @@ public class AppPreferencesHelper implements PreferencesHelper {
         mPrefs.edit().putString(PREF_COLLECTOR_ID, verification_id);
 
     }
-
-
 }

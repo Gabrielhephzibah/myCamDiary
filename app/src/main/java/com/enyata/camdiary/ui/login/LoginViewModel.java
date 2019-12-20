@@ -25,7 +25,7 @@ import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
 /**
- * Created by amitshekhar on 08/07/17.
+ * Created by Sanni Michael on 10/12/2019.
  */
 
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {

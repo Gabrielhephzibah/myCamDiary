@@ -16,7 +16,6 @@
 
 package com.enyata.camdiary.di.builder;
 
-import com.enyata.camdiary.ui.about.AboutFragmentProvider;
 import com.enyata.camdiary.ui.aggregations.barcode.collectorID.CollectorIdActivity;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
@@ -48,13 +47,7 @@ import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
-import com.enyata.camdiary.ui.feed.FeedActivity;
-import com.enyata.camdiary.ui.feed.FeedActivityModule;
-import com.enyata.camdiary.ui.feed.blogs.BlogFragmentProvider;
-import com.enyata.camdiary.ui.feed.opensource.OpenSourceFragmentProvider;
 import com.enyata.camdiary.ui.login.LoginActivity;
-import com.enyata.camdiary.ui.main.MainActivity;
-import com.enyata.camdiary.ui.main.rating.RateUsDialogProvider;
 import com.enyata.camdiary.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -66,11 +59,6 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = {
-            FeedActivityModule.class,
-            BlogFragmentProvider.class,
-            OpenSourceFragmentProvider.class})
-    abstract FeedActivity bindFeedActivity();
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();
@@ -154,8 +142,6 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector
     abstract DeliveryHistoryActivity bindDeliveryHistoryActivity();
 
-
-
     @ContributesAndroidInjector
     abstract BottlesActivity bindBottlesActivity();
 
@@ -170,11 +156,6 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract AggregatorDashboardActivity bindAggregatorDashboardActivity();
-
-    @ContributesAndroidInjector(modules = {
-            AboutFragmentProvider.class,
-            RateUsDialogProvider.class})
-    abstract MainActivity bindMainActivity();
 
     @ContributesAndroidInjector
     abstract SplashActivity bindSplashActivity();

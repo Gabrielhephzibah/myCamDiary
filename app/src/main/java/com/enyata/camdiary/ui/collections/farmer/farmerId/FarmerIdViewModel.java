@@ -25,7 +25,7 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().onResponse(response);
-                    getDataManager().setFarmerId(String.valueOf(response.getData()));
+                    getDataManager().setFarmerId(String.valueOf(response.getData().getId()));
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
