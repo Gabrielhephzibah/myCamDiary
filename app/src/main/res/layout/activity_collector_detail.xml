@@ -95,6 +95,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Adetoyin, Gabriel"
@@ -119,6 +120,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="+2347032457893"
@@ -144,6 +146,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="adegab@gmail.com"
@@ -170,6 +173,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/verificationNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="X3478JND8992"

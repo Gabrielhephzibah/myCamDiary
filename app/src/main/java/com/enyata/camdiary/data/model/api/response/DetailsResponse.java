@@ -15,7 +15,18 @@ public class DetailsResponse {
     @SerializedName("data")
     private FarmerDetails data;
 
+    @Expose
+    @SerializedName("error")
+    private String error;
+
+
+
     public FarmerDetails getData() {
         return data;
+    }
+
+
+    public  String getError(){
+        return error;
     }
 }

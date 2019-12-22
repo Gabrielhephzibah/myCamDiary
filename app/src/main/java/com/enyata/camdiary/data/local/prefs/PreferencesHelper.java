@@ -19,7 +19,7 @@ package com.enyata.camdiary.data.local.prefs;
 import com.enyata.camdiary.data.DataManager;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Gabriel Hephzibah and Sanni Michael on 10/12/2019
  */
 
 public interface PreferencesHelper {
@@ -52,4 +52,7 @@ public interface PreferencesHelper {
 
     void setFarmerId(String id);
 
+     String getCollectorId();
+
+     void  setCollectorId( String verification_id);
 }

@@ -41,7 +41,7 @@ import com.enyata.camdiary.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 /**
- * Created by Sanni Michael Tomiwa 3/12/2019.
+ * Created by Sanni Michael Tomiwa and Gabriel Hephzibah 3/12/2019.
  */
 @Singleton
 public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFactory {

@@ -43,7 +43,7 @@
                     android:id="@+id/aggregator_litres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2200 Liters"
+                    android:text="0"
                     android:textColor="#21523C"
                     android:textSize="25dp"
                     android:letterSpacing="-0.03"

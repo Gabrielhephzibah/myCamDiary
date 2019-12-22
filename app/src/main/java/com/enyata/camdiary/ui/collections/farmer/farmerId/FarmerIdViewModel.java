@@ -16,14 +16,18 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
 
 
     public void getFarmerDetails(String id){
+        setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
+
                 .getFarmerDetails(id)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
+                    setIsLoading(false);
                     getNavigator().onResponse(response);
                     getDataManager().setFarmerId(String.valueOf(response.getData().getId()));
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
 
