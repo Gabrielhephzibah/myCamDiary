@@ -37,7 +37,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
  */
 
 @Singleton
@@ -122,6 +122,14 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
+    public Flowable<CollectionResponse> getCollectorCollection() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTORS_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(CollectionResponse.class);
+    }
+
+    @Override
     public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
         return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_TODAY_COLLECTION)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
@@ -135,6 +143,14 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(CollectionResponse.class);
+    }
+
+    @Override
+    public Single<DetailsResponse> getCollectorDetails(String verification_id) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTORS_DETAILS+ "/" + verification_id)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(DetailsResponse.class);
     }
 
     @Override

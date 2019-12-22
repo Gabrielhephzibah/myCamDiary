@@ -33,7 +33,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Gabriel Hephzibah and Sanni Michael  on 10/12/2019
  */
 
 public interface ApiHelper {
@@ -55,11 +55,16 @@ public interface ApiHelper {
     Single<AllEntries> getAllEntries();
     // Get Today's collection
     Flowable<CollectionResponse> getTodaysCollection();
+
+    // Get collector collection
+    Flowable<CollectionResponse>getCollectorCollection();
     //GET Aggregator today's collection
     Flowable<AggregationCollectionResponse>getAggregatorTodayCollection();
 
     // Get All Collections
     Flowable<CollectionResponse> getAllCollection();
+    //Get Collectors Details
+    Single<DetailsResponse>getCollectorDetails(String verification_id);
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
 

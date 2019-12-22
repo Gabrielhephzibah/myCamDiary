@@ -19,7 +19,7 @@ package com.enyata.camdiary.data.remote;
 import com.enyata.camdiary.BuildConfig;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
  */
 
 public final class ApiEndPoint {
@@ -43,6 +43,11 @@ public final class ApiEndPoint {
     public static final String NO_OF_COLLECTORS = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collectors";
 
     public static final String AGGREGATOR_TODAY_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/aggregation/today";
+
+    public static final String COLLECTORS_DETAILS = BuildConfig.BASE_URL + "/collectors/verify";
+
+    public static final String COLLECTORS_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/all";
+
 
     public static final String FARMER_INFO_URL = BuildConfig.BASE_URL + "/farmer";
 

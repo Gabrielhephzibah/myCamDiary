@@ -16,4 +16,19 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     public void onBack(){
         getNavigator().back();
     }
+
+    public  void  getCollectorCollection(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getCollectorCollection()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().getCollectorCollection(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
 }

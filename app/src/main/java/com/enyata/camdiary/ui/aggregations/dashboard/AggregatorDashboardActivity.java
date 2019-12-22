@@ -25,6 +25,7 @@ import com.enyata.camdiary.databinding.ActivityAggregatorDashboardBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 
 import org.json.JSONArray;
@@ -269,6 +270,12 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         }
 
 
+    }
+
+    @Override
+    public void onLogOut() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
 

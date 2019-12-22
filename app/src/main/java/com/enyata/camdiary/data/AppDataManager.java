@@ -22,7 +22,6 @@ import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
-import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
@@ -42,7 +41,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
- * Created by Sanni Michael on 10/12/2019
+ * Created by Gabriel Hephzibah and Sanni Michael on 10/12/2019
  */
 @Singleton
 public class AppDataManager implements DataManager {
@@ -145,6 +144,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public String getCollectorId() {
+        return mPreferencesHelper.getCollectorId();
+    }
+
+    @Override
+    public void setCollectorId(String verification_id) {
+        mPreferencesHelper.setCollectorId(verification_id);
+
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -185,6 +195,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Flowable<CollectionResponse> getCollectorCollection() {
+        return mApiHelper.getCollectorCollection();
+    }
+
+    @Override
     public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
         return mApiHelper.getAggregatorTodayCollection();
     }
@@ -192,6 +207,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<CollectionResponse> getAllCollection() {
         return mApiHelper.getAllCollection();
+    }
+
+    @Override
+    public Single<DetailsResponse> getCollectorDetails(String verification_id) {
+        return mApiHelper.getCollectorDetails(verification_id);
     }
 
     @Override

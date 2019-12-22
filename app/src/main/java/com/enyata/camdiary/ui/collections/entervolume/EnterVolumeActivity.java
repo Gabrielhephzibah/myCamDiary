@@ -113,6 +113,9 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
                     params.put("test_two", "passed");
                     params.put("test_three", "passed");
                     params.put("approved_container", "true");
+
+                    params.put("message","nil");
+
                     enterVolumeViewModel.createCollection(params);
                 } catch (Exception e) {
                     e.printStackTrace();
