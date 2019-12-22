@@ -105,11 +105,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         fullName = firstName + " "+ lastName;
 
-
-//        farmerIdViewModel.getFarmerDetails();
-
-
-
         username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
 
         DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
