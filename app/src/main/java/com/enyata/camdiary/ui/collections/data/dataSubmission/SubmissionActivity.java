@@ -13,6 +13,7 @@ import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -72,5 +73,11 @@ public class SubmissionActivity extends BaseActivity<ActivitySubmissionBinding, 
         Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void logout() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

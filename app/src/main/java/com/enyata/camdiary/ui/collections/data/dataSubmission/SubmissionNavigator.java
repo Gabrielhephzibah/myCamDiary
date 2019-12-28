@@ -5,4 +5,5 @@ public interface SubmissionNavigator {
     void history();
     void scan();
     void dataCollection();
+    void logout();
 }

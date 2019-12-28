@@ -24,4 +24,9 @@ public class SubmissionViewModel extends BaseViewModel<SubmissionNavigator> {
     public  void onHome(){
         getNavigator().home();
     }
+
+    public  void onLogout(){
+        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        getNavigator().logout();
+    }
 }

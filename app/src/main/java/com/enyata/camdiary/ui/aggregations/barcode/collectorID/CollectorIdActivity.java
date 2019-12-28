@@ -83,7 +83,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     public void accept() {
         String id = collectorId.getText().toString();
         if(TextUtils.isEmpty(id)){
-            Alert.showFailed(getApplicationContext(),"Please enter farmer id");
+            Alert.showFailed(getApplicationContext(),"Please enter collector's verification_id");
             return;
         }
 
@@ -110,7 +110,9 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         Log.d("message",data.getContactNo());
         Log.d("message",data.getVerificationId());
 
+
 //        Log.d("message",data.getCooperativeName());
+       String id = String.valueOf(data.getId());
 
         intent.putExtra("first_name",data.getFirstName());
         intent.putExtra("last_name",data.getLastName());
@@ -118,6 +120,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         intent.putExtra("verification_id",data.getVerificationId());
         intent.putExtra("email",data.getEmail());
         intent.putExtra("coperate_name", data.getCooperativeName());
+        intent.putExtra("id",id);
 
 
 

@@ -122,8 +122,8 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Flowable<CollectionResponse> getCollectorCollection() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTORS_COLLECTION)
+    public Flowable<CollectionResponse> getCollectorCollection(String id) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTORS_COLLECTION + "/" + id)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(CollectionResponse.class);
@@ -132,6 +132,14 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
         return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_TODAY_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(AggregationCollectionResponse.class);
+    }
+
+    @Override
+    public Flowable<AggregationCollectionResponse> getAggregatorHistory() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_HISTORY)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(AggregationCollectionResponse.class);

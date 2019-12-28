@@ -155,6 +155,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public String getCollectorCollectionId() {
+       return mPreferencesHelper.getCollectorCollectionId();
+    }
+
+    @Override
+    public void setCollectorCollectionId(String id) {
+        mPreferencesHelper.setCollectorCollectionId(id);
+
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -195,13 +206,19 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Flowable<CollectionResponse> getCollectorCollection() {
-        return mApiHelper.getCollectorCollection();
+    public Flowable<CollectionResponse> getCollectorCollection(String id) {
+        return mApiHelper.getCollectorCollection(id);
     }
+
 
     @Override
     public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
         return mApiHelper.getAggregatorTodayCollection();
+    }
+
+    @Override
+    public Flowable<AggregationCollectionResponse> getAggregatorHistory() {
+        return mApiHelper.getAggregatorHistory();
     }
 
     @Override

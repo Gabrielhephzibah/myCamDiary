@@ -47,6 +47,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_COLLECTOR_ID= "PREF_KEY_COLLECTOR_ID";
 
+    private  static  final String PREF_COLLECTOR_COLLECTION_ID = "PREF_KEY_COLLECTOR_COLLECTION_ID";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -135,6 +137,17 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public void setCollectorId(String verification_id) {
         mPrefs.edit().putString(PREF_COLLECTOR_ID, verification_id);
+
+    }
+
+    @Override
+    public String getCollectorCollectionId() {
+        return mPrefs.getString(PREF_COLLECTOR_COLLECTION_ID,null);
+    }
+
+    @Override
+    public void setCollectorCollectionId(String id) {
+        mPrefs.edit().putString(PREF_COLLECTOR_COLLECTION_ID,id).apply();
 
     }
 }

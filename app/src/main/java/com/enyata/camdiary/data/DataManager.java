@@ -22,7 +22,7 @@ import com.enyata.camdiary.data.remote.ApiHelper;
 
 
 /**
- * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
+ * Created by Sanni Michael 10/12/2019
  */
 
 public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {

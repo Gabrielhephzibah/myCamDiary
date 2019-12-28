@@ -1,5 +1,6 @@
 package com.enyata.camdiary.data.model.api.response;
 
+import com.enyata.camdiary.data.remote.ApiHeader;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -53,6 +54,22 @@ public class Collection {
     @SerializedName("message")
     private String message;
 
+    @Expose
+    @SerializedName("farmer")
+    private FarmerDetails farmerDetails;
+
+//
+//    @Expose
+//    @SerializedName("lastname")
+//    private String lastNmae ;
+//
+//    @Expose
+//    @SerializedName("verification_id")
+//    private String verificationId ;
+//
+//    @Expose
+//    @SerializedName("cooperative_name")
+//    private String cooperativeName ;
 
 
     public int getId() {
@@ -102,4 +119,6 @@ public class Collection {
     public String getMessage() {
         return message;
     }
+
+    public  FarmerDetails getFarmer(){return  farmerDetails;}
 }

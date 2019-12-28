@@ -34,6 +34,10 @@ public class AggregatorCollections {
     @SerializedName("collector_id")
     private String collectorId;
 
+    @Expose
+    @SerializedName("collector")
+    private FarmerDetails collectorDetails;
+
 
 
     public int getId() {
@@ -51,6 +55,10 @@ public class AggregatorCollections {
     public  String getUpdatedAt(){return  updatedAt;}
 
     public  String getCollectorId(){return  collectorId;}
+
+    public  FarmerDetails getCollectorDetails(){
+        return  collectorDetails;
+    }
 
 
 
