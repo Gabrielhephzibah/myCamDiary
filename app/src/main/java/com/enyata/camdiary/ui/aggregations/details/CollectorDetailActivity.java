@@ -28,6 +28,7 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     String phoneNumber;
     String email;
     String coperateName;
+    String id;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -66,6 +67,8 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         verificationNumber = getIntent().getStringExtra("verification_id");
         phoneNumber = getIntent().getStringExtra("phone_number");
         email = getIntent().getStringExtra("email");
+        id = getIntent().getStringExtra("id");
+
 
 
         TextView name = activityCollectorDetailBinding.name;
@@ -86,6 +89,7 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     @Override
     public void proceed() {
         Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+        intent .putExtra("id",id);
 
         startActivity(intent);
     }

@@ -8,5 +8,6 @@ public interface HistoryNavigator {
     void scan();
     void back();
     void getAllCollections(CollectionResponse allCollections);
+    void logout();
 
 }

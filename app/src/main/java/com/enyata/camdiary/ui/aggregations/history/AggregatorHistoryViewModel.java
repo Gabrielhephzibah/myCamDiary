@@ -17,4 +17,18 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
     public  void  onBack(){
         getNavigator().back();
     }
+
+    public void  getAggretionHistory(){
+        getCompositeDisposable().add(getDataManager()
+                .getAggregatorHistory()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response ->{
+                    getNavigator().getAggregatorHistory(response);
+                },throwable -> {
+                    getNavigator().handleError(throwable);
+
+                }));
+
+    }
 }

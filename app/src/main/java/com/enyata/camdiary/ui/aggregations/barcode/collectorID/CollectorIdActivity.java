@@ -1,6 +1,5 @@
 package com.enyata.camdiary.ui.aggregations.barcode.collectorID;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -10,17 +9,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.androidnetworking.error.ANError;
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
-import com.enyata.camdiary.data.model.api.response.FarmerDetails;
-import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectorIdBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
-import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -73,7 +68,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     public void handleError(Throwable throwable) {
 //        if (throwable != null) {
 //            ANError error = (ANError) throwable;
-//            FarmerDetails response = gson.fromJson(error.getErrorBody(), FarmerDetails.class);
+//            Details response = gson.fromJson(error.getErrorBody(), Details.class);
 //            Alert.showFailed(getApplicationContext(), response.getError());
 //        }
 
@@ -83,7 +78,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     public void accept() {
         String id = collectorId.getText().toString();
         if(TextUtils.isEmpty(id)){
-            Alert.showFailed(getApplicationContext(),"Please enter farmer id");
+            Alert.showFailed(getApplicationContext(),"Please enter collector's verification_id");
             return;
         }
 
@@ -104,13 +99,15 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     public void getCollectorDetails(DetailsResponse response) {
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
 
-        FarmerDetails data = response.getData();
+        Details data = response.getData();
         Log.d("message",data.getFirstName());
         Log.d("message",data.getLastName());
         Log.d("message",data.getContactNo());
         Log.d("message",data.getVerificationId());
 
+
 //        Log.d("message",data.getCooperativeName());
+       String id = String.valueOf(data.getId());
 
         intent.putExtra("first_name",data.getFirstName());
         intent.putExtra("last_name",data.getLastName());
@@ -118,6 +115,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         intent.putExtra("verification_id",data.getVerificationId());
         intent.putExtra("email",data.getEmail());
         intent.putExtra("coperate_name", data.getCooperativeName());
+        intent.putExtra("id",id);
 
 
 

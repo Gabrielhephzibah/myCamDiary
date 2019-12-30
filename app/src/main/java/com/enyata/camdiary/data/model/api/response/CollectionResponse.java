@@ -14,4 +14,6 @@ public class CollectionResponse {
     public List<Collection> getData() {
         return data;
     }
+
+
 }

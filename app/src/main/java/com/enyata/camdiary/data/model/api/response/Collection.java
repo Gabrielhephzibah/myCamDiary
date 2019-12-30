@@ -53,7 +53,10 @@ public class Collection {
     @SerializedName("message")
     private String message;
 
-
+    @Expose
+    @SerializedName("farmer")
+    private Details farmerDetails;
+    
 
     public int getId() {
         return id;
@@ -102,4 +105,6 @@ public class Collection {
     public String getMessage() {
         return message;
     }
+
+    public Details getFarmer(){return  farmerDetails;}
 }
