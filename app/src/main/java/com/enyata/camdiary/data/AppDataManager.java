@@ -212,8 +212,8 @@ public class AppDataManager implements DataManager {
 
 
     @Override
-    public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
-        return mApiHelper.getAggregatorTodayCollection();
+    public Flowable<AggregationCollectionResponse> getAggregatorTodaysCollection() {
+        return mApiHelper.getAggregatorTodaysCollection();
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -14,13 +13,10 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
-import com.enyata.camdiary.data.model.api.response.FarmerDetails;
-import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.databinding.ActivityFarmerIdBinding;
-import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
-import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
@@ -74,7 +70,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
     @Override
     public void onResponse(DetailsResponse data) {
         Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
-        FarmerDetails response = data.getData();
+        Details response = data.getData();
 
         intent.putExtra("first_name",response.getFirstName());
         intent.putExtra("last_name",response.getLastName());
@@ -90,7 +86,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
     public void handleError(Throwable throwable) {
         if (throwable != null) {
             ANError error = (ANError) throwable;
-            FarmerDetails response = gson.fromJson(error.getErrorBody(), FarmerDetails.class);
+            Details response = gson.fromJson(error.getErrorBody(), Details.class);
             Alert.showFailed(getApplicationContext(), response.getError());
         }
 

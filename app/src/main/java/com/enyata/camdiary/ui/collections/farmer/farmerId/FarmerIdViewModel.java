@@ -1,7 +1,6 @@
 package com.enyata.camdiary.ui.collections.farmer.farmerId;
 
 import com.enyata.camdiary.data.DataManager;
-import com.enyata.camdiary.data.model.api.response.FarmerDetails;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 

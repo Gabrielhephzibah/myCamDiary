@@ -130,7 +130,7 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Flowable<AggregationCollectionResponse> getAggregatorTodayCollection() {
+    public Flowable<AggregationCollectionResponse> getAggregatorTodaysCollection() {
         return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_TODAY_COLLECTION)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()

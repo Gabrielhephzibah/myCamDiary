@@ -11,12 +11,6 @@ public class CollectionResponse {
     @SerializedName("data")
     private List<Collection> data;
 
-
-
-
-
-
-
     public List<Collection> getData() {
         return data;
     }

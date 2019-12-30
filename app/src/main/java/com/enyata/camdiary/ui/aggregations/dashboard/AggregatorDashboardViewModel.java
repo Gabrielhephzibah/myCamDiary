@@ -57,7 +57,7 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
 
     public void  getAggregatorTodayCollection(){
         getCompositeDisposable().add(getDataManager()
-        .getAggregatorTodayCollection()
+        .getAggregatorTodaysCollection()
         .subscribeOn(getSchedulerProvider().io())
          .observeOn(getSchedulerProvider().ui())
          .subscribe(response ->{

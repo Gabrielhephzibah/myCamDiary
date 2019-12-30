@@ -36,7 +36,7 @@ public class AggregatorCollections {
 
     @Expose
     @SerializedName("collector")
-    private FarmerDetails collectorDetails;
+    private Details collectorDetails;
 
 
 
@@ -56,7 +56,7 @@ public class AggregatorCollections {
 
     public  String getCollectorId(){return  collectorId;}
 
-    public  FarmerDetails getCollectorDetails(){
+    public Details getCollectorDetails(){
         return  collectorDetails;
     }
 
