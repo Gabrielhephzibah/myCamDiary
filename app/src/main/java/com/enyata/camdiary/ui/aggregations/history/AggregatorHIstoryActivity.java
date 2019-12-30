@@ -12,6 +12,8 @@ import android.widget.ListView;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.databinding.ActivityAggregatorHistoryBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
@@ -70,86 +72,14 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
         listView = findViewById(R.id.listView);
 
-
-
-        JSONObject collector1 = new JSONObject();
-        try {
-            collector1.put("fullName", "Akin, Solomon");
-
-            collector1.put("companyId", "64ERT234KI89");
-
-            collector1.put("myLitres", "40 litres");
-            collector1.put("date", "23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        aggregatorHistoryViewModel.getAggretionHistory();
 
 
 
-        JSONObject collector2 = new JSONObject();
-        try {
-            collector2.put("fullName", "Akin, Solomon");
+    }
 
-            collector2.put("companyId", "64ERT234KI89");
-
-            collector2.put("myLitres", "40 litres");
-            collector2.put("date", "23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        JSONObject collector3 = new JSONObject();
-        try {
-            collector3.put("fullName", "Akin, Solomon");
-
-            collector3.put("companyId", "64ERT234KI89");
-
-            collector3.put("myLitres", "40 litres");
-            collector3.put("date", "23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray array = new JSONArray();
-        array.put(collector1);
-        array.put(collector2);
-        array.put(collector3);
-        array.put(collector2);
-        array.put(collector1);
-        array.put(collector3);
-
-
-        for (int i = 0; i < array.length(); i++) {
-
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String fullName = object.getString("fullName");
-                String companyId= object.getString("companyId");
-
-                String myLitres = object.getString("myLitres");
-                String date = object.getString("date");
-
-
-
-                aggregatorHistoryLists.add(new AggregatorHistoryList(fullName,companyId,myLitres,date));
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-
-        aggregatorHistoryAdapter = new AggregatorHistoryAdapter(AggregatorHIstoryActivity.this, aggregatorHistoryLists);
-        listView.setAdapter(aggregatorHistoryAdapter);
-
-
+    @Override
+    public void handleError(Throwable throwable) {
 
     }
 
@@ -164,6 +94,19 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     public void back() {
         Intent intent = new Intent(getApplicationContext(),AggregatorDashboardActivity.class);
         startActivity(intent);
+
+    }
+
+    @Override
+    public void getAggregatorHistory(AggregationCollectionResponse response) {
+        for (AggregatorCollections history : response.getData()){
+            String[] formatted = history.getCreatedAt().split(" ");
+            String[] formattedDate = formatted[0].split("-");
+            String date = formattedDate[2] +"/"+formattedDate[1]+"/"+formattedDate[0];
+            aggregatorHistoryLists .add(new AggregatorHistoryList(history.getCollectorDetails().getFirstName() + " "+ history.getCollectorDetails().getLastName(),history.getCollectorDetails().getVerificationId(), history.getVolume()+ " litres", date));
+            aggregatorHistoryAdapter = new AggregatorHistoryAdapter(AggregatorHIstoryActivity.this,aggregatorHistoryLists);
+            listView.setAdapter(aggregatorHistoryAdapter);
+        }
 
     }
 }

@@ -58,10 +58,8 @@ public class AggregatorHistoryAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(aggregatorHistoryLists.size() > 10){
-            return 5;
-        }else{
+
             return aggregatorHistoryLists.size();
-        }
+
     }
 }

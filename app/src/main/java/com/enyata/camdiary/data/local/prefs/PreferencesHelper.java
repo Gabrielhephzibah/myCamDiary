@@ -55,4 +55,8 @@ public interface PreferencesHelper {
      String getCollectorId();
 
      void  setCollectorId( String verification_id);
+
+     String getCollectorCollectionId();
+
+     void  setCollectorCollectionId(String id);
 }

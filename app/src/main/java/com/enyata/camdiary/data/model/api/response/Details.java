@@ -3,7 +3,7 @@ package com.enyata.camdiary.data.model.api.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FarmerDetails {
+public class Details {
 
     @Expose
     @SerializedName("id")

@@ -17,15 +17,16 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         getNavigator().back();
     }
 
-    public  void  getCollectorCollection(){
+    public  void  getCollectorCollection(String id){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .getCollectorCollection()
+                .getCollectorCollection(id)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().getCollectorCollection(response);
+                    getDataManager().setCollectorCollectionId(String.valueOf(response.getData()));
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);

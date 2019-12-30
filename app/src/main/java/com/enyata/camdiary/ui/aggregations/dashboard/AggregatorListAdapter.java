@@ -55,11 +55,7 @@ public class AggregatorListAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(aggregatorLists.size() > 10){
-            return 5;
-        }else{
             return aggregatorLists.size();
-        }
     }
 
 }

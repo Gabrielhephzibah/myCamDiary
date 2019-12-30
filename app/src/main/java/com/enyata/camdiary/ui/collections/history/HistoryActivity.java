@@ -26,6 +26,7 @@ import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActi
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
+import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
@@ -128,11 +129,17 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
             String[] formatted = response.getCreatedAt().split(" ");
             String[] formattedDate = formatted[0].split("-");
             String date = formattedDate[2] +"/"+formattedDate[1]+"/"+formattedDate[0];
-            collectorHistoryLists.add(new CollectorHistoryList("Mike", "Enyata", "XXXXX", response.getStatusOfCollection(), response.getVolume()+ " litres",  date));
+            collectorHistoryLists.add(new CollectorHistoryList(response.getFarmer().getFirstName()+  "  " + response.getFarmer().getLastName(),response.getFarmer().getCooperativeName(),response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume()+ " litres",  date));
             collectorHistoryAdapter = new CollectorHistoryAdapter(HistoryActivity.this, collectorHistoryLists);
             listView.setAdapter(collectorHistoryAdapter);
         }
 
+    }
+
+    @Override
+    public void logout() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -57,11 +57,8 @@ public class ProductAdapter  extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(productLists.size() > 10){
-            return 5;
-        }else{
             return productLists.size();
-        }
+
     }
 
 
