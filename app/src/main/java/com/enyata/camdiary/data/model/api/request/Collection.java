@@ -148,7 +148,6 @@ public class Collection {
             result = 31 * result + (test_two != null ? test_two.hashCode() : 0);
             result = 31 * result + (test_three != null ? test_three.hashCode() : 0);
             result = 31 * result + (approved_container != null ? approved_container.hashCode() : 0);
-
             result = 31 * result + (message != null ? message.hashCode() : 0);
             return result;
         }
