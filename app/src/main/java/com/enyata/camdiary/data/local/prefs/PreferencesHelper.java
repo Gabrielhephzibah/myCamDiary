@@ -38,6 +38,10 @@ public interface PreferencesHelper {
 
     int getCurrentUserLoggedInMode();
 
+    String getLoggedInView();
+
+    void setLoggedInView(String type);
+
     void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
 
     String getCurrentUserName();
@@ -54,9 +58,17 @@ public interface PreferencesHelper {
 
      String getCollectorId();
 
-     void  setCollectorId( String verification_id);
+     void setCollectorId(String id);
 
      String getCollectorCollectionId();
 
+     void setAggregationCollection(String collection);
+
+     String getAggregationCollection();
+
      void  setCollectorCollectionId(String id);
+
+    void setCollectorName(String collection);
+
+    String getCollectorName();
 }

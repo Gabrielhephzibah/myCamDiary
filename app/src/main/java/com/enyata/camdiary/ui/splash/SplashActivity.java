@@ -25,8 +25,10 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivitySplashBinding;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 
 import javax.inject.Inject;
@@ -66,8 +68,15 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     }
 
     @Override
-    public void openDashboardActivity() {
-        Intent intent = new Intent(getApplicationContext(),DashboardActivity.class);
+    public void openDashboardActivity(String type) {
+        Intent intent;
+        if(type.equals("collector")){
+            intent = new Intent(getApplicationContext(),DashboardActivity.class);
+        }else if(type.equals("aggregator")){
+            intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
+        }else{
+            intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
+        }
         startActivity(intent);
     }
 

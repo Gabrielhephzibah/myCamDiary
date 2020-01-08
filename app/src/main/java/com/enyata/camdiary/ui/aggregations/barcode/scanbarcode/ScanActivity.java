@@ -51,7 +51,6 @@ public class ScanActivity extends BaseActivity<ActivityScanBinding,ScanViewModel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scanViewModel.setNavigator(this);
-
     }
 
     @Override

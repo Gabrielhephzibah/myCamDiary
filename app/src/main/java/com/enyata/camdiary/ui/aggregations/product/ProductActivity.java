@@ -1,14 +1,13 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.androidnetworking.error.ANError;
@@ -20,14 +19,8 @@ import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
-import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
-import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
-import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorAdapter;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
@@ -39,8 +32,9 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class ProductActivity extends BaseActivity<ActivityProductBinding,ProductViewModel>implements ProductNavigator {
- String id;
+public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator {
+
+    String id;
 
     ProductAdapter productAdapter;
     ListView listView;
@@ -48,7 +42,6 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Inject
     Gson gson;
-
 
     @Inject
     ViewModelProviderFactory factory;
@@ -61,7 +54,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Override
     public int getBindingVariable() {
-        return com.enyata.camdiary.BR.viewModel;
+        return BR.viewModel;
     }
 
     @Override
@@ -71,7 +64,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Override
     public ProductViewModel getViewModel() {
-        productViewModel = ViewModelProviders.of(this,factory).get(ProductViewModel.class);
+        productViewModel = ViewModelProviders.of(this, factory).get(ProductViewModel.class);
         return productViewModel;
     }
 
@@ -79,27 +72,44 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
-
-      id = (getIntent().getStringExtra("id"));
         listView = findViewById(R.id.listView);
 
+        String collectorId = productViewModel.getCollectorId();
 
+        String aggregationCollection = productViewModel.getAggregationCollection();
 
-        productViewModel.getCollectorCollection(id);
+        productViewModel.getCollectorCollection(collectorId);
 
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(),VolumeActivity.class);
-                startActivity(intent);
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            ProductList item = (ProductList) adapterView.getItemAtPosition(i);
+            Alert.showInfo(getApplicationContext(),"FULL_NAME "+item.getFullName());
+            Intent intent = new Intent(getApplicationContext(),VolumeActivity.class);
+            intent.putExtra("collectionId",String.valueOf(item.getCollectionId()));
+            intent.putExtra("fullName", item.getFullName());
+            startActivity(intent);
+            if(!TextUtils.isEmpty(aggregationCollection)){
+                try {
+                    JSONArray jsonArray = new JSONArray(aggregationCollection);
+                    for (int k = 0; k < jsonArray.length(); k++) {
+                        JSONObject jsonObject = (JSONObject) jsonArray.get(k);
+                        if(jsonObject.get("collection_id").equals(item.getCollectionId())){
+                            productLists.remove(i);
+                            productAdapter.notifyDataSetChanged();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
-
-
-
+        productViewModel.getCollections().observe(this, response -> {
+            for (Collection data : response.getData()) {
+                productLists.add(new ProductList(data.getFarmer().getFirstName() + "  " + data.getFarmer().getLastName(), data.getFarmer().getCooperativeName(), data.getFarmer().getVerificationId(), data.getVolume() + " litres", String.valueOf(data.getId())));
+                productAdapter = new ProductAdapter(ProductActivity.this, productLists);
+                listView.setAdapter(productAdapter);
+            }
+        });
 
     }
 
@@ -120,17 +130,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Override
     public void back() {
-        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
     public void getCollectorCollection(CollectionResponse response) {
-        for (Collection data : response.getData()){
-            productLists.add(new ProductList(data.getFarmer().getFirstName() + "  " + data.getFarmer().getLastName(),data.getFarmer().getCooperativeName(),data.getFarmer().getVerificationId(),data.getVolume()+" litres"));
-            productAdapter = new ProductAdapter(ProductActivity.this,productLists);
-            listView.setAdapter(productAdapter);
-        }
-
+        productViewModel.setCollections(response);
     }
 }

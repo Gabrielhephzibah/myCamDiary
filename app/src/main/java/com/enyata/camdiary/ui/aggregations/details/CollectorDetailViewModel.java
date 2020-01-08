@@ -16,4 +16,8 @@ public class CollectorDetailViewModel extends BaseViewModel<CollectorDetailNavig
     public  void onBack(){
         getNavigator().back();
     }
+
+    public String getId(){
+        return getDataManager().getCollectorId();
+    }
 }

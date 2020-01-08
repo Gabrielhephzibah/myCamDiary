@@ -160,7 +160,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             params.gravity = Gravity.CENTER_HORIZONTAL;
             slideLayout.setLayoutParams(params);
 
-
             slideLayout.addView(slider_dash[i], params);
         }
 

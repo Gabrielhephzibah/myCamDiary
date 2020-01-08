@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
@@ -14,6 +15,7 @@ import com.enyata.camdiary.databinding.ActivityCollectionSuccessBinding;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeViewModel;
+import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 
 import javax.inject.Inject;
@@ -49,11 +51,22 @@ public class CollectionSuccessActivity extends BaseActivity<ActivityCollectionSu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         collectionSuccessViewModel.setNavigator(this);
+
+        String volume = getIntent().getStringExtra("volume");
+        String collector = getIntent().getStringExtra("collector");
+        String farmer = getIntent().getStringExtra("farmer");
+
+        TextView volumeTextView = findViewById(R.id.volumeTextView);
+        volumeTextView.setText(String.format("%s Litres ", volume));
+        TextView collectorTextView = findViewById(R.id.collectorTextView);
+        collectorTextView.setText(collector);
+        TextView farmerTextView = findViewById(R.id.farmerTextView);
+        farmerTextView.setText(farmer);
     }
 
     @Override
     public void next() {
-        Intent intent = new Intent(getApplicationContext(), LastCollectionActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
         startActivity(intent);
     }
 }

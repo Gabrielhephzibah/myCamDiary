@@ -24,5 +24,5 @@ public interface SplashNavigator {
 
     void openLoginActivity();
 
-    void openDashboardActivity();
+    void openDashboardActivity(String type);
 }

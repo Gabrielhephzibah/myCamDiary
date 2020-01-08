@@ -49,6 +49,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final String PREF_COLLECTOR_COLLECTION_ID = "PREF_KEY_COLLECTOR_COLLECTION_ID";
 
+    private  static  final String PREF_LOGGED_IN_VIEW = "PREF_KEY_LOGGED_IN_VIEW";
+
+    private  static  final String PREF_KEY_AGGREGATION_COLLECTION = "PREF_KEY_AGGREGATION_COLLECTION";
+
+    private  static  final String PREF_KEY_COLLECTOR_NAME = "PREF_KEY_COLLECTOR_NAME";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -95,6 +101,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
+    public String getLoggedInView() {
+        return mPrefs.getString(PREF_LOGGED_IN_VIEW, null);
+    }
+
+    @Override
+    public void setLoggedInView(String type) {
+        mPrefs.edit().putString(PREF_LOGGED_IN_VIEW, type).apply();
+    }
+
+    @Override
     public void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
         mPrefs.edit().putInt(PREF_KEY_USER_LOGGED_IN_MODE, mode.getType()).apply();
     }
@@ -135,9 +151,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCollectorId(String verification_id) {
-        mPrefs.edit().putString(PREF_COLLECTOR_ID, verification_id);
-
+    public void setCollectorId(String id) {
+        mPrefs.edit().putString(PREF_COLLECTOR_ID, id).apply();
     }
 
     @Override
@@ -146,8 +161,28 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
+    public void setAggregationCollection(String collection) {
+        mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION, collection).apply();
+    }
+
+    @Override
+    public String getAggregationCollection() {
+        return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,null);
+    }
+
+    @Override
     public void setCollectorCollectionId(String id) {
         mPrefs.edit().putString(PREF_COLLECTOR_COLLECTION_ID,id).apply();
 
+    }
+
+    @Override
+    public void setCollectorName(String name) {
+        mPrefs.edit().putString(PREF_KEY_COLLECTOR_NAME,name).apply();
+    }
+
+    @Override
+    public String getCollectorName() {
+        return mPrefs.getString(PREF_KEY_COLLECTOR_NAME,null);
     }
 }

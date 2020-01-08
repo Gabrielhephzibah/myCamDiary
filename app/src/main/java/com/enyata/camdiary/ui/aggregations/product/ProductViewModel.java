@@ -1,8 +1,15 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.response.Collection;
+import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
+
+import org.json.JSONArray;
 
 public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     public ProductViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
@@ -17,7 +24,19 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         getNavigator().back();
     }
 
-    public  void  getCollectorCollection(String id){
+    public void setCollectorId(String id){
+        getDataManager().setCollectorCollectionId(id);
+    }
+
+    public String getCollectorId(){
+        return getDataManager().getCollectorId();
+    }
+
+    public String getAggregationCollection(){
+        return getDataManager().getAggregationCollection();
+    }
+
+    public void getCollectorCollection(String id){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .getCollectorCollection(id)
@@ -26,10 +45,20 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().getCollectorCollection(response);
-                    getDataManager().setCollectorCollectionId(String.valueOf(response.getData()));
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
+
+    private MutableLiveData<CollectionResponse> collectionMutableLiveData = new MutableLiveData<>();
+
+    public void setCollections(CollectionResponse collection) {
+        collectionMutableLiveData.setValue(collection);
+    }
+
+    public LiveData<CollectionResponse> getCollections() {
+        return collectionMutableLiveData;
+    }
+
 }

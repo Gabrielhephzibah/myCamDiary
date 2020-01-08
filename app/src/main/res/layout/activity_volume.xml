@@ -37,8 +37,6 @@
                     android:layout_height="wrap_content">
 
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,7 +105,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/password"
+                                    android:id="@+id/volume"
 
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
@@ -118,7 +116,6 @@
                                     android:textCursorDrawable= "@null" />
 
                             </com.google.android.material.textfield.TextInputLayout>
-
 
                             <FrameLayout
                                 android:id="@+id/spinner_parent"

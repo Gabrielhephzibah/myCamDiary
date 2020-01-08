@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.Details;
@@ -23,7 +24,7 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
-public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding,ColectorIdViewModel>implements CollectorIdNavigator {
+public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding, ColectorIdViewModel> implements CollectorIdNavigator {
     @Inject
     Gson gson;
 
@@ -39,7 +40,6 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     }
 
 
-
     @Override
     public int getBindingVariable() {
         return com.enyata.camdiary.BR.viewModel;
@@ -52,7 +52,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
 
     @Override
     public ColectorIdViewModel getViewModel() {
-        colectorIdViewModel = ViewModelProviders.of(this,factory).get(ColectorIdViewModel.class);
+        colectorIdViewModel = ViewModelProviders.of(this, factory).get(ColectorIdViewModel.class);
         return colectorIdViewModel;
     }
 
@@ -66,32 +66,27 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
 
     @Override
     public void handleError(Throwable throwable) {
-//        if (throwable != null) {
-//            ANError error = (ANError) throwable;
-//            Details response = gson.fromJson(error.getErrorBody(), Details.class);
-//            Alert.showFailed(getApplicationContext(), response.getError());
-//        }
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            Details response = gson.fromJson(error.getErrorBody(), Details.class);
+            Alert.showFailed(getApplicationContext(), response.getError());
+        }
 
     }
 
     @Override
     public void accept() {
         String id = collectorId.getText().toString();
-        if(TextUtils.isEmpty(id)){
-            Alert.showFailed(getApplicationContext(),"Please enter collector's verification_id");
+        if (TextUtils.isEmpty(id)) {
+            Alert.showFailed(getApplicationContext(), "Please enter collector's verification_id");
             return;
         }
-
-//        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-//        startActivity(intent);
-
         colectorIdViewModel.getCollectorDetails(id);
-
     }
 
     @Override
     public void back() {
-        Intent intent =  new Intent(getApplicationContext(), ScanActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
         startActivity(intent);
     }
 
@@ -100,28 +95,16 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
 
         Details data = response.getData();
-        Log.d("message",data.getFirstName());
-        Log.d("message",data.getLastName());
-        Log.d("message",data.getContactNo());
-        Log.d("message",data.getVerificationId());
-
-
-//        Log.d("message",data.getCooperativeName());
-       String id = String.valueOf(data.getId());
-
-        intent.putExtra("first_name",data.getFirstName());
-        intent.putExtra("last_name",data.getLastName());
+        colectorIdViewModel.setCollectorName(data.getFirstName() + " "+data.getLastName());
+        String id = String.valueOf(data);
+        intent.putExtra("first_name", data.getFirstName());
+        intent.putExtra("last_name", data.getLastName());
         intent.putExtra("phone_number", data.getContactNo());
-        intent.putExtra("verification_id",data.getVerificationId());
-        intent.putExtra("email",data.getEmail());
+        intent.putExtra("verification_id", data.getVerificationId());
+        intent.putExtra("email", data.getEmail());
         intent.putExtra("coperate_name", data.getCooperativeName());
-        intent.putExtra("id",id);
-
-
-
+        intent.putExtra("id", id);
         startActivity(intent);
-
-
     }
 
     @Override

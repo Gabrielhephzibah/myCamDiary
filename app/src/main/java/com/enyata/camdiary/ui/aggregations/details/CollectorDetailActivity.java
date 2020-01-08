@@ -17,6 +17,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.utils.Alert;
 
 import javax.inject.Inject;
 
@@ -61,7 +62,6 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         collectorDetailViewModel.setNavigator(this);
         activityCollectorDetailBinding = getViewDataBinding();
 
-
         firstName = getIntent().getStringExtra("first_name");
         lastName = getIntent().getStringExtra("last_name");
         verificationNumber = getIntent().getStringExtra("verification_id");
@@ -69,19 +69,15 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         email = getIntent().getStringExtra("email");
         id = getIntent().getStringExtra("id");
 
-
-
         TextView name = activityCollectorDetailBinding.name;
         TextView Email = activityCollectorDetailBinding.email;
         TextView verification_number = activityCollectorDetailBinding.verificationNumber;
         TextView number = activityCollectorDetailBinding.number;
 
-
-        name.setText(firstName+ " " + lastName);
+        name.setText(String.format("%s %s", firstName, lastName));
         Email.setText(email);
         verification_number.setText(verificationNumber);
         number.setText(phoneNumber);
-
 
     }
 
@@ -90,7 +86,6 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     public void proceed() {
         Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
         intent .putExtra("id",id);
-
         startActivity(intent);
     }
 

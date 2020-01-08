@@ -109,6 +109,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public String getLoggedInView() {
+        return mPreferencesHelper.getLoggedInView();
+    }
+
+    @Override
+    public void setLoggedInView(String type) {
+        mPreferencesHelper.setLoggedInView(type);
+    }
+
+    @Override
     public void setCurrentUserLoggedInMode(LoggedInMode mode) {
         mPreferencesHelper.setCurrentUserLoggedInMode(mode);
     }
@@ -149,8 +159,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCollectorId(String verification_id) {
-        mPreferencesHelper.setCollectorId(verification_id);
+    public void setCollectorId(String id) {
+        mPreferencesHelper.setCollectorId(id);
 
     }
 
@@ -160,9 +170,29 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setAggregationCollection(String collection) {
+        mPreferencesHelper.setAggregationCollection(collection);
+    }
+
+    @Override
+    public String getAggregationCollection() {
+        return mPreferencesHelper.getAggregationCollection();
+    }
+
+    @Override
     public void setCollectorCollectionId(String id) {
         mPreferencesHelper.setCollectorCollectionId(id);
 
+    }
+
+    @Override
+    public void setCollectorName(String collection) {
+       mPreferencesHelper.setCollectorName(collection);
+    }
+
+    @Override
+    public String getCollectorName() {
+        return mPreferencesHelper.getCollectorName();
     }
 
     @Override

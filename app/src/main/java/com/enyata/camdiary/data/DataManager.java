@@ -39,6 +39,7 @@ public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
     void updateLoginStatus(
             LoggedInMode loggedInMode);
 
+
     enum LoggedInMode {
 
         LOGGED_IN_MODE_LOGGED_OUT(0),
