@@ -37,12 +37,13 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding, VolumeVi
     ViewModelProviderFactory factory;
     private VolumeViewModel volumeViewModel;
     Spinner spinner;
-    String[] number = {"", "1", "2", "3", "4", "5", "6"};
 
     TextView volume;
     String churno;
     String fullname;
     String collectionId;
+    String[] number = {"","1","2","3","4","5","6"};
+    ActivityVolumeBinding activityVolumeBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
@@ -69,11 +70,12 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding, VolumeVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         volumeViewModel.setNavigator(this);
-        spinner = findViewById(R.id.spinner);
-        volume = findViewById(R.id.volume);
 
+        volume = findViewById(R.id.volume);
         collectionId = getIntent().getStringExtra("collectionId");
         fullname = getIntent().getStringExtra("fullName");
+        activityVolumeBinding = getViewDataBinding();
+        spinner = activityVolumeBinding.spinner;
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VolumeActivity.this, android.R.layout.simple_spinner_item, number);
         spinner.setAdapter(arrayAdapter);
@@ -92,50 +94,37 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding, VolumeVi
         final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
         dialog.setView(dialogView);
         dialog.setCancelable(false);
-        TextView cancel = (TextView) dialogView.findViewById(R.id.cancel);
-        TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
-        TextView message = (TextView) dialogView.findViewById(R.id.message);
+        TextView cancel = dialogView.findViewById(R.id.cancel);
+        TextView continuee = dialogView.findViewById(R.id.continuee);
+        TextView message = dialogView.findViewById(R.id.message);
         message.setText(String.format("You have collected %s litres of product \n%s.\nPlease tap continue to confirm \nCollection", volume.getText().toString(), fullname));
         final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
+        cancel.setOnClickListener(v -> alertDialog.dismiss());
+
+        continuee.setOnClickListener(v -> {
+
+            JSONObject params = new JSONObject();
+            try {
+
+                params.put("collector_id", volumeViewModel.getCollectorId());
+                params.put("collection_id", collectionId);
+                params.put("volume", volume.getText().toString());
+                params.put("churno", churno);
+
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(params);
+                volumeViewModel.saveAggregationCollection(String.valueOf(jsonArray));
+                Intent intent = new Intent(getApplicationContext(), CollectionSuccessActivity.class);
+                intent.putExtra("farmer",volumeViewModel.getCollectorName());
+                intent.putExtra("collector", fullname);
+                intent.putExtra("volume",volume.getText().toString());
+                startActivity(intent);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
-
-        continuee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                JSONObject params = new JSONObject();
-                try {
-
-                    params.put("collector_id", volumeViewModel.getCollectorId());
-                    params.put("collection_id", collectionId);
-                    params.put("volume", volume.getText().toString());
-                    params.put("churno", churno);
-
-                    JSONArray jsonArray = new JSONArray();
-                    jsonArray.put(params);
-                    volumeViewModel.saveAggregationCollection(String.valueOf(jsonArray));
-                    Intent intent = new Intent(getApplicationContext(), CollectionSuccessActivity.class);
-                    intent.putExtra("farmer",volumeViewModel.getCollectorName());
-                    intent.putExtra("collector", fullname);
-                    intent.putExtra("volume",volume.getText().toString());
-                    startActivity(intent);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-
-
-
     }
 
     @Override

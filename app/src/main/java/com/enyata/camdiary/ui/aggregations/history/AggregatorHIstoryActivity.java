@@ -41,6 +41,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     @Inject
     ViewModelProviderFactory factory;
     private AggregatorHistoryViewModel aggregatorHistoryViewModel;
+    ActivityAggregatorHistoryBinding activityAggregatorHistoryBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorHIstoryActivity.class);
@@ -70,7 +71,8 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
         aggregatorHistoryViewModel.setNavigator(this);
 
 
-        listView = findViewById(R.id.listView);
+        activityAggregatorHistoryBinding = getViewDataBinding();
+        listView = activityAggregatorHistoryBinding.listView;
 
         aggregatorHistoryViewModel.getAggretionHistory();
 

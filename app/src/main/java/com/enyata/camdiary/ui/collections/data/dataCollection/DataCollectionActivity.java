@@ -33,6 +33,7 @@ public class DataCollectionActivity extends BaseActivity<ActivityDataCollectionB
     private DataCollectionViewModel dataCollectionViewModel;
     ImageView history;
     ImageView scanbarcode;
+    ActivityDataCollectionBinding activityDataCollectionBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, DataCollectionActivity.class);
@@ -60,8 +61,10 @@ public class DataCollectionActivity extends BaseActivity<ActivityDataCollectionB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataCollectionViewModel.setNavigator(this);
-        history= findViewById(R.id.history);
-        scanbarcode = findViewById(R.id.scanbarcode);
+        activityDataCollectionBinding = getViewDataBinding();
+       history =  activityDataCollectionBinding.included.history;
+
+        scanbarcode = activityDataCollectionBinding.included.scanbarcode;
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override

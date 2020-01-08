@@ -163,7 +163,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<DetailsResponse> getFarmerDetails(String id) {
-        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_INFO_URL+"/"+id)
+        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_INFO_URL+"/"+ id)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(DetailsResponse.class);

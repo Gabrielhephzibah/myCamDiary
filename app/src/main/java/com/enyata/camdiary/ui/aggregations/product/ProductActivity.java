@@ -1,14 +1,17 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
-import androidx.lifecycle.Observer;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
@@ -24,9 +27,6 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -46,11 +46,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     @Inject
     ViewModelProviderFactory factory;
     private ProductViewModel productViewModel;
+    ActivityProductBinding activityProductBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
     }
-
 
     @Override
     public int getBindingVariable() {
@@ -72,35 +72,76 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
-        listView = findViewById(R.id.listView);
 
         String collectorId = productViewModel.getCollectorId();
-
         String aggregationCollection = productViewModel.getAggregationCollection();
-
         productViewModel.getCollectorCollection(collectorId);
+        activityProductBinding = getViewDataBinding();
+        listView = activityProductBinding.listView;
+
+        productViewModel.getCollectorCollection(id);
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            ProductList item = (ProductList) adapterView.getItemAtPosition(i);
-            Alert.showInfo(getApplicationContext(),"FULL_NAME "+item.getFullName());
-            Intent intent = new Intent(getApplicationContext(),VolumeActivity.class);
-            intent.putExtra("collectionId",String.valueOf(item.getCollectionId()));
-            intent.putExtra("fullName", item.getFullName());
-            startActivity(intent);
-            if(!TextUtils.isEmpty(aggregationCollection)){
-                try {
-                    JSONArray jsonArray = new JSONArray(aggregationCollection);
-                    for (int k = 0; k < jsonArray.length(); k++) {
-                        JSONObject jsonObject = (JSONObject) jsonArray.get(k);
-                        if(jsonObject.get("collection_id").equals(item.getCollectionId())){
-                            productLists.remove(i);
-                            productAdapter.notifyDataSetChanged();
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(ProductActivity.this);
+            LayoutInflater inflater = ProductActivity.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.aggregator_enter_volume_layout,null);
+            dialog.setView(dialogView);
+            dialog.setCancelable(false);
+
+            TextView back = dialogView.findViewById(R.id.back);
+            TextView accept = dialogView.findViewById(R.id.accept);
+            Spinner spinner = dialogView.findViewById(R.id.spinner);
+
+            String[] number = {"0","1","2","3","4","5","6"};
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_spinner_item, number);
+            spinner.setAdapter(arrayAdapter);
+
+            final AlertDialog alert = dialog.create();
+            alert.show();
+
+            back.setOnClickListener(view1 -> alert.dismiss());
+
+            accept.setOnClickListener(view12 -> {
+               LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
+               View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout,null);
+               TextView message = nextDialogView.findViewById(R.id.message);
+               message.setText("You have collected 40 litres of product \nfrom Adetoyin Gabriel.\nPlease tap continue to confirm \nCollection");
+               dialog.setView(nextDialogView);
+               dialog.setCancelable(false);
+
+               final AlertDialog nextAlert = dialog.create();
+               nextAlert.show();
+
+               TextView cancel = nextDialogView.findViewById(R.id.cancel);
+               TextView continuee = nextDialogView.findViewById(R.id.continuee);
+
+               cancel.setOnClickListener(view121 -> nextAlert.dismiss());
+
+               continuee.setOnClickListener(view1212 -> {
+                   LayoutInflater thirdInflater = ProductActivity.this.getLayoutInflater();
+                   View thirdDialogView = thirdInflater.inflate(R.layout.aggregator_confirm_successful_layout,null);
+                   dialog.setView(thirdDialogView);
+                   dialog.setCancelable(false);
+                   AlertDialog thirdAlert = dialog.create();
+                   thirdAlert.show();
+
+                   TextView back1 = thirdDialogView.findViewById(R.id.back);
+                   TextView next = thirdDialogView.findViewById(R.id.next);
+
+                   back1.setOnClickListener(view12121 -> thirdAlert.dismiss());
+
+                   next.setOnClickListener(view121212 -> {
+                      Intent intent = new Intent(getApplicationContext(),ProductActivity.class);
+                      startActivity(intent);
+                       productViewModel.getCollectorCollection(id);
+                   });
+
+               });
+
+
+            });
+
         });
 
         productViewModel.getCollections().observe(this, response -> {
