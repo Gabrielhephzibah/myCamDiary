@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submission_successful">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Successful"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="28dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Collected from"
+                android:letterSpacing="0.03"
+                android:textSize="7sp"
+                android:fontFamily="@font/azo_san"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adetoyin Gabriel"
+                android:textSize="22sp"
+                android:letterSpacing="0.03"
+                android:textStyle="bold"
+                android:fontFamily="@font/azo_san_bold"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Farmer"
+                android:letterSpacing="0.03"
+                android:layout_marginTop="13dp"
+                android:textSize="7sp"
+                android:fontFamily="@font/azo_san"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akin Solomon"
+                android:textSize="22sp"
+                android:letterSpacing="0.03"
+                android:textStyle="bold"
+                android:fontFamily="@font/azo_san_bold"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volume"
+                android:letterSpacing="0.03"
+                android:layout_marginTop="14dp"
+                android:textSize="7sp"
+                android:fontFamily="@font/azo_san"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="40 Litres"
+                android:textSize="22sp"
+                android:letterSpacing="0.03"
+                android:textStyle="bold"
+                android:fontFamily="@font/azo_san_bold"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp">
+
+
+                <TextView
+                    android:id="@+id/back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/azo_san"
+                    android:text="BACK"
+                    android:textStyle="bold"
+                    android:textSize="14dp"/>
+
+
+                <TextView
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/back"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/azo_san"
+                    android:text="NEXT"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

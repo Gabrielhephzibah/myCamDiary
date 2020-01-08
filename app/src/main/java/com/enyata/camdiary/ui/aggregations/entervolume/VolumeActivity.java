@@ -31,6 +31,7 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding,VolumeVie
     private VolumeViewModel volumeViewModel;
     Spinner spinner;
     String[] number = {"","1","2","3","4","5","6"};
+    ActivityVolumeBinding activityVolumeBinding;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
@@ -58,8 +59,8 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding,VolumeVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         volumeViewModel.setNavigator(this);
-        spinner = findViewById(R.id.spinner);
-        spinner = findViewById(R.id.spinner);
+        activityVolumeBinding = getViewDataBinding();
+        spinner = activityVolumeBinding.spinner;
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VolumeActivity.this, android.R.layout.simple_spinner_item,number);
         spinner.setAdapter(arrayAdapter);

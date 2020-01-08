@@ -31,4 +31,19 @@
         app:font="@font/azo_san_bold"
         app:fontStyle="normal"
         app:fontWeight="500" />
+
+<!--    light-->
+
+    <font
+        android:font="@font/azo_sans_light"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+
+        app:font="@font/azo_san_bold"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+
+
+
+
 </font-family>

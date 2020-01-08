@@ -38,7 +38,7 @@
                     android:layout_marginLeft="28dp">
 
                     <TextView
-                        android:id="@+id/aggregator_name"
+                        android:id="@+id/aggregatorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
                         android:fontFamily="@font/azo_san"
                         android:text="How's it going?"
                         android:textAllCaps="false"
-                        android:layout_alignBottom="@+id/aggregator_name"
+                        android:layout_alignBottom="@+id/aggregatorName"
                         android:textColor="#3333"
                         android:layout_marginBottom="-26dp"
                         android:textSize="14sp"
@@ -72,7 +72,7 @@
                         app:cardCornerRadius="35dp"
                         app:strokeWidth="1dp"
                         android:layout_marginRight="27dp"
-                        android:layout_toLeftOf="@id/aggregator_name"
+                        android:layout_toLeftOf="@id/aggregatorName"
                         android:layout_alignParentRight="true">
                         <ImageView
                             android:layout_width="match_parent"
