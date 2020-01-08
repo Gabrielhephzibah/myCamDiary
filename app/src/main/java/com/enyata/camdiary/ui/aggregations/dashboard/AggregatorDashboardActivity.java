@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,10 +27,6 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -42,8 +37,9 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     ListView listView;
     ArrayList<AggregatorList> aggregatorLists = new ArrayList<>();
     AggregatorHomepageAdapter aggregatorHomepageAdapter;
-    TextView aggregatorName;
+    TextView aggregator_name;
     TextView date;
+    ActivityAggregatorDashboardBinding activityAggregatorDashboardBinding;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -79,13 +75,20 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         aggregatorDashboardViewModel.setNavigator(this);
-        pager = findViewById(R.id.pager);
-        slideLayout = findViewById(R.id.slideLayout);
-        listView = findViewById(R.id.listView);
-        aggregatorName = findViewById(R.id.aggregator_name);
-        date = findViewById(R.id.date);
+        activityAggregatorDashboardBinding = getViewDataBinding();
+
+        pager = activityAggregatorDashboardBinding.pager;
+
+        slideLayout = activityAggregatorDashboardBinding.slideLayout;
+
+       listView = activityAggregatorDashboardBinding.listView;
+
+       aggregator_name = activityAggregatorDashboardBinding.aggregatorName;
+
+       date = activityAggregatorDashboardBinding.date;
+
         date.setText(aggregatorDashboardViewModel.getCurrentDate());
-        aggregatorName.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
+        aggregator_name.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
 
 
 

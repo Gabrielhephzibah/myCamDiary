@@ -257,15 +257,14 @@
                 </LinearLayout>
             </ScrollView>
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/down">
 
-
-
                 <include
-
+                    android:id="@+id/included"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -274,7 +273,12 @@
                 </include>
 
 
+
             </RelativeLayout>
+
+
+
+
 
 
 
@@ -283,9 +287,12 @@
 
 
 
+
     </LinearLayout>
 
 
 
 
+
 </layout>
+

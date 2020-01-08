@@ -46,6 +46,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
     CollectorHistoryAdapter collectorHistoryAdapter;
     ListView listView;
     ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
+    ActivityHistoryBinding activityHistoryBinding;
 
 
 
@@ -78,7 +79,10 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         historyViewModel.setNavigator(this);
-        listView = findViewById(R.id.listView);
+        activityHistoryBinding =getViewDataBinding();
+        listView = activityHistoryBinding.listView;
+
+
 
 
         if (!isNetworkConnected()) {

@@ -98,7 +98,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
         farmerIdViewModel.setNavigator(this);
         activityFarmerIdBinding = getViewDataBinding();
         farmerId = activityFarmerIdBinding.farmerId;
-        //farmerIdViewModel.getFarmerDetails();
+
     }
 
     @Override
