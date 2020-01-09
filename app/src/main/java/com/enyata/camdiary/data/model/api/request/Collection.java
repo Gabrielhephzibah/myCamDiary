@@ -38,7 +38,6 @@ public class Collection {
 
 
 
-
         public Request(String farmerId, String statusOfCollection, String volume, String testOne, String testTwo,String testThree, String approvedContainer, String message) {
             this.farmer_id = farmerId;
             this.status_of_collection = statusOfCollection;

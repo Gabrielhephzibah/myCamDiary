@@ -71,8 +71,8 @@ public interface ApiHelper {
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
 
-    //Get saveAggregation
-    Flowable<NewCollectionResponse> saveAggregation(Aggregation.Request request);
+    //Save Aggregation
+    Single<NewCollectionResponse> saveAggregation(Aggregation.Request request);
 
 
 }

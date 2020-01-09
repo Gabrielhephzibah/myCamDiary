@@ -16,12 +16,11 @@ public class Aggregation {
         @Expose
         private String collector_id;
 
-
         @Expose
-        private List<AggregationCollection>aggregation_collections;
+        private List<AggregationCollection.Request> aggregation_collections;
 
 
-        public  Request(String collectorId, List aggregationCollections){
+        public  Request(String collectorId, List<AggregationCollection.Request>aggregationCollections){
             this.collector_id = collectorId;
             this.aggregation_collections = aggregationCollections;
         }
@@ -30,7 +29,7 @@ public class Aggregation {
             return collector_id;
         }
 
-        public List<AggregationCollection> getAggregationCollections() {
+        public List<AggregationCollection.Request> getAggregationCollections() {
             return aggregation_collections;
         }
 

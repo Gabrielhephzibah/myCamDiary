@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -191,6 +192,8 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     text.setOnClickListener(view121212 -> {
 
                         productLists.remove(position);
+                        productAdapter.notifyDataSetChanged();
+
                         dismissAllModal();
 
                         try {
@@ -209,12 +212,34 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
                         if (text.getText().toString().equals(getString(R.string.finishText))) {
 
-                            JSONObject request = new JSONObject();
 
                             try {
 
-                                request.put("collector_id", collectorId);
-                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
+                                ArrayList<AggregationCollection.Request> requestArrayList = new ArrayList<AggregationCollection.Request>();
+
+                                JSONArray array = new JSONArray(productViewModel.getAggregationCollection());
+
+                                for(int i=0; i<array.length(); i++){
+
+                                    String collectionIdd = array.getJSONObject(i).getString("collection_id");
+                                    String farmerIdd = array.getJSONObject(i).getString("farmer_id");
+                                    String collectionVolumee = array.getJSONObject(i).getString("collection_volume");
+                                    String collectionStatuss = array.getJSONObject(i).getString("collection_status");
+                                    String testOnee = array.getJSONObject(i).getString("test_one");
+                                    String testTwoo = array.getJSONObject(i).getString("test_two");
+                                    String testThreee = array.getJSONObject(i).getString("test_three");
+                                    String approvedContainers = array.getJSONObject(i).getString("approved_container");
+                                    String messagee = array.getJSONObject(i).getString("message");
+                                    String aggregationVolumee = array.getJSONObject(i).getString("aggregation_volume");
+                                    String aggregationChurnoo = array.getJSONObject(i).getString("aggregation_churno");
+
+
+                                    requestArrayList.add(new AggregationCollection.Request(collectionIdd,farmerIdd, collectionVolumee,collectionStatuss,testOnee,testTwoo,testThreee,approvedContainers,messagee,aggregationVolumee,aggregationChurnoo));
+
+                                }
+
+
+                                productViewModel.saveAggregation(collectorId, requestArrayList);
 
                                 // TODO
                                 //  1. Pass appropriate value to third modal
@@ -278,6 +303,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     @Override
     public void responseMessage(NewCollectionResponse response) {
         Alert.showInfo(getApplicationContext(),response.getResponseMessage());
+        Log.i("ON RESPONSEEEE","HAS HIT THE ENDPOINT");
     }
 
     @Override

@@ -171,11 +171,12 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Flowable<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.SAVE_AGGREGATION)
+                .addBodyParameter(request)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
-                .getObjectFlowable(NewCollectionResponse.class);
+                .getObjectSingle(NewCollectionResponse.class);
     }
 
 }

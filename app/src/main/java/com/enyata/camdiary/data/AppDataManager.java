@@ -268,8 +268,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Flowable<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
-        return saveAggregation(request);
+    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+        return mApiHelper.saveAggregation(request);
     }
 
     @Override
