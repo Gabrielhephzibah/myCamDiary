@@ -48,8 +48,6 @@ public class Collection {
             this.test_three = testThree;
             this.approved_container = approvedContainer;
             this.message = message;
-
-
         }
 
 

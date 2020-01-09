@@ -15,5 +15,4 @@ public class CollectionResponse {
         return data;
     }
 
-
 }

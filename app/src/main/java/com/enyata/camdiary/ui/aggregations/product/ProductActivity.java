@@ -20,6 +20,7 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
@@ -210,7 +211,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                             try {
 
                                 request.put("collector_id", collectorId);
-                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
+                                request.put("aggregation_collections",  new JSONArray(productViewModel.getAggregationCollection()));
 
                                 // TODO
                                 //  1. Pass appropriate value to third modal
