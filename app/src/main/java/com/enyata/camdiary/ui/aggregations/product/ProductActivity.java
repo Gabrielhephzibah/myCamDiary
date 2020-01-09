@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,20 +35,12 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator {
-
-    String id;
-
-    AlertDialog firstModal, secondModal, thirdModal;
-    ProductAdapter productAdapter;
-    ListView listView;
-    ArrayList<ProductList> productLists = new ArrayList<>();
+public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator, AdapterView.OnItemSelectedListener {
 
     @Inject
     Gson gson;
@@ -56,6 +49,13 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     ViewModelProviderFactory factory;
     private ProductViewModel productViewModel;
     ActivityProductBinding activityProductBinding;
+
+    private AlertDialog firstModal, secondModal, thirdModal;
+    private ProductAdapter productAdapter;
+    private ListView listView;
+    private ArrayList<ProductList> productLists = new ArrayList<>();
+    private String aggregationCollections;
+    private String churno;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
@@ -82,10 +82,15 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
 
-        id = productViewModel.getCollectorId();
+        String id = productViewModel.getCollectorId();
         productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
+
+        aggregationCollections = productViewModel.getAggregationCollection();
+
+        if (!aggregationCollections.equals("nil"))
+            productViewModel.setAggregationCollection("nil");
 
         listView.setOnItemClickListener((adapterView, view, position, l) -> {
 
@@ -117,8 +122,9 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_spinner_item, number);
             spinner.setAdapter(arrayAdapter);
+            spinner.setOnItemSelectedListener(this);
             EditText volume = dialogView.findViewById(R.id.aggregatorVolume);
-            String churn = spinner.getSelectedItem().toString();
+
 
             firstModal = dialog.create();
             firstModal.show();
@@ -133,8 +139,8 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                 }
 
                 JSONObject jsonObject = new JSONObject();
-
                 try {
+
                     jsonObject.put("collection_id", collectionId);
                     jsonObject.put("farmer_id", farmerId);
                     jsonObject.put("collection_volume", collectionVolume);
@@ -145,12 +151,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     jsonObject.put("approved_container", approvedContainer);
                     jsonObject.put("message", collectionMessage);
                     jsonObject.put("aggregation_volume", volume.getText().toString());
-                    jsonObject.put("aggregation_churno", churn);
+                    jsonObject.put("aggregation_churno", churno);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
                 LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
                 View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout, null);
@@ -177,21 +182,27 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
                     TextView back1 = thirdDialogView.findViewById(R.id.back);
                     TextView text = thirdDialogView.findViewById(R.id.next);
-                    if(productLists.size() == 1){
+
+                    if (productLists.size() == 1) {
                         text.setText(getString(R.string.finishText));
-                    }else{
+                    } else {
                         text.setText(getString(R.string.nextText));
                     }
                     back1.setOnClickListener(view12121 -> thirdModal.dismiss());
-
                     text.setOnClickListener(view121212 -> {
+
+                        productLists.remove(position);
+                        firstModal.dismiss();
+                        secondModal.dismiss();
+                        thirdModal.dismiss();
+
                         try {
-                            String collections = productViewModel.getAggregationCollection();
-                            if(collections != null){
-                                JSONArray jsonArray = new JSONArray(collections);
+                            aggregationCollections = productViewModel.getAggregationCollection();
+                            if (!aggregationCollections.equals("nil")) {
+                                JSONArray jsonArray = new JSONArray(aggregationCollections);
                                 jsonArray.put(jsonObject);
                                 productViewModel.setAggregationCollection(String.valueOf(jsonArray));
-                            } else{
+                            } else {
                                 JSONArray params = new JSONArray();
                                 params.put(jsonObject);
                                 productViewModel.setAggregationCollection(String.valueOf(params));
@@ -200,15 +211,24 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                             e.printStackTrace();
                         }
 
-                        if(text.getText().toString().equals(getString(R.string.finishText))){
-                            Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
-                            startActivity(intent);
-                        }
+                        if (text.getText().toString().equals(getString(R.string.finishText))) {
 
-                        productLists.remove(position);
-                        firstModal.dismiss();
-                        secondModal.dismiss();
-                        thirdModal.dismiss();
+                            JSONObject request = new JSONObject();
+
+                            try {
+
+                                request.put("collector_id", collectorId);
+                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
+
+                                // TODO
+                                //  1. Pass appropriate value to third modal
+                                //  2. Add viewmodel to save aggregation and redirect to aggregation dashsboard on success
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
 
                     });
 
@@ -252,4 +272,15 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     public void getCollectorCollection(CollectionResponse response) {
         productViewModel.setCollections(response);
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        churno = (String) parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
 }
