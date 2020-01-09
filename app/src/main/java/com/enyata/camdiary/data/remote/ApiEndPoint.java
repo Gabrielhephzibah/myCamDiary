@@ -52,6 +52,8 @@ public final class ApiEndPoint {
 
     public  static  final  String AGGREGATOR_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
+    public  static  final  String SAVE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
+
 
 
     private ApiEndPoint() {

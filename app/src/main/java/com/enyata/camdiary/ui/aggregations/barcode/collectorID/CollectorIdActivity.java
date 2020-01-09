@@ -95,7 +95,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
 
         Details data = response.getData();
-        colectorIdViewModel.setCollectorName(data.getFirstName() + " "+data.getLastName());
+        colectorIdViewModel.setCollectorName(data.getFirstName() + " " + data.getLastName());
         String id = String.valueOf(data);
         intent.putExtra("first_name", data.getFirstName());
         intent.putExtra("last_name", data.getLastName());

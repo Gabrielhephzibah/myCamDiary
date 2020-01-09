@@ -1,7 +1,6 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -21,19 +20,16 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
-import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
-import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
-import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorAdapter;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
@@ -41,11 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -283,6 +276,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
     @Override
+    public void responseMessage(NewCollectionResponse response) {
+        Alert.showInfo(getApplicationContext(),response.getResponseMessage());
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         churno = (String) parent.getItemAtPosition(position);
     }
@@ -293,3 +291,5 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
 }
+
+

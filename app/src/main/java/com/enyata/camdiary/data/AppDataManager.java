@@ -18,6 +18,7 @@ package com.enyata.camdiary.data;
 
 import android.content.Context;
 
+import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -264,6 +265,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<DetailsResponse> getFarmerDetails(String id) {
         return  mApiHelper.getFarmerDetails(id);
+    }
+
+    @Override
+    public Flowable<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+        return saveAggregation(request);
     }
 
     @Override

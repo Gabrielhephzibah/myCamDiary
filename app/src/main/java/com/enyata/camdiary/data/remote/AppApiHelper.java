@@ -16,6 +16,7 @@
 
 package com.enyata.camdiary.data.remote;
 
+import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -167,6 +168,14 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(DetailsResponse.class);
+    }
+
+    @Override
+    public Flowable<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.SAVE_AGGREGATION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(NewCollectionResponse.class);
     }
 
 }
