@@ -38,7 +38,6 @@ public class Collection {
 
 
 
-
         public Request(String farmerId, String statusOfCollection, String volume, String testOne, String testTwo,String testThree, String approvedContainer, String message) {
             this.farmer_id = farmerId;
             this.status_of_collection = statusOfCollection;
@@ -148,7 +147,6 @@ public class Collection {
             result = 31 * result + (test_two != null ? test_two.hashCode() : 0);
             result = 31 * result + (test_three != null ? test_three.hashCode() : 0);
             result = 31 * result + (approved_container != null ? approved_container.hashCode() : 0);
-
             result = 31 * result + (message != null ? message.hashCode() : 0);
             return result;
         }

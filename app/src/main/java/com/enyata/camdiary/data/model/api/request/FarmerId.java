@@ -17,8 +17,7 @@ public class FarmerId {
 
 
         public Request( String farmer_id){
-            id =farmer_id;
-
+            id = farmer_id;
 
         }
 

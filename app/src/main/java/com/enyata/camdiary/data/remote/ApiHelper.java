@@ -16,6 +16,7 @@
 
 package com.enyata.camdiary.data.remote;
 
+import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -69,6 +70,9 @@ public interface ApiHelper {
     Single<DetailsResponse>getCollectorDetails(String verification_id);
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
+
+    //Save Aggregation
+    Single<NewCollectionResponse> saveAggregation(Aggregation.Request request);
 
 
 }

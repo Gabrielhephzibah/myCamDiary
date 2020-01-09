@@ -1,14 +1,19 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
+
+import java.util.List;
 
 public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     public ProductViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
@@ -61,6 +66,24 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                     getNavigator().handleError(throwable);
                 }));
     }
+
+    public  void  saveAggregation(String collectorId, List<AggregationCollection.Request>aggregationCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .saveAggregation(new Aggregation.Request(collectorId,aggregationCollection))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().responseMessage(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
+
+
 
     private MutableLiveData<CollectionResponse> collectionMutableLiveData = new MutableLiveData<>();
 
