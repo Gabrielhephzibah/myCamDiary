@@ -28,7 +28,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             app:hintTextAppearance= "@style/MyAppearance"
             app:boxStrokeColor="@color/colorPrimary"
             app:boxStrokeWidth="10dp"
@@ -39,8 +38,7 @@
             app:boxCornerRadiusTopStart="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-
+                android:id="@+id/aggregatorVolume"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="Volume"

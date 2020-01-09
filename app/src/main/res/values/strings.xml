@@ -97,6 +97,8 @@
     <string name="email"><font size="5">Email</font></string>
     <string name="phone_number"><font size="5">Phone Number</font></string>
     <string name="adress"><font size="5">Address</font></string>
+    <string name="nextText">NEXT</string>
+    <string name="finishText">FINISH</string>
 
 
 </resources>

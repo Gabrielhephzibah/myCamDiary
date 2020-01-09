@@ -36,6 +36,10 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         return getDataManager().getAggregationCollection();
     }
 
+    public void setAggregationCollection(String collection){
+        getDataManager().setAggregationCollection(collection);
+    }
+
     public void getCollectorCollection(String id){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()

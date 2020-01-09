@@ -38,16 +38,16 @@ public class ProductAdapter  extends ArrayAdapter {
             listItem = LayoutInflater.from(mcontext).inflate(R.layout.product_list_layout,parent,false);
 
         ProductList product = productLists.get(position);
-        TextView name = listItem.findViewById(R.id.name);
+        TextView name = listItem.findViewById(R.id.farmerNameTextView);
         name.setText(product.getFullName());
 
         TextView litres = listItem.findViewById(R.id.litres);
         litres.setText(product.getMyLitres());
 
-        TextView companyName  = listItem.findViewById(R.id.companyname);
+        TextView companyName  = listItem.findViewById(R.id.companyNameTextView);
         companyName.setText(product.getCompanyName());
 
-        TextView farmerId  = listItem.findViewById(R.id.farmerId);
+        TextView farmerId  = listItem.findViewById(R.id.farmerverificationIdTextView);
         farmerId.setText(product.getCompanyId());
 
 
