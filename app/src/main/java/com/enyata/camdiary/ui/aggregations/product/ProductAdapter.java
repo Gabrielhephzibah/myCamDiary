@@ -51,7 +51,6 @@ public class ProductAdapter  extends ArrayAdapter {
         farmerId.setText(product.getCompanyId());
 
 
-
         return listItem;
     }
 

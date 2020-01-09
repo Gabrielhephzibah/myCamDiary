@@ -1,6 +1,7 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
 public class ProductList {
+
     private String fullName;
     private String companyName;
     private String companyId;
@@ -13,11 +14,11 @@ public class ProductList {
     private String testTwo;
     private String testThree;
     private String approvedContainer;
-    private String messsage;
+    private String message;
     private String collectorId;
 
 
-    public ProductList(String myName, String coperativeName, String companyId, String milkLitres, String id, String farmerId, String collectionStatus, String collectionVolume, String testOne, String testTwo, String testThree, String approvedContainer, String messsage
+    public ProductList(String myName, String coperativeName, String companyId, String milkLitres, String id, String farmerId, String collectionStatus, String collectionVolume, String testOne, String testTwo, String testThree, String approvedContainer, String message
     , String collectorId) {
         this.fullName = myName;
         this.companyName = coperativeName;
@@ -31,7 +32,7 @@ public class ProductList {
         this.testTwo = testTwo;
         this.testThree = testThree;
         this.approvedContainer = approvedContainer;
-        this.messsage = messsage;
+        this.message = message;
         this.collectorId = collectorId;
 
     }
@@ -109,7 +110,7 @@ public class ProductList {
     public String getApprovedContainer(){
         return  approvedContainer;
     }
-    public  String getMesssage(){
-        return messsage;
+    public  String getMessage(){
+        return message;
     }
 }
