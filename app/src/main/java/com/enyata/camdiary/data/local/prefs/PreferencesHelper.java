@@ -71,4 +71,5 @@ public interface PreferencesHelper {
     void setCollectorName(String collection);
 
     String getCollectorName();
+
 }

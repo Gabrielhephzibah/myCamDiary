@@ -107,15 +107,11 @@ public class VolumeActivity extends BaseActivity<ActivityVolumeBinding, VolumeVi
 
             JSONObject params = new JSONObject();
             try {
-
                 params.put("collector_id", volumeViewModel.getCollectorId());
                 params.put("collection_id", collectionId);
                 params.put("volume", volume.getText().toString());
                 params.put("churno", churno);
 
-                JSONArray jsonArray = new JSONArray();
-                jsonArray.put(params);
-                volumeViewModel.saveAggregationCollection(String.valueOf(jsonArray));
                 Intent intent = new Intent(getApplicationContext(), CollectionSuccessActivity.class);
                 intent.putExtra("farmer",volumeViewModel.getCollectorName());
                 intent.putExtra("collector", fullname);

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,34 +41,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class ProductActivity extends BaseActivity<ActivityProductBinding,ProductViewModel>implements ProductNavigator {
- String id;
 
-    ProductAdapter productAdapter;
-    ListView listView;
-    ArrayList<ProductList> productLists = new ArrayList<>();
+public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator, AdapterView.OnItemSelectedListener {
 
     @Inject
     Gson gson;
 
-
     @Inject
     ViewModelProviderFactory factory;
-    private ProductViewModel productViewModel;
     ActivityProductBinding activityProductBinding;
+
+    private ProductViewModel productViewModel;
+    private AlertDialog firstModal, secondModal, thirdModal;
+    private ProductAdapter productAdapter;
+    private ListView listView;
+    private ArrayList<ProductList> productLists = new ArrayList<>();
+    private String churno;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
     }
 
-
     @Override
     public int getBindingVariable() {
-        return com.enyata.camdiary.BR.viewModel;
+        return BR.viewModel;
     }
 
     @Override
@@ -77,7 +82,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Override
     public ProductViewModel getViewModel() {
-        productViewModel = ViewModelProviders.of(this,factory).get(ProductViewModel.class);
+        productViewModel = ViewModelProviders.of(this, factory).get(ProductViewModel.class);
         return productViewModel;
     }
 
@@ -85,113 +90,171 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
+
+        String id = productViewModel.getCollectorId();
+        productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
 
-      id = (getIntent().getStringExtra("id"));
-        listView = findViewById(R.id.listView);
+        if (productViewModel.checkIfAggregationCollectionIsNotEmpty())
+            productViewModel.setAggregationCollection("nil");
 
+        listView.setOnItemClickListener((adapterView, view, position, l) -> {
 
+            ProductList product = productLists.get(position);
+            String farmerId = product.getFarmerId();
+            String collectionStatus = product.getCollectionStatus();
+            String collectionVolume = product.getCollectionVolume();
+            String testOne = product.getTestOne();
+            String testTwo = product.getTestTwo();
+            String testThree = product.getTestThree();
+            String farmerName = product.getFullName();
+            String approvedContainer = product.getApprovedContainer();
+            String collectionMessage = product.getMessage();
+            String collectionId = product.getCollectionId();
+            String collectorId = product.getCollectorId();
 
-        productViewModel.getCollectorCollection(id);
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(ProductActivity.this);
+            LayoutInflater inflater = ProductActivity.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.aggregator_enter_volume_layout, null);
+            dialog.setView(dialogView);
+            dialog.setCancelable(false);
 
+            TextView back = dialogView.findViewById(R.id.back);
+            TextView accept = dialogView.findViewById(R.id.accept);
+            Spinner spinner = dialogView.findViewById(R.id.spinner);
 
+            String[] number = {"0", "1", "2", "3", "4", "5", "6"};
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(ProductActivity.this);
-                LayoutInflater inflater = ProductActivity.this.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.aggregator_enter_volume_layout,null);
-                dialog.setView(dialogView);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_spinner_item, number);
+            spinner.setAdapter(arrayAdapter);
+            spinner.setOnItemSelectedListener(this);
+            EditText volume = dialogView.findViewById(R.id.aggregatorVolume);
+
+            firstModal = dialog.create();
+            firstModal.show();
+
+            back.setOnClickListener(view1 -> firstModal.dismiss());
+
+            accept.setOnClickListener(view12 -> {
+
+                if (productViewModel.isVolumeEmpty(volume.getText().toString())) {
+                    Alert.showWarning(getApplicationContext(), "Please enter volume");
+                    return;
+                }
+
+                JSONObject jsonObject = new JSONObject();
+
+                try {
+
+                    jsonObject.put("collection_id", collectionId);
+                    jsonObject.put("farmer_id", farmerId);
+                    jsonObject.put("collection_volume", collectionVolume);
+                    jsonObject.put("collection_status", collectionStatus);
+                    jsonObject.put("test_one", testOne);
+                    jsonObject.put("test_two", testTwo);
+                    jsonObject.put("test_three", testThree);
+                    jsonObject.put("approved_container", approvedContainer);
+                    jsonObject.put("message", collectionMessage);
+                    jsonObject.put("aggregation_volume", volume.getText().toString());
+                    jsonObject.put("aggregation_churno", churno);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
+                View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout, null);
+                TextView message = nextDialogView.findViewById(R.id.message);
+                message.setText(String.format("You have collected %s litres of product \nfrom %s.\nPlease tap continue to confirm \nCollection", volume.getText().toString(), farmerName));
+                dialog.setView(nextDialogView);
                 dialog.setCancelable(false);
 
-                TextView back = dialogView.findViewById(R.id.back);
-                TextView accept = dialogView.findViewById(R.id.accept);
-                Spinner spinner = dialogView.findViewById(R.id.spinner);
+                secondModal = dialog.create();
+                secondModal.show();
 
-                String[] number = {"0","1","2","3","4","5","6"};
+                TextView cancel = nextDialogView.findViewById(R.id.cancel);
+                TextView continuee = nextDialogView.findViewById(R.id.continuee);
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_spinner_item,number);
-                spinner.setAdapter(arrayAdapter);
+                cancel.setOnClickListener(view121 -> secondModal.dismiss());
 
-                final AlertDialog alert = dialog.create();
-                alert.show();
+                continuee.setOnClickListener(view1212 -> {
+                    LayoutInflater thirdInflater = ProductActivity.this.getLayoutInflater();
+                    View thirdDialogView = thirdInflater.inflate(R.layout.aggregator_confirm_successful_layout, null);
+                    dialog.setView(thirdDialogView);
+                    dialog.setCancelable(false);
+                    thirdModal = dialog.create();
+                    thirdModal.show();
 
-                back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alert.dismiss();
+                    TextView back1 = thirdDialogView.findViewById(R.id.back);
+                    TextView text = thirdDialogView.findViewById(R.id.next);
+
+                    if (productLists.size() == 1) {
+                        text.setText(getString(R.string.finishText));
+                    } else {
+                        text.setText(getString(R.string.nextText));
                     }
+                    back1.setOnClickListener(view12121 -> thirdModal.dismiss());
+                    text.setOnClickListener(view121212 -> {
+
+                        productLists.remove(position);
+                        dismissAllModal();
+
+                        try {
+                            if (productViewModel.checkIfAggregationCollectionIsNotEmpty()) {
+                                JSONArray jsonArray = new JSONArray(productViewModel.getAggregationCollection());
+                                jsonArray.put(jsonObject);
+                                productViewModel.setAggregationCollection(String.valueOf(jsonArray));
+                            } else {
+                                JSONArray params = new JSONArray();
+                                params.put(jsonObject);
+                                productViewModel.setAggregationCollection(String.valueOf(params));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (text.getText().toString().equals(getString(R.string.finishText))) {
+
+                            JSONObject request = new JSONObject();
+
+                            try {
+
+                                request.put("collector_id", collectorId);
+                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
+
+                                // TODO
+                                //  1. Pass appropriate value to third modal
+                                //  2. Add view model to save aggregation and redirect to aggregation dashboard on success
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    });
+
                 });
 
-                accept.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
-                       View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout,null);
-                       TextView message = nextDialogView.findViewById(R.id.message);
-                       message.setText("You have collected 40 litres of product \nfrom Adetoyin Gabriel.\nPlease tap continue to confirm \nCollection");
-                       dialog.setView(nextDialogView);
-                       dialog.setCancelable(false);
+            });
 
-                       final AlertDialog nextAlert = dialog.create();
-                       nextAlert.show();
+        });
 
-                       TextView cancel = nextDialogView.findViewById(R.id.cancel);
-                       TextView continuee = nextDialogView.findViewById(R.id.continuee);
-
-                       cancel.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View view) {
-                               nextAlert.dismiss();
-                           }
-                       });
-
-                       continuee.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View view) {
-                               LayoutInflater thirdInflater = ProductActivity.this.getLayoutInflater();
-                               View thirdDialogView = thirdInflater.inflate(R.layout.aggregator_confirm_successful_layout,null);
-                               dialog.setView(thirdDialogView);
-                               dialog.setCancelable(false);
-                               AlertDialog thirdAlert = dialog.create();
-                               thirdAlert.show();
-
-                               TextView back = thirdDialogView.findViewById(R.id.back);
-                               TextView next = thirdDialogView.findViewById(R.id.next);
-
-                               back.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View view) {
-                                       thirdAlert.dismiss();
-                                   }
-                               });
-
-                               next.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View view) {
-                                      Intent intent = new Intent(getApplicationContext(),ProductActivity.class);
-                                      startActivity(intent);
-
-
-                                   }
-                               });
-
-                           }
-                       });
-
-
-                    }
-                });
-
+        productViewModel.getCollections().observe(this, response -> {
+            for (Collection data : response.getData()) {
+                productLists.add(new ProductList(data.getFarmer().getFirstName() + "  " + data.getFarmer().getLastName(), data.getFarmer().getCooperativeName(), data.getFarmer().getVerificationId(), data.getVolume() + " litres", String.valueOf(data.getId()), String.valueOf(data.getFarmerId()), data.getStatusOfCollection(), String.valueOf(data.getVolume()), data.getTestOne(), data.getTestTwo(), data.getTestThree(), Boolean.toString(data.getApprovedContainer()), data.getMessage(), String.valueOf(data.getCollectorId())));
+                productAdapter = new ProductAdapter(ProductActivity.this, productLists);
+                listView.setAdapter(productAdapter);
             }
         });
 
+    }
 
-
-
-
+    public void dismissAllModal(){
+        firstModal.dismiss();
+        secondModal.dismiss();
+        thirdModal.dismiss();
     }
 
     @Override
@@ -211,17 +274,22 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding,Product
 
     @Override
     public void back() {
-        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
     public void getCollectorCollection(CollectionResponse response) {
-        for (Collection data : response.getData()){
-            productLists.add(new ProductList(data.getFarmer().getFirstName() + "  " + data.getFarmer().getLastName(),data.getFarmer().getCooperativeName(),data.getFarmer().getVerificationId(),data.getVolume()+" litres"),String.valueOf(data.getId()));
-            productAdapter = new ProductAdapter(ProductActivity.this,productLists);
-            listView.setAdapter(productAdapter);
-        }
+        productViewModel.setCollections(response);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        churno = (String) parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }

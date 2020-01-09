@@ -167,7 +167,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getAggregationCollection() {
-        return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,null);
+        return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,"nil");
     }
 
     @Override

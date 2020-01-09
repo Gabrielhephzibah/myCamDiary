@@ -23,10 +23,6 @@ public class VolumeViewModel extends BaseViewModel<VolumeNavigator> {
         getNavigator().back();
     }
 
-    public void saveAggregationCollection(String collection){
-        getDataManager().setAggregationCollection(collection);
-    }
-
     public String getCollectorId(){
         return getDataManager().getCollectorId();
     }

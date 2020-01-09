@@ -15,14 +15,11 @@
         android:layout_marginRight="12dip">
 
 
-
-
         <RelativeLayout
             android:layout_margin="8dp"
             android:id="@+id/parent_layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <ImageView
                 android:layout_marginTop="12dp"
@@ -38,7 +35,7 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/farmerNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Akin, Solomon"
@@ -48,13 +45,13 @@
                     />
 
                 <TextView
-                    android:id="@+id/farmerId"
+                    android:id="@+id/farmerverificationIdTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="X3478JND8992"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
-                    android:layout_alignRight="@+id/name"
+                    android:layout_alignRight="@+id/farmerNameTextView"
                     android:fontFamily="@font/azo_san"
                     />
 
@@ -70,7 +67,7 @@
                 android:layout_marginLeft="75dp">
 
                 <TextView
-                    android:id="@+id/companyname"
+                    android:id="@+id/companyNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Xamsatde"
@@ -86,8 +83,23 @@
                     android:text="40 Litres"
                     android:textColor="#3D3D3D"
                     android:textSize="10sp"
-                    android:layout_alignRight="@id/companyname"
+                    android:layout_alignRight="@id/companyNameTextView"
                     android:fontFamily="@font/azo_san" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </RelativeLayout>
 
