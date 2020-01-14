@@ -1,18 +1,4 @@
-/*
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- */
+
 
 package com.enyata.camdiary.data.local.prefs;
 
@@ -20,8 +6,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.di.PreferenceInfo;
 import com.enyata.camdiary.utils.AppConstants;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -54,6 +48,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private  static  final String PREF_KEY_AGGREGATION_COLLECTION = "PREF_KEY_AGGREGATION_COLLECTION";
 
     private  static  final String PREF_KEY_COLLECTOR_NAME = "PREF_KEY_COLLECTOR_NAME";
+
+    private  static  final String PREF_KEY_AGGREGATION_COLLECTION_LIST = "PREF_KEY_AGGREGATION_COLLECTION_LIST";
 
     private final SharedPreferences mPrefs;
 
@@ -184,5 +180,20 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getCollectorName() {
         return mPrefs.getString(PREF_KEY_COLLECTOR_NAME,null);
+    }
+
+    @Override
+    public void saveAggregationCollectionList(List<AggregationCollection.Request> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION_LIST,json).apply();
+    }
+
+    @Override
+    public List<AggregationCollection.Request> getAggregationCollectionList() {
+        Gson gson = new Gson();
+        String json = mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION_LIST,null);
+        Type type = new TypeToken<List<AggregationCollection.Request>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 }

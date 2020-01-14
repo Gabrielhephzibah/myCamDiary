@@ -20,9 +20,10 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
+import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
@@ -31,14 +32,14 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+
 
 public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator, AdapterView.OnItemSelectedListener {
 
@@ -86,8 +87,10 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
 
-        if (productViewModel.checkIfAggregationCollectionIsNotEmpty())
-            productViewModel.setAggregationCollection("nil");
+        if (!productViewModel.checkIfAggregationCollectionIsEmpty()){
+            productViewModel.setAggregationCollectionList(null);
+        }
+
 
         listView.setOnItemClickListener((adapterView, view, position, l) -> {
 
@@ -133,25 +136,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     return;
                 }
 
-                JSONObject jsonObject = new JSONObject();
-
-                try {
-
-                    jsonObject.put("collection_id", collectionId);
-                    jsonObject.put("farmer_id", farmerId);
-                    jsonObject.put("collection_volume", collectionVolume);
-                    jsonObject.put("collection_status", collectionStatus);
-                    jsonObject.put("test_one", testOne);
-                    jsonObject.put("test_two", testTwo);
-                    jsonObject.put("test_three", testThree);
-                    jsonObject.put("approved_container", approvedContainer);
-                    jsonObject.put("message", collectionMessage);
-                    jsonObject.put("aggregation_volume", volume.getText().toString());
-                    jsonObject.put("aggregation_churno", churno);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                AggregationCollection.Request request = new AggregationCollection.Request(collectionId, farmerId, collectionVolume, collectionStatus, testOne, testTwo, testThree, approvedContainer, collectionMessage, volume.getText().toString(), churno);
 
                 LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
                 View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout, null);
@@ -188,40 +173,24 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     text.setOnClickListener(view121212 -> {
 
                         productLists.remove(position);
+                        productAdapter.notifyDataSetChanged();
+
                         dismissAllModal();
 
-                        try {
-                            if (productViewModel.checkIfAggregationCollectionIsNotEmpty()) {
-                                JSONArray jsonArray = new JSONArray(productViewModel.getAggregationCollection());
-                                jsonArray.put(jsonObject);
-                                productViewModel.setAggregationCollection(String.valueOf(jsonArray));
-                            } else {
-                                JSONArray params = new JSONArray();
-                                params.put(jsonObject);
-                                productViewModel.setAggregationCollection(String.valueOf(params));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        if (productViewModel.checkIfAggregationCollectionIsEmpty()) {
+                            List<AggregationCollection.Request> newList = new ArrayList<>();
+                            newList.add(request);
+                            productViewModel.setAggregationCollectionList(newList);
+                        } else {
+                            List<AggregationCollection.Request> arrayList = new ArrayList<>(productViewModel.getAggregationCollectionList());
+                            arrayList.add(request);
+                            productViewModel.setAggregationCollectionList(arrayList);
                         }
 
-                        if (text.getText().toString().equals(getString(R.string.finishText))) {
 
-                            JSONObject request = new JSONObject();
-
-                            try {
-
-                                request.put("collector_id", collectorId);
-                                request.put("aggregation_collections",  new JSONArray(productViewModel.getAggregationCollection()));
-
-                                // TODO
-                                //  1. Pass appropriate value to third modal
-                                //  2. Add view model to save aggregation and redirect to aggregation dashboard on success
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
+                        Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
+                        if (text.getText().toString().equals(getString(R.string.finishText)))
+                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
 
                     });
 
@@ -241,7 +210,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
     }
 
-    public void dismissAllModal(){
+    public void dismissAllModal() {
         firstModal.dismiss();
         secondModal.dismiss();
         thirdModal.dismiss();
@@ -273,6 +242,12 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
     @Override
+    public void responseMessage(NewCollectionResponse response) {
+        Alert.showInfo(getApplicationContext(), response.getResponseMessage());
+        Log.i("ON RESPONSEEEE", "HAS HIT THE ENDPOINT");
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         churno = (String) parent.getItemAtPosition(position);
     }
@@ -283,3 +258,5 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
 }
+
+

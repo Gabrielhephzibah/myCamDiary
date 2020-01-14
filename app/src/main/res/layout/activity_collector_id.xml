@@ -61,7 +61,6 @@
                 android:text="Collector  ID"
                 android:textColor="#fff"
                 android:textSize="30sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -69,14 +68,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="33dp"
             android:layout_marginTop="34dp"
-
             android:layout_marginRight="26dp"
             android:orientation="vertical">
 
 
             <FrameLayout
 
-                android:id="@+id/fragment_qc_flSelectWorkDone"
+                android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -97,7 +95,6 @@
                         android:textColorHint="#fff"
                         android:textSize="14sp" />
 
-
                 </FrameLayout>
 
                 <TextView
@@ -117,6 +114,7 @@
 
 
         </LinearLayout>
+
 
         <Button
             android:onClick="@{() -> viewModel.onAccept()}"

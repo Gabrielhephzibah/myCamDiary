@@ -6,9 +6,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     public ProductViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
@@ -39,13 +44,22 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         return TextUtils.isEmpty(volume);
     }
 
-    public boolean checkIfAggregationCollectionIsNotEmpty(){
-        return !getAggregationCollection().equals("nil");
+    public boolean checkIfAggregationCollectionIsEmpty(){
+        return getAggregationCollectionList() == null;
     }
 
     public void setAggregationCollection(String collection){
         getDataManager().setAggregationCollection(collection);
     }
+
+    public void setAggregationCollectionList(List<AggregationCollection.Request> list){
+        getDataManager().saveAggregationCollectionList(list);
+    }
+
+    public List<AggregationCollection.Request> getAggregationCollectionList(){
+        return getDataManager().getAggregationCollectionList();
+    }
+
 
     public void getCollectorCollection(String id){
         setIsLoading(true);
@@ -61,6 +75,22 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                     getNavigator().handleError(throwable);
                 }));
     }
+
+    public  void  saveAggregation(String collectorId, List<AggregationCollection.Request> aggregationCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .saveAggregation(new Aggregation.Request(collectorId, aggregationCollection))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().responseMessage(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
 
     private MutableLiveData<CollectionResponse> collectionMutableLiveData = new MutableLiveData<>();
 

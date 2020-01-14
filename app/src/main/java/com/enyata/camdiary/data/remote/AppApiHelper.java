@@ -1,21 +1,8 @@
-/*
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- */
+
 
 package com.enyata.camdiary.data.remote;
 
+import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -67,6 +54,15 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Single<NewCollectionResponse> doCreateCollection(Collection.Request request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.NEW_COLLECTION)
+                .addBodyParameter(request)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.SAVE_AGGREGATION)
                 .addBodyParameter(request)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
