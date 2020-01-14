@@ -29,6 +29,7 @@ import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
 import com.enyata.camdiary.data.local.db.DbHelper;
@@ -268,7 +269,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+    public Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request) {
         return mApiHelper.saveAggregation(request);
     }
 

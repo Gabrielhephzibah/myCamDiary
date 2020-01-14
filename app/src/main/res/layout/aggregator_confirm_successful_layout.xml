@@ -58,6 +58,7 @@
                 />
 
             <TextView
+                android:id="@+id/collectorName"
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,6 +85,7 @@
                 />
 
             <TextView
+                android:id="@+id/farmerName"
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +113,7 @@
                 />
 
             <TextView
+                android:id="@+id/volume"
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +153,7 @@
                     android:fontFamily="@font/azo_san"
                     android:text="NEXT"
                     android:textStyle="bold"
-                    android:textSize="16dp"/>
+                    android:textSize="14dp"/>
 
 
             </RelativeLayout>

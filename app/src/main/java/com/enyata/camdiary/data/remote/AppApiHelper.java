@@ -28,6 +28,7 @@ import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -171,12 +172,12 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
+    public Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.SAVE_AGGREGATION)
-                .addBodyParameter(request)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
                 .build()
-                .getObjectSingle(NewCollectionResponse.class);
+                .getObjectSingle(SavedAggregationResponse.class);
     }
 
 }

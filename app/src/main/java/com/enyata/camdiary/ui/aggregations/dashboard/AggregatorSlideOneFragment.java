@@ -1,6 +1,7 @@
 package com.enyata.camdiary.ui.aggregations.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class AggregatorSlideOneFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 AggregatorVolumeTextView.setText(String.format("%s Litres",s));
+
             }
         });
 

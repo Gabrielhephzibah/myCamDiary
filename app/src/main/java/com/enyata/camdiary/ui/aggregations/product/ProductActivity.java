@@ -1,8 +1,5 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,22 +13,35 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.NewResponse;
+import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.Collection;
+import com.enyata.camdiary.data.model.api.request.Aggregation;
+
+
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
+import com.enyata.camdiary.data.remote.APIService;
+import com.enyata.camdiary.data.remote.ApiHeader;
+import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,11 +53,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator, AdapterView.OnItemSelectedListener {
+    String str;
+
+    private APIService mAPIService;
+
 
     @Inject
     Gson gson;
+
 
     @Inject
     ViewModelProviderFactory factory;
@@ -59,6 +80,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     private ListView listView;
     private ArrayList<ProductList> productLists = new ArrayList<>();
     private String churno;
+
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
@@ -85,10 +107,17 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         super.onCreate(savedInstanceState);
         productViewModel.setNavigator(this);
 
+        mAPIService = ApiUtils.getAPIService();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+
         String id = productViewModel.getCollectorId();
         productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
+        str = productViewModel.getAggregationCollection();
 
         if (productViewModel.checkIfAggregationCollectionIsNotEmpty())
             productViewModel.setAggregationCollection("nil");
@@ -136,6 +165,8 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     Alert.showWarning(getApplicationContext(), "Please enter volume");
                     return;
                 }
+                AggregationSavedCollection collection = new AggregationSavedCollection(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno);
+
 
                 JSONObject jsonObject = new JSONObject();
 
@@ -160,7 +191,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                 LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
                 View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout, null);
                 TextView message = nextDialogView.findViewById(R.id.message);
-                message.setText(String.format("You have collected %s litres of product \nfrom %s.\nPlease tap continue to confirm \nCollection", volume.getText().toString(), farmerName));
+                message.setText(String.format("You have collected %s litres of product \nfrom %s.\nPlease tap continue to confirm \nCollection", volume.getText().toString(), productViewModel.getCollectorName()));
                 dialog.setView(nextDialogView);
                 dialog.setCancelable(false);
 
@@ -182,6 +213,13 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
                     TextView back1 = thirdDialogView.findViewById(R.id.back);
                     TextView text = thirdDialogView.findViewById(R.id.next);
+                    TextView collectorName = thirdDialogView.findViewById(R.id.collectorName);
+                    TextView farmerNamee = thirdDialogView.findViewById(R.id.farmerName);
+                    TextView volumee = thirdDialogView.findViewById(R.id.volume);
+
+                    collectorName.setText(productViewModel.getCollectorName());
+                    farmerNamee.setText(farmerName);
+                    volumee.setText(volume.getText().toString());
 
                     if (productLists.size() == 1) {
                         text.setText(getString(R.string.finishText));
@@ -193,61 +231,102 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
                         productLists.remove(position);
                         productAdapter.notifyDataSetChanged();
-
                         dismissAllModal();
 
-                        try {
-                            if (productViewModel.checkIfAggregationCollectionIsNotEmpty()) {
-                                JSONArray jsonArray = new JSONArray(productViewModel.getAggregationCollection());
-                                jsonArray.put(jsonObject);
-                                productViewModel.setAggregationCollection(String.valueOf(jsonArray));
-                            } else {
-                                JSONArray params = new JSONArray();
-                                params.put(jsonObject);
-                                productViewModel.setAggregationCollection(String.valueOf(params));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        if (text.getText().toString().equals(getString(R.string.finishText))) {
-
-
+                        if (productViewModel.checkIfAggregationCollectionIsNotEmpty()) {
+                            JSONArray jsonArray = null;
                             try {
-
-                                ArrayList<AggregationCollection.Request> requestArrayList = new ArrayList<AggregationCollection.Request>();
-
-                                JSONArray array = new JSONArray(productViewModel.getAggregationCollection());
-
-                                for(int i=0; i<array.length(); i++){
-
-                                    String collectionIdd = array.getJSONObject(i).getString("collection_id");
-                                    String farmerIdd = array.getJSONObject(i).getString("farmer_id");
-                                    String collectionVolumee = array.getJSONObject(i).getString("collection_volume");
-                                    String collectionStatuss = array.getJSONObject(i).getString("collection_status");
-                                    String testOnee = array.getJSONObject(i).getString("test_one");
-                                    String testTwoo = array.getJSONObject(i).getString("test_two");
-                                    String testThreee = array.getJSONObject(i).getString("test_three");
-                                    String approvedContainers = array.getJSONObject(i).getString("approved_container");
-                                    String messagee = array.getJSONObject(i).getString("message");
-                                    String aggregationVolumee = array.getJSONObject(i).getString("aggregation_volume");
-                                    String aggregationChurnoo = array.getJSONObject(i).getString("aggregation_churno");
-
-
-                                    requestArrayList.add(new AggregationCollection.Request(collectionIdd,farmerIdd, collectionVolumee,collectionStatuss,testOnee,testTwoo,testThreee,approvedContainers,messagee,aggregationVolumee,aggregationChurnoo));
-
-                                }
-
-
-                                productViewModel.saveAggregation(collectorId, requestArrayList);
-
-                                // TODO
-                                //  1. Pass appropriate value to third modal
-                                //  2. Add view model to save aggregation and redirect to aggregation dashboard on success
-
+                                jsonArray = new JSONArray(productViewModel.getAggregationCollection());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            jsonArray.put(jsonObject);
+                            productViewModel.setAggregationCollection(String.valueOf(jsonArray));
+                        } else {
+                            JSONArray params = new JSONArray();
+                            params.put(jsonObject);
+                            productViewModel.setAggregationCollection(String.valueOf(params));
+                        }
+
+                        if (text.getText().toString().equals(getString(R.string.finishText))) {
+                            str = productViewModel.getAggregationCollection();
+
+//                            JSONObject request = new JSONObject();
+
+//                            try {
+
+                            Gson gson = new Gson();
+                            TypeToken<Post> token = new TypeToken<Post>() {
+                            };
+                            Post pb = gson.fromJson(str, token.getType());
+                            Log.i("MESSAGESSSS", pb.toString());
+                            sendPost(pb);
+
+
+//                             productViewModel.sendPost(collectorId,pb);
+//                                pb.add(new AggregationSavedCollection(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno));
+
+
+//                                List<AggregationSavedCollection>pb = new ArrayList<AggregationSavedCollection>();
+//                                productViewModel.getAggregationCollection();
+//                                JSONObject request = new JSONObject();
+//
+//                                JSONArray jArray = request.getJSONArray("aggregation_collections");
+//                                for(int i = 0; i < jArray.length(); i++){
+//                                    String  collectionIdd = jArray.getJSONObject(i).getString("collection_id");
+//                                    String farmerIdd = jArray.getJSONObject(i).getString("farmer_id");
+//                                    String collectionVolumee = jArray.getJSONObject(i).getString("collection_statuss");
+//                                    String collectionStatuss = jArray.getJSONObject(i).getString("collection_status");
+//                                    String testOnee = jArray.getJSONObject(i).getString("test_one");
+//                                    String testTwoo = jArray.getJSONObject(i).getString("test_two");
+//                                    String testThreee = jArray.getJSONObject(i).getString("test_three");
+//                                    String approvedContainerr = jArray.getJSONObject(i).getString("approved_container");
+//                                    String messagee = jArray.getJSONObject(i).getString("message");
+//                                    String aggreagtionVolume = jArray.getJSONObject(i).getString("aggregation_volume");
+//                                    String churnNo = jArray.getJSONObject(i).getString("aggregation_churno");
+//                                }
+
+
+//                                Gson gson = new Gson();
+//                                TypeToken<ArrayList<AggregationCollection.Request>> token = new TypeToken<ArrayList<AggregationCollection.Request>>() {
+////
+//
+//                                };
+//
+//                                ArrayList<AggregationCollection.Request> pb = gson.fromJson(str, token.getType());
+////
+//                                pb.add(new AggregationCollection.Request(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno));
+////
+//                                String st = new Gson().toJson(pb);
+////
+//                                Log.i("MYRESPONSEEEEE", collectionId + pb.toString());
+//
+//                                productViewModel.saveAggregation(collectorId,pb);
+
+
+//                                String str[] = productViewModel.getAggregationCollection().split(",");
+//                                List<AggregationCollection.Request> al = new ArrayList<>();
+//                                al = Arrays.asList(str);
+//                                for(String s: al){
+//                                    request.put("aggregation_collections", s);
+//                                    ArrayList<AggregationCollection.Request>collection = new ArrayList<>();
+//
+//                                    Log.i("MYYYRESPONSEE",collection.toString());
+//                                    productViewModel.saveAggregation(collectorId,s);
+
+
+//                                }
+//                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
+
+//                                productViewModel.saveAggregation(collectorId,);
+
+                            // TODO
+                            //  1. Pass appropriate value to third modal
+                            //  2. Add view model to save aggregation and redirect to aggregation dashboard on success
+
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
 
                         }
 
@@ -269,10 +348,35 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
     }
 
-    public void dismissAllModal(){
+    public void dismissAllModal() {
         firstModal.dismiss();
         secondModal.dismiss();
         thirdModal.dismiss();
+    }
+
+
+    public void sendPost(Post post) {
+
+
+        mAPIService.savePost(post, productViewModel.getAccessToken()).enqueue(new Callback<Post>() {
+
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+
+                if (response.isSuccessful()) {
+                    Post object = response.body();
+                    String jsonString = object.toString();
+
+//                    showResponse(response.body().toString());
+                    Log.i("SUCCESS INFORMATION", "post submitted to API." + jsonString);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.e("failure", "Unable to submit post to API.");
+            }
+        });
     }
 
     @Override
@@ -301,9 +405,24 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
     @Override
-    public void responseMessage(NewCollectionResponse response) {
-        Alert.showInfo(getApplicationContext(),response.getResponseMessage());
-        Log.i("ON RESPONSEEEE","HAS HIT THE ENDPOINT");
+    public void responseMessage(SavedAggregationResponse response) {
+        Log.i("RESPONSEEEE", "HAS HIT THE ENDPOINT");
+    }
+
+//    @Override
+//    public void responseMessage(Aggregation response) {
+//        Log.i("RESPONSEE","HAS HIT THE ENDPOINT");
+//
+//    }
+
+//    @Override
+//    public void responseMessage(NewCollectionResponse response) {
+//        Log.i("RESPONSEEE","HAS HIT THE ENDPOINT");
+//    }
+
+    @Override
+    public void aggregationCollection(Aggregation aggregate) {
+
     }
 
     @Override
@@ -317,5 +436,4 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
 }
-
 

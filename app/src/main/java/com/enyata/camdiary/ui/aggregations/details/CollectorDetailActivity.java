@@ -86,6 +86,8 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     public void proceed() {
         Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
         intent .putExtra("id",id);
+        intent.putExtra("first_name",firstName);
+        intent.putExtra("last_name", lastName);
         startActivity(intent);
     }
 

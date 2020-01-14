@@ -68,7 +68,7 @@ public interface PreferencesHelper {
 
      void  setCollectorCollectionId(String id);
 
-    void setCollectorName(String collection);
+    void setCollectorName(String name);
 
     String getCollectorName();
 

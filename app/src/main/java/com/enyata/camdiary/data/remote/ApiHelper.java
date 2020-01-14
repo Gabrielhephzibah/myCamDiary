@@ -28,6 +28,7 @@ import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
 import io.reactivex.Flowable;
@@ -72,7 +73,7 @@ public interface ApiHelper {
     Single<DetailsResponse> getFarmerDetails(String id);
 
     //Save Aggregation
-    Single<NewCollectionResponse> saveAggregation(Aggregation.Request request);
+    Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request);
 
 
 }

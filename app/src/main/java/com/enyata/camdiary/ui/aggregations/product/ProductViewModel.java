@@ -7,15 +7,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProductViewModel extends BaseViewModel<ProductNavigator> {
+
     public ProductViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
@@ -37,12 +46,16 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     }
 
     public String getAggregationCollection(){
+
         return getDataManager().getAggregationCollection();
     }
 
-    public boolean isVolumeEmpty(String volume){
+    public boolean isVolumeEmpty(String volume)
+    {
         return TextUtils.isEmpty(volume);
     }
+
+
 
     public boolean checkIfAggregationCollectionIsNotEmpty(){
         return !getAggregationCollection().equals("nil");
@@ -67,7 +80,7 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 }));
     }
 
-    public  void  saveAggregation(String collectorId, List<AggregationCollection.Request>aggregationCollection){
+    public  void  saveAggregation(String collectorId, List<AggregationCollection.Request> aggregationCollection){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .saveAggregation(new Aggregation.Request(collectorId,aggregationCollection))
@@ -76,11 +89,43 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().responseMessage(response);
+
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
+
+    public String getCollectorName(){
+       return getDataManager().getCollectorName();
+
+    }
+    private APIService mAPIService;
+
+    public String getAccessToken(){
+        return getDataManager().getAccessToken();
+    }
+
+//    public void sendPost(String collectorId, List<AggregationSavedCollection>aggregation) {
+//
+//        mAPIService.savePost(collectorId, aggregation).enqueue(new Callback<Post>() {
+//
+//            @Override
+//            public void onResponse(Call<Post> call, Response<Post> response) {
+//
+//                if(response.isSuccessful()) {
+////                    showResponse(response.body().toString());
+//                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Post> call, Throwable t) {
+//                Log.e("failure", "Unable to submit post to API.");
+//            }
+//        });
+//    }
+
 
 
 

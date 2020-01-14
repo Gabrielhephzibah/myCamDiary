@@ -1,11 +1,16 @@
 package com.enyata.camdiary.data.model.api.request;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Aggregation {
+
 
     private Aggregation(){
         // don't instantiate
@@ -14,9 +19,11 @@ public class Aggregation {
     public static class Request{
 
         @Expose
+        @SerializedName("collector_id")
         private String collector_id;
 
         @Expose
+        @SerializedName("aggregation_collections")
         private List<AggregationCollection.Request> aggregation_collections;
 
 
@@ -29,7 +36,7 @@ public class Aggregation {
             return collector_id;
         }
 
-        public List<AggregationCollection.Request> getAggregationCollections() {
+        public List<AggregationCollection.Request>getAggregationCollections() {
             return aggregation_collections;
         }
 

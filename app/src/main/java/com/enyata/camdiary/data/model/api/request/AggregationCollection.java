@@ -1,6 +1,7 @@
 package com.enyata.camdiary.data.model.api.request;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.PortUnreachableException;
 
@@ -13,36 +14,48 @@ public class AggregationCollection {
     public  static  class  Request{
 
         @Expose
+        @SerializedName("collection_id")
         private String collection_id;
 
         @Expose
+        @SerializedName("farmer_id")
         private String farmer_id;
 
         @Expose
+        @SerializedName("collection_volume")
         private String collection_volume;
 
         @Expose
+        @SerializedName("collection_status")
         private String collection_status;
 
         @Expose
+        @SerializedName("test_one")
         private String test_one;
 
         @Expose
+        @SerializedName("test_two")
         private String test_two;
 
         @Expose
+        @SerializedName("test_three")
         private String test_three;
 
         @Expose
+        @SerializedName("approved_container")
         private String approved_container;
 
         @Expose
+        @SerializedName("message")
         private String message;
 
+
         @Expose
+        @SerializedName("aggregation_volume")
         private String aggregation_volume;
 
         @Expose
+        @SerializedName("aggregation_churno")
         private String aggregation_churno;
 
 

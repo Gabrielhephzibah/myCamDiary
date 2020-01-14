@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -183,6 +184,8 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     @Override
     public void displayAggregatorVolume(AggregationVolume volume) {
         aggregatorDashboardViewModel.setAggregatorVolume(volume.getData());
+
+
     }
 
     @Override
