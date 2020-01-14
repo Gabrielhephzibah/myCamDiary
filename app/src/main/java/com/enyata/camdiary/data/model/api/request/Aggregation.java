@@ -3,8 +3,11 @@ package com.enyata.camdiary.data.model.api.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+<<<<<<< HEAD
 import org.json.JSONArray;
 
+=======
+>>>>>>> c6b16f04fbedf9ce854c919cad786b1cfd225493
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +29,7 @@ public class Aggregation {
         @SerializedName("aggregation_collections")
         private List<AggregationCollection.Request> aggregation_collections;
 
-
-        public  Request(String collectorId, List<AggregationCollection.Request>aggregationCollections){
+        public Request(String collectorId, List<AggregationCollection.Request> aggregationCollections){
             this.collector_id = collectorId;
             this.aggregation_collections = aggregationCollections;
         }
@@ -41,7 +43,6 @@ public class Aggregation {
         }
 
 
-
         @Override
         public boolean equals(Object obj) {
             if (this == obj) {
@@ -53,7 +54,7 @@ public class Aggregation {
             }
 
 
-          Aggregation.Request request = (Aggregation.Request)obj;
+          Aggregation.Request request = (Aggregation.Request) obj;
 
             if (collector_id != null ? !collector_id.equals(request.collector_id) : request.collector_id != null) {
                 return false;
@@ -76,8 +77,6 @@ public class Aggregation {
             return  result;
 
         }
-
-
 
 
         }

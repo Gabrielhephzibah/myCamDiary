@@ -71,7 +71,6 @@ public class AggregationCollection {
             this.message = messagee;
             this.aggregation_volume = aggregationVolume;
             this.aggregation_churno = aggregationChurnNo;
-
         }
 
 
@@ -133,7 +132,7 @@ public class AggregationCollection {
             }
             
             
-           AggregationCollection.Request request = (Request)obj;
+           AggregationCollection.Request request = (AggregationCollection.Request)obj;
 
             if (collection_id != null ? !collection_id.equals(request.collection_id) : request.collection_id != null) {
                 return false;

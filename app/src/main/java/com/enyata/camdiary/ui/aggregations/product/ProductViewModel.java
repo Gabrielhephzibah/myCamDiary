@@ -1,7 +1,6 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -55,15 +54,23 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         return TextUtils.isEmpty(volume);
     }
 
+    public boolean checkIfAggregationCollectionIsEmpty(){
+        return getAggregationCollectionList() == null;
 
-
-    public boolean checkIfAggregationCollectionIsNotEmpty(){
-        return !getAggregationCollection().equals("nil");
     }
 
     public void setAggregationCollection(String collection){
         getDataManager().setAggregationCollection(collection);
     }
+
+    public void setAggregationCollectionList(List<AggregationCollection.Request> list){
+        getDataManager().saveAggregationCollectionList(list);
+    }
+
+    public List<AggregationCollection.Request> getAggregationCollectionList(){
+        return getDataManager().getAggregationCollectionList();
+    }
+
 
     public void getCollectorCollection(String id){
         setIsLoading(true);
@@ -83,7 +90,7 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
     public  void  saveAggregation(String collectorId, List<AggregationCollection.Request> aggregationCollection){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .saveAggregation(new Aggregation.Request(collectorId,aggregationCollection))
+                .saveAggregation(new Aggregation.Request(collectorId, aggregationCollection))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
@@ -125,8 +132,6 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
 //            }
 //        });
 //    }
-
-
 
 
 
