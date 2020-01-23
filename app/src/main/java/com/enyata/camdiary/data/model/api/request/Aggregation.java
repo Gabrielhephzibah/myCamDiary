@@ -3,11 +3,7 @@ package com.enyata.camdiary.data.model.api.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-<<<<<<< HEAD
-import org.json.JSONArray;
 
-=======
->>>>>>> c6b16f04fbedf9ce854c919cad786b1cfd225493
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

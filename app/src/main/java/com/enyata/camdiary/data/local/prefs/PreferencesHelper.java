@@ -3,6 +3,7 @@
 package com.enyata.camdiary.data.local.prefs;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 
 import java.util.ArrayList;
@@ -62,9 +63,9 @@ public interface PreferencesHelper {
 
     String getCollectorName();
 
-    void saveAggregationCollectionList(List<AggregationCollection.Request> list);
+    void saveAggregationCollectionList(List<AggregationSavedCollection> list);
 
-    List<AggregationCollection.Request> getAggregationCollectionList();
+    List<AggregationSavedCollection> getAggregationCollectionList();
 
 }
 

@@ -1,12 +1,14 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.NewResponse;
 import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
@@ -54,6 +56,10 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         return TextUtils.isEmpty(volume);
     }
 
+
+    public boolean checkIfAggregationCollectionIsNotEmpty() {
+        return true;
+    }
     public boolean checkIfAggregationCollectionIsEmpty(){
         return getAggregationCollectionList() == null;
 
@@ -63,11 +69,11 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         getDataManager().setAggregationCollection(collection);
     }
 
-    public void setAggregationCollectionList(List<AggregationCollection.Request> list){
+    public void setAggregationCollectionList(List<AggregationSavedCollection> list){
         getDataManager().saveAggregationCollectionList(list);
     }
 
-    public List<AggregationCollection.Request> getAggregationCollectionList(){
+    public List<AggregationSavedCollection> getAggregationCollectionList(){
         return getDataManager().getAggregationCollectionList();
     }
 
@@ -87,21 +93,33 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 }));
     }
 
-    public  void  saveAggregation(String collectorId, List<AggregationCollection.Request> aggregationCollection){
-        setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .saveAggregation(new Aggregation.Request(collectorId, aggregationCollection))
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    setIsLoading(false);
-                    getNavigator().responseMessage(response);
 
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
-    }
+//    public void sendPost(Post post) {
+//
+//
+//        mAPIService.savePost(getDataManager().getAccessToken(),post).enqueue(new Callback<NewResponse>() {
+//
+//            @Override
+//            public void onResponse(Call<NewResponse> call, Response<NewResponse> response) {
+//
+//                if (response.isSuccessful()) {
+////                    Post object = response.body();
+////                    String jsonString = object.toString();
+//
+////                    showResponse(response.body().toString());
+//                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
+//
+//                    getNavigator().Onresponse(response);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewResponse> call, Throwable t) {
+//                Log.e("failure", "Unable to submit post to API.");
+//            }
+//        });
+//    }
 
     public String getCollectorName(){
        return getDataManager().getCollectorName();

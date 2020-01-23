@@ -16,4 +16,13 @@ public class DeliveryHistoryViewModel extends BaseViewModel<DeliveryHistoryNavig
     public  void onSignup(){
         getNavigator().signup();
     }
+
+    public void  onLogOut(){
+        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        getNavigator().logout();
+    }
+
+    public void onBack(){
+        getNavigator().back();
+    }
 }

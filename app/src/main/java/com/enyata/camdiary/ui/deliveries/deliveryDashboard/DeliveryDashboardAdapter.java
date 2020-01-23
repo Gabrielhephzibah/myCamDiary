@@ -6,43 +6,38 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 
-public class DeliveryDashboardAdapter extends PagerAdapter {
-    private int[] layouts;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideOneFragment;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideThreeFragment;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideTwoFragment;
+
+public class DeliveryDashboardAdapter extends FragmentPagerAdapter {
     Context context;
-    LayoutInflater layoutInflater;
 
-
-    public  DeliveryDashboardAdapter(int[] layouts, Context context){
-        this.layouts = layouts;
+    public DeliveryDashboardAdapter(Context context, FragmentManager fm) {
+        super(fm);
         this.context = context;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-
-
     }
+
     @Override
     public int getCount() {
-        return layouts.length;
+        return 2;
     }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
-    }
-
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Fragment getItem(int position) {
 
-        View view = layoutInflater.inflate(layouts[position],container,false);
+        if (position == 0) {
+            return DeliveryDashboardSlideOneFragement.newInstance();
 
-        container.addView(view);
-
-
-        return view;
+        }else{
+            return DeliveryDashboardSlideTwoFragment.newInstance();
+        }
     }
+
 }

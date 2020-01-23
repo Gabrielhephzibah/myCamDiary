@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.enyata.camdiary.BR;
@@ -19,7 +20,9 @@ import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemAdapter;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemList;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +38,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     DeliveryHistoryAdapter deliveryHistoryAdapter;
     ListView listView;
     ArrayList<DeliveryHistoryList> deliveryHistoryLists= new ArrayList<>();
+    ActivityDeliveryHistoryBinding activityDeliveryHistoryBinding;
 
 
     @Inject
@@ -68,6 +72,9 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
         super.onCreate(savedInstanceState);
         deliveryHistoryViewModel.setNavigator(this);
         listView = findViewById(R.id.listView);
+        activityDeliveryHistoryBinding = getViewDataBinding();
+        ImageView logout = activityDeliveryHistoryBinding.logout;
+
 
 
         JSONObject delivery1 = new JSONObject();
@@ -179,5 +186,17 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
         Intent intent = new Intent(getApplicationContext(), DeliveryActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void logout() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
+        startActivity(intent);
     }
 }

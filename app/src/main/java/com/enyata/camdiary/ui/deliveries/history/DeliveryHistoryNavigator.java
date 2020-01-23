@@ -4,4 +4,7 @@ public interface DeliveryHistoryNavigator {
 
     void signup();
     void delivery();
+    void logout();
+    void back();
+
 }

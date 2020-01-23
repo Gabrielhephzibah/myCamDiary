@@ -4,6 +4,7 @@ package com.enyata.camdiary.data;
 
 import android.content.Context;
 
+import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -12,10 +13,12 @@ import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
@@ -188,13 +191,15 @@ public class AppDataManager implements DataManager {
     }
 
 
+
+
     @Override
-    public void saveAggregationCollectionList(List<AggregationCollection.Request> list) {
+    public void saveAggregationCollectionList(List<AggregationSavedCollection> list) {
         mPreferencesHelper.saveAggregationCollectionList(list);
     }
 
     @Override
-    public List<AggregationCollection.Request> getAggregationCollectionList() {
+    public List<AggregationSavedCollection> getAggregationCollectionList() {
         return mPreferencesHelper.getAggregationCollectionList();
     }
 
@@ -272,6 +277,16 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request) {
         return mApiHelper.saveAggregation(request);
+    }
+
+    @Override
+    public Flowable<PendingDeliveryResponse> getPendingDelivery() {
+        return mApiHelper.getPendingDelivery();
+    }
+
+    @Override
+    public Single<DeliveryCompletedResponse> getDeliveryCompleted() {
+        return  mApiHelper.getDeliveryCompleted();
     }
 
     @Override

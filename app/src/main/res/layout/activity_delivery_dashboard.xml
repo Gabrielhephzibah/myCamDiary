@@ -36,7 +36,7 @@
                     android:layout_marginLeft="28dp">
 
                     <TextView
-                        android:id="@+id/forgotPassword"
+                        android:id="@+id/dispatcherName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -55,7 +55,7 @@
                         android:fontFamily="@font/azo_san"
                         android:text="How's it going?"
                         android:textAllCaps="false"
-                        android:layout_alignBottom="@+id/forgotPassword"
+                        android:layout_alignBottom="@+id/dispatcherName"
                         android:textColor="#3333"
                         android:layout_marginBottom="-26dp"
                         android:textSize="14sp"
@@ -70,7 +70,7 @@
                         app:cardCornerRadius="35dp"
                         app:strokeWidth="1dp"
                         android:layout_marginRight="27dp"
-                        android:layout_toLeftOf="@id/forgotPassword"
+                        android:layout_toLeftOf="@id/dispatcherName"
                         android:layout_alignParentRight="true">
                         <ImageView
                             android:layout_width="fill_parent"
@@ -129,6 +129,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="23/08/2020"
@@ -141,8 +142,10 @@
                 </LinearLayout>
 
                 <ListView
+
                     android:id="@+id/listView"
                     android:layout_marginTop="11dp"
+                    android:layout_marginBottom="78dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -152,316 +155,9 @@
 
 
 
-
-
-
-<!--                <LinearLayout-->
-<!--                    android:background="@drawable/addboxshawdow"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:layout_marginTop="0dp"-->
-<!--                    android:layout_marginLeft="24dip"-->
-<!--                    android:layout_marginBottom="12dp"-->
-<!--                    android:layout_marginRight="20dip">-->
-
-
-
-
-<!--                    <RelativeLayout-->
-<!--                        android:layout_margin="12dp"-->
-<!--                        android:id="@+id/parent_layout1"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:src="@drawable/delivery_img"-->
-<!--                            android:layout_alignParentLeft="true"/>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/name1"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="Devon, Samuel"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-
-<!--                        </RelativeLayout>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="24dp"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/farmerId1"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="+2348033237685"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="4 items"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:layout_alignRight="@id/farmerId1"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/middle1"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="64ERT234KI89"-->
-<!--                                android:layout_marginTop="18dp"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-
-
-
-<!--                        </RelativeLayout>-->
-
-
-
-
-
-
-
-<!--                    </RelativeLayout>-->
-
-
-
-
-<!--                </LinearLayout>-->
-
-
-
-
-<!--                <LinearLayout-->
-<!--                    android:background="@drawable/boxshadow"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:layout_marginTop="0dp"-->
-<!--                    android:layout_marginLeft="24dip"-->
-<!--                    android:layout_marginBottom="12dp"-->
-<!--                    android:layout_marginRight="20dip">-->
-
-
-
-
-<!--                    <RelativeLayout-->
-<!--                        android:layout_margin="12dp"-->
-<!--                        android:id="@+id/parent_layout2"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:src="@drawable/delivery_img"-->
-<!--                            android:layout_alignParentLeft="true"/>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/name2"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="Devon, Samuel"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-
-
-
-<!--                        </RelativeLayout>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="24dp"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/farmerId2"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="+2348033237685"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="4 items"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:layout_alignRight="@id/farmerId2"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/middle2"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="64ERT234KI89"-->
-<!--                                android:layout_marginTop="18dp"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-
-
-
-<!--                        </RelativeLayout>-->
-
-
-
-
-
-
-
-<!--                    </RelativeLayout>-->
-
-
-
-
-<!--                </LinearLayout>-->
-
-
-
-<!--                <LinearLayout-->
-<!--                    android:background="@drawable/addboxshawdow"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:layout_marginTop="0dp"-->
-<!--                    android:layout_marginLeft="24dip"-->
-<!--                    android:layout_marginBottom="12dp"-->
-<!--                    android:layout_marginRight="20dip">-->
-
-
-
-
-<!--                    <RelativeLayout-->
-<!--                        android:layout_margin="12dp"-->
-<!--                        android:id="@+id/parent_layout"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:src="@drawable/delivery_img"-->
-<!--                            android:layout_alignParentLeft="true"/>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/name"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="Devon, Samuel"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-
-<!--                        </RelativeLayout>-->
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="24dp"-->
-<!--                            android:layout_marginLeft="75dp">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/farmerId"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="+2348033237685"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="4 items"-->
-<!--                                android:textColor="@color/deliveryColor"-->
-<!--                                android:textSize="12sp"-->
-<!--                                android:layout_alignRight="@id/farmerId"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/middle"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="64ERT234KI89"-->
-<!--                                android:layout_marginTop="18dp"-->
-<!--                                android:textColor="#CECECE"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                />-->
-
-
-<!--                        </RelativeLayout>-->
-
-
-<!--                    </RelativeLayout>-->
-
-
-
-
-<!--                </LinearLayout>-->
-
-
             </LinearLayout>
+
+
 
 
             <LinearLayout
@@ -475,7 +171,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="56dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginBottom="13dp"
                     android:layout_gravity="center">
@@ -483,7 +179,7 @@
                     <RelativeLayout
 
                         android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <ImageView
 
@@ -504,35 +200,36 @@
 
                     </RelativeLayout>
 
+<!--                    <RelativeLayout-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_marginLeft="0dp"-->
+<!--                        android:layout_height="wrap_content">-->
+<!--                        <ImageView-->
+
+<!--                            android:onClick="@{() -> viewModel.onDelivery()}"-->
+<!--                            android:id="@+id/delivery"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/ic_delivery"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Deliveries"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            android:textSize="8sp"-->
+<!--                            android:gravity="left"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:textColor="#fff"-->
+<!--                            />-->
+
+<!--                    </RelativeLayout>-->
+
+
                     <RelativeLayout
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="45dp"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:onClick="@{() -> viewModel.onDelivery()}"
-                            android:id="@+id/delivery"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_delivery"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Deliveries"
-                            android:fontFamily="@font/azo_san"
-                            android:textSize="8sp"
-                            android:gravity="left"
-                            android:layout_alignParentBottom="true"
-                            android:textColor="#fff"
-                            />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_marginLeft="45dp"
+                        android:layout_marginLeft="43dp"
                         android:layout_height="wrap_content">
                         <ImageView
                             android:onClick="@{() -> viewModel.onHistory()}"
@@ -551,6 +248,31 @@
                             />
 
                     </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="58dp"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:onClick="@{() -> viewModel.onLogOut()}"
+                            android:id="@+id/logout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_logout"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Log out"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:layout_alignParentBottom="true"
+                            android:textColor="#fff"
+                            />
+
+                    </RelativeLayout>
+
 
 
 

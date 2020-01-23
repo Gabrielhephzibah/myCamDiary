@@ -10,10 +10,12 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -174,6 +176,22 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(request)
                 .build()
                 .getObjectSingle(SavedAggregationResponse.class);
+    }
+
+    @Override
+    public Flowable<PendingDeliveryResponse> getPendingDelivery() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.PENDING_DELIVERY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(PendingDeliveryResponse.class);
+    }
+
+    @Override
+    public Single<DeliveryCompletedResponse> getDeliveryCompleted() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.DELIVERY_COMPLETED)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(DeliveryCompletedResponse.class);
     }
 
 

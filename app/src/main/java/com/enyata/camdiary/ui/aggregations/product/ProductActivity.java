@@ -45,6 +45,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -117,7 +118,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
-        str = productViewModel.getAggregationCollection();
+//        str = productViewModel.getAggregationCollection();
 
         if (!productViewModel.checkIfAggregationCollectionIsEmpty()){
             productViewModel.setAggregationCollectionList(null);
@@ -170,7 +171,6 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                 AggregationSavedCollection collection = new AggregationSavedCollection(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno);
 
 
-                AggregationCollection.Request request = new AggregationCollection.Request(collectionId, farmerId, collectionVolume, collectionStatus, testOne, testTwo, testThree, approvedContainer, collectionMessage, volume.getText().toString(), churno);
 
                 LayoutInflater nextInflater = ProductActivity.this.getLayoutInflater();
                 View nextDialogView = nextInflater.inflate(R.layout.confirm_entry_layout, null);
@@ -219,34 +219,40 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
 
                         if (productViewModel.checkIfAggregationCollectionIsEmpty()) {
-                            List<AggregationCollection.Request> newList = new ArrayList<>();
-                            newList.add(request);
+                            List<AggregationSavedCollection> newList = new ArrayList<>();
+                            newList.add(collection);
                             productViewModel.setAggregationCollectionList(newList);
                         } else {
-                            List<AggregationCollection.Request> arrayList = new ArrayList<>(productViewModel.getAggregationCollectionList());
-                            arrayList.add(request);
+                            List<AggregationSavedCollection> arrayList = new ArrayList<>(productViewModel.getAggregationCollectionList());
+                            arrayList.add(collection);
                             productViewModel.setAggregationCollectionList(arrayList);
                         }
 
 
+
+
                         Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
-                        if (text.getText().toString().equals(getString(R.string.finishText)))
-                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
+                        if (text.getText().toString().equals(getString(R.string.finishText))) {
+//                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
+//                                str = productViewModel.getAggregationCollection();
+//                            str = productViewModel.getAggregationCollectionList();
 
 
+                        Post newAggregation = new Post(collectorId,productViewModel.getAggregationCollectionList());
+                        Log.i("New RESPONSEE", String.valueOf(newAggregation));
+//                            sendPost(newAggregation);
 
 
-
-//                            JSONObject request = new JSONObject();
-
-//                            try {
-
-                            Gson gson = new Gson();
-                            TypeToken<Post> token = new TypeToken<Post>() {
-                            };
-                            Post pb = gson.fromJson(str, token.getType());
-                            Log.i("MESSAGESSSS", pb.toString());
-                            sendPost(pb);
+//                            str = String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList()));
+//                            Gson gson = new Gson();
+//                            TypeToken<AggregationSavedCollection> token = new TypeToken<AggregationSavedCollection>() {};
+//                            AggregationSavedCollection aggregationSavedCollection = gson.fromJson(str, token.getType());
+//                           List <AggregationSavedCollection> pb = new AggregationSavedCollection("","","","","","","","","","","");
+//                            pb.add(aggregationSavedCollection);
+                           // Post newAggregation = new Post(collectorId,ArrayList<AggregationSavedCollection> aggregationSavedCollection);
+//                            Post newAggregation = new Post(collectorId,aggregationSavedCollection);
+//                            Log.i("MESSAGESSSS", newAggregation.toString());
+//                            sendPost(newAggregation);
 
 
 //                             productViewModel.sendPost(collectorId,pb);
@@ -329,7 +335,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 //                        Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
 //                        if (text.getText().toString().equals(getString(R.string.finishText)))
 //                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
-
+                        }
 
                     });
 
@@ -359,22 +365,23 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     public void sendPost(Post post) {
 
 
-        mAPIService.savePost(post, productViewModel.getAccessToken()).enqueue(new Callback<Post>() {
+        mAPIService.savePost(productViewModel.getAccessToken(),post).enqueue(new Callback<NewResponse>() {
 
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<NewResponse> call, Response<NewResponse> response) {
 
                 if (response.isSuccessful()) {
-                    Post object = response.body();
-                    String jsonString = object.toString();
+//                    Post object = response.body();
+//                    String jsonString = object.toString();
 
 //                    showResponse(response.body().toString());
-                    Log.i("SUCCESS INFORMATION", "post submitted to API." + jsonString);
+                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
+
                 }
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
+            public void onFailure(Call<NewResponse> call, Throwable t) {
                 Log.e("failure", "Unable to submit post to API.");
             }
         });
@@ -414,7 +421,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     @Override
     public void aggregationCollection(Aggregation aggregate) {
     }
-    
+
 //
 //    public void responseMessage(NewCollectionResponse response) {
 //        Alert.showInfo(getApplicationContext(), response.getResponseMessage());

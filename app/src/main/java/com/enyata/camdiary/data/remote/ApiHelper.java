@@ -9,10 +9,12 @@ import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
+import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
@@ -59,6 +61,13 @@ public interface ApiHelper {
 
     //Save Aggregation
     Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request);
+
+    //Pending Delivery
+
+    Flowable<PendingDeliveryResponse>getPendingDelivery();
+
+    //Completed Deliveries
+    Single<DeliveryCompletedResponse>getDeliveryCompleted();
 
 
 }

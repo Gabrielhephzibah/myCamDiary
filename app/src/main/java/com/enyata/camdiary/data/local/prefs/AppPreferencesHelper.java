@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.di.PreferenceInfo;
 import com.enyata.camdiary.utils.AppConstants;
@@ -39,17 +40,17 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_FARMER_ID = "PREF_KEY_FARMER_ID";
 
-    private static final String PREF_COLLECTOR_ID= "PREF_KEY_COLLECTOR_ID";
+    private static final String PREF_COLLECTOR_ID = "PREF_KEY_COLLECTOR_ID";
 
-    private  static  final String PREF_COLLECTOR_COLLECTION_ID = "PREF_KEY_COLLECTOR_COLLECTION_ID";
+    private static final String PREF_COLLECTOR_COLLECTION_ID = "PREF_KEY_COLLECTOR_COLLECTION_ID";
 
-    private  static  final String PREF_LOGGED_IN_VIEW = "PREF_KEY_LOGGED_IN_VIEW";
+    private static final String PREF_LOGGED_IN_VIEW = "PREF_KEY_LOGGED_IN_VIEW";
 
-    private  static  final String PREF_KEY_AGGREGATION_COLLECTION = "PREF_KEY_AGGREGATION_COLLECTION";
+    private static final String PREF_KEY_AGGREGATION_COLLECTION = "PREF_KEY_AGGREGATION_COLLECTION";
 
-    private  static  final String PREF_KEY_COLLECTOR_NAME = "PREF_KEY_COLLECTOR_NAME";
+    private static final String PREF_KEY_COLLECTOR_NAME = "PREF_KEY_COLLECTOR_NAME";
 
-    private  static  final String PREF_KEY_AGGREGATION_COLLECTION_LIST = "PREF_KEY_AGGREGATION_COLLECTION_LIST";
+    private static final String PREF_KEY_AGGREGATION_COLLECTION_LIST = "PREF_KEY_AGGREGATION_COLLECTION_LIST";
 
     private final SharedPreferences mPrefs;
 
@@ -133,17 +134,17 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getFarmerId() {
-        return mPrefs.getString(PREF_KEY_FARMER_ID,null);
+        return mPrefs.getString(PREF_KEY_FARMER_ID, null);
     }
 
     @Override
     public void setFarmerId(String id) {
-        mPrefs.edit().putString(PREF_KEY_FARMER_ID,id).apply();
+        mPrefs.edit().putString(PREF_KEY_FARMER_ID, id).apply();
     }
 
     @Override
     public String getCollectorId() {
-        return mPrefs.getString(PREF_COLLECTOR_ID,null);
+        return mPrefs.getString(PREF_COLLECTOR_ID, null);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getCollectorCollectionId() {
-        return mPrefs.getString(PREF_COLLECTOR_COLLECTION_ID,null);
+        return mPrefs.getString(PREF_COLLECTOR_COLLECTION_ID, null);
     }
 
     @Override
@@ -163,37 +164,57 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getAggregationCollection() {
-        return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,"nil");
+        return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION, "nil");
     }
 
     @Override
     public void setCollectorCollectionId(String id) {
-        mPrefs.edit().putString(PREF_COLLECTOR_COLLECTION_ID,id).apply();
+        mPrefs.edit().putString(PREF_COLLECTOR_COLLECTION_ID, id).apply();
 
     }
 
     @Override
     public void setCollectorName(String name) {
-        mPrefs.edit().putString(PREF_KEY_COLLECTOR_NAME,name).apply();
+        mPrefs.edit().putString(PREF_KEY_COLLECTOR_NAME, name).apply();
     }
 
     @Override
     public String getCollectorName() {
-        return mPrefs.getString(PREF_KEY_COLLECTOR_NAME,null);
+        return mPrefs.getString(PREF_KEY_COLLECTOR_NAME, null);
+
     }
 
     @Override
-    public void saveAggregationCollectionList(List<AggregationCollection.Request> list) {
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION_LIST,json).apply();
+    public void saveAggregationCollectionList(List<AggregationSavedCollection> list) {
+      Gson gson = new Gson();
+      String json = gson.toJson(list);
+        mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION_LIST, json).apply();
     }
 
     @Override
-    public List<AggregationCollection.Request> getAggregationCollectionList() {
+    public List<AggregationSavedCollection> getAggregationCollectionList() {
         Gson gson = new Gson();
-        String json = mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION_LIST,null);
-        Type type = new TypeToken<List<AggregationCollection.Request>>() {}.getType();
+        String json = mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION_LIST, null);
+        Type type = new TypeToken<List<AggregationCollection.Request>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
+
 }
+
+
+
+//        @Override
+//        public void setAggregationCollection(String collection) {
+//            mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION, collection).apply();
+//        }
+//
+//        @Override
+//        public String getAggregationCollection() {
+//            return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,"nil");
+//        }
+
+
+
+
+

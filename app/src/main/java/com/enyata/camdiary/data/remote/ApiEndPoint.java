@@ -40,6 +40,10 @@ public final class ApiEndPoint {
 
     public  static  final  String SAVE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
+    public  static  final String PENDING_DELIVERY = BuildConfig.INVENTORY_BASE_URL + "/delivery/assigned";
+
+    public  static  final  String DELIVERY_COMPLETED = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/count";
+
 
 
     private ApiEndPoint() {
