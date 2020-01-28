@@ -28,6 +28,7 @@ import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -85,12 +86,13 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
 
 
 
-        if (!isNetworkConnected()) {
-            Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
-            return;
-        }
+       if (AppStatus.getInstance(this).isOnline()){
+           historyViewModel.getAllCollection();
+       }else {
+           Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again later");
+       }
 
-       historyViewModel.getAllCollection();
+
 
 
     }
@@ -100,7 +102,12 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
         if (throwable != null) {
             ANError error = (ANError) throwable;
             VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
-            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
+            }
+
         }
 
     }

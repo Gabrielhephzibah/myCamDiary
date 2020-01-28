@@ -59,11 +59,9 @@ public class DeliveryListAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(deliveryLists.size() > 10){
-            return 5;
-        }else{
-            return deliveryLists.size();
-        }
+
+        return deliveryLists.size();
+
     }
 
 

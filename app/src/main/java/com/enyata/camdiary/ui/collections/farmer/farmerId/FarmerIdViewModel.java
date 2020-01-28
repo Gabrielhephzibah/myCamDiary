@@ -1,5 +1,9 @@
 package com.enyata.camdiary.ui.collections.farmer.farmerId;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
@@ -14,10 +18,10 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
     }
 
 
+
     public void getFarmerDetails(String id){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-
                 .getFarmerDetails(id)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -31,6 +35,8 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
                 }));
 
     }
+
+
 
 
     public void dispose(){

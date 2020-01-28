@@ -20,6 +20,8 @@ import com.enyata.camdiary.data.model.api.request.FarmerId;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.EnterIdErrorResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -31,6 +33,7 @@ import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -80,10 +83,15 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void handleError(Throwable throwable) {
-        if (throwable != null) {
+        if (throwable != null ) {
             ANError error = (ANError) throwable;
-            VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
-            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            }
+
         }
     }
 
@@ -128,15 +136,18 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             }
         });
 
-        if (!isNetworkConnected()) {
-            Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
-            return;
-        }
 
-        dashboardViewModel.getVolumeOfAcceptedCollection();
-        dashboardViewModel.getVolumeOfRejectedCollection();
-        dashboardViewModel.getTodaysCollection();
-        dashboardViewModel.getAllEntries();
+      if (AppStatus.getInstance(this).isOnline()){
+          dashboardViewModel.getVolumeOfAcceptedCollection();
+          dashboardViewModel.getVolumeOfRejectedCollection();
+          dashboardViewModel.getTodaysCollection();
+          dashboardViewModel.getAllEntries();
+          return;
+      }else {
+          Alert.showFailed(getApplicationContext(),"Please check Internet Connection and try again");
+      }
+
+
 
     }
 
@@ -206,6 +217,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void getTodayCollection(CollectionResponse todayCollectionResponse) {
+
         for (Collection response : todayCollectionResponse.getData())  {
             dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName()+ "  " + response.getFarmer().getLastName(),response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(),response.getStatusOfCollection(), response.getVolume()+ " litres"));
             DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);

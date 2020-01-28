@@ -27,6 +27,7 @@ import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -40,12 +41,8 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
     String volume;
     String firstName;
     String lastName;
-
-
     String infoMessage;
-
     ActivityReasonBinding activityReasonBinding;
-
     private String test_one;
     private String test_two;
     private String test_three;
@@ -88,10 +85,6 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         lastName = getIntent().getStringExtra("last_name");
         infoMessage = "nil";
         Log.d("volume ", volume);
-
-
-
-
         test_one = "failed";
         test_two = "failed";
         test_three = "failed";
@@ -133,15 +126,12 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
 
         continuee.setOnClickListener(v -> {
             alertDialog.dismiss();
-
-
-
-
             if(!TextUtils.isEmpty(textarea.getText().toString())){
                 infoMessage = textarea.getText().toString();
             }
 
-            try {
+            if (AppStatus.getInstance(this).isOnline()){
+                try {
                 JSONObject params = new JSONObject();
                 params.put("farmer_id", reasonViewModel.getFarmerId());
                 params.put("status_of_collection", "rejected");
@@ -157,9 +147,10 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
                 error.printStackTrace();
             }
 
-//
-//            Intent intent = new Intent(getApplicationContext(), RejectsuccessActivity.class);
-//            startActivity(intent);
+                }else {
+                Alert.showFailed(getApplicationContext(),"Please Check Your Internet Connection and try again");
+            }
+
 
         });
 
@@ -205,7 +196,12 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
-            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the Internet");
+            }
+
         }
     }
 

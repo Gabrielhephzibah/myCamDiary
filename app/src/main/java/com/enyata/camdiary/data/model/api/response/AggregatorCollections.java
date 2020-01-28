@@ -38,6 +38,10 @@ public class AggregatorCollections {
     @SerializedName("collector")
     private Details collectorDetails;
 
+    @Expose
+    @SerializedName("aggregation_total_volume")
+    private  String aggregationTotalVolume;
+
 
 
     public int getId() {
@@ -60,6 +64,7 @@ public class AggregatorCollections {
         return  collectorDetails;
     }
 
-
-
+    public String getAggregationTotalVolume() {
+        return aggregationTotalVolume;
+    }
 }

@@ -31,4 +31,7 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
                 }));
 
     }
+    public  void  dispose(){
+        onCleared();
+    }
 }

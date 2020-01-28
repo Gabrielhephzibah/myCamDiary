@@ -13,9 +13,7 @@ public interface ProductNavigator {
     void product();
     void back();
     void getCollectorCollection(CollectionResponse response);
-    void responseMessage(SavedAggregationResponse response);
-    void aggregationCollection(Aggregation aggregate);
-//    void Onresponse(NewCollectionResponse response);
-
+    void onResponse();
+    void onFailed(Throwable throwable);
 
 }

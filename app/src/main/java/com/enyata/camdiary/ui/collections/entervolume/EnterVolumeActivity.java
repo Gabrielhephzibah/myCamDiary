@@ -3,7 +3,9 @@ package com.enyata.camdiary.ui.collections.entervolume;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActi
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -103,7 +106,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             if (TextUtils.isEmpty(volume)) {
                 Alert.showInfo(getApplicationContext(), "Please enter volume");
                 return;
-            } else {
+            } else  if (AppStatus.getInstance(this).isOnline()){
                 try {
                     JSONObject params = new JSONObject();
                     params.put("farmer_id",enterVolumeViewModel.getFarmerId());
@@ -120,8 +123,16 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+            } else {
+                Alert.showFailed(getApplicationContext(),"Please check your Internet Connection and try again");
             }
         });
+    }
+
+    @Override
+    public void onResponseError() {
+        Alert.showFailed(getApplicationContext(), "Unable to connect");
     }
 
     @Override
@@ -152,7 +163,11 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
-            Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }
+        }else{
+            Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
     }
 

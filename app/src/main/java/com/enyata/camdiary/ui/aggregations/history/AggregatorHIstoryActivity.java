@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
+import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.databinding.ActivityAggregatorHistoryBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
@@ -22,6 +24,9 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.history.CollectorHistoryAdapter;
 import com.enyata.camdiary.ui.collections.history.CollectorHistoryList;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +44,9 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
 
     @Inject
+    Gson gson;
+
+    @Inject
     ViewModelProviderFactory factory;
     private AggregatorHistoryViewModel aggregatorHistoryViewModel;
     ActivityAggregatorHistoryBinding activityAggregatorHistoryBinding;
@@ -46,7 +54,6 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorHIstoryActivity.class);
     }
-
 
 
     @Override
@@ -61,7 +68,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public AggregatorHistoryViewModel getViewModel() {
-        aggregatorHistoryViewModel= ViewModelProviders.of(this,factory).get(AggregatorHistoryViewModel.class);
+        aggregatorHistoryViewModel = ViewModelProviders.of(this, factory).get(AggregatorHistoryViewModel.class);
         return aggregatorHistoryViewModel;
     }
 
@@ -69,12 +76,13 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         aggregatorHistoryViewModel.setNavigator(this);
-
-
         activityAggregatorHistoryBinding = getViewDataBinding();
         listView = activityAggregatorHistoryBinding.listView;
-
-        aggregatorHistoryViewModel.getAggretionHistory();
+        if (AppStatus.getInstance(this).isOnline()){
+            aggregatorHistoryViewModel.getAggretionHistory();
+        }else {
+            Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");
+        }
 
 
 
@@ -82,6 +90,16 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void handleError(Throwable throwable) {
+        if (throwable != null ) {
+            ANError error = (ANError) throwable;
+            FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            }
+
+        }
 
     }
 
@@ -94,21 +112,27 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void back() {
-        Intent intent = new Intent(getApplicationContext(),AggregatorDashboardActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
 
     }
 
     @Override
     public void getAggregatorHistory(AggregationCollectionResponse response) {
-        for (AggregatorCollections history : response.getData()){
+        for (AggregatorCollections history : response.getData()) {
             String[] formatted = history.getCreatedAt().split(" ");
             String[] formattedDate = formatted[0].split("-");
-            String date = formattedDate[2] +"/"+formattedDate[1]+"/"+formattedDate[0];
-            aggregatorHistoryLists .add(new AggregatorHistoryList(history.getCollectorDetails().getFirstName() + " "+ history.getCollectorDetails().getLastName(),history.getCollectorDetails().getVerificationId(), history.getVolume()+ " litres", date));
-            aggregatorHistoryAdapter = new AggregatorHistoryAdapter(AggregatorHIstoryActivity.this,aggregatorHistoryLists);
+            String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
+            aggregatorHistoryLists.add(new AggregatorHistoryList(history.getCollectorDetails().getFirstName() + " " + history.getCollectorDetails().getLastName(), history.getCollectorDetails().getVerificationId(), history.getVolume() + " litres", date));
+            aggregatorHistoryAdapter = new AggregatorHistoryAdapter(AggregatorHIstoryActivity.this, aggregatorHistoryLists);
             listView.setAdapter(aggregatorHistoryAdapter);
         }
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        aggregatorHistoryViewModel.dispose();
+    }
+
 }

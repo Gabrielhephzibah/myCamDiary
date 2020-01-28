@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
+import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.databinding.ActivityAggregatorDashboardBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
@@ -27,12 +28,17 @@ import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregatorDashboardBinding, AggregatorDashboardViewModel> implements AggregatorDashboardNavigator {
+    @Inject
+    Gson gson;
+
 
     AggregatorListAdapter aggregatorListAdapter;
     ListView listView;
@@ -54,7 +60,6 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
     }
-
 
     @Override
     public int getBindingVariable() {
@@ -91,18 +96,14 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         date.setText(aggregatorDashboardViewModel.getCurrentDate());
         aggregator_name.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
 
-
-
-        if (!isNetworkConnected()) {
-            Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
-            return;
-        }else{
+        if (AppStatus.getInstance(this).isOnline()) {
             aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
             aggregatorDashboardViewModel.getTotalNumberOfCollectors();
             aggregatorDashboardViewModel.getAggregatorTodayCollection();
+        }else{
+            Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again");
+
         }
-
-
 
         aggregatorHomepageAdapter = new AggregatorHomepageAdapter(this, getSupportFragmentManager());
         pager.setAdapter(aggregatorHomepageAdapter);
@@ -132,6 +133,16 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void handleError(Throwable throwable) {
+        if (throwable != null ) {
+            ANError error = (ANError) throwable;
+            FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            }
+
+        }
 
     }
 
@@ -197,7 +208,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     @Override
     public void getAggregatorTodayCollection(AggregationCollectionResponse todayCollection) {
         for (AggregatorCollections response : todayCollection.getData() ) {
-            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " "+ response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getVolume() + " litres" ));
+            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " "+ response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres" ));
             aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this,aggregatorLists);
             listView.setAdapter(aggregatorListAdapter);
 
@@ -210,6 +221,12 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     public void onLogOut() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        aggregatorDashboardViewModel.dispose();
     }
 
 

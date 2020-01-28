@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.Product;
 import com.enyata.camdiary.databinding.ActivityDetailsBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
@@ -18,20 +21,23 @@ import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryAc
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.feedback.FeedbackActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryList;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,DetailsViewModel>implements DetailsNavigator {
-    String address;
-    String firstName;
-    String lastName;
-    String phoneNo;
-    String productName;
-    String  quantity;
+
     @Inject
     ViewModelProviderFactory factory;
     private DetailsViewModel detailsViewModel;
     ActivityDetailsBinding activityDetailsBinding;
+    ArrayList<DeliveryItemList>deliveryItemLists = new ArrayList<>();
+    DeliveryItemAdapter deliveryItemAdapter;
+    String customerName;
+    String address;
+    String phoneNo;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, DeliveryActivity.class);
@@ -62,22 +68,29 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
         TextView addresss = activityDetailsBinding.address;
         TextView name = activityDetailsBinding.userName;
         TextView phoneNoo = activityDetailsBinding.phoneNo;
-        TextView item1 = activityDetailsBinding.items1;
-        TextView quantity1 = activityDetailsBinding.quantity1;
-
-        address = getIntent().getStringExtra("address");
-        firstName = getIntent().getStringExtra("firstName");
-        lastName = getIntent().getStringExtra("lastName");
-        phoneNo = getIntent().getStringExtra("phoneNo");
-        productName = getIntent().getStringExtra("name");
-        quantity = getIntent().getStringExtra("quantity");
+        ListView listView = activityDetailsBinding.listView;
 
 
+
+        customerName = getIntent().getStringExtra("customerName");
+        address = getIntent().getStringExtra("customerAddress");
+        phoneNo = getIntent().getStringExtra("contactNo");
+        ArrayList<Product> list = ((ArrayList<Product>) getIntent().getSerializableExtra("list"));
+        Log.i("ARRAYLIST",list.toString());
+        for (int i = 0; i < list.size(); i++){
+            Product obj = list.get(i);
+            String productNamee = obj.getName();
+            String productQuantityy = obj.getQuantity();
+
+            deliveryItemLists.add(new DeliveryItemList(productNamee,"x "+ productQuantityy));
+            deliveryItemAdapter = new DeliveryItemAdapter(DetailsActivity.this,deliveryItemLists);
+            listView.setAdapter(deliveryItemAdapter);
+
+
+        }
         addresss.setText(address);
-        name.setText(firstName + " "+ lastName);
+        name.setText(customerName);
         phoneNoo.setText(phoneNo);
-        item1.setText(productName + ".....................");
-        quantity1.setText(quantity);
 
     }
 

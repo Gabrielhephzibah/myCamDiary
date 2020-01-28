@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="30dp"
-                android:layout_marginLeft="32dp">
+                android:layout_marginLeft="28dp">
 
 
                 <ImageView
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/azo_san"
                     android:textColor="#CECECE"
                     android:layout_marginTop="13dp"
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Address"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/azo_san"
                     android:textColor="#CECECE"
                     android:layout_marginTop="20dp"
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Phone No."
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/azo_san"
                     android:textColor="#CECECE"
                     android:layout_marginTop="20dp"
@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Delivery Instructions"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/azo_san"
                     android:textColor="#CECECE"
                     android:layout_marginTop="20dp"
@@ -148,96 +148,106 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Items"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/azo_san"
                     android:textColor="#CECECE"
                     android:layout_marginTop="20dp"
                     />
 
+                <ListView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/listView"
 
-                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/items1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textStyle="bold"
-                        android:textColor="@color/deliveryColor"
-                        android:textSize="12sp"
-                        android:text="Double Skimmed Milk.............................."/>
+                    android:layout_height="wrap_content"/>
 
 
-                    <TextView
-                        android:id="@+id/quantity1"
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textSize="12dp"
-                        android:textColor="@color/deliveryColor"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/items1"
-                        android:text="x1"/>
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="45dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/items1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:text="Double Skimmed Milk"/>-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/quantity1"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textSize="12dp"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignRight="@+id/items1"-->
+<!--                        android:text="x1"/>-->
 
 
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="45dp">-->
 
-                    <TextView
-                        android:id="@+id/items2"
-                        android:textColor="@color/deliveryColor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:text="Double Milk ............................................"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/deliveryColor"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/items2"
-                        android:text="x3"/>
-
-                </RelativeLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/items2"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:text="Double Milk"/>-->
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textSize="12dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignRight="@+id/items2"-->
+<!--                        android:text="x3"/>-->
 
-                    <TextView
-                        android:id="@+id/items"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textStyle="bold"
-                        android:textColor="@color/deliveryColor"
-                        android:textSize="12sp"
-                        android:text="Creamy Milk............................................"/>
+<!--                </RelativeLayout>-->
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/azo_san_bold"
-                        android:textSize="12dp"
-                        android:textColor="@color/deliveryColor"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/items"
-                        android:text="x1"/>
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="45dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/items"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:text="Creamy Milk"/>-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:fontFamily="@font/azo_san_bold"-->
+<!--                        android:textSize="12dp"-->
+<!--                        android:textColor="@color/deliveryColor"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignRight="@+id/items"-->
+<!--                        android:text="x1"/>-->
 
 
                     <Button
@@ -261,7 +271,7 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
 
 
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
 
 

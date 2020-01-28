@@ -79,6 +79,9 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
     }
 
 
+    public void dispose(){
+        onCleared();
+    }
 
     /**
      * Live Data Instance

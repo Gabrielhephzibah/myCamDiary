@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="45dp">
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/azo_san_bold"
+            android:textStyle="bold"
+            android:textColor="@color/deliveryColor"
+            android:textSize="12sp"
+            android:text="Double Skimmed Milk"/>
+
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/azo_san_bold"
+            android:textSize="12dp"
+            android:textColor="@color/deliveryColor"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/itemName"
+            android:text="x1"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

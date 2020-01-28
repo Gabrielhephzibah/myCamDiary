@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class FarmerIdResponse {
 
     @Expose
-    @SerializedName("res")
+    @SerializedName("responseMessage")
     private String responseMessage;
 
     @Expose

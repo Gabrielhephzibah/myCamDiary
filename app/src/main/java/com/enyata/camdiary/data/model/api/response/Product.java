@@ -1,9 +1,14 @@
 package com.enyata.camdiary.data.model.api.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product  implements Serializable {
 
     @Expose
     @SerializedName("id")
@@ -65,4 +70,22 @@ public class Product {
                 ", price='" + price + '\'' +
                 '}';
     }
+
+//    public  Product(){
+//
+//    }
+//    public  Product(String product){
+//
+//    }
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel parcel, int i) {
+//        dest.writeString(category);
+//
+//    }
 }

@@ -17,6 +17,7 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
         getNavigator().accept();
     }
 
+
     public void onReject() {
         getNavigator().reject();
     }
@@ -46,6 +47,7 @@ public class EnterVolumeViewModel extends BaseViewModel<EnterVolumeNavigator> {
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
+                    getNavigator().onResponseError();
                 }));
     }
 

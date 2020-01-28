@@ -22,10 +22,12 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.Order;
 import com.enyata.camdiary.data.model.api.response.PendingData;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.Product;
 import com.enyata.camdiary.databinding.ActivityDeliveryDashboardBinding;
+import com.enyata.camdiary.ui.aggregations.product.ProductList;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
@@ -33,9 +35,11 @@ import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -46,15 +50,11 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
     DeliveryListAdapter deliveryListAdapter;
     ListView listView;
-    ArrayList<DeliveryList> deliveryLists = new ArrayList<>();
+
     String address;
     String phoneNo;
     String firstName;
     String lastName;
-    String name;
-    String quantity;
-
-
     @Inject
     ViewModelProviderFactory factory;
     private DeliveryDashboardViewModel deliveryDashboardViewModel;
@@ -62,7 +62,9 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     private DeliveryDashboardAdapter deliveryDashboardAdapterr;
     ImageView[] slider_dash;
     LinearLayout slideLayout;
+    ArrayList<DeliveryList> deliveryLists = new ArrayList<>();
     ViewPager pager;
+
     ActivityDeliveryDashboardBinding activityDeliveryDashboardBinding;
 
 
@@ -105,31 +107,40 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         date.setText(deliveryDashboardViewModel.getCurrentDate());
 
 
-        if (!isNetworkConnected()) {
-            Alert.showInfo(getApplicationContext(),"No internet connection, please check internet settings and try again");
-            return;
-        }else{
+        if (AppStatus.getInstance(this).isOnline()) {
             deliveryDashboardViewModel.getDeliveriesCompleted();
             deliveryDashboardViewModel.getPendingDelivery();
+        }else{
+            Alert.showFailed(getApplicationContext(), "Please Check your internet Connection and try again");
         }
 
+        listView.setOnItemClickListener((adapterView, view, position, l) -> {
+
+            DeliveryList delivery = deliveryLists .get(position);
+            String customerName = delivery.getMyName();
+            String  customerAddress= delivery.getCustomerAdreess();
+            String contactNo = delivery.getNumber();
+            ArrayList<Product> namee = delivery.getProducts();
+
+            for (int i = 0; i < namee.size(); i++){
+                Product obj = namee.get(i);
+               String productName = obj.getName();
+                String productQuantity = obj.getQuantity();
+                 Log.i("PRODUCTNAME", productName);
+                 Log.i("PRODUCTQUQANTITY", productQuantity);
+
+                Intent intent = new Intent(getApplicationContext(),DetailsActivity.class);
+                intent.putExtra("productName", productName);
+                intent.putExtra("productQuantity", productQuantity);
+                intent.putExtra("customerName", customerName);
+                intent.putExtra("customerAddress", customerAddress);
+                intent.putExtra("contactNo", contactNo);
+                intent.putExtra("list", namee);
 
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
-                Log.i("MESSAGE", address);
-                Log.i("MESSAGE", phoneNo);
-                intent.putExtra("address", address);
-                intent.putExtra("firstName",firstName);
-                intent.putExtra("lastName",lastName);
-                intent.putExtra("phoneNo",phoneNo);
-                intent.putExtra("name", name);
-                intent.putExtra("quantity", quantity);
                 startActivity(intent);
             }
+
         });
 
 
@@ -162,7 +173,12 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
-            Alert.showFailed(getApplicationContext(), "Please check your internet connection");
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(),response.getResponseMessage());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            }
+
         }
     }
 
@@ -223,18 +239,22 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         deliveryDashboardViewModel.setdeliveryCompleted(response.getData());
     }
 
+
     @Override
     public void getPendingDelivery(PendingDeliveryResponse response) {
 
         for (PendingData pendingData : response.getData()){
             String items;
 
-            for (int i = 0; i <pendingData.getOrder().getProducts().size(); i++){
-                Product obj = pendingData.getOrder().getProducts().get(i);
-                name = obj.getName();
-                quantity = obj.getQuantity();
+//            for (int i = 0; i< pendingData.getOrder().getProducts().size(); i++){
+//                Product obj = pendingData.getOrder().getProducts().get(i);
+//                name = obj.getName();
+//                quantity = obj.getQuantity();
+//
+//
+//
+//            }
 
-            }
             address = pendingData.getOrder().getAddress();
             firstName = pendingData.getOrder().getUsers().getFirstName();
             lastName = pendingData.getOrder().getUsers().getLastName();
@@ -247,12 +267,26 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
                  items = pendingData.getOrder().getProductCount()+ " items";
             }
 
-            deliveryLists.add(new DeliveryList(pendingData.getOrder().getUsers().getFirstName()+ ","+" "+pendingData.getOrder().getUsers().getLastName(),items,pendingData.getOrder().getUsers().getContactNo(),pendingData.getOrder().getUsers().getVerificationId()));
+            deliveryLists.add(new DeliveryList(pendingData.getOrder().getUsers().getFirstName()+ ","+" "+pendingData.getOrder().getUsers().getLastName(),items,pendingData.getOrder().getUsers().getContactNo(),pendingData.getOrder().getUsers().getVerificationId(),pendingData.getOrder().getAddress(), (ArrayList<Product>) pendingData.getOrder().getProducts()));
           deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
+//          Log.i("DELIVERYLIST", deliveryLists.toString());
+
           listView.setAdapter(deliveryListAdapter);
+          Log.i("PRODUCTS", String.valueOf((ArrayList<Product>) pendingData.getOrder().getProducts()));
+//            Log.i("ArraysName", name);
+//            Log.i("ArrayQuantity", quantity);
+
+//            Log.i("LISTVIEW", listView.toString());
         }
 
 
+    }
+
+
+    @Override
+    protected  void  onDestroy() {
+        super.onDestroy();
+        deliveryDashboardViewModel.dispose();
     }
 
 

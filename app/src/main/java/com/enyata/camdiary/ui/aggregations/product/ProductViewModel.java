@@ -1,5 +1,6 @@
 package com.enyata.camdiary.ui.aggregations.product;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -13,8 +14,12 @@ import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
+import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.remote.APIService;
+import com.enyata.camdiary.data.remote.ApiUtils;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseViewModel;
+import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
 import java.util.ArrayList;
@@ -77,6 +82,12 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
         return getDataManager().getAggregationCollectionList();
     }
 
+    public void dispose(){
+        onCleared();
+    }
+
+    public APIService mAPIService = ApiUtils.getAPIService();;
+
 
     public void getCollectorCollection(String id){
         setIsLoading(true);
@@ -93,65 +104,41 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 }));
     }
 
-
-//    public void sendPost(Post post) {
-//
-//
-//        mAPIService.savePost(getDataManager().getAccessToken(),post).enqueue(new Callback<NewResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<NewResponse> call, Response<NewResponse> response) {
-//
-//                if (response.isSuccessful()) {
-////                    Post object = response.body();
-////                    String jsonString = object.toString();
-//
-////                    showResponse(response.body().toString());
-//                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
-//
-//                    getNavigator().Onresponse(response);
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<NewResponse> call, Throwable t) {
-//                Log.e("failure", "Unable to submit post to API.");
-//            }
-//        });
-//    }
-
     public String getCollectorName(){
        return getDataManager().getCollectorName();
 
     }
-    private APIService mAPIService;
 
     public String getAccessToken(){
         return getDataManager().getAccessToken();
     }
 
-//    public void sendPost(String collectorId, List<AggregationSavedCollection>aggregation) {
-//
-//        mAPIService.savePost(collectorId, aggregation).enqueue(new Callback<Post>() {
-//
-//            @Override
-//            public void onResponse(Call<Post> call, Response<Post> response) {
-//
-//                if(response.isSuccessful()) {
-////                    showResponse(response.body().toString());
-//                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Post> call, Throwable t) {
-//                Log.e("failure", "Unable to submit post to API.");
-//            }
-//        });
-//    }
 
+    public void sendPost(Post post) {
+        setIsLoading(true);
 
+        mAPIService.savePost(getDataManager().getAccessToken(),post).enqueue(new Callback<NewResponse>() {
+
+            @Override
+            public void onResponse(Call<NewResponse> call, Response<NewResponse> response) {
+                setIsLoading(false);
+
+                if (response.isSuccessful()) {
+                    getNavigator().onResponse();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewResponse> call, Throwable throwable) {
+                setIsLoading(false);
+                Log.i("FAILURE MESSAGE", "Post failed");
+                if (throwable!= null){
+                    getNavigator().onFailed(throwable);
+
+                }
+            }
+        });
+    }
 
     private MutableLiveData<CollectionResponse> collectionMutableLiveData = new MutableLiveData<>();
 

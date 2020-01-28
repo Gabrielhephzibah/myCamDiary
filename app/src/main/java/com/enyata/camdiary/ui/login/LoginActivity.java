@@ -21,6 +21,7 @@ import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.main.MainActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -64,7 +65,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         if (throwable != null) {
             ANError error = (ANError) throwable;
             CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
-            Alert.showFailed(getApplicationContext(),response.getError());
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(),response.getError());
+            }else {
+                Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
+            }
+
         }
     }
 
@@ -72,21 +78,26 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void loginClick() {
-        String email = mActivityLoginBinding.emailTextView.getText().toString();
-        String password = mActivityLoginBinding.passwordTextView.getText().toString();
-        if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {
-            if (mLoginViewModel.isLengthEqualsToSeven(password)) {
-                if (!isNetworkConnected()) {
-                    Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
-                    return;
+        if (AppStatus.getInstance(this).isOnline()) {
+            String email = mActivityLoginBinding.emailTextView.getText().toString();
+            String password = mActivityLoginBinding.passwordTextView.getText().toString();
+            if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {
+                if (mLoginViewModel.isLengthEqualsToSeven(password)) {
+                    if (!isNetworkConnected()) {
+                        Alert.showInfo(getApplicationContext(), "No internet connection, please check internet settings and try again");
+                        return;
+                    }
+                    hideKeyboard();
+                    mLoginViewModel.login(email, password);
+                } else {
+                    Alert.showInfo(getApplicationContext(), "Password length must be seven or more");
                 }
-                hideKeyboard();
-                mLoginViewModel.login(email, password);
             } else {
-                Alert.showInfo(getApplicationContext(), "Password length must be seven or more");
+                Alert.showFailed(getApplicationContext(), "Please fill all fields");
             }
-        } else {
-            Alert.showFailed(getApplicationContext(), "Please fill all fields");
+
+        }else {
+            Alert.showFailed(getApplicationContext(),"Please check your internet connection and try again");
         }
     }
 

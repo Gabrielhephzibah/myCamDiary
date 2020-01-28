@@ -76,6 +76,10 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
 
     }
 
+    public  void  dispose(){
+        onCleared();
+    }
+
 
 
     /**

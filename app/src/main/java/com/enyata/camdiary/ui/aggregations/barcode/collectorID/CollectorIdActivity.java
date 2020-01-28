@@ -20,6 +20,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -69,7 +70,12 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         if (throwable != null) {
             ANError error = (ANError) throwable;
             Details response = gson.fromJson(error.getErrorBody(), Details.class);
-            Alert.showFailed(getApplicationContext(), response.getError());
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getError());
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to Connect to the Internet");
+            }
+
         }
 
     }
@@ -80,8 +86,12 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         if (TextUtils.isEmpty(id)) {
             Alert.showFailed(getApplicationContext(), "Please enter collector's verification_id");
             return;
+        }else  if (AppStatus.getInstance(this).isOnline()){
+            colectorIdViewModel.getCollectorDetails(id);
+        } else {
+            Alert.showFailed(getApplicationContext(), "Please Check you Internet Connection and try again");
         }
-        colectorIdViewModel.getCollectorDetails(id);
+
     }
 
     @Override

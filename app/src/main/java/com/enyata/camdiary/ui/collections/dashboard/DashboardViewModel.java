@@ -78,7 +78,8 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
                 }));
     }
 
-    public void dispose(){
+    public void dispose()
+    {
         onCleared();
     }
 

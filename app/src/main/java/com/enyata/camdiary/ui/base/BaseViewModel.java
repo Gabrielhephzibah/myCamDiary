@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.utils.NetworkUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
 import java.lang.ref.WeakReference;

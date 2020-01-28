@@ -25,7 +25,6 @@ import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.NewResponse;
 import com.enyata.camdiary.data.model.Post;
 
-import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 
@@ -34,20 +33,14 @@ import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.remote.APIService;
-import com.enyata.camdiary.data.remote.ApiHeader;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +111,6 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
-//        str = productViewModel.getAggregationCollection();
 
         if (!productViewModel.checkIfAggregationCollectionIsEmpty()){
             productViewModel.setAggregationCollectionList(null);
@@ -216,8 +208,6 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                         productLists.remove(position);
                         productAdapter.notifyDataSetChanged();
                         dismissAllModal();
-
-
                         if (productViewModel.checkIfAggregationCollectionIsEmpty()) {
                             List<AggregationSavedCollection> newList = new ArrayList<>();
                             newList.add(collection);
@@ -227,114 +217,17 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                             arrayList.add(collection);
                             productViewModel.setAggregationCollectionList(arrayList);
                         }
-
-
-
-
                         Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
                         if (text.getText().toString().equals(getString(R.string.finishText))) {
-//                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
-//                                str = productViewModel.getAggregationCollection();
-//                            str = productViewModel.getAggregationCollectionList();
-
-
                         Post newAggregation = new Post(collectorId,productViewModel.getAggregationCollectionList());
                         Log.i("New RESPONSEE", String.valueOf(newAggregation));
-//                            sendPost(newAggregation);
+                        if (AppStatus.getInstance(this).isOnline()){
+                            productViewModel.sendPost(newAggregation);
+                        } else {
+                            Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");
+                        }
 
 
-//                            str = String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList()));
-//                            Gson gson = new Gson();
-//                            TypeToken<AggregationSavedCollection> token = new TypeToken<AggregationSavedCollection>() {};
-//                            AggregationSavedCollection aggregationSavedCollection = gson.fromJson(str, token.getType());
-//                           List <AggregationSavedCollection> pb = new AggregationSavedCollection("","","","","","","","","","","");
-//                            pb.add(aggregationSavedCollection);
-                           // Post newAggregation = new Post(collectorId,ArrayList<AggregationSavedCollection> aggregationSavedCollection);
-//                            Post newAggregation = new Post(collectorId,aggregationSavedCollection);
-//                            Log.i("MESSAGESSSS", newAggregation.toString());
-//                            sendPost(newAggregation);
-
-
-//                             productViewModel.sendPost(collectorId,pb);
-//                                pb.add(new AggregationSavedCollection(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno));
-
-
-//                                List<AggregationSavedCollection>pb = new ArrayList<AggregationSavedCollection>();
-//                                productViewModel.getAggregationCollection();
-//                                JSONObject request = new JSONObject();
-//
-//                                JSONArray jArray = request.getJSONArray("aggregation_collections");
-//                                for(int i = 0; i < jArray.length(); i++){
-//                                    String  collectionIdd = jArray.getJSONObject(i).getString("collection_id");
-//                                    String farmerIdd = jArray.getJSONObject(i).getString("farmer_id");
-//                                    String collectionVolumee = jArray.getJSONObject(i).getString("collection_statuss");
-//                                    String collectionStatuss = jArray.getJSONObject(i).getString("collection_status");
-//                                    String testOnee = jArray.getJSONObject(i).getString("test_one");
-//                                    String testTwoo = jArray.getJSONObject(i).getString("test_two");
-//                                    String testThreee = jArray.getJSONObject(i).getString("test_three");
-//                                    String approvedContainerr = jArray.getJSONObject(i).getString("approved_container");
-//                                    String messagee = jArray.getJSONObject(i).getString("message");
-//                                    String aggreagtionVolume = jArray.getJSONObject(i).getString("aggregation_volume");
-//                                    String churnNo = jArray.getJSONObject(i).getString("aggregation_churno");
-//                                }
-
-
-//                                Gson gson = new Gson();
-//                                TypeToken<ArrayList<AggregationCollection.Request>> token = new TypeToken<ArrayList<AggregationCollection.Request>>() {
-////
-//
-//                                };
-//
-//                                ArrayList<AggregationCollection.Request> pb = gson.fromJson(str, token.getType());
-////
-//                                pb.add(new AggregationCollection.Request(collectionId,farmerId,collectionVolume,collectionStatus,testOne,testTwo,testThree,approvedContainer,collectionMessage,volume.getText().toString(),churno));
-////
-//                                String st = new Gson().toJson(pb);
-////
-//                                Log.i("MYRESPONSEEEEE", collectionId + pb.toString());
-//
-//                                productViewModel.saveAggregation(collectorId,pb);
-
-
-//                                String str[] = productViewModel.getAggregationCollection().split(",");
-//                                List<AggregationCollection.Request> al = new ArrayList<>();
-//                                al = Arrays.asList(str);
-//                                for(String s: al){
-//                                    request.put("aggregation_collections", s);
-//                                    ArrayList<AggregationCollection.Request>collection = new ArrayList<>();
-//
-//                                    Log.i("MYYYRESPONSEE",collection.toString());
-//                                    productViewModel.saveAggregation(collectorId,s);
-
-
-//                                }
-//                                request.put("aggregation_collections", new JSONArray(productViewModel.getAggregationCollection()));
-
-//                                productViewModel.saveAggregation(collectorId,);
-
-                            // TODO
-                            //  1. Pass appropriate value to third modal
-                            //  2. Add view model to save aggregation and redirect to aggregation dashboard on success
-
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-
-
-//                        if (productViewModel.checkIfAggregationCollectionIsEmpty()) {
-//                            List<AggregationCollection.Request> newList = new ArrayList<>();
-//                            newList.add(request);
-//                            productViewModel.setAggregationCollectionList(newList);
-//                        } else {
-//                            List<AggregationCollection.Request> arrayList = new ArrayList<>(productViewModel.getAggregationCollectionList());
-//                            arrayList.add(request);
-//                            productViewModel.setAggregationCollectionList(arrayList);
-//                        }
-//
-//
-//                        Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
-//                        if (text.getText().toString().equals(getString(R.string.finishText)))
-//                            productViewModel.saveAggregation(collectorId, new ArrayList<>(productViewModel.getAggregationCollectionList()));
                         }
 
                     });
@@ -359,32 +252,6 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         firstModal.dismiss();
         secondModal.dismiss();
         thirdModal.dismiss();
-    }
-
-
-    public void sendPost(Post post) {
-
-
-        mAPIService.savePost(productViewModel.getAccessToken(),post).enqueue(new Callback<NewResponse>() {
-
-            @Override
-            public void onResponse(Call<NewResponse> call, Response<NewResponse> response) {
-
-                if (response.isSuccessful()) {
-//                    Post object = response.body();
-//                    String jsonString = object.toString();
-
-//                    showResponse(response.body().toString());
-                    Log.i("SUCCESS INFORMATION", "post submitted to API." + response.body().toString());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewResponse> call, Throwable t) {
-                Log.e("failure", "Unable to submit post to API.");
-            }
-        });
     }
 
     @Override
@@ -413,21 +280,18 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     }
 
     @Override
+    public void onResponse() {
+        Log.i("SUCCESS INFORMATION", "post submitted to API.");
+        Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
+        startActivity(intent);
 
-    public void responseMessage(SavedAggregationResponse response) {
-        Log.i("RESPONSEEEE", "HAS HIT THE ENDPOINT");
     }
 
     @Override
-    public void aggregationCollection(Aggregation aggregate) {
-    }
+    public void onFailed(Throwable throwable) {
+        Alert.showFailed(getApplicationContext(),"Request not Successful, please Check Your Internet and try again");
 
-//
-//    public void responseMessage(NewCollectionResponse response) {
-//        Alert.showInfo(getApplicationContext(), response.getResponseMessage());
-//        Log.i("ON RESPONSEEEE", "HAS HIT THE ENDPOINT");
-//
-//    }
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -438,6 +302,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        productViewModel.dispose();
 
+    }
 }
 
