@@ -70,22 +70,5 @@ public class Product  implements Serializable {
                 ", price='" + price + '\'' +
                 '}';
     }
-
-//    public  Product(){
-//
-//    }
-//    public  Product(String product){
-//
-//    }
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel parcel, int i) {
-//        dest.writeString(category);
-//
-//    }
+    
 }

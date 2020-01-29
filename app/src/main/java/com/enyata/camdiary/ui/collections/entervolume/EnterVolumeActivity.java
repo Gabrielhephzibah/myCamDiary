@@ -3,9 +3,7 @@ package com.enyata.camdiary.ui.collections.entervolume;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -16,16 +14,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityEnterVolumeBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -106,7 +102,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
             if (TextUtils.isEmpty(volume)) {
                 Alert.showInfo(getApplicationContext(), "Please enter volume");
                 return;
-            } else  if (AppStatus.getInstance(this).isOnline()){
+            } else  if (InternetConnection.getInstance(this).isOnline()){
                 try {
                     JSONObject params = new JSONObject();
                     params.put("farmer_id",enterVolumeViewModel.getFarmerId());

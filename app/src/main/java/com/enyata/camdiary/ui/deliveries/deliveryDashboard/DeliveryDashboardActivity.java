@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,12 +21,10 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.Order;
 import com.enyata.camdiary.data.model.api.response.PendingData;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.Product;
 import com.enyata.camdiary.databinding.ActivityDeliveryDashboardBinding;
-import com.enyata.camdiary.ui.aggregations.product.ProductList;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
@@ -36,11 +32,10 @@ import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -104,7 +99,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         date.setText(deliveryDashboardViewModel.getCurrentDate());
 
 
-        if (AppStatus.getInstance(this).isOnline()) {
+        if (InternetConnection.getInstance(this).isOnline()) {
             deliveryDashboardViewModel.getDeliveriesCompleted();
 //            deliveryDashboardViewModel.getPendingDelivery();
             deliveryDashboardViewModel.getBottleInventory();
@@ -253,7 +248,6 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
           deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
 
           listView.setAdapter(deliveryListAdapter);
-          Log.i("PRODUCTS", String.valueOf((ArrayList<Product>) pendingData.getOrder().getProducts()));
         }
 
 

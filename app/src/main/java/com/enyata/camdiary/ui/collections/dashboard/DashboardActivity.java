@@ -16,11 +16,9 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.model.api.request.FarmerId;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.EnterIdErrorResponse;
 import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
@@ -28,12 +26,11 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
-import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -137,7 +134,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         });
 
 
-      if (AppStatus.getInstance(this).isOnline()){
+      if (InternetConnection.getInstance(this).isOnline()){
           dashboardViewModel.getVolumeOfAcceptedCollection();
           dashboardViewModel.getVolumeOfRejectedCollection();
           dashboardViewModel.getTodaysCollection();

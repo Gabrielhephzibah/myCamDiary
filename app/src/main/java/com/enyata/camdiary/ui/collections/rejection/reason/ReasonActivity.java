@@ -15,19 +15,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityReasonBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
-import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeViewModel;
-import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -130,7 +126,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
                 infoMessage = textarea.getText().toString();
             }
 
-            if (AppStatus.getInstance(this).isOnline()){
+            if (InternetConnection.getInstance(this).isOnline()){
                 try {
                 JSONObject params = new JSONObject();
                 params.put("farmer_id", reasonViewModel.getFarmerId());

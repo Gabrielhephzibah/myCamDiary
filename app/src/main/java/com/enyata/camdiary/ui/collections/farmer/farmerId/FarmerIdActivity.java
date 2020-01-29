@@ -2,8 +2,6 @@ package com.enyata.camdiary.ui.collections.farmer.farmerId;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -21,7 +19,7 @@ import com.enyata.camdiary.databinding.ActivityFarmerIdBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -65,7 +63,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
             Alert.showFailed(getApplicationContext()," Please enter farmer id");
             return;
 
-        }else if (AppStatus.getInstance(this).isOnline()){
+        }else if (InternetConnection.getInstance(this).isOnline()){
             farmerIdViewModel.getFarmerDetails(id);
         } else{
             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");

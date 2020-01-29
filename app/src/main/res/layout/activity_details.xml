@@ -162,93 +162,6 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
                     android:layout_height="wrap_content"/>
 
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginRight="45dp">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/items1"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:textSize="12sp"-->
-<!--                        android:text="Double Skimmed Milk"/>-->
-
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/quantity1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textSize="12dp"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignRight="@+id/items1"-->
-<!--                        android:text="x1"/>-->
-
-
-
-<!--                </RelativeLayout>-->
-
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginRight="45dp">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/items2"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textSize="12sp"-->
-<!--                        android:text="Double Milk"/>-->
-
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textSize="12dp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignRight="@+id/items2"-->
-<!--                        android:text="x3"/>-->
-
-<!--                </RelativeLayout>-->
-
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginRight="45dp">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/items"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:textSize="12sp"-->
-<!--                        android:text="Creamy Milk"/>-->
-
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:fontFamily="@font/azo_san_bold"-->
-<!--                        android:textSize="12dp"-->
-<!--                        android:textColor="@color/deliveryColor"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignRight="@+id/items"-->
-<!--                        android:text="x1"/>-->
-
 
                     <Button
                         android:onClick="@{() -> viewModel.onDeliver()}"
@@ -268,21 +181,6 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
 
 
 
-
-
-
-<!--                </RelativeLayout>-->
-
-
-
-
-
-
-
-
-
-
-
             </LinearLayout>
 
 
@@ -294,10 +192,6 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
                 android:scaleType="fitXY"
                 android:src="@drawable/delivery_white_cow"
                 />
-
-
-
-
         </RelativeLayout>
 
 

@@ -28,7 +28,7 @@ import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         date.setText(aggregatorDashboardViewModel.getCurrentDate());
         aggregator_name.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
 
-        if (AppStatus.getInstance(this).isOnline()) {
+        if (InternetConnection.getInstance(this).isOnline()) {
             aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
             aggregatorDashboardViewModel.getTotalNumberOfCollectors();
             aggregatorDashboardViewModel.getAggregatorTodayCollection();

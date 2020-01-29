@@ -1,16 +1,13 @@
 package com.enyata.camdiary.ui.aggregations.history;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.androidnetworking.error.ANError;
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -19,19 +16,11 @@ import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.databinding.ActivityAggregatorHistoryBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
-import com.enyata.camdiary.ui.aggregations.product.ProductViewModel;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.collections.history.CollectorHistoryAdapter;
-import com.enyata.camdiary.ui.collections.history.CollectorHistoryList;
-import com.enyata.camdiary.ui.collections.history.HistoryActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -79,7 +68,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
         aggregatorHistoryViewModel.setNavigator(this);
         activityAggregatorHistoryBinding = getViewDataBinding();
         listView = activityAggregatorHistoryBinding.listView;
-        if (AppStatus.getInstance(this).isOnline()){
+        if (InternetConnection.getInstance(this).isOnline()){
             aggregatorHistoryViewModel.getAggretionHistory();
         }else {
             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");

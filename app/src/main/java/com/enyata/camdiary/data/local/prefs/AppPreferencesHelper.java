@@ -186,8 +186,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public void saveAggregationCollectionList(List<AggregationSavedCollection> list) {
-      Gson gson = new Gson();
-      String json = gson.toJson(list);
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
         mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION_LIST, json).apply();
     }
 
@@ -201,20 +201,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
 }
-
-
-
-//        @Override
-//        public void setAggregationCollection(String collection) {
-//            mPrefs.edit().putString(PREF_KEY_AGGREGATION_COLLECTION, collection).apply();
-//        }
-//
-//        @Override
-//        public String getAggregationCollection() {
-//            return mPrefs.getString(PREF_KEY_AGGREGATION_COLLECTION,"nil");
-//        }
-
-
 
 
 

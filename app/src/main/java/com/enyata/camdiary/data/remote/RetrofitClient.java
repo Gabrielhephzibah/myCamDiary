@@ -35,11 +35,4 @@ public class RetrofitClient {
         return retrofit;
     }
 
-
-//
-//    public  static Call<NewResponse>savePost(String collectorId, AggregationSavedCollection collection){
-//        Call<NewResponse>savePost = apiService.savePost(collectorId,collection)
-//    }
-
-
 }

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.androidnetworking.error.ANError;
@@ -20,7 +19,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -86,7 +85,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         if (TextUtils.isEmpty(id)) {
             Alert.showFailed(getApplicationContext(), "Please enter collector's verification_id");
             return;
-        }else  if (AppStatus.getInstance(this).isOnline()){
+        }else  if (InternetConnection.getInstance(this).isOnline()){
             colectorIdViewModel.getCollectorDetails(id);
         } else {
             Alert.showFailed(getApplicationContext(), "Please Check you Internet Connection and try again");

@@ -22,15 +22,12 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
-import com.enyata.camdiary.data.model.NewResponse;
 import com.enyata.camdiary.data.model.Post;
 
 import com.enyata.camdiary.data.model.api.response.Collection;
-import com.enyata.camdiary.data.model.api.request.Aggregation;
 
 
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
-import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
@@ -39,7 +36,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -49,9 +46,6 @@ import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> implements ProductNavigator, AdapterView.OnItemSelectedListener {
@@ -217,11 +211,9 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                             arrayList.add(collection);
                             productViewModel.setAggregationCollectionList(arrayList);
                         }
-                        Log.d("ARRAY_LIST ",String.valueOf(new ArrayList<>(productViewModel.getAggregationCollectionList())));
                         if (text.getText().toString().equals(getString(R.string.finishText))) {
                         Post newAggregation = new Post(collectorId,productViewModel.getAggregationCollectionList());
-                        Log.i("New RESPONSEE", String.valueOf(newAggregation));
-                        if (AppStatus.getInstance(this).isOnline()){
+                        if (InternetConnection.getInstance(this).isOnline()){
                             productViewModel.sendPost(newAggregation);
                         } else {
                             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");

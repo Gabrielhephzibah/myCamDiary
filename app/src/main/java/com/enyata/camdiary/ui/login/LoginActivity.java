@@ -5,7 +5,6 @@ package com.enyata.camdiary.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -19,9 +18,8 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
-import com.enyata.camdiary.ui.main.MainActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -78,7 +76,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void loginClick() {
-        if (AppStatus.getInstance(this).isOnline()) {
+        if (InternetConnection.getInstance(this).isOnline()) {
             String email = mActivityLoginBinding.emailTextView.getText().toString();
             String password = mActivityLoginBinding.passwordTextView.getText().toString();
             if (mLoginViewModel.isEmailAndPasswordValid(email, password)) {

@@ -64,14 +64,6 @@ public class AppApiHelper implements ApiHelper {
                 .getObjectSingle(NewCollectionResponse.class);
     }
 
-//    @Override
-//    public Single<NewCollectionResponse> saveAggregation(Aggregation.Request request) {
-//        return Rx2AndroidNetworking.post(ApiEndPoint.SAVE_AGGREGATION)
-//                .addBodyParameter(request)
-//                .addHeaders(mApiHeader.getProtectedApiHeader())
-//                .build()
-//                .getObjectSingle(NewCollectionResponse.class);
-//    }
 
     @Override
     public Single<VolumeResponse> getAcceptedVolume() {

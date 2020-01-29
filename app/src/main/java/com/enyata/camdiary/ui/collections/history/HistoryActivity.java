@@ -1,16 +1,13 @@
 package com.enyata.camdiary.ui.collections.history;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.androidnetworking.error.ANError;
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.Collection;
@@ -20,20 +17,11 @@ import com.enyata.camdiary.databinding.ActivityHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorAdapter;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
-import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
-import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
-import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppStatus;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -86,7 +74,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
 
 
 
-       if (AppStatus.getInstance(this).isOnline()){
+       if (InternetConnection.getInstance(this).isOnline()){
            historyViewModel.getAllCollection();
        }else {
            Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again later");
