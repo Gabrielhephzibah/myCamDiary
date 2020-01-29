@@ -1,5 +1,6 @@
 package com.enyata.camdiary.ui.deliveries.deliveryDashboard;
 
+import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.Order;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
@@ -15,5 +16,6 @@ public interface DeliveryDashboardNavigator {
     void logout();
     void  getDeliveryCompleted(DeliveryCompletedResponse response);
     void  getPendingDelivery(PendingDeliveryResponse response);
+    void  getBottleInventory(BottleInventoryResponse response);
 
 }

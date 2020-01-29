@@ -12,6 +12,7 @@ import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
+import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
@@ -287,6 +288,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<DeliveryCompletedResponse> getDeliveryCompleted() {
         return  mApiHelper.getDeliveryCompleted();
+    }
+
+    @Override
+    public Single<BottleInventoryResponse> getBottleInventory() {
+        return  mApiHelper.getBottleInventory();
     }
 
     @Override

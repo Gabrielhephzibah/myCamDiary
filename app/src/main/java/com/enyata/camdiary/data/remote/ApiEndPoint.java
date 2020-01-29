@@ -44,6 +44,8 @@ public final class ApiEndPoint {
 
     public  static  final  String DELIVERY_COMPLETED = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/count";
 
+    public  static  final  String BOTTLE_INVENTORY = BuildConfig.INVENTORY_BASE_URL + "/delivery/bottles";
+
 
 
     private ApiEndPoint() {

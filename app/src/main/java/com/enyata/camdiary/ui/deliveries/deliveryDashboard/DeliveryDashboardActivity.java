@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.Order;
@@ -51,10 +52,6 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     DeliveryListAdapter deliveryListAdapter;
     ListView listView;
 
-    String address;
-    String phoneNo;
-    String firstName;
-    String lastName;
     @Inject
     ViewModelProviderFactory factory;
     private DeliveryDashboardViewModel deliveryDashboardViewModel;
@@ -109,7 +106,8 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
         if (AppStatus.getInstance(this).isOnline()) {
             deliveryDashboardViewModel.getDeliveriesCompleted();
-            deliveryDashboardViewModel.getPendingDelivery();
+//            deliveryDashboardViewModel.getPendingDelivery();
+            deliveryDashboardViewModel.getBottleInventory();
         }else{
             Alert.showFailed(getApplicationContext(), "Please Check your internet Connection and try again");
         }
@@ -245,22 +243,6 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
         for (PendingData pendingData : response.getData()){
             String items;
-
-//            for (int i = 0; i< pendingData.getOrder().getProducts().size(); i++){
-//                Product obj = pendingData.getOrder().getProducts().get(i);
-//                name = obj.getName();
-//                quantity = obj.getQuantity();
-//
-//
-//
-//            }
-
-            address = pendingData.getOrder().getAddress();
-            firstName = pendingData.getOrder().getUsers().getFirstName();
-            lastName = pendingData.getOrder().getUsers().getLastName();
-            phoneNo = pendingData.getOrder().getUsers().getContactNo();
-
-
             if (pendingData.getOrder().getProductCount().equals("1")){
                 items= pendingData.getOrder().getProductCount() + " item";
             }else {
@@ -269,16 +251,17 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
             deliveryLists.add(new DeliveryList(pendingData.getOrder().getUsers().getFirstName()+ ","+" "+pendingData.getOrder().getUsers().getLastName(),items,pendingData.getOrder().getUsers().getContactNo(),pendingData.getOrder().getUsers().getVerificationId(),pendingData.getOrder().getAddress(), (ArrayList<Product>) pendingData.getOrder().getProducts()));
           deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
-//          Log.i("DELIVERYLIST", deliveryLists.toString());
 
           listView.setAdapter(deliveryListAdapter);
           Log.i("PRODUCTS", String.valueOf((ArrayList<Product>) pendingData.getOrder().getProducts()));
-//            Log.i("ArraysName", name);
-//            Log.i("ArrayQuantity", quantity);
-
-//            Log.i("LISTVIEW", listView.toString());
         }
 
+
+    }
+
+    @Override
+    public void getBottleInventory(BottleInventoryResponse response) {
+        deliveryDashboardViewModel.setInventoryCollected(response.getData());
 
     }
 

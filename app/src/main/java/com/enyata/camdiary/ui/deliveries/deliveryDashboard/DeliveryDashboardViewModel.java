@@ -76,6 +76,20 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
 
     }
 
+
+    public  void  getBottleInventory(){
+        getCompositeDisposable().add(getDataManager()
+                .getBottleInventory()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getNavigator().getBottleInventory(response);
+                }, throwable -> {
+                    getNavigator().handleError(throwable);
+
+                }));
+    }
+
     public  void  dispose(){
         onCleared();
     }

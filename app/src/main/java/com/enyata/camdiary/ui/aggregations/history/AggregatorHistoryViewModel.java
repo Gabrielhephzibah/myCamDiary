@@ -34,4 +34,9 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
     public  void  dispose(){
         onCleared();
     }
+
+    public void onLogOut(){
+        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        getNavigator().onLogOut();
+    }
 }

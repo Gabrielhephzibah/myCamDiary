@@ -6,5 +6,6 @@ public interface AggregatorHistoryNavigator {
     void handleError(Throwable throwable);
     void scan();
     void  back();
+    void onLogOut();
     void getAggregatorHistory(AggregationCollectionResponse response);
 }

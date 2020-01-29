@@ -24,6 +24,7 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.history.CollectorHistoryAdapter;
 import com.enyata.camdiary.ui.collections.history.CollectorHistoryList;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.AppStatus;
 import com.google.gson.Gson;
@@ -115,6 +116,12 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
         Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onLogOut() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

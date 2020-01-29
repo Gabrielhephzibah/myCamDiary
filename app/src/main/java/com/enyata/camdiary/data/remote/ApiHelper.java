@@ -8,6 +8,7 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
+import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
@@ -68,6 +69,8 @@ public interface ApiHelper {
 
     //Completed Deliveries
     Single<DeliveryCompletedResponse>getDeliveryCompleted();
+
+    Single<BottleInventoryResponse>getBottleInventory();
 
 
 }

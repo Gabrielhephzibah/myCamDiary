@@ -41,12 +41,12 @@ public class DeliveryDashboardSlideTwoFragment extends Fragment {
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        TextView acceptedVolumeTextView = view.findViewById(R.id.litres_first);
-//        deliveryDashboardViewModel.getAcceptedVolume().observe(requireActivity(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                acceptedVolumeTextView.setText(String.format("%s Litres", s));
-//            }
-//        });
+        TextView bottleCount = view.findViewById(R.id.litres_second);
+        deliveryDashboardViewModel.getInventoryCompleted().observe(requireActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                bottleCount.setText(String.format(s));
+            }
+        });
     }
 }
