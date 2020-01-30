@@ -18,6 +18,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
+import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
@@ -109,6 +110,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         }else if(type.equals("delivery")){
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         }
+        startActivity(intent);
+    }
+
+    @Override
+    public void onForgotPassword() {
+        Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent);
     }
 

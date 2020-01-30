@@ -111,6 +111,7 @@
                 </LinearLayout>
 
                 <RelativeLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -128,6 +129,7 @@
                         android:src="@drawable/padlock" />
 
                     <TextView
+                        android:onClick="@{() -> viewModel.onForgotPassword()}"
                         android:id="@+id/forgotPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

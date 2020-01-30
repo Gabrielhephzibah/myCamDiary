@@ -6,7 +6,8 @@ import android.content.Context;
 
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
-import com.enyata.camdiary.data.model.api.request.AggregationCollection;
+import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -20,6 +21,7 @@ import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
+import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.google.gson.Gson;
@@ -28,7 +30,6 @@ import com.enyata.camdiary.data.local.prefs.PreferencesHelper;
 import com.enyata.camdiary.data.remote.ApiHeader;
 import com.enyata.camdiary.data.remote.ApiHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -191,7 +192,25 @@ public class AppDataManager implements DataManager {
         return mPreferencesHelper.getCollectorName();
     }
 
+    @Override
+    public void setOrderId(String orderId) {
+        mPreferencesHelper.setOrderId(orderId);
+    }
 
+    @Override
+    public String getOrderId() {
+        return mPreferencesHelper.getOrderId();
+    }
+
+    @Override
+    public void setCustomerName(String name) {
+        mPreferencesHelper.setCustomerName(name);
+    }
+
+    @Override
+    public String getCustomerName() {
+        return mPreferencesHelper.getCustomerName();
+    }
 
 
     @Override
@@ -293,6 +312,16 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<BottleInventoryResponse> getBottleInventory() {
         return  mApiHelper.getBottleInventory();
+    }
+
+    @Override
+    public Single<NewCollectionResponse> addNewDelivery(DeliveryCollection.Request request) {
+        return mApiHelper.addNewDelivery(request);
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request) {
+        return mApiHelper.resetPassword(request);
     }
 
     @Override

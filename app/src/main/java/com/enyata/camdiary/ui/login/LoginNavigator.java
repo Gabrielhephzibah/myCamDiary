@@ -14,5 +14,9 @@ public interface LoginNavigator {
 
     void goToDashBoard(String type);
 
+    void onForgotPassword();
+
+
+
 }
 

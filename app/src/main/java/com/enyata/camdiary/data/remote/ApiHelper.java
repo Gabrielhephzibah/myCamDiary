@@ -5,6 +5,8 @@ package com.enyata.camdiary.data.remote;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
+import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
@@ -16,6 +18,7 @@ import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
+import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 
@@ -69,8 +72,12 @@ public interface ApiHelper {
 
     //Completed Deliveries
     Single<DeliveryCompletedResponse>getDeliveryCompleted();
-
+    //Bottle Inventory
     Single<BottleInventoryResponse>getBottleInventory();
+    //  Delivery Collection
+    Single<NewCollectionResponse>addNewDelivery(DeliveryCollection.Request request);
+    //Reset password
+    Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request);
 
 
 }

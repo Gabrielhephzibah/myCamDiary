@@ -52,8 +52,6 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                         getNavigator().goToDashBoard("delivery");
                         getDataManager().setLoggedInView("delivery");
                     }
-
-
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -63,6 +61,11 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void onLoginClick() {
         getNavigator().loginClick();
     }
+
+    public void onForgotPassword(){
+        getNavigator().onForgotPassword();
+    }
+
 
 
 }

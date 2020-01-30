@@ -63,6 +63,14 @@ public interface PreferencesHelper {
 
     String getCollectorName();
 
+    void setOrderId(String orderId);
+
+    String getOrderId();
+
+    void setCustomerName(String name);
+
+    String getCustomerName();
+
     void saveAggregationCollectionList(List<AggregationSavedCollection> list);
 
     List<AggregationSavedCollection> getAggregationCollectionList();

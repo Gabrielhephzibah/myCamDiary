@@ -43,12 +43,21 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="29dp">
 
+                    <ImageView
+                        android:layout_marginTop="12dp"
+                        android:onClick="@{() -> viewModel.onBack()}"
+                        android:id="@+id/back2home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_green_arrow"/>
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Returned"
                         android:letterSpacing="0.03"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/azo_san_bold"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
@@ -87,9 +96,6 @@
                             android:gravity="top"/>
 
                     </LinearLayout>
-
-
-
                     <Button
                         android:onClick="@{() -> viewModel.onFinish()}"
                         android:id="@+id/finish"
@@ -100,7 +106,7 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="100dip"
                         android:background="@drawable/hover_button"
-                        android:text="Finish"
+                        android:text="Submit"
                         android:fontFamily="@font/azo_san"
                         android:textAllCaps="false"
                         android:textColor="@drawable/changing_text"

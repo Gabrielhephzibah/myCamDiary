@@ -12,4 +12,8 @@ public class FinishViewModel extends BaseViewModel<FinishNavigator> {
     public void onFinish(){
         getNavigator().finish();
     }
+
+    public  String getCustomerName(){
+        return getDataManager().getCustomerName();
+    }
 }

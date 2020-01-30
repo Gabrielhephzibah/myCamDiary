@@ -34,6 +34,7 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationA
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
+import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -127,6 +128,9 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract DeliveryHistoryActivity bindDeliveryHistoryActivity();
+
+    @ContributesAndroidInjector
+    abstract ResetPasswordActivity ResetPasswordActivity();
 
     @ContributesAndroidInjector
     abstract BottlesActivity bindBottlesActivity();

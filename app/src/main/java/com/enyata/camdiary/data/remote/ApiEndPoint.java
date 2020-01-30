@@ -46,6 +46,10 @@ public final class ApiEndPoint {
 
     public  static  final  String BOTTLE_INVENTORY = BuildConfig.INVENTORY_BASE_URL + "/delivery/bottles";
 
+    public static final String DELIVERY_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/delivery";
+
+    public  static  final  String RESET_PASSWORD = BuildConfig.BASE_URL + "/auth/reset-password-begin";
+
 
 
     private ApiEndPoint() {

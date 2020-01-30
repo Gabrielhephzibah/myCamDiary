@@ -3,69 +3,136 @@ package com.enyata.camdiary.data.model.api.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class PendingData {
-
-    @Expose
-    @SerializedName("id")
-    private int id;
-
-    @Expose
-    @SerializedName("deliverer_id")
-    private int delivererId;
-
-    @Expose
-    @SerializedName("bottles")
-    private int bottles;
-
-    @Expose
-    @SerializedName("feedback")
-    private String feedback;
 
     @Expose
     @SerializedName("order_id")
     private int orderId;
 
     @Expose
+    @SerializedName("user_id")
+    private int userId;
+
+    @Expose
+    @SerializedName("address")
+    private String address;
+
+    @Expose
+    @SerializedName("frequency_of_delivery")
+    private String frequencyOfDelivery;
+
+    @Expose
+    @SerializedName("area_of_delivery")
+    private String areaOfDelivery;
+
+    @Expose
+    @SerializedName("period_of_delivery")
+    private String periodOfDelivery;
+
+    @Expose
     @SerializedName("created_at")
     private String createdAt;
 
     @Expose
-    @SerializedName("updated_at")
-    private String updatedAt;
+    @SerializedName("payment_status")
+    private String paymentStatus;
 
     @Expose
-    @SerializedName("order")
-    private Order order;
+    @SerializedName("delivery_status")
+    private String deliveryStatus;
 
-    public int getId() {
-        return id;
-    }
+    @Expose
+    @SerializedName("deliverer_id")
+    private String delivererId;
 
-    public int getDelivererId() {
-        return delivererId;
-    }
+    @Expose
+    @SerializedName("amount")
+    private int amount;
 
-    public int getBottles() {
-        return bottles;
-    }
+    @Expose
+    @SerializedName("payment_reference")
+    private String paymentReference;
 
-    public String getFeedback() {
-        return feedback;
-    }
+    @Expose
+    @SerializedName("discount_id")
+    private String discountId;
+
+    @Expose
+    @SerializedName("products")
+    private List<Product>products;
+
+    @Expose
+    @SerializedName("user")
+    private Details users;
+
+    @Expose
+    @SerializedName("product_count")
+    private String productCount;
+
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getFrequencyOfDelivery() {
+        return frequencyOfDelivery;
+    }
+
+    public String getAreaOfDelivery() {
+        return areaOfDelivery;
+    }
+
+    public String getPeriodOfDelivery() {
+        return periodOfDelivery;
     }
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
-    public Order getOrder() {
-        return order;
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public String getDelivererId() {
+        return delivererId;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public String getPaymentReference() {
+        return paymentReference;
+    }
+
+    public String getDiscountId() {
+        return discountId;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public Details getUsers() {
+        return users;
+    }
+
+    public String getProductCount() {
+        return productCount;
     }
 }

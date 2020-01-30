@@ -92,6 +92,8 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         activityDeliveryDashboardBinding = getViewDataBinding();
         ImageView logout = activityDeliveryDashboardBinding.logout;
 
+
+
         TextView dispatcherName = activityDeliveryDashboardBinding.dispatcherName;
         dispatcherName.setText( "Hey," + " " + deliveryDashboardViewModel.getCurrentFirstName());
 
@@ -100,8 +102,8 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
 
         if (InternetConnection.getInstance(this).isOnline()) {
-            deliveryDashboardViewModel.getDeliveriesCompleted();
-//            deliveryDashboardViewModel.getPendingDelivery();
+//            deliveryDashboardViewModel.getDeliveriesCompleted();
+            deliveryDashboardViewModel.getPendingDelivery();
             deliveryDashboardViewModel.getBottleInventory();
         }else{
             Alert.showFailed(getApplicationContext(), "Please Check your internet Connection and try again");
@@ -114,6 +116,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
             String  customerAddress= delivery.getCustomerAdreess();
             String contactNo = delivery.getNumber();
             ArrayList<Product> namee = delivery.getProducts();
+
 
             for (int i = 0; i < namee.size(); i++){
                 Product obj = namee.get(i);
@@ -237,14 +240,19 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     public void getPendingDelivery(PendingDeliveryResponse response) {
 
         for (PendingData pendingData : response.getData()){
+            int orderId = pendingData.getOrderId();
+            String name = pendingData.getUsers().getFirstName() + " " + pendingData.getUsers().getLastName();
+            deliveryDashboardViewModel.setOrderId(String.valueOf(orderId));
+            deliveryDashboardViewModel.setCustomerName(name);
+
             String items;
-            if (pendingData.getOrder().getProductCount().equals("1")){
-                items= pendingData.getOrder().getProductCount() + " item";
+            if (pendingData.getProductCount().equals("1")){
+                items= pendingData.getProductCount() + " item";
             }else {
-                 items = pendingData.getOrder().getProductCount()+ " items";
+                 items = pendingData.getProductCount()+ " items";
             }
 
-            deliveryLists.add(new DeliveryList(pendingData.getOrder().getUsers().getFirstName()+ ","+" "+pendingData.getOrder().getUsers().getLastName(),items,pendingData.getOrder().getUsers().getContactNo(),pendingData.getOrder().getUsers().getVerificationId(),pendingData.getOrder().getAddress(), (ArrayList<Product>) pendingData.getOrder().getProducts()));
+            deliveryLists.add(new DeliveryList(pendingData.getUsers().getFirstName()+ ","+" "+pendingData.getUsers().getLastName(),items,pendingData.getUsers().getContactNo(),pendingData.getUsers().getVerificationId(),pendingData.getAddress(), (ArrayList<Product>) pendingData.getProducts()));
           deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
 
           listView.setAdapter(deliveryListAdapter);

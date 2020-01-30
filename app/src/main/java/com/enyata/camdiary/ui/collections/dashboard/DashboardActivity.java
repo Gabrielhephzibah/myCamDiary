@@ -6,16 +6,20 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -55,6 +59,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     private ListView listView;
     private ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
     private LinearLayout slideLayout;
+   private RelativeLayout data;
 
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
 
@@ -97,134 +102,141 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         super.onCreate(savedInstanceState);
         dashboardViewModel.setNavigator(this);
         activityCollectionDashboardBinding = getViewDataBinding();
-        ViewPager pager = activityCollectionDashboardBinding.pager;
-        slideLayout = activityCollectionDashboardBinding.slideLayout;
-        listView = activityCollectionDashboardBinding.listView;
-        TextView username = activityCollectionDashboardBinding.username;
-        TextView today = activityCollectionDashboardBinding.today;
-        today.setText(dashboardViewModel.getCurrentDate());
-        firstName = getIntent().getStringExtra("first_name");
-        lastName = getIntent().getStringExtra("last_name");
-        coperateName = getIntent().getStringExtra("coperate_name");
-        verification_number = getIntent().getStringExtra("farmer_id");
+        data = activityCollectionDashboardBinding.data;
+//        if (dashboardViewModel.getData()== "collector") {
+//            Log.i("USERTYPE", dashboardViewModel.getData());
+//            data.setVisibility(View.GONE);
+//        }
+            ViewPager pager = activityCollectionDashboardBinding.pager;
+            slideLayout = activityCollectionDashboardBinding.slideLayout;
+            listView = activityCollectionDashboardBinding.listView;
+            TextView username = activityCollectionDashboardBinding.username;
+            TextView today = activityCollectionDashboardBinding.today;
 
-        fullName = firstName + " "+ lastName;
+            today.setText(dashboardViewModel.getCurrentDate());
+            firstName = getIntent().getStringExtra("first_name");
+            lastName = getIntent().getStringExtra("last_name");
+            coperateName = getIntent().getStringExtra("coperate_name");
+            verification_number = getIntent().getStringExtra("farmer_id");
 
-        username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
+            fullName = firstName + " " + lastName;
 
-        DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
-        pager.setAdapter(viewPagerAdapter);
-        createSliderDash(0);
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
 
-            }
+            DashboardAdapter viewPagerAdapter = new DashboardAdapter(this, getSupportFragmentManager());
+            pager.setAdapter(viewPagerAdapter);
+            createSliderDash(0);
+            pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            @Override
-            public void onPageSelected(int position) {
-                createSliderDash(position);
+                }
 
-            }
+                @Override
+                public void onPageSelected(int position) {
+                    createSliderDash(position);
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                }
 
-            }
-        });
+                @Override
+                public void onPageScrollStateChanged(int state) {
 
-
-      if (InternetConnection.getInstance(this).isOnline()){
-          dashboardViewModel.getVolumeOfAcceptedCollection();
-          dashboardViewModel.getVolumeOfRejectedCollection();
-          dashboardViewModel.getTodaysCollection();
-          dashboardViewModel.getAllEntries();
-          return;
-      }else {
-          Alert.showFailed(getApplicationContext(),"Please check Internet Connection and try again");
-      }
+                }
+            });
 
 
-
-    }
-
-
-    @Override
-    public void createSliderDash(int current_position) {
-        if (slideLayout != null)
-            slideLayout.removeAllViews();
-
-        ImageView[] slider_dash = new ImageView[layouts.length];
-        for (int i = 0; i < layouts.length; i++) {
-            slider_dash[i] = new ImageView(this);
-            if (i == current_position) {
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.active_slider_dash));
+            if (InternetConnection.getInstance(this).isOnline()) {
+                dashboardViewModel.getVolumeOfAcceptedCollection();
+                dashboardViewModel.getVolumeOfRejectedCollection();
+                dashboardViewModel.getTodaysCollection();
+                dashboardViewModel.getAllEntries();
+                return;
             } else {
-                slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.default_slider_dash));
+                Alert.showFailed(getApplicationContext(), "Please check Internet Connection and try again");
             }
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(4, 0, 4, 0);
-            params.gravity = Gravity.CENTER_HORIZONTAL;
-            slideLayout.setLayoutParams(params);
 
-            slideLayout.addView(slider_dash[i], params);
         }
 
-    }
 
-    @Override
-    public void scancode() {
-        Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
-        startActivity(intent);
-    }
+        @Override
+        public void createSliderDash ( int current_position){
+            if (slideLayout != null)
+                slideLayout.removeAllViews();
 
-    @Override
-    public void history() {
-        Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
-        startActivity(intent);
-    }
+            ImageView[] slider_dash = new ImageView[layouts.length];
+            for (int i = 0; i < layouts.length; i++) {
+                slider_dash[i] = new ImageView(this);
+                if (i == current_position) {
+                    slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.active_slider_dash));
+                } else {
+                    slider_dash[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.default_slider_dash));
+                }
 
-    @Override
-    public void dataCollection() {
-        Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
-        startActivity(intent);
-    }
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.setMargins(4, 0, 4, 0);
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                slideLayout.setLayoutParams(params);
 
-    @Override
-    public void logout() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-    }
+                slideLayout.addView(slider_dash[i], params);
+            }
 
-    @Override
-    public void displayAcceptedVolume(VolumeResponse volume) {
-        dashboardViewModel.setAcceptedVolume(volume.getData());
-    }
-
-    @Override
-    public void displayRejectedVolume(VolumeResponse volume) {
-        dashboardViewModel.setRejectedVolume(volume.getData());
-    }
-
-    @Override
-    public void getAllEntries(AllEntries entries) {
-        dashboardViewModel.setEntries(entries.getData());
-    }
-
-    @Override
-    public void getTodayCollection(CollectionResponse todayCollectionResponse) {
-
-        for (Collection response : todayCollectionResponse.getData())  {
-            dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName()+ "  " + response.getFarmer().getLastName(),response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(),response.getStatusOfCollection(), response.getVolume()+ " litres"));
-            DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
-            listView.setAdapter(dashboardCollectorAdapter);
         }
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dashboardViewModel.dispose();
-    }
+        @Override
+        public void scancode () {
+            Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void history () {
+            Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void dataCollection () {
+            Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void logout () {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void displayAcceptedVolume (VolumeResponse volume){
+            dashboardViewModel.setAcceptedVolume(volume.getData());
+        }
+
+        @Override
+        public void displayRejectedVolume (VolumeResponse volume){
+            dashboardViewModel.setRejectedVolume(volume.getData());
+        }
+
+        @Override
+        public void getAllEntries (AllEntries entries){
+            dashboardViewModel.setEntries(entries.getData());
+        }
+
+        @Override
+        public void getTodayCollection (CollectionResponse todayCollectionResponse){
+
+            for (Collection response : todayCollectionResponse.getData()) {
+                dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName() + "  " + response.getFarmer().getLastName(), response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume() + " litres"));
+                DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
+                listView.setAdapter(dashboardCollectorAdapter);
+            }
+        }
+
+        @Override
+        protected void onDestroy () {
+            super.onDestroy();
+            dashboardViewModel.dispose();
+        }
+
+
 }

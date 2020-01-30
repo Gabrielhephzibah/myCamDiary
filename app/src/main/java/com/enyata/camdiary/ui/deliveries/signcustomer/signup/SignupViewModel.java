@@ -17,4 +17,8 @@ public class SignupViewModel extends BaseViewModel<SignupNavigator> {
         getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         getNavigator().logout();
     }
+
+    public  void  onBack(){
+        getNavigator().onBack();
+    }
 }

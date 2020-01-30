@@ -31,9 +31,6 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
         getNavigator().logout();
 
     }
-
-
-
     public  void  onSignup(){
         getNavigator().signup();
     }
@@ -44,6 +41,10 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
 
     public  String getCurrentDate(){
         return (String) DateFormat.format("dd/MM/yyyy",new java.util.Date());
+    }
+
+    public void setCustomerName(String name){
+        getDataManager().setCustomerName(name);
     }
 
     public void getPendingDelivery(){
@@ -92,6 +93,10 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
 
     public  void  dispose(){
         onCleared();
+    }
+
+    public  void  setOrderId(String orderId){
+        getDataManager().setOrderId(orderId);
     }
 
 

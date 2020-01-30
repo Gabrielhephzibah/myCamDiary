@@ -3,6 +3,8 @@
 package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -17,6 +19,7 @@ import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
+import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -193,6 +196,24 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(BottleInventoryResponse.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> addNewDelivery(DeliveryCollection.Request request) {
+       return Rx2AndroidNetworking.post(ApiEndPoint.DELIVERY_COLLECTION)
+                .addBodyParameter(request)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.RESET_PASSWORD)
+                .addBodyParameter(request)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(ResetPasswordResponse.class);
     }
 
 

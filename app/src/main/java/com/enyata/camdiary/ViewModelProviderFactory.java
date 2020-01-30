@@ -36,6 +36,7 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationV
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
+import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
 import com.enyata.camdiary.ui.splash.SplashViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
@@ -146,6 +147,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(DeliveryHistoryViewModel.class)) {
             //noinspection unchecked
             return (T) new DeliveryHistoryViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(ResetPasswordViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ResetPasswordViewModel(dataManager, schedulerProvider);
 
         } else if (modelClass.isAssignableFrom(HistoryViewModel.class)) {
             //noinspection unchecked

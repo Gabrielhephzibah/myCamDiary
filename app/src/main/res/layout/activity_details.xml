@@ -157,28 +157,27 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
                 <ListView
                     android:layout_marginTop="10dp"
                     android:id="@+id/listView"
+                    android:layout_marginBottom="15dp"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
 
-
-                    <Button
-                        android:onClick="@{() -> viewModel.onDeliver()}"
-                        android:id="@+id/deliver"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="180dp"
-                        android:background="@drawable/hover_button"
-                        android:text="Deliver"
-                        android:layout_marginTop="42dp"
-                        android:fontFamily="@font/azo_san"
-                        android:textAllCaps="false"
-                        android:textColor="@drawable/changing_text"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
+                <Button
+                    android:id="@+id/deliver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginRight="180dp"
+                    android:background="@drawable/hover_button"
+                    android:fontFamily="@font/azo_san"
+                    android:onClick="@{() -> viewModel.onDeliver()}"
+                    android:text="Deliver"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/changing_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

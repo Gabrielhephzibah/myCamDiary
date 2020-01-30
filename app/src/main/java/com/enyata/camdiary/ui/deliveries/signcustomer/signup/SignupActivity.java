@@ -18,6 +18,8 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
+import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
+import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
@@ -58,15 +60,6 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding,SignupVie
         super.onCreate(savedInstanceState);
         signupViewModel.setNavigator(this);
 
-//
-//        delivery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), DeliveryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         history = findViewById(R.id.history);
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +68,6 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding,SignupVie
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -89,6 +80,12 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding,SignupVie
     @Override
     public void logout() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBack() {
+        Intent intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         startActivity(intent);
     }
 }

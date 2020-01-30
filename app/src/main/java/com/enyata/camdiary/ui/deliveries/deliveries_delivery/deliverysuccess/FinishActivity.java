@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
@@ -22,7 +23,8 @@ public class FinishActivity extends BaseActivity<ActivityFinishBinding,FinishVie
     @Inject
     ViewModelProviderFactory factory;
     private FinishViewModel finishViewModel;
-
+    ActivityFinishBinding activityFinishBinding;
+    String noOfBottles;
     public static Intent newIntent(Context context) {
         return new Intent(context, DeliveryActivity.class);
     }
@@ -48,6 +50,13 @@ public class FinishActivity extends BaseActivity<ActivityFinishBinding,FinishVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         finishViewModel.setNavigator(this);
+        activityFinishBinding = getViewDataBinding();
+        TextView bottles =activityFinishBinding.bottles;
+       TextView name = activityFinishBinding.customerName;
+       noOfBottles = getIntent().getStringExtra("bottles");
+       bottles.setText(noOfBottles);
+       name.setText(finishViewModel.getCustomerName());
+
     }
 
     @Override

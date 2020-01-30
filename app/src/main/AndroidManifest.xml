@@ -3,7 +3,7 @@
     package="com.enyata.camdiary">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MvvmApp"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.deliveries.history.DeliveryHistoryActivity"></activity>
+        <activity android:name=".ui.password.ResetPasswordActivity"></activity>
+        <activity android:name=".ui.deliveries.history.DeliveryHistoryActivity" />
         <activity android:name=".ui.deliveries.signcustomer.confirmsuccess.SignsuccessActivity" />
         <activity android:name=".ui.deliveries.signcustomer.confirmation.ConfirmationActivity" />
         <activity android:name=".ui.deliveries.signcustomer.signup.SignupActivity" />

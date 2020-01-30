@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.di.PreferenceInfo;
 import com.enyata.camdiary.utils.AppConstants;
 import com.google.gson.Gson;
@@ -51,6 +52,10 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private static final String PREF_KEY_COLLECTOR_NAME = "PREF_KEY_COLLECTOR_NAME";
 
     private static final String PREF_KEY_AGGREGATION_COLLECTION_LIST = "PREF_KEY_AGGREGATION_COLLECTION_LIST";
+
+    private  static  final  String PREF_KEY_ORDER_ID = "PREF_KEY_ORDER_ID";
+
+    private static  final String PREF_KEY_CUSTOMER_NAME = "PREF_KEY_CUSTOMER_NAME";
 
     private final SharedPreferences mPrefs;
 
@@ -182,6 +187,26 @@ public class AppPreferencesHelper implements PreferencesHelper {
     public String getCollectorName() {
         return mPrefs.getString(PREF_KEY_COLLECTOR_NAME, null);
 
+    }
+
+    @Override
+    public void setOrderId(String orderId) {
+        mPrefs.edit().putString(PREF_KEY_ORDER_ID,orderId).apply();
+    }
+
+    @Override
+    public String getOrderId() {
+        return mPrefs.getString(PREF_KEY_ORDER_ID,null);
+    }
+
+    @Override
+    public void setCustomerName(String name) {
+        mPrefs.edit().putString(PREF_KEY_CUSTOMER_NAME, name).apply();
+    }
+
+    @Override
+    public String getCustomerName() {
+        return mPrefs.getString(PREF_KEY_CUSTOMER_NAME,null);
     }
 
     @Override
