@@ -24,6 +24,7 @@ import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryVi
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -73,14 +74,18 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
 
     @Override
     public void finish() {
-        Log.i("ORDERID",bottlesViewModel.getOrderId());
+        Log.i("ORDERID", bottlesViewModel.getOrderId());
+        if (InternetConnection.getInstance(this).isOnline()) {
 
-        DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(),bottlesViewModel.getOrderId());
-        bottlesViewModel.addNewDelivery(request);
+            DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(), bottlesViewModel.getOrderId());
+            bottlesViewModel.addNewDelivery(request);
 
-        Intent intent = new Intent(getApplicationContext(), FinishActivity.class);
-        intent.putExtra("Bottles", activityBottlesBinding.editText.getText().toString());
-        startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), FinishActivity.class);
+            intent.putExtra("Bottles", activityBottlesBinding.editText.getText().toString());
+            startActivity(intent);
+        } else {
+            Alert.showFailed(getApplicationContext(), "Please check your network connection and try again");
+        }
     }
 
     @Override
@@ -98,7 +103,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
             if (error.getErrorBody()!= null){
                 Alert.showFailed(getApplicationContext(),response.getResponseMessage());
             }else {
-                Alert.showFailed(getApplicationContext(),"Unable to Connect");
+                Alert.showFailed(getApplicationContext(),"Unable to Connect to  the internet");
             }
         }
 
@@ -109,5 +114,11 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
     public void onBack() {
         Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bottlesViewModel.onDispose();
     }
 }

@@ -35,6 +35,11 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
     }
 
+
+    public  String getUserType(){
+        return  getDataManager().getUserType();
+    }
+
     public void getVolumeOfAcceptedCollection() {
         getCompositeDisposable().add(getDataManager()
                 .getAcceptedVolume()

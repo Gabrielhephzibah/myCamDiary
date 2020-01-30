@@ -45,6 +45,10 @@ public class HistoryViewModel extends BaseViewModel<HistoryNavigator> {
         return (String) DateFormat.format("dd/MM/yyyy", new java.util.Date());
     }
 
+    public String getUserType(){
+        return getDataManager().getUserType();
+    }
+
     public  void onLogout(){
         getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         getNavigator().logout();

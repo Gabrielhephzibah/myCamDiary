@@ -34,4 +34,8 @@ public class ResetPasswordViewModel extends BaseViewModel<ResetPasswordNavigator
 
     }
 
+    public  void  onDispose(){
+        onCleared();
+    }
+
 }

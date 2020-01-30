@@ -67,6 +67,10 @@ public interface PreferencesHelper {
 
     String getOrderId();
 
+    void setUserType(String user);
+
+    String getUserType();
+
     void setCustomerName(String name);
 
     String getCustomerName();

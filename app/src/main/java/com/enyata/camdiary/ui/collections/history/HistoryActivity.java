@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
@@ -36,6 +38,8 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
     ListView listView;
     ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
     ActivityHistoryBinding activityHistoryBinding;
+
+    RelativeLayout data;
 
 
 
@@ -69,11 +73,14 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
         super.onCreate(savedInstanceState);
         historyViewModel.setNavigator(this);
         activityHistoryBinding =getViewDataBinding();
+        data = activityHistoryBinding.data;
+
+        if (historyViewModel.getUserType().equals("data_collectors")){
+            data.setVisibility(View.VISIBLE);
+        }
+
         listView = activityHistoryBinding.listView;
-
-
-
-
+        
        if (InternetConnection.getInstance(this).isOnline()){
            historyViewModel.getAllCollection();
        }else {

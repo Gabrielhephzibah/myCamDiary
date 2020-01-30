@@ -103,10 +103,11 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         dashboardViewModel.setNavigator(this);
         activityCollectionDashboardBinding = getViewDataBinding();
         data = activityCollectionDashboardBinding.data;
-//        if (dashboardViewModel.getData()== "collector") {
-//            Log.i("USERTYPE", dashboardViewModel.getData());
-//            data.setVisibility(View.GONE);
-//        }
+        Log.i("MYYYYYYYYYYYYYY", dashboardViewModel.getUserType());
+
+        if (dashboardViewModel.getUserType().equals("data_collectors")){
+            data.setVisibility(View.VISIBLE);
+        }
             ViewPager pager = activityCollectionDashboardBinding.pager;
             slideLayout = activityCollectionDashboardBinding.slideLayout;
             listView = activityCollectionDashboardBinding.listView;

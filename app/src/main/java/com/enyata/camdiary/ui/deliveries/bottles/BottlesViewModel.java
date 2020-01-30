@@ -39,4 +39,8 @@ public class BottlesViewModel extends BaseViewModel<BottlesNavigator> {
 
                 }));
     }
+
+   public  void onDispose(){
+        onCleared();
+   }
 }

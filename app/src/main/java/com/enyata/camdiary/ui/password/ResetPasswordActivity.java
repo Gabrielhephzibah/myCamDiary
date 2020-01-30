@@ -21,6 +21,7 @@ import com.enyata.camdiary.databinding.ActivityResetPasswordBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -83,12 +84,15 @@ public class ResetPasswordActivity extends BaseActivity<ActivityResetPasswordBin
     @Override
     public void onSubmit() {
         Log.i("EDITTEXTVALUE", activityResetPasswordBinding.editText.getText().toString());
+        if (InternetConnection.getInstance(this).isOnline()) {
 
-        ResetPasswordRequest.Request request = new ResetPasswordRequest.Request(activityResetPasswordBinding.editText.getText().toString());
+            ResetPasswordRequest.Request request = new ResetPasswordRequest.Request(activityResetPasswordBinding.editText.getText().toString());
 
-        resetPasswordViewModel.resetPassword(request);
+            resetPasswordViewModel.resetPassword(request);
 
-
+        }else {
+            Alert.showFailed(getApplicationContext(),"Please check your Internet Connection and try again");
+        }
     }
 
     @Override
@@ -117,16 +121,11 @@ public class ResetPasswordActivity extends BaseActivity<ActivityResetPasswordBin
                AlertDialog alert = alertDialog.create();
                alert.show();
 
+    }
 
-
-
-
-
-
-
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        resetPasswordViewModel.onDispose();
     }
 }

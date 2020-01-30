@@ -38,6 +38,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                 .subscribe(response -> {
                     setIsLoading(false);
                     getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_IN);
+                    getNavigator().onResponse(response);
                     String token = response.getData().getToken();
                     String userEmail = response.getData().getEmail();
                     String firstname = response.getData().getFirstName();
@@ -51,7 +52,13 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     }else if (response.getData().getUserType().equals("delivery")){
                         getNavigator().goToDashBoard("delivery");
                         getDataManager().setLoggedInView("delivery");
+                    }else if (response.getData().getUserType().equals("data_collectors")){
+                        getNavigator().goToDashBoard("collectors");
+                        getDataManager().setLoggedInView("data_collectors");
                     }
+
+
+
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -64,6 +71,14 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public void onForgotPassword(){
         getNavigator().onForgotPassword();
+    }
+
+    public void setUserType(String user){
+        getDataManager().setUserType(user);
+    }
+
+    public  String getUserType(){
+        return  getDataManager().getUserType();
     }
 
 

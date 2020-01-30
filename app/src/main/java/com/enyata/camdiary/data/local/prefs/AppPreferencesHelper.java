@@ -57,6 +57,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static  final String PREF_KEY_CUSTOMER_NAME = "PREF_KEY_CUSTOMER_NAME";
 
+    private  static  final String PREF_KEY_USER_TYPE = "PREF_KEY_USER_TYPE";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -197,6 +199,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getOrderId() {
         return mPrefs.getString(PREF_KEY_ORDER_ID,null);
+    }
+
+    @Override
+    public void setUserType(String user) {
+        mPrefs.edit().putString(PREF_KEY_USER_TYPE,user).apply();
+    }
+
+    @Override
+    public String getUserType() {
+        return mPrefs.getString(PREF_KEY_USER_TYPE,null);
     }
 
     @Override

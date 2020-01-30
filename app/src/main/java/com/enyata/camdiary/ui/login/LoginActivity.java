@@ -5,6 +5,7 @@ package com.enyata.camdiary.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -102,6 +103,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToDashBoard(String type) {
+
         Intent intent = null;
         if(type.equals("collectors")){
             intent = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -109,7 +111,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         }else if(type.equals("delivery")){
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
+        }else if(type.equals("data_collectors")){
+            intent = new Intent(getApplicationContext(), DashboardActivity.class);
         }
+
         startActivity(intent);
     }
 
@@ -117,6 +122,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void onForgotPassword() {
         Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResponse(CamLoginResponse response) {
+        String user = response.getData().getUserType();
+        mLoginViewModel.setUserType(user);
+        Log.i("MY USER", mLoginViewModel.getUserType());
+
     }
 
     @Override

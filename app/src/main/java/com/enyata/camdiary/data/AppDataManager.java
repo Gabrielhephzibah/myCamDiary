@@ -203,6 +203,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setUserType(String user) {
+        mPreferencesHelper.setUserType(user);
+    }
+
+    @Override
+    public String getUserType() {
+        return mPreferencesHelper.getUserType();
+    }
+
+    @Override
     public void setCustomerName(String name) {
         mPreferencesHelper.setCustomerName(name);
     }
