@@ -107,4 +107,23 @@ public class Collection {
     }
 
     public Details getFarmer(){return  farmerDetails;}
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "id='" + id + '\'' +
+                ",collectorId = '"+ collectorId +
+                ", farmerId='" + farmerId + '\'' +
+                ", statusOfCollection='" + statusOfCollection + '\'' +
+                ", volume='" + volume + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", testOne='" + testOne + '\'' +
+                ", testTwo='" + testTwo + '\'' +
+                ", testThree='" + testThree + '\'' +
+                ", approvedContainer='" + approvedContainer + '\'' +
+                ", message='" + message + '\'' +
+                ", farmer='" + farmerDetails + '\'' +
+                '}';
+    }
 }

@@ -11,6 +11,10 @@
             type="com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel" />
     </data>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,9 +43,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-
-
-
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
                                 android:src="@drawable/ic_green_arrow"/>
 
                             <TextView
-                                android:id="@+id/forgotPassword"
+                                android:id="@+id/dispatcherName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -75,7 +76,7 @@
                                 android:fontFamily="@font/azo_san"
                                 android:text="Here’s how far you’ve done"
                                 android:textAllCaps="false"
-                                android:layout_alignBottom="@+id/forgotPassword"
+                                android:layout_alignBottom="@+id/dispatcherName"
                                 android:textColor="#3333"
                                 android:layout_marginBottom="-26dp"
                                 android:textSize="14sp"
@@ -90,14 +91,14 @@
                                 app:cardCornerRadius="35dp"
                                 app:strokeWidth="1dp"
                                 android:layout_marginRight="27dp"
-                                android:layout_toLeftOf="@id/forgotPassword"
+                                android:layout_toLeftOf="@id/dispatcherName"
                                 android:layout_alignParentRight="true">
                                 <ImageView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
                                     android:id="@+id/circular_image"
                                     android:scaleType="fitCenter"
-                                    android:layout_toLeftOf="@id/forgotPassword"
+                                    android:layout_toLeftOf="@id/dispatcherName"
                                     android:layout_alignParentRight="true"
                                     android:src="@drawable/delivery_susan" />
                             </androidx.cardview.widget.CardView>
@@ -110,32 +111,13 @@
 
                     <ListView
                         android:layout_marginTop="11dp"
+                        android:layout_marginBottom="85dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/listView"/>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </LinearLayout>
-
-
-
-
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -175,30 +157,6 @@
                                 />
 
                         </RelativeLayout>
-
-<!--                        <RelativeLayout-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_marginLeft="45dp"-->
-<!--                            android:layout_height="wrap_content">-->
-<!--                            <ImageView-->
-<!--                                android:onClick="@{() -> viewModel.onDelivery()}"-->
-<!--                                android:id="@+id/delivery"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:src="@drawable/ic_delivery"/>-->
-<!--                            <TextView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="Deliveries"-->
-<!--                                android:fontFamily="@font/azo_san"-->
-<!--                                android:textSize="8sp"-->
-<!--                                android:gravity="left"-->
-<!--                                android:layout_alignParentBottom="true"-->
-<!--                                android:textColor="#fff"-->
-<!--                                />-->
-
-<!--                        </RelativeLayout>-->
 
 
                         <RelativeLayout
@@ -265,5 +223,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
 
 </layout>

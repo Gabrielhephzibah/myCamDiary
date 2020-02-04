@@ -4,6 +4,8 @@ package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.BuildConfig;
 
+import java.util.StringTokenizer;
+
 /**
  * Created by Sanni Michael and Gabriel Hephzibah on 10/12/2019
  */
@@ -36,8 +38,6 @@ public final class ApiEndPoint {
 
     public static final String FARMER_INFO_URL = BuildConfig.BASE_URL + "/farmer";
 
-    public  static  final  String AGGREGATOR_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
-
     public  static  final  String SAVE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
     public  static  final String PENDING_DELIVERY = BuildConfig.INVENTORY_BASE_URL + "/delivery/assigned";
@@ -50,7 +50,11 @@ public final class ApiEndPoint {
 
     public  static  final  String RESET_PASSWORD = BuildConfig.BASE_URL + "/auth/reset-password-begin";
 
+    public  static  final String COLLECTION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/collection/completed/history";
 
+    public  static  final  String DELIVERY_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/history";
+
+    public  static  final  String AGGREGATION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation/history";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

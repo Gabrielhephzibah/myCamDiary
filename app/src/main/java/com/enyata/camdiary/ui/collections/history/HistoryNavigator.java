@@ -1,5 +1,7 @@
 package com.enyata.camdiary.ui.collections.history;
 
+import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 
 public interface HistoryNavigator {
@@ -7,7 +9,7 @@ public interface HistoryNavigator {
     void dataCollection();
     void scan();
     void back();
-    void getAllCollections(CollectionResponse allCollections);
     void logout();
+    void getCollectionHistory(CollectionHistoryResponse response);
 
 }

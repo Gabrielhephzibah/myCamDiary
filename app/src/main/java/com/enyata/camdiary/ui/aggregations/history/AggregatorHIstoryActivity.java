@@ -5,14 +5,19 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.AggregationHistory;
+import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityAggregatorHistoryBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
@@ -23,6 +28,7 @@ import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,6 +46,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     ViewModelProviderFactory factory;
     private AggregatorHistoryViewModel aggregatorHistoryViewModel;
     ActivityAggregatorHistoryBinding activityAggregatorHistoryBinding;
+    ArrayList<AggregationItemInterface> aggregationList = new ArrayList<AggregationItemInterface>();
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorHIstoryActivity.class);
@@ -68,8 +75,11 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
         aggregatorHistoryViewModel.setNavigator(this);
         activityAggregatorHistoryBinding = getViewDataBinding();
         listView = activityAggregatorHistoryBinding.listView;
+        TextView aggregatorName =  activityAggregatorHistoryBinding.aggregatorName;
+        aggregatorName.setText("Hey"+ "," + aggregatorHistoryViewModel.getCurrentUser());
+
         if (InternetConnection.getInstance(this).isOnline()){
-            aggregatorHistoryViewModel.getAggretionHistory();
+            aggregatorHistoryViewModel.getAggregationHistory();
         }else {
             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");
         }
@@ -82,7 +92,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     public void handleError(Throwable throwable) {
         if (throwable != null ) {
             ANError error = (ANError) throwable;
-            FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
+            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
             if (error.getErrorBody()!= null){
                 Alert.showFailed(getApplicationContext(), response.getResponseMessage());
             }else {
@@ -114,17 +124,32 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     }
 
     @Override
-    public void getAggregatorHistory(AggregationCollectionResponse response) {
-        for (AggregatorCollections history : response.getData()) {
-            String[] formatted = history.getCreatedAt().split(" ");
+    public void getAggregationHistory(AggregationHistoryResponse response) {
+        Log.i("AggregationCollection", response.toString());
+        for (AggregationHistory history : response.getAggregationHistory()){
+            String[] formatted = history.getDate().split(" ");
             String[] formattedDate = formatted[0].split("-");
             String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
-            aggregatorHistoryLists.add(new AggregatorHistoryList(history.getCollectorDetails().getFirstName() + " " + history.getCollectorDetails().getLastName(), history.getCollectorDetails().getVerificationId(), history.getVolume() + " litres", date));
-            aggregatorHistoryAdapter = new AggregatorHistoryAdapter(AggregatorHIstoryActivity.this, aggregatorHistoryLists);
-            listView.setAdapter(aggregatorHistoryAdapter);
-        }
 
+            aggregationList.add(new AggregationHistoryHeader(date));
+             List<AggregatorCollections> aggregatorCollections = history.getAggregatorCollections();
+             for (int i = 0; i< aggregatorCollections.size(); i++){
+                 AggregatorCollections collections = aggregatorCollections.get(i);
+                 String firstName = collections.getCollectorDetails().getFirstName();
+                 String lastName = collections.getCollectorDetails().getLastName();
+                 String verificationId = collections.getCollectorDetails().getVerificationId();
+                 String volume = collections.getAggregationTotalVolume();
+
+                 aggregationList.add(new AggregatorHistory(firstName + " " +lastName, verificationId,volume));
+                 AggregationCustomAdapter customAdapter = new AggregationCustomAdapter(AggregatorHIstoryActivity.this, aggregationList);
+                 listView.setAdapter(customAdapter);
+
+
+             }
+        }
     }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

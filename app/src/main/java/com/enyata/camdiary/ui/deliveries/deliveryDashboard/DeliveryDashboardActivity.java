@@ -102,7 +102,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
 
         if (InternetConnection.getInstance(this).isOnline()) {
-//            deliveryDashboardViewModel.getDeliveriesCompleted();
+            deliveryDashboardViewModel.getDeliveriesCompleted();
             deliveryDashboardViewModel.getPendingDelivery();
             deliveryDashboardViewModel.getBottleInventory();
         }else{

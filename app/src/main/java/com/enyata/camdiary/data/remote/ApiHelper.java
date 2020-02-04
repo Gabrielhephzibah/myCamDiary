@@ -8,11 +8,15 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -53,9 +57,6 @@ public interface ApiHelper {
     Flowable<CollectionResponse>getCollectorCollection(String id);
     //GET Aggregator today's collection
     Flowable<AggregationCollectionResponse> getAggregatorTodaysCollection();
-
-    //Get Aggregator's history
-    Flowable<AggregationCollectionResponse>getAggregatorHistory();
     // Get Collection's history
     Flowable<CollectionResponse> getAllCollection();
     //Get Collectors Details
@@ -78,6 +79,12 @@ public interface ApiHelper {
     Single<NewCollectionResponse>addNewDelivery(DeliveryCollection.Request request);
     //Reset password
     Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request);
+    //Collection History
+    Flowable<CollectionHistoryResponse>getCollectionHistory();
+    //Delivery history
+    Flowable<DeliveryHistoryResponseData>getDeliveryHistory();
+    //AggregationHistory
+    Flowable<AggregationHistoryResponse>getAggregationHistory();
 
 
 }

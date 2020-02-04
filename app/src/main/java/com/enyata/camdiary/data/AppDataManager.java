@@ -9,13 +9,17 @@ import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -285,11 +289,6 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Flowable<AggregationCollectionResponse> getAggregatorHistory() {
-        return mApiHelper.getAggregatorHistory();
-    }
-
-    @Override
     public Flowable<CollectionResponse> getAllCollection() {
         return mApiHelper.getAllCollection();
     }
@@ -332,6 +331,21 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request) {
         return mApiHelper.resetPassword(request);
+    }
+
+    @Override
+    public Flowable<CollectionHistoryResponse> getCollectionHistory() {
+        return mApiHelper.getCollectionHistory();
+    }
+
+    @Override
+    public Flowable<DeliveryHistoryResponseData> getDeliveryHistory() {
+        return mApiHelper.getDeliveryHistory();
+    }
+
+    @Override
+    public Flowable<AggregationHistoryResponse> getAggregationHistory() {
+        return mApiHelper.getAggregationHistory();
     }
 
     @Override

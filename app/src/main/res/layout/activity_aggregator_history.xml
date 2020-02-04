@@ -13,6 +13,11 @@
     </data>
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,7 +60,7 @@
                             android:src="@drawable/ic_green_arrow" />
 
                         <TextView
-                            android:id="@+id/forgotPassword"
+                            android:id="@+id/aggregatorName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
@@ -74,7 +79,7 @@
                             android:fontFamily="@font/azo_san"
                             android:text="Here’s how far you’ve done"
                             android:textAllCaps="false"
-                            android:layout_alignBottom="@+id/forgotPassword"
+                            android:layout_alignBottom="@+id/aggregatorName"
                             android:textColor="#3333"
                             android:layout_marginBottom="-26dp"
                             android:textSize="14sp" />
@@ -86,14 +91,14 @@
                             app:cardCornerRadius="35dp"
                             app:strokeWidth="1dp"
                             android:layout_marginRight="27dp"
-                            android:layout_toLeftOf="@id/forgotPassword"
+                            android:layout_toLeftOf="@id/aggregatorName"
                             android:layout_alignParentRight="true">
                             <ImageView
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:id="@+id/circular_image"
                                 android:scaleType="fitCenter"
-                                android:layout_toLeftOf="@id/forgotPassword"
+                                android:layout_toLeftOf="@id/aggregatorName"
                                 android:layout_alignParentRight="true"
                                 android:src="@drawable/aggregator_mark" />
                         </androidx.cardview.widget.CardView>
@@ -217,17 +222,19 @@
 
             </LinearLayout>
 
-
-
-
-
-
-
         </RelativeLayout>
 
-
-
     </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
 
 
 </layout>

@@ -6,6 +6,7 @@ import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
+import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
@@ -13,7 +14,10 @@ import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -132,13 +136,6 @@ public class AppApiHelper implements ApiHelper {
                 .getObjectFlowable(AggregationCollectionResponse.class);
     }
 
-    @Override
-    public Flowable<AggregationCollectionResponse> getAggregatorHistory() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATOR_HISTORY)
-                .addHeaders(mApiHeader.getProtectedApiHeader())
-                .build()
-                .getObjectFlowable(AggregationCollectionResponse.class);
-    }
 
     @Override
     public Flowable<CollectionResponse> getAllCollection() {
@@ -214,6 +211,30 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(ResetPasswordResponse.class);
+    }
+
+    @Override
+    public Flowable<CollectionHistoryResponse> getCollectionHistory() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTION_HISTORY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(CollectionHistoryResponse.class);
+    }
+
+    @Override
+    public Flowable<DeliveryHistoryResponseData> getDeliveryHistory() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.DELIVERY_HISTORY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(DeliveryHistoryResponseData.class);
+    }
+
+    @Override
+    public Flowable<AggregationHistoryResponse> getAggregationHistory() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.AGGREGATION_HISTORY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(AggregationHistoryResponse.class);
     }
 
 

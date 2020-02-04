@@ -225,6 +225,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         @Override
         public void getTodayCollection (CollectionResponse todayCollectionResponse){
+        Log.i("RESPONSE", todayCollectionResponse.getData().toString());
 
             for (Collection response : todayCollectionResponse.getData()) {
                 dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName() + "  " + response.getFarmer().getLastName(), response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume() + " litres"));

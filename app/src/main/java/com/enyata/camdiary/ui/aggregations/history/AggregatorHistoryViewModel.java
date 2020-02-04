@@ -18,19 +18,24 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
         getNavigator().back();
     }
 
-    public void  getAggretionHistory(){
+
+    public  void  getAggregationHistory(){
+        setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .getAggregatorHistory()
+                .getAggregationHistory()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response ->{
-                    getNavigator().getAggregatorHistory(response);
+                    setIsLoading(false);
+                    getNavigator().getAggregationHistory(response);
                 },throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
 
                 }));
-
     }
+
+
     public  void  dispose(){
         onCleared();
     }
@@ -38,5 +43,9 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
     public void onLogOut(){
         getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         getNavigator().onLogOut();
+    }
+
+    public  String getCurrentUser(){
+       return getDataManager().getCurrentUserName();
     }
 }

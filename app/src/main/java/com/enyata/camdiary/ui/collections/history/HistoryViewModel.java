@@ -1,6 +1,7 @@
 package com.enyata.camdiary.ui.collections.history;
 
 import android.text.format.DateFormat;
+import android.util.Log;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -25,14 +26,18 @@ public class HistoryViewModel extends BaseViewModel<HistoryNavigator> {
         getNavigator().back();
     }
 
-    public void getAllCollection(){
+
+    public  void  getCollectionHistory(){
+        setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .getAllCollection()
+                .getCollectionHistory()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getNavigator().getAllCollections(response);
+                    setIsLoading(false);
+                    getNavigator().getCollectionHistory(response);
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
                 }));
     }
@@ -52,6 +57,14 @@ public class HistoryViewModel extends BaseViewModel<HistoryNavigator> {
     public  void onLogout(){
         getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         getNavigator().logout();
+    }
+
+    public String getAccessToken(){
+        return getDataManager().getAccessToken();
+    }
+
+    public  String getCuurentUser(){
+        return getDataManager().getCurrentUserName();
     }
 
 

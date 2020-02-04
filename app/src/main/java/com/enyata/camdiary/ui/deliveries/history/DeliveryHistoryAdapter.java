@@ -45,8 +45,6 @@ public class DeliveryHistoryAdapter extends ArrayAdapter {
         TextView items = listItem.findViewById(R.id.items);
         items.setText(delivery.getItems());
 
-
-
         TextView date = listItem.findViewById(R.id.date);
         date.setText(delivery.getDate());
 

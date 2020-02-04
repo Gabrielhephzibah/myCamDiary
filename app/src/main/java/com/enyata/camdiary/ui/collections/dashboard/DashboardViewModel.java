@@ -30,11 +30,6 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
         getNavigator().logout();
     }
 
-    public String getData(){
-      return getDataManager().getLoggedInView();
-
-    }
-
 
     public  String getUserType(){
         return  getDataManager().getUserType();

@@ -1,5 +1,9 @@
 package com.enyata.camdiary.ui.collections.history;
 
+import com.enyata.camdiary.data.model.api.response.Collection;
+
+import java.util.ArrayList;
+
 public class CollectorHistoryList {
     private String fullName;
     private String companyName;
@@ -9,7 +13,7 @@ public class CollectorHistoryList {
     private  String date;
 
 
-    public  CollectorHistoryList(String myName,String coperativeName, String id, String myStatus,String milkLitres,String myDate){
+    public  CollectorHistoryList(String myName, String coperativeName, String id, String myStatus, String milkLitres,    String myDate){
         fullName = myName;
         companyName = coperativeName;
         companyId= id;
@@ -67,5 +71,6 @@ public class CollectorHistoryList {
     public  String getDate(){
         return date;
     }
+
 
 }

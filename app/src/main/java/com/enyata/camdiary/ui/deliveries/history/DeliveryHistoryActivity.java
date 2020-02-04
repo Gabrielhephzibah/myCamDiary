@@ -1,6 +1,5 @@
 package com.enyata.camdiary.ui.deliveries.history;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -9,36 +8,37 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.enyata.camdiary.BR;
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
+import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityDeliveryHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
-import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
-import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
-import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemAdapter;
-import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryItemList;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.InternetConnection;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistoryBinding,DeliveryHistoryViewModel>implements DeliveryHistoryNavigator {
+public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistoryBinding, DeliveryHistoryViewModel> implements DeliveryHistoryNavigator {
 
+    @Inject
+    Gson gson;
 
-    DeliveryHistoryAdapter deliveryHistoryAdapter;
     ListView listView;
-    ArrayList<DeliveryHistoryList> deliveryHistoryLists= new ArrayList<>();
     ActivityDeliveryHistoryBinding activityDeliveryHistoryBinding;
+    ArrayList<DeliveryItemInterface> deliveryHistoryLists = new ArrayList<DeliveryItemInterface>();
 
 
     @Inject
@@ -48,7 +48,6 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     public static Intent newIntent(Context context) {
         return new Intent(context, DeliveryHistoryActivity.class);
     }
-
 
 
     @Override
@@ -63,7 +62,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public DeliveryHistoryViewModel getViewModel() {
-        deliveryHistoryViewModel = ViewModelProviders.of(this,factory).get(DeliveryHistoryViewModel.class);
+        deliveryHistoryViewModel = ViewModelProviders.of(this, factory).get(DeliveryHistoryViewModel.class);
         return deliveryHistoryViewModel;
     }
 
@@ -74,103 +73,13 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
         listView = findViewById(R.id.listView);
         activityDeliveryHistoryBinding = getViewDataBinding();
         ImageView logout = activityDeliveryHistoryBinding.logout;
-
-
-
-        JSONObject delivery1 = new JSONObject();
-        try {
-            delivery1.put("myName", "Devon, Samuel");
-
-            delivery1.put("items", "4 items");
-
-            delivery1.put("number", "+2348033237685");
-
-            delivery1.put("itemId", "64ERT234KI89");
-
-            delivery1.put("date","23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+         TextView dispatcherName = activityDeliveryHistoryBinding.dispatcherName;
+         dispatcherName.setText("Hey" +", " +deliveryHistoryViewModel.getCurrentUser());
+        if (InternetConnection.getInstance(this).isOnline()) {
+            deliveryHistoryViewModel.getDeliveryHistory();
+        } else {
+            Alert.showFailed(getApplicationContext(), "Please check your internet setting and try again");
         }
-
-
-
-        JSONObject delivery2 = new JSONObject();
-        try {
-            delivery2.put("myName", "Devon, Samuel");
-
-            delivery2.put("items", "4 items");
-
-            delivery2.put("number", "+2348033237685");
-
-            delivery2.put("itemId", "64ERT234KI89");
-
-            delivery2.put("date","23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
-        JSONObject delivery3 = new JSONObject();
-        try {
-            delivery3.put("myName", "Devon, Samuel");
-
-            delivery3.put("items", "4 items");
-
-            delivery3.put("number", "+2348033237685");
-
-            delivery3.put("itemId", "64ERT234KI89");
-
-            delivery3.put("date","23/08/2020");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-        JSONArray array = new JSONArray();
-        array.put(delivery1);
-        array.put(delivery2);
-        array.put(delivery3);
-        array.put(delivery2);
-        array.put(delivery1);
-        array.put(delivery3);
-
-
-        for (int i = 0; i < array.length(); i++) {
-
-            try {
-                Log.i("message", array.toString());
-
-                JSONObject object = array.getJSONObject(i);
-                String myName = object.getString("myName");
-                String items= object.getString("items");
-
-                String number = object.getString("number");
-                String itemId = object.getString("itemId");
-
-                String date = object.getString("date");
-
-                deliveryHistoryLists.add(new DeliveryHistoryList(myName,items,number,itemId,date));
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-
-        deliveryHistoryAdapter= new DeliveryHistoryAdapter(DeliveryHistoryActivity.this, deliveryHistoryLists);
-        listView.setAdapter(deliveryHistoryAdapter);
-
-
-
-
 
     }
 
@@ -198,5 +107,60 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     public void back() {
         Intent intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void deliveryHistory(DeliveryHistoryResponseData response) {
+        Log.i("DeliveryHistory", response.getData().toString());
+        for (DeliveryHistoryResponse data : response.getData()) {
+            String[] formatted = data.getDate().split(" ");
+            String[] formattedDate = formatted[0].split("-");
+            String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
+            deliveryHistoryLists.add(new DeliveryHistoryHeader(date));
+            List<com.enyata.camdiary.data.model.api.response.DeliveryHistory> deliveryHistory = data.getDeliveryHistory();
+            for (int i = 0; i < deliveryHistory.size(); i++) {
+                String items;
+                com.enyata.camdiary.data.model.api.response.DeliveryHistory history = deliveryHistory.get(i);
+                String firstName = history.getOrder().getUsers().getFirstName();
+                String lastName = history.getOrder().getUsers().getLastName();
+                String contactNo = history.getOrder().getUsers().getContactNo();
+                String verificationNo = history.getOrder().getUsers().getVerificationId();
+                String productCount = history.getOrder().getProductCount();
+                if (history.getOrder().getProductCount().equals("1")) {
+                    items = history.getOrder().getProductCount() + " item";
+                } else {
+                    items = history.getOrder().getProductCount() + " items";
+                }
+
+
+                deliveryHistoryLists.add(new DeliveryHistory(firstName + " " + lastName, items, contactNo, verificationNo));
+                DeliveryCustomAdapter customAdapter = new DeliveryCustomAdapter(DeliveryHistoryActivity.this, deliveryHistoryLists);
+                listView.setAdapter(customAdapter);
+            }
+        }
+
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+            if (error.getErrorBody() != null) {
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            } else {
+                Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
+            }
+        }
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        deliveryHistoryViewModel.onDispose();
     }
 }

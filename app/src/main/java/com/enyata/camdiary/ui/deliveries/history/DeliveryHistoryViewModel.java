@@ -25,4 +25,29 @@ public class DeliveryHistoryViewModel extends BaseViewModel<DeliveryHistoryNavig
     public void onBack(){
         getNavigator().back();
     }
+
+    public void getDeliveryHistory(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getDeliveryHistory()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().deliveryHistory(response);
+
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+
+                }));
+    }
+
+    public void onDispose(){
+        onCleared();
+    }
+
+    public  String  getCurrentUser(){
+       return getDataManager().getCurrentUserName();
+    }
 }

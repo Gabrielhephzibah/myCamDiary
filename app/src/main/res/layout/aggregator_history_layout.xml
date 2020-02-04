@@ -5,28 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="29dp">
-
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="23/08/2020"
-            android:textColor="@color/colorPrimary"
-            android:textSize="8sp"
-            />
-
-
-
-    </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/parent"
         android:background="@drawable/addboxshawdow"
@@ -36,9 +14,6 @@
         android:layout_marginTop="0dp"
         android:layout_marginLeft="24dip"
         android:layout_marginRight="26dip">
-
-
-
 
         <RelativeLayout
             android:layout_margin="12dp"
@@ -104,7 +79,7 @@
                 android:layout_marginLeft="75dp">
 
                 <TextView
-                    android:id="@+id/farmerId"
+                    android:id="@+id/collectorId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="64ERT234KI89"

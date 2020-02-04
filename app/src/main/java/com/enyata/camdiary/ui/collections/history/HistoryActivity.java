@@ -5,16 +5,25 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.response.Collection;
+import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
+import com.enyata.camdiary.data.remote.APIService;
+import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
@@ -25,27 +34,32 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,HistoryViewModel>implements HistoryNavigator {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, HistoryViewModel> implements HistoryNavigator {
 
     @Inject
     Gson gson;
-
-    CollectorHistoryAdapter collectorHistoryAdapter;
-    ListView listView;
-    ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
-    ActivityHistoryBinding activityHistoryBinding;
-
-    RelativeLayout data;
-
-
-
     @Inject
     ViewModelProviderFactory factory;
     private HistoryViewModel historyViewModel;
+
+    ListView listView;
+    ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
+    ActivityHistoryBinding activityHistoryBinding;
+    RelativeLayout data;
+    private APIService mAPIService;
+    ArrayList<CollectionItemInterface> collectionList = new ArrayList<CollectionItemInterface>();
 
     public static Intent newIntent(Context context) {
         return new Intent(context, HistoryActivity.class);
@@ -64,7 +78,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
 
     @Override
     public HistoryViewModel getViewModel() {
-        historyViewModel = ViewModelProviders.of(this,factory).get(HistoryViewModel.class);
+        historyViewModel = ViewModelProviders.of(this, factory).get(HistoryViewModel.class);
         return historyViewModel;
     }
 
@@ -72,22 +86,18 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         historyViewModel.setNavigator(this);
-        activityHistoryBinding =getViewDataBinding();
+        activityHistoryBinding = getViewDataBinding();
         data = activityHistoryBinding.data;
-
-        if (historyViewModel.getUserType().equals("data_collectors")){
-            data.setVisibility(View.VISIBLE);
-        }
-
+        mAPIService = ApiUtils.getAPIService();
         listView = activityHistoryBinding.listView;
-        
-       if (InternetConnection.getInstance(this).isOnline()){
-           historyViewModel.getAllCollection();
-       }else {
-           Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again later");
-       }
+        TextView collectorName = activityHistoryBinding.collectorName;
+        collectorName.setText("Hey" + "," + historyViewModel.getCuurentUser());
 
-
+        if (InternetConnection.getInstance(this).isOnline()) {
+            historyViewModel.getCollectionHistory();
+        } else {
+            Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again later");
+        }
 
 
     }
@@ -97,10 +107,10 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
         if (throwable != null) {
             ANError error = (ANError) throwable;
             VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
-            if (error.getErrorBody()!= null){
+            if (error.getErrorBody() != null) {
                 Alert.showFailed(getApplicationContext(), response.getResponseMessage());
-            }else {
-                Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
+            } else {
+                Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
             }
 
         }
@@ -116,7 +126,6 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
 
     @Override
     public void scan() {
-
         Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
         startActivity(intent);
 
@@ -130,27 +139,39 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding,History
     }
 
     @Override
-    public void getAllCollections(CollectionResponse allCollections) {
-        for (Collection response : allCollections.getData()) {
-            String[] formatted = response.getCreatedAt().split(" ");
-            String[] formattedDate = formatted[0].split("-");
-            String date = formattedDate[2] +"/"+formattedDate[1]+"/"+formattedDate[0];
-            collectorHistoryLists.add(new CollectorHistoryList(response.getFarmer().getFirstName()+  "  " + response.getFarmer().getLastName(),response.getFarmer().getCooperativeName(),response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume()+ " litres",  date));
-            collectorHistoryAdapter = new CollectorHistoryAdapter(HistoryActivity.this, collectorHistoryLists);
-            listView.setAdapter(collectorHistoryAdapter);
-        }
-
-    }
-
-    @Override
     public void logout() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 
     @Override
+    public void getCollectionHistory(CollectionHistoryResponse response) {
+        Log.i("RESPONSEEEE", response.getData().toString());
+        for (CollectionHistory history : response.getData()) {
+            String date = history.getDate();
+            collectionList.add(new CollectorHistoryHeader(date));
+            List<Collection> collectionHistory = history.getCollectionHistory();
+            for (int i = 0; i < collectionHistory.size(); i++) {
+                Collection data = collectionHistory.get(i);
+                String firstName = data.getFarmer().getFirstName();
+                String lastName = data.getFarmer().getLastName();
+                String litres = String.valueOf(data.getVolume());
+                String statusOfCollection = data.getStatusOfCollection();
+                String verificationNumber = data.getFarmer().getVerificationId();
+                String companyName = data.getFarmer().getCooperativeName();
+                collectionList.add(new CollectorHistory(firstName + " " + lastName, companyName, verificationNumber, statusOfCollection, litres));
+                CollectionHistoryCustomAdapter adapter = new CollectionHistoryCustomAdapter(HistoryActivity.this, collectionList);
+                listView.setAdapter(adapter);
+
+            }
+        }
+    }
+
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         historyViewModel.dispose();
     }
+
 }

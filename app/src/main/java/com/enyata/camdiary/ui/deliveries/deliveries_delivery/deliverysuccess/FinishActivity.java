@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.enyata.camdiary.BR;
@@ -53,7 +54,8 @@ public class FinishActivity extends BaseActivity<ActivityFinishBinding,FinishVie
         activityFinishBinding = getViewDataBinding();
         TextView bottles =activityFinishBinding.bottles;
        TextView name = activityFinishBinding.customerName;
-       noOfBottles = getIntent().getStringExtra("bottles");
+       noOfBottles = getIntent().getStringExtra("Bottles");
+        Log.i("BOTTLESSS", noOfBottles);
        bottles.setText(noOfBottles);
        name.setText(finishViewModel.getCustomerName());
 

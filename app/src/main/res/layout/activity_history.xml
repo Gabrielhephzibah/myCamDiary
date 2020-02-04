@@ -1,15 +1,20 @@
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.collections.history.HistoryActivity">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.enyata.camdiary.ui.collections.history.HistoryViewModel" />
     </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -18,37 +23,39 @@
         android:orientation="vertical">
 
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:gravity="bottom">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="29dp"
                     android:layout_marginTop="30dp"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="29dp">
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
-                            android:onClick="@{() -> viewModel.onBack()}"
                             android:id="@+id/back"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_green_arrow"
-                            android:gravity="start" />
+                            android:gravity="start"
+                            android:onClick="@{() -> viewModel.onBack()}"
+                            android:src="@drawable/ic_green_arrow" />
 
 
                         <TextView
-                            android:id="@+id/forgotPassword"
+                            android:id="@+id/collectorName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
@@ -61,15 +68,15 @@
                             android:textSize="30sp" />
 
                         <TextView
-                            android:paddingTop="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/collectorName"
+                            android:layout_marginBottom="-26dp"
                             android:fontFamily="@font/azo_san"
+                            android:paddingTop="25dp"
                             android:text="Here’s how far you’ve done"
                             android:textAllCaps="false"
-                            android:layout_alignBottom="@+id/forgotPassword"
                             android:textColor="#3333"
-                            android:layout_marginBottom="-26dp"
                             android:textSize="14sp"
 
 
@@ -79,43 +86,40 @@
                             android:id="@+id/circle"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
-                            app:cardCornerRadius="35dp"
-                            app:strokeWidth="1dp"
+                            android:layout_alignParentRight="true"
                             android:layout_marginRight="27dp"
-                            android:layout_toLeftOf="@id/forgotPassword"
-                            android:layout_alignParentRight="true">
+                            android:layout_toLeftOf="@id/collectorName"
+                            app:cardCornerRadius="35dp"
+                            app:strokeWidth="1dp">
+
                             <ImageView
+                                android:id="@+id/circular_image"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:id="@+id/circular_image"
-                                android:scaleType="fitCenter"
-                                android:layout_toLeftOf="@id/forgotPassword"
                                 android:layout_alignParentRight="true"
+                                android:layout_toLeftOf="@id/collectorName"
+                                android:scaleType="fitCenter"
                                 android:src="@drawable/farmer_ade" />
                         </androidx.cardview.widget.CardView>
                     </RelativeLayout>
 
                 </LinearLayout>
 
+
                 <ListView
-                    android:layout_marginBottom="80dp"
+                    android:id="@+id/listView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listView"
-                    />
+                    android:layout_marginBottom="80dp" />
 
 
             </LinearLayout>
 
 
-
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_alignParentBottom="true"
                 android:layout_height="72dp"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal">
@@ -123,124 +127,127 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="17dp"
-                    android:layout_marginBottom="13dp"
                     android:layout_marginRight="30dp"
-                    android:layout_gravity="center">
+                    android:layout_marginBottom="13dp">
 
                     <RelativeLayout
 
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
                         <ImageView
-                            android:layout_marginTop="5dp"
                             android:id="@+id/history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_history"/>
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_history" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="History"
-                            android:fontFamily="@font/azo_san"
-                            android:textSize="7sp"
                             android:layout_alignParentBottom="true"
+                            android:fontFamily="@font/azo_san"
+                            android:text="History"
                             android:textColor="#fff"
-                            />
+                            android:textSize="7sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="1">
+
                         <ImageView
+                            android:id="@+id/scanbarcode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
+                            android:layout_marginLeft="6dp"
                             android:layout_marginTop="5dp"
                             android:onClick="@{() -> viewModel.onScancode()}"
-                            android:id="@+id/scanbarcode"
-                            android:layout_marginLeft="6dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_scanbarcode"/>
+                            android:src="@drawable/ic_scanbarcode" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Scan Barcode"
-                            android:fontFamily="@font/azo_san"
-                            android:textSize="7sp"
-                            android:layout_centerHorizontal="true"
-                            android:gravity="left"
                             android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/azo_san"
+                            android:gravity="left"
+                            android:text="Scan Barcode"
                             android:textColor="#fff"
-                            />
+                            android:textSize="7sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:visibility="gone"
                         android:id="@+id/data"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
                         <ImageView
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="5dp"
-                            android:onClick="@{() -> viewModel.onDataCollection()}"
-                            android:layout_marginLeft="9dp"
                             android:id="@+id/data_collection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_collector_data_collection"/>
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginTop="5dp"
+                            android:onClick="@{() -> viewModel.onDataCollection()}"
+                            android:src="@drawable/ic_collector_data_collection" />
+
                         <TextView
 
-                            android:layout_alignRight="@+id/data_collection"
-                            android:layout_centerHorizontal="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Data Collection"
-                            android:textSize="7sp"
-                            android:gravity="left"
-                            android:fontFamily="@font/azo_san"
+                            android:layout_alignRight="@+id/data_collection"
                             android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/azo_san"
+                            android:gravity="left"
+                            android:text="Data Collection"
                             android:textColor="#fff"
-                            />
+                            android:textSize="7sp" />
 
                     </RelativeLayout>
 
 
                     <RelativeLayout
                         android:id="@+id/log"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="1">
+
                         <ImageView
                             android:id="@+id/logout"
-                            android:layout_marginTop="5dp"
-                            android:onClick="@{() -> viewModel.onLogout()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_logout"/>
+                            android:layout_marginTop="5dp"
+                            android:onClick="@{() -> viewModel.onLogout()}"
+                            android:src="@drawable/ic_logout" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
                             android:layout_marginBottom="0dp"
                             android:fontFamily="@font/azo_san"
                             android:text="Log Out"
-                            android:layout_alignParentRight="true"
                             android:textColor="#fff"
                             android:textSize="7sp" />
 
                     </RelativeLayout>
-
 
 
                 </LinearLayout>
@@ -248,16 +255,20 @@
             </LinearLayout>
 
 
-
-
         </RelativeLayout>
-
-
 
 
     </LinearLayout>
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
+    </FrameLayout>
 
 
 </layout>
