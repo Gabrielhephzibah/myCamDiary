@@ -1,13 +1,13 @@
 package com.enyata.camdiary.ui.deliveries.history;
 
-public class DeliveryHistory implements  DeliveryItemInterface {
+public class DispatcherHistory implements  DeliveryItemInterface {
 
     public String myName;
     public String items;
     public   String number;
     public String itemId;
 
-    public DeliveryHistory(String myName, String items, String number, String itemId) {
+    public DispatcherHistory(String myName, String items, String number, String itemId) {
         this.myName = myName;
         this.items = items;
         this.number = number;

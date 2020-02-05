@@ -125,7 +125,6 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void getAggregationHistory(AggregationHistoryResponse response) {
-        Log.i("AggregationCollection", response.toString());
         for (AggregationHistory history : response.getAggregationHistory()){
             String[] formatted = history.getDate().split(" ");
             String[] formattedDate = formatted[0].split("-");

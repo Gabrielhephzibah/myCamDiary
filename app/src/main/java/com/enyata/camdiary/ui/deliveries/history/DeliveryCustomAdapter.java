@@ -53,16 +53,16 @@ public class DeliveryCustomAdapter extends BaseAdapter {
                 // if item
                 convertView = inflater.inflate(R.layout.delivery_history_layout, parent, false);
                 TextView name = (TextView) convertView.findViewById(R.id.name);
-                name.setText(((DeliveryHistory) item.get(position)).getMyName());
+                name.setText(((DispatcherHistory) item.get(position)).getMyName());
 
                 TextView number = (TextView) convertView.findViewById(R.id.number);
-                number.setText(((DeliveryHistory) item.get(position)).getNumber());
+                number.setText(((DispatcherHistory) item.get(position)).getNumber());
 
                 TextView itemId = (TextView) convertView.findViewById(R.id.itemsId);
-                itemId.setText(((DeliveryHistory) item.get(position)).getItemId());
+                itemId.setText(((DispatcherHistory) item.get(position)).getItemId());
 
                 TextView items = (TextView) convertView.findViewById(R.id.items);
-                items.setText(((DeliveryHistory) item.get(position)).getItems());
+                items.setText(((DispatcherHistory) item.get(position)).getItems());
             }
 
 

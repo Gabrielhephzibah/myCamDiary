@@ -88,7 +88,9 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
         historyViewModel.setNavigator(this);
         activityHistoryBinding = getViewDataBinding();
         data = activityHistoryBinding.data;
-        mAPIService = ApiUtils.getAPIService();
+        if (historyViewModel.getUserType().equals("data_collectors")){
+            data.setVisibility(View.VISIBLE);
+        }
         listView = activityHistoryBinding.listView;
         TextView collectorName = activityHistoryBinding.collectorName;
         collectorName.setText("Hey" + "," + historyViewModel.getCuurentUser());
@@ -146,7 +148,6 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
     @Override
     public void getCollectionHistory(CollectionHistoryResponse response) {
-        Log.i("RESPONSEEEE", response.getData().toString());
         for (CollectionHistory history : response.getData()) {
             String date = history.getDate();
             collectionList.add(new CollectorHistoryHeader(date));

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.DeliveryHistory;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
@@ -111,16 +111,16 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public void deliveryHistory(DeliveryHistoryResponseData response) {
-        Log.i("DeliveryHistory", response.getData().toString());
+
         for (DeliveryHistoryResponse data : response.getData()) {
             String[] formatted = data.getDate().split(" ");
             String[] formattedDate = formatted[0].split("-");
             String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
             deliveryHistoryLists.add(new DeliveryHistoryHeader(date));
-            List<com.enyata.camdiary.data.model.api.response.DeliveryHistory> deliveryHistory = data.getDeliveryHistory();
+            List<DeliveryHistory>deliveryHistory = data.getDeliveryHistory();
             for (int i = 0; i < deliveryHistory.size(); i++) {
                 String items;
-                com.enyata.camdiary.data.model.api.response.DeliveryHistory history = deliveryHistory.get(i);
+                DeliveryHistory history = deliveryHistory.get(i);
                 String firstName = history.getOrder().getUsers().getFirstName();
                 String lastName = history.getOrder().getUsers().getLastName();
                 String contactNo = history.getOrder().getUsers().getContactNo();
@@ -132,8 +132,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
                     items = history.getOrder().getProductCount() + " items";
                 }
 
-
-                deliveryHistoryLists.add(new DeliveryHistory(firstName + " " + lastName, items, contactNo, verificationNo));
+                deliveryHistoryLists.add(new DispatcherHistory(firstName + " " + lastName, items, contactNo, verificationNo));
                 DeliveryCustomAdapter customAdapter = new DeliveryCustomAdapter(DeliveryHistoryActivity.this, deliveryHistoryLists);
                 listView.setAdapter(customAdapter);
             }
