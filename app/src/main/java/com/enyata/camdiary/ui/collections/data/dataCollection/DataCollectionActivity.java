@@ -62,27 +62,6 @@ public class DataCollectionActivity extends BaseActivity<ActivityDataCollectionB
         super.onCreate(savedInstanceState);
         dataCollectionViewModel.setNavigator(this);
         activityDataCollectionBinding = getViewDataBinding();
-       history =  activityDataCollectionBinding.included.history;
-
-        scanbarcode = activityDataCollectionBinding.included.scanbarcode;
-
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        scanbarcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent scan = new Intent(getApplicationContext(), BarcodeActivity.class);
-                startActivity(scan);
-            }
-        });
-
     }
 
     @Override
@@ -112,8 +91,6 @@ public class DataCollectionActivity extends BaseActivity<ActivityDataCollectionB
 
             }
         });
-
-
 
     }
 

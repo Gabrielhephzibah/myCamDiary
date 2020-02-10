@@ -139,7 +139,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
                  String verificationId = collections.getCollectorDetails().getVerificationId();
                  String volume = collections.getAggregationTotalVolume();
 
-                 aggregationList.add(new AggregatorHistory(firstName + " " +lastName, verificationId,volume));
+                 aggregationList.add(new AggregatorHistory(firstName + " " +lastName, verificationId,volume + " litres"));
                  AggregationCustomAdapter customAdapter = new AggregationCustomAdapter(AggregatorHIstoryActivity.this, aggregationList);
                  listView.setAdapter(customAdapter);
 

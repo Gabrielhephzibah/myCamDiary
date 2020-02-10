@@ -35,7 +35,7 @@ public class DeliveryDashboardAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return DeliveryDashboardSlideOneFragement.newInstance();
 
-        }else{
+        } else {
             return DeliveryDashboardSlideTwoFragment.newInstance();
         }
     }

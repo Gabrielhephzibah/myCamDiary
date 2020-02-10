@@ -273,7 +273,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
     @Override
     public void onResponse() {
-        Log.i("SUCCESS INFORMATION", "post submitted to API.");
+        Alert.showSuccess(getApplicationContext(), "Aggregation Successful");
         Intent intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
 

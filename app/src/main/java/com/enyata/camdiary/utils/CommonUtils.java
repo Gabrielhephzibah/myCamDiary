@@ -43,6 +43,11 @@ CommonUtils {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+
+    public static boolean isPhoneNumberValid(String phoneNumber){
+        return Patterns.PHONE.matcher(phoneNumber).matches();
+    }
+
     public static String loadJSONFromAsset(Context context, String jsonFileName) throws IOException {
         AssetManager manager = context.getAssets();
         InputStream is = manager.open(jsonFileName);

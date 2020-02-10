@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="bottom"
     android:gravity="bottom"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,12 +12,10 @@
         android:layout_gravity="bottom">
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_height="72dp"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:background="@color/colorPrimary"
             android:orientation="horizontal">
@@ -24,118 +23,99 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginBottom="13dp"
-                android:layout_gravity="center">
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="13dp">
 
                 <RelativeLayout
 
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
                     <ImageView
-
                         android:id="@+id/sigup"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_signup"/>
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_signup" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sign Up"
-                        android:fontFamily="@font/azo_san"
-                        android:textSize="8sp"
                         android:layout_alignParentBottom="true"
+                        android:fontFamily="@font/azo_san"
+                        android:text="Sign Up"
                         android:textColor="#fff"
-                        />
+                        android:textSize="7sp" />
 
                 </RelativeLayout>
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_marginLeft="45dp"-->
-<!--                    android:layout_height="wrap_content">-->
-<!--                    <ImageView-->
-<!--                        android:id="@+id/delivery"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:src="@drawable/ic_delivery"/>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Deliveries"-->
-<!--                        android:fontFamily="@font/azo_san"-->
-<!--                        android:textSize="8sp"-->
-<!--                        android:gravity="left"-->
-<!--                        android:layout_alignParentBottom="true"-->
-<!--                        android:textColor="#fff"-->
-<!--                        />-->
-
-<!--                </RelativeLayout>-->
-
-
                 <RelativeLayout
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_marginLeft="45dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_weight="1">
+
                     <ImageView
                         android:id="@+id/history"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_delivery_history"/>
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="2dp"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/ic_history1" />
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="History"
-                        android:textSize="8sp"
-                        android:fontFamily="@font/azo_san"
                         android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/azo_san"
+                        android:gravity="left"
+                        android:text="History"
                         android:textColor="#fff"
-                        />
+                        android:textSize="7sp" />
 
                 </RelativeLayout>
 
 
                 <RelativeLayout
-                    android:layout_weight="1"
+                    android:id="@+id/log"
                     android:layout_width="0dp"
-                    android:layout_marginLeft="58dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_weight="1">
+
                     <ImageView
-                        android:onClick="@{() -> viewModel.onLogOut()}"
                         android:id="@+id/logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_logout"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_logout" />
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Log out"
-                        android:textSize="8sp"
-                        android:fontFamily="@font/azo_san"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/azo_san"
+                        android:text="Log Out"
                         android:textColor="#fff"
-                        />
+                        android:textSize="7sp" />
 
                 </RelativeLayout>
-
-
 
 
             </LinearLayout>
 
 
-
-
         </LinearLayout>
-
-
-
-
 
 
     </LinearLayout>

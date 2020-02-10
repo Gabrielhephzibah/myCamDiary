@@ -77,8 +77,8 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         Log.i("ORDERID", bottlesViewModel.getOrderId());
         if (InternetConnection.getInstance(this).isOnline()) {
 
-//            DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(), bottlesViewModel.getOrderId());
-//            bottlesViewModel.addNewDelivery(request);
+            DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(), bottlesViewModel.getOrderId());
+            bottlesViewModel.addNewDelivery(request);
 
             Intent intent = new Intent(getApplicationContext(), FinishActivity.class);
             intent.putExtra("Bottles", activityBottlesBinding.editText.getText().toString());
@@ -91,7 +91,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
     @Override
     public void onResponse(NewCollectionResponse response) {
         Log.i("REQUESSST SUCCESSS", "YOUR REQUEST IS SUCCESSFULL");
-        Alert.showSuccess(getApplicationContext(),"YOUR REQUEST IS SUCCESSFUL");
+        Alert.showSuccess(getApplicationContext(),"ORDER COMPLETED");
 
     }
 

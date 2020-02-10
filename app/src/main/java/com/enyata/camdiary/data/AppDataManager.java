@@ -7,6 +7,7 @@ import android.content.Context;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
@@ -21,6 +22,7 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
@@ -346,6 +348,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<AggregationHistoryResponse> getAggregationHistory() {
         return mApiHelper.getAggregationHistory();
+    }
+
+    @Override
+    public Single<DispatcherSignUpResponse> dispatcherSignUp(DispatcherSignUpRequest.Request request) {
+        return mApiHelper.dispatcherSignUp(request);
     }
 
     @Override

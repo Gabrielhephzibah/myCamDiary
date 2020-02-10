@@ -188,7 +188,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onHistory()}"
                             android:id="@+id/history"
                             android:layout_width="wrap_content"
@@ -213,10 +213,11 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:layout_centerInParent="true"
-                            android:layout_marginTop="5dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onScancode()}"
                             android:id="@+id/scanbarcode"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginLeft="0dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_scanbarcode"/>
@@ -235,17 +236,18 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                         android:visibility="gone"
+                        android:visibility="gone"
                         android:id="@+id/data"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                          android:paddingBottom="10dp"
                             android:layout_alignParentRight="true"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onDataCollection()}"
-                            android:layout_marginLeft="9dp"
+                            android:layout_marginLeft="0dp"
                             android:id="@+id/data_collection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -275,7 +277,7 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:id="@+id/logout"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onLogout()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

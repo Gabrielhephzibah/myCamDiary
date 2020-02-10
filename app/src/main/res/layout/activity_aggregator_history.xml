@@ -136,9 +136,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginBottom="13dp"
+                    android:layout_marginRight="40dp"
                     android:layout_gravity="center">
 
                     <RelativeLayout
@@ -149,7 +150,6 @@
                         <ImageView
                             android:layout_marginTop="2dp"
                             android:id="@+id/history"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_history"/>
@@ -168,18 +168,21 @@
                     <RelativeLayout
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:paddingBottom="10dp"
+                            android:layout_centerInParent="true"
                             android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onScancode()}"
-                            android:layout_marginLeft="2dp"
+                            android:layout_marginLeft="0dp"
                             android:id="@+id/scanbarcode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_scanbarcode"/>
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Scan Barcode"
                             android:fontFamily="@font/azo_san"
@@ -196,16 +199,18 @@
 
                         android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="45dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:layout_alignParentRight="true"
                             android:onClick="@{() -> viewModel.onLogOut()}"
                             android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_logout"/>
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Log Out"
                             android:textSize="7sp"

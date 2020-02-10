@@ -86,21 +86,6 @@
                     android:layout_alignRight="@id/companyNameTextView"
                     android:fontFamily="@font/azo_san" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </RelativeLayout>
 
         </RelativeLayout>

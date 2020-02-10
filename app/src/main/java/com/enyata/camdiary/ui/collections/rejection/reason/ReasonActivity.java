@@ -203,6 +203,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
 
     @Override
     public void onResponse(NewCollectionResponse response) {
+        Alert.showSuccess(getApplicationContext(),"Rejection Successful");
         Intent intent = new Intent(getApplicationContext(), RejectsuccessActivity.class);
         intent.putExtra("volume",volume);
         intent.putExtra("first_name", firstName);

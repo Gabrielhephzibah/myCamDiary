@@ -37,7 +37,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     String verificationNumber;
     String farmer_id;
 
-
     @Inject
     Gson gson;
 
@@ -169,6 +168,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public void displayResponse(NewCollectionResponse response) {
+        Alert.showSuccess(getApplicationContext(),"Collection Successful");
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);

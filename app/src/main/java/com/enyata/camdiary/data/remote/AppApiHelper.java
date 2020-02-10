@@ -4,6 +4,7 @@ package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
@@ -19,6 +20,7 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
@@ -235,6 +237,15 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(AggregationHistoryResponse.class);
+    }
+
+    @Override
+    public Single<DispatcherSignUpResponse> dispatcherSignUp(DispatcherSignUpRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.DISPATCHER_SIGNUP)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(DispatcherSignUpResponse.class);
     }
 
 

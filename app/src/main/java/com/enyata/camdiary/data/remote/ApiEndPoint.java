@@ -56,6 +56,8 @@ public final class ApiEndPoint {
 
     public  static  final  String AGGREGATION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation/history";
 
+    public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/auth/dispatcher/signup";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

@@ -63,6 +63,8 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
 
+
+
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerDetailsActivity.class);
     }

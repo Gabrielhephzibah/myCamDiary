@@ -1,11 +1,12 @@
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.deliveries.history.DeliveryHistoryActivity">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel" />
@@ -16,213 +17,220 @@
         android:layout_height="wrap_content">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <RelativeLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:gravity="bottom">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <RelativeLayout
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dip"
-                            android:layout_marginLeft="28dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:onClick="@{() -> viewModel.onBack()}"
-                                android:id="@+id/back2home"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_green_arrow"/>
+                                android:layout_marginLeft="28dp"
+                                android:layout_marginTop="30dip">
 
-                            <TextView
-                                android:id="@+id/dispatcherName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_marginTop="40dip"
-                                android:fontFamily="@font/azo_sans_light"
-                                android:gravity="center_vertical"
-                                android:lines="1"
-                                android:text="Hey, Susan"
-                                android:textColor="@color/deliveryColor"
-                                android:textSize="30sp" />
-
-                            <TextView
-                                android:paddingTop="25dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/azo_san"
-                                android:text="Here’s how far you’ve done"
-                                android:textAllCaps="false"
-                                android:layout_alignBottom="@+id/dispatcherName"
-                                android:textColor="#3333"
-                                android:layout_marginBottom="-26dp"
-                                android:textSize="14sp"
-
-
-                                />
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/circle"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
-                                app:cardCornerRadius="35dp"
-                                app:strokeWidth="1dp"
-                                android:layout_marginRight="27dp"
-                                android:layout_toLeftOf="@id/dispatcherName"
-                                android:layout_alignParentRight="true">
                                 <ImageView
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:id="@+id/circular_image"
-                                    android:scaleType="fitCenter"
-                                    android:layout_toLeftOf="@id/dispatcherName"
+                                    android:id="@+id/back2home"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="@{() -> viewModel.onBack()}"
+                                    android:src="@drawable/ic_green_arrow" />
+
+                                <TextView
+                                    android:id="@+id/dispatcherName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginTop="40dip"
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:gravity="center_vertical"
+                                    android:lines="1"
+                                    android:text="Hey, Susan"
+                                    android:textColor="@color/deliveryColor"
+                                    android:textSize="30sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@+id/dispatcherName"
+                                    android:layout_marginBottom="-26dp"
+                                    android:fontFamily="@font/azo_san"
+                                    android:paddingTop="25dp"
+                                    android:text="Here’s how far you’ve done"
+                                    android:textAllCaps="false"
+                                    android:textColor="#3333"
+                                    android:textSize="14sp"
+
+
+                                    />
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/circle"
+                                    android:layout_width="75dp"
+                                    android:layout_height="75dp"
                                     android:layout_alignParentRight="true"
-                                    android:src="@drawable/delivery_susan" />
-                            </androidx.cardview.widget.CardView>
-                        </RelativeLayout>
+                                    android:layout_marginRight="27dp"
+                                    android:layout_toLeftOf="@id/dispatcherName"
+                                    app:cardCornerRadius="35dp"
+                                    app:strokeWidth="1dp">
 
+                                    <ImageView
+                                        android:id="@+id/circular_image"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_toLeftOf="@id/dispatcherName"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/delivery_susan" />
+                                </androidx.cardview.widget.CardView>
+                            </RelativeLayout>
 
+                        </LinearLayout>
+
+                        <ListView
+                            android:id="@+id/listView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:layout_marginBottom="85dp" />
 
 
                     </LinearLayout>
-
-                    <ListView
-                        android:layout_marginTop="11dp"
-                        android:layout_marginBottom="85dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listView"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@color/colorPrimary"
-                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="56dp"
-                        android:layout_marginTop="17dp"
-                        android:layout_marginBottom="13dp"
-                        android:layout_gravity="center">
+                        android:layout_height="72dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:orientation="horizontal">
 
-                        <RelativeLayout
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginBottom="13dp">
 
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:onClick="@{() -> viewModel.onSignup()}"
-                                android:id="@+id/sigup"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_signup"/>
-                            <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    android:id="@+id/history"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:onClick="@{() -> viewModel.onSignup()}"
+                                    android:src="@drawable/ic_signup" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:fontFamily="@font/azo_san"
+                                    android:text="Sign Up"
+                                    android:textColor="#fff"
+                                    android:textSize="7sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Sign Up"
-                                android:fontFamily="@font/azo_san"
-                                android:textSize="8sp"
-                                android:layout_alignParentBottom="true"
-                                android:textColor="#fff"
-                                />
+                                android:layout_marginLeft="0dp"
+                                android:layout_weight="1">
 
-                        </RelativeLayout>
+                                <ImageView
+                                    android:id="@+id/scanbarcode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="0dp"
+                                    android:layout_marginTop="2dp"
+                                    android:paddingBottom="10dp"
+                                    android:src="@drawable/ic_history1" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:fontFamily="@font/azo_san"
+                                    android:gravity="left"
+                                    android:text="History"
+                                    android:textColor="#fff"
+                                    android:textSize="7sp" />
 
-                        <RelativeLayout
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_marginLeft="45dp"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/log"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_delivery_history"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="History"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                android:layout_alignParentBottom="true"
-                                android:textColor="#fff"
-                                />
+                                android:layout_marginLeft="0dp"
+                                android:layout_weight="1">
 
-                        </RelativeLayout>
+                                <ImageView
+                                    android:id="@+id/logout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="2dp"
+                                    android:onClick="@{() -> viewModel.onLogOut()}"
+                                    android:src="@drawable/ic_logout" />
 
-                        <RelativeLayout
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_marginLeft="58dp"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:onClick="@{() -> viewModel.onLogOut()}"
-                                android:id="@+id/logout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_logout"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Log out"
-                                android:textSize="8sp"
-                                android:fontFamily="@font/azo_san"
-                                android:layout_alignParentBottom="true"
-                                android:textColor="#fff"
-                                />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginBottom="0dp"
+                                    android:fontFamily="@font/azo_san"
+                                    android:text="Log Out"
+                                    android:textColor="#fff"
+                                    android:textSize="7sp" />
 
-                        </RelativeLayout>
+                            </RelativeLayout>
 
 
+                        </LinearLayout>
 
 
                     </LinearLayout>
 
 
+                </RelativeLayout>
 
 
-                </LinearLayout>
-
-
-
-
-
-            </RelativeLayout>
-
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/address_looking_up"

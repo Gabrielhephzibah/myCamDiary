@@ -62,11 +62,7 @@ public class DeliveryHistoryAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(deliveryHistoryLists.size() > 10){
-            return 5;
-        }else{
-            return deliveryHistoryLists.size();
-        }
+        return deliveryHistoryLists.size();
     }
 
 }

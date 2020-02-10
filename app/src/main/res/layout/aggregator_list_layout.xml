@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="64ERT234KI89"
-                    android:textColor="#CECECE"
+                    android:textColor="#3D3D3D"
                     android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />

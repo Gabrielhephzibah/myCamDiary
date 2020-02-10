@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="Xamsatde"
                     android:layout_marginTop="22dp"
-                    android:textColor="#CECECE"
+                    android:textColor="#3D3D3D"
                     android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="X3478JND8992"
-                    android:textColor="#CECECE"
+                    android:textColor="#3D3D3D"
                     android:textSize="10sp"
                     android:fontFamily="@font/azo_san"
                     />
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rejected"
-                    android:textColor="#CECECE"
+                    android:textColor="#3D3D3D"
                     android:textSize="10sp"
                     android:layout_alignRight="@id/farmerId"
                     android:fontFamily="@font/azo_san"
