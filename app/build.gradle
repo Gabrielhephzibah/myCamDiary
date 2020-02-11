@@ -1,4 +1,4 @@
- apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
 
 android {
@@ -127,6 +127,18 @@ dependencies {
     //UI testing with UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     testImplementation 'androidx.test:core:1.0.0'
+
+    // barcode reader library
+    implementation 'info.androidhive:barcode-reader:1.1.5'
+
+    // google vision library
+    implementation 'com.google.android.gms:play-services-vision:11.0.2'
+
+    //zxing
+    implementation 'com.google.zxing:core:3.2.0'
+
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
+
 
 }
 

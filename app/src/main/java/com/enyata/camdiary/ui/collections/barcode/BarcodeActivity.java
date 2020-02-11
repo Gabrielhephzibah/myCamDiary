@@ -15,10 +15,13 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
+import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 
 import javax.inject.Inject;
 
-public class BarcodeActivity  extends BaseActivity<ActivityBarcodeBinding, BarcodeViewModel> implements BarcodeNavigator {
+import info.androidhive.barcode.BarcodeReader;
+
+public class BarcodeActivity  extends BaseActivity<ActivityBarcodeBinding, BarcodeViewModel> implements BarcodeNavigator  {
 
     @Inject
     ViewModelProviderFactory factory;
@@ -49,9 +52,10 @@ public class BarcodeActivity  extends BaseActivity<ActivityBarcodeBinding, Barco
 
     }
 
+
     @Override
     public void scan() {
-        Intent intent = new Intent(getApplicationContext(),FarmerDetailsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CollectorScanBarCode.class);
         startActivity(intent);
     }
 

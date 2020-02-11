@@ -97,13 +97,31 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="110dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginRight="110dip"
+                    android:background="@drawable/hover_button"
+                    android:fontFamily="@font/azo_san"
+                    android:onClick="@{() -> viewModel.onLoginClick()}"
+                    android:text="Sign In"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/changing_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
                 <RelativeLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="10dip">
+                    android:layout_marginTop="14dip">
 
 
                     <ImageView
@@ -129,23 +147,6 @@
                         android:textColor="#21523C"
                         android:textSize="12sp" />
                 </RelativeLayout>
-                
-                <Button
-                    android:id="@+id/signin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="110dip"
-                    android:layout_marginTop="20dip"
-                    android:layout_marginRight="110dip"
-                    android:background="@drawable/hover_button"
-                    android:fontFamily="@font/azo_san"
-                    android:onClick="@{() -> viewModel.onLoginClick()}"
-                    android:text="Sign In"
-                    android:textAllCaps="false"
-                    android:textColor="@drawable/changing_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
 
             </LinearLayout>
 

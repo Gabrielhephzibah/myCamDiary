@@ -17,6 +17,7 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewMode
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode;
 
 import javax.inject.Inject;
 
@@ -55,7 +56,7 @@ public class ScanActivity extends BaseActivity<ActivityScanBinding,ScanViewModel
 
     @Override
     public void scan() {
-        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AggregatorScanBarCode.class);
         startActivity(intent);
     }
 

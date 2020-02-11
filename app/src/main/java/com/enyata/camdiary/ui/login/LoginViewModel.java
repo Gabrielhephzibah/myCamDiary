@@ -57,8 +57,6 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                         getDataManager().setLoggedInView("data_collectors");
                     }
 
-
-
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
