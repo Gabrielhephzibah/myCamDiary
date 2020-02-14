@@ -79,5 +79,9 @@ public interface PreferencesHelper {
 
     List<AggregationSavedCollection> getAggregationCollectionList();
 
+    void setUserImageUrl(String image_url);
+
+    String  getUserImageUrl();
+
 }
 

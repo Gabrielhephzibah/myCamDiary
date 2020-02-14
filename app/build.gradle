@@ -128,9 +128,6 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     testImplementation 'androidx.test:core:1.0.0'
 
-    // barcode reader library
-    implementation 'info.androidhive:barcode-reader:1.1.5'
-
     // google vision library
     implementation 'com.google.android.gms:play-services-vision:11.0.2'
 

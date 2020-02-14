@@ -59,6 +59,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final String PREF_KEY_USER_TYPE = "PREF_KEY_USER_TYPE";
 
+    private  static  final  String PREF_KEY_USER_IMAGE_URL = "PREF_KEY_USER_IMAGE_URL";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -235,6 +237,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
         Type type = new TypeToken<List<AggregationCollection.Request>>() {
         }.getType();
         return gson.fromJson(json, type);
+    }
+
+    @Override
+    public void setUserImageUrl(String image_url) {
+        mPrefs.edit().putString(PREF_KEY_USER_IMAGE_URL, image_url).apply();
+    }
+
+    @Override
+    public String getUserImageUrl() {
+        return mPrefs.getString(PREF_KEY_USER_IMAGE_URL,null);
     }
 
 }

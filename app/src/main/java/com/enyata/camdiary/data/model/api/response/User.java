@@ -45,6 +45,10 @@ public class User {
     @SerializedName("user_type")
     private String userType;
 
+    @Expose
+    @SerializedName("image_url")
+    private String imageUrl;
+
     public String getStatus() {
         return status;
     }
@@ -84,4 +88,6 @@ public class User {
     public int getId() {
         return id;
     }
+
+    public  String getImageUrl(){return  imageUrl;}
 }

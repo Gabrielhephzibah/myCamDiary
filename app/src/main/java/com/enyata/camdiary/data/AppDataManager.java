@@ -240,6 +240,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setUserImageUrl(String image_url) {
+        mPreferencesHelper.setUserImageUrl(image_url);
+    }
+
+    @Override
+    public String getUserImageUrl() {
+        return mPreferencesHelper.getUserImageUrl();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -369,11 +379,12 @@ public class AppDataManager implements DataManager {
     public void updateUserInfo(
             String accessToken,
             String firstname,
-            String email) {
+            String email, String imageUrL) {
 
         setAccessToken(accessToken);
         setCurrentUserName(firstname);
         setCurrentUserEmail(email);
+        setUserImageUrl(imageUrL);
     }
 
     @Override

@@ -15,13 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="45dp"
         android:background="@color/colorPrimary"
         android:orientation="vertical">
 
@@ -109,9 +106,6 @@
                 android:fontFamily="@font/azo_san_bold"
 
                 />
-
-
-
         </LinearLayout>
 
     </LinearLayout>

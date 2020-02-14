@@ -42,7 +42,8 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     String token = response.getData().getToken();
                     String userEmail = response.getData().getEmail();
                     String firstname = response.getData().getFirstName();
-                    getDataManager().updateUserInfo(token,firstname,userEmail);
+                    String image_url = response.getData().getImageUrl();
+                    getDataManager().updateUserInfo(token,firstname,userEmail,image_url);
                     if(response.getData().getUserType().equals("collectors")){
                         getNavigator().goToDashBoard("collectors");
                         getDataManager().setLoggedInView("collector");
