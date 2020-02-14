@@ -25,6 +25,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     ListView listView;
     ActivityDeliveryHistoryBinding activityDeliveryHistoryBinding;
     ArrayList<DeliveryItemInterface> deliveryHistoryLists = new ArrayList<DeliveryItemInterface>();
+    ImageView image;
 
 
     @Inject
@@ -72,6 +74,9 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
         deliveryHistoryViewModel.setNavigator(this);
         listView = findViewById(R.id.listView);
         activityDeliveryHistoryBinding = getViewDataBinding();
+        image = findViewById(R.id.dispatcherImage);
+        String dispatcherImage = deliveryHistoryViewModel.getDispatcherImage();
+        Picasso.get().load(dispatcherImage).into(image);
         ImageView logout = activityDeliveryHistoryBinding.logout;
          TextView dispatcherName = activityDeliveryHistoryBinding.dispatcherName;
          dispatcherName.setText("Hey" +", " +deliveryHistoryViewModel.getCurrentUser());

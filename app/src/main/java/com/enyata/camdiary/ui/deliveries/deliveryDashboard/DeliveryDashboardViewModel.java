@@ -124,6 +124,10 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
         return inventoryCollected;
     }
 
+    public  String getDispatcherImage(){
+        return getDataManager().getUserImageUrl();
+    }
+
 
 
 

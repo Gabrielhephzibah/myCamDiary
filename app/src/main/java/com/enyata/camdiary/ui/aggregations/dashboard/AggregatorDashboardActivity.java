@@ -30,6 +30,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     TextView aggregator_name;
     TextView date;
     ActivityAggregatorDashboardBinding activityAggregatorDashboardBinding;
+    ImageView aggregatorUrl;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -82,6 +84,9 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         super.onCreate(savedInstanceState);
         aggregatorDashboardViewModel.setNavigator(this);
         activityAggregatorDashboardBinding = getViewDataBinding();
+        String aggregatorImage = aggregatorDashboardViewModel.getAggregatorImage();
+        aggregatorUrl = findViewById(R.id.aggregatorImage);
+        Picasso.get().load(aggregatorImage).into(aggregatorUrl);
 
         pager = activityAggregatorDashboardBinding.pager;
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     AggregatorHistoryAdapter aggregatorHistoryAdapter;
     ListView listView;
     ArrayList<AggregatorHistoryList> aggregatorHistoryLists = new ArrayList<>();
+    ImageView image;
 
 
     @Inject
@@ -77,6 +80,10 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
         listView = activityAggregatorHistoryBinding.listView;
         TextView aggregatorName =  activityAggregatorHistoryBinding.aggregatorName;
         aggregatorName.setText("Hey"+ "," + aggregatorHistoryViewModel.getCurrentUser());
+        image = findViewById(R.id.aggregatorImage);
+        String aggregatorImage = aggregatorHistoryViewModel.getAggregatorImage();
+        Picasso.get().load(aggregatorImage).into(image);
+
 
         if (InternetConnection.getInstance(this).isOnline()){
             aggregatorHistoryViewModel.getAggregationHistory();

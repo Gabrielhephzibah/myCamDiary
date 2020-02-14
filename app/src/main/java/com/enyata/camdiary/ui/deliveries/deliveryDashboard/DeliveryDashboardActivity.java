@@ -34,6 +34,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
     DeliveryListAdapter deliveryListAdapter;
     ListView listView;
+    ImageView image ;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -91,6 +93,11 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         listView = findViewById(R.id.listView);
         activityDeliveryDashboardBinding = getViewDataBinding();
         ImageView logout = activityDeliveryDashboardBinding.logout;
+
+        image = findViewById(R.id.dispatcherImage);
+        String dispatcherImage = deliveryDashboardViewModel.getDispatcherImage();
+
+        Picasso.get().load(dispatcherImage).into(image);
 
 
 

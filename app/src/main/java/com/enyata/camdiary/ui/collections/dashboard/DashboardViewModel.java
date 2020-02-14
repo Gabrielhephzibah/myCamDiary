@@ -130,4 +130,8 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
         return getDataManager().getCurrentUserName();
     }
 
+    public  String getCollectorImage(){
+        return getDataManager().getUserImageUrl();
+    }
+
 }

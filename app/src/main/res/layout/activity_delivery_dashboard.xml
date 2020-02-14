@@ -70,10 +70,10 @@
                         android:layout_toLeftOf="@id/dispatcherName"
                         android:layout_alignParentRight="true">
                         <ImageView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:id="@+id/circular_image"
-                            android:scaleType="fitCenter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/dispatcherImage"
+                            android:scaleType="fitXY"
                             android:layout_toLeftOf="@id/forgotPassword"
                             android:layout_alignParentRight="true"
                             android:src="@drawable/delivery_susan" />

@@ -50,4 +50,8 @@ public class DeliveryHistoryViewModel extends BaseViewModel<DeliveryHistoryNavig
     public  String  getCurrentUser(){
        return getDataManager().getCurrentUserName();
     }
+
+    public  String getDispatcherImage(){
+        return getDataManager().getUserImageUrl();
+    }
 }

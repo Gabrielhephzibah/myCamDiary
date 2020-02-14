@@ -57,7 +57,7 @@ public class CollectionHistoryCustomAdapter extends BaseAdapter {
            TextView name = convertView.findViewById(R.id.name);
            name.setText(collection.get(position).getFullName());
 
-           TextView litres = convertView.findViewById(R.id.companyname);
+           TextView litres = convertView.findViewById(R.id.collectorLitres);
            litres.setText(collection.get(position).getMyLitres());
 
            TextView companyName = convertView.findViewById(R.id.companyname);

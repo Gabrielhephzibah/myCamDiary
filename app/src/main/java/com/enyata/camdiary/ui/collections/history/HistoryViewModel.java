@@ -67,6 +67,10 @@ public class HistoryViewModel extends BaseViewModel<HistoryNavigator> {
         return getDataManager().getCurrentUserName();
     }
 
+    public  String getCollectorImage(){
+        return  getDataManager().getUserImageUrl();
+    }
+
 
 
 }

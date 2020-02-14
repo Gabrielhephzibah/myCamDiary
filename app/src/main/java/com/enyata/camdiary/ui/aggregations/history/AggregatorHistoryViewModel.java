@@ -48,4 +48,8 @@ public class AggregatorHistoryViewModel extends BaseViewModel<AggregatorHistoryN
     public  String getCurrentUser(){
        return getDataManager().getCurrentUserName();
     }
+
+    public  String getAggregatorImage(){
+        return  getDataManager().getUserImageUrl();
+    }
 }

@@ -108,5 +108,9 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
         return totalAggregation;
     }
 
+    public  String getAggregatorImage(){
+        return getDataManager().getUserImageUrl();
+    }
+
 
 }

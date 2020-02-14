@@ -41,7 +41,7 @@ public class CollectorHistoryAdapter extends ArrayAdapter {
         TextView name = listItem.findViewById(R.id.name);
         name.setText(collector.getFullName());
 
-        TextView litres = listItem.findViewById(R.id.litres);
+        TextView litres = listItem.findViewById(R.id.collectorLitres);
         litres.setText(collector.getMyLitres());
 
         TextView companyName  = listItem.findViewById(R.id.companyname);

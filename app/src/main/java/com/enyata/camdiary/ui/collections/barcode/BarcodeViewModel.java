@@ -10,7 +10,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.List;
 
-import info.androidhive.barcode.BarcodeReader;
+
 
 public class BarcodeViewModel extends BaseViewModel<BarcodeNavigator> {
     public BarcodeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {

@@ -9,6 +9,7 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,6 +55,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
     @Inject
     ViewModelProviderFactory factory;
     private HistoryViewModel historyViewModel;
+    ImageView collectorImage;
 
     ListView listView;
     ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
@@ -88,6 +91,11 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
         historyViewModel.setNavigator(this);
         activityHistoryBinding = getViewDataBinding();
         data = activityHistoryBinding.data;
+        collectorImage = findViewById(R.id.collectorImage);
+        String imageUrl = historyViewModel.getCollectorImage();
+
+        Picasso.get().load(imageUrl).into(collectorImage);
+
         if (historyViewModel.getUserType().equals("data_collectors")){
             data.setVisibility(View.VISIBLE);
         }
@@ -160,7 +168,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
                 String statusOfCollection = data.getStatusOfCollection();
                 String verificationNumber = data.getFarmer().getVerificationId();
                 String companyName = data.getFarmer().getCooperativeName();
-                collectionList.add(new CollectorHistory(firstName + " " + lastName, companyName, verificationNumber, statusOfCollection, litres));
+                collectionList.add(new CollectorHistory(firstName + " " + lastName, companyName, verificationNumber, statusOfCollection, litres + " litres"));
                 CollectionHistoryCustomAdapter adapter = new CollectionHistoryCustomAdapter(HistoryActivity.this, collectionList);
                 listView.setAdapter(adapter);
 

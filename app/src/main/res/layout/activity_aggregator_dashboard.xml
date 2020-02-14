@@ -75,9 +75,10 @@
                         android:layout_toLeftOf="@id/aggregatorName"
                         android:layout_alignParentRight="true">
                         <ImageView
+                            android:scaleType="fitXY"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/circular_image"
+                            android:id="@+id/aggregatorImage"
                             android:layout_toLeftOf="@id/forgotPassword"
                             android:layout_alignParentRight="true"
                             android:src="@drawable/aggregator_mark" />

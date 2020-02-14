@@ -19,7 +19,6 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
-import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -36,6 +35,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -47,6 +47,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     String coperateName;
     String verification_number;
     String fullName;
+    ImageView collectorImage;
 
     @Inject
     Gson gson;
@@ -106,6 +107,11 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         activityCollectionDashboardBinding = getViewDataBinding();
         data = activityCollectionDashboardBinding.data;
         Log.i("MYYYYYYYYYYYYYY", dashboardViewModel.getUserType());
+        collectorImage = findViewById(R.id.collectorImage);
+        String imageUrl = dashboardViewModel.getCollectorImage();
+        Picasso.get().load(imageUrl).into(collectorImage);
+
+        Log.i("IMAGEURL", imageUrl);
 
         if (dashboardViewModel.getUserType().equals("data_collectors")){
             data.setVisibility(View.VISIBLE);

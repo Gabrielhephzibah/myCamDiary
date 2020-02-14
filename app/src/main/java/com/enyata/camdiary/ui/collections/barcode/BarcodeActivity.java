@@ -19,7 +19,6 @@ import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarC
 
 import javax.inject.Inject;
 
-import info.androidhive.barcode.BarcodeReader;
 
 public class BarcodeActivity  extends BaseActivity<ActivityBarcodeBinding, BarcodeViewModel> implements BarcodeNavigator  {
 

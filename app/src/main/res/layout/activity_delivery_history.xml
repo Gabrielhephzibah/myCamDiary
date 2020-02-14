@@ -96,12 +96,12 @@
                                     app:strokeWidth="1dp">
 
                                     <ImageView
-                                        android:id="@+id/circular_image"
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent"
+                                        android:id="@+id/dispatcherImage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_alignParentRight="true"
                                         android:layout_toLeftOf="@id/dispatcherName"
-                                        android:scaleType="fitCenter"
+                                        android:scaleType="fitXY"
                                         android:src="@drawable/delivery_susan" />
                                 </androidx.cardview.widget.CardView>
                             </RelativeLayout>
