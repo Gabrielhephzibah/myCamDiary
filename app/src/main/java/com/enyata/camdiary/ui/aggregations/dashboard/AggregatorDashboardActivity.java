@@ -4,17 +4,23 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -30,6 +36,8 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,6 +57,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     TextView date;
     ActivityAggregatorDashboardBinding activityAggregatorDashboardBinding;
     ImageView aggregatorUrl;
+    CFAlertDialog alertDialog1;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -224,8 +233,55 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void onLogOut() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = AggregatorDashboardActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_bottom_sheet,null);
+               alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+
+//                .setTitle("LOG-OUT")
+//                .setMessage("Are you sure you want  to Log-out")
+                .setCancelable(true)
+//                .setBackgroundColor(Color.parseColor("#21523C"))
+
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog1.dismiss();
+            }
+        });
+
+       alertDialog1 = alertDialog.create();
+        alertDialog1.show();
+
+
+
+
+
+//        alertDialog.show();
+
+
+//        BottomSheetMaterialDialog.Builder bottomSheet = new BottomSheetMaterialDialog.Builder(AggregatorDashboardActivity.this);
+//        LayoutInflater inflater = AggregatorDashboardActivity.this.getLayoutInflater();
+//        View dialogView = inflater.inflate(R.layout.logout_bottom_sheet,null);
+////        bottomSheet.setTitle("Are you Sure You want to exit this App?");
+//        bottomSheet.setPositiveButton("Yes", new BottomSheetMaterialDialog.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int which) {
+//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+//        bottomSheet.setNegativeButton("NO", new BottomSheetMaterialDialog.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int which) {
+//                dialogInterface.dismiss();
+//            }
+//        });
+//        BottomSheetMaterialDialog alert = bottomSheet.build();
+//        alert.show();
     }
 
     @Override
