@@ -93,6 +93,7 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:textColor="#fff"
                         android:textColorHint="#fff"
+                        android:textCursorDrawable="@null"
                         android:textSize="14sp" />
 
                 </FrameLayout>

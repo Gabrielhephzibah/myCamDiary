@@ -153,6 +153,8 @@
                                 android:textColorHint="@color/hint_color"
                                 android:inputType="text|textMultiLine"
                                 android:backgroundTint="#fff"
+                                android:textColor="@color/colorPrimary"
+                                android:textCursorDrawable = "@null"
                                 android:gravity="top"/>
 
                         </LinearLayout>

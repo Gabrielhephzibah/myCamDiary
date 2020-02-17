@@ -17,6 +17,7 @@ import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.EnterIdErrorResponse;
 import com.enyata.camdiary.databinding.ActivityFarmerIdBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
@@ -69,6 +70,12 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");
         }
 
+    }
+
+    @Override
+    public void back() {
+        Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
+        startActivity(intent);
     }
 
     @Override

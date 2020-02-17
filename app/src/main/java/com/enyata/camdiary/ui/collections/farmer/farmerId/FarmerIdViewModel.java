@@ -17,6 +17,10 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
         getNavigator().accept();
     }
 
+    public void onBack(){
+        getNavigator().back();
+    }
+
 
 
     public void getFarmerDetails(String id){

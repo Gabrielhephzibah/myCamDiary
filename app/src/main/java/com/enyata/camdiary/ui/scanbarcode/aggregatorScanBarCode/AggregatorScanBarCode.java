@@ -37,7 +37,6 @@ public class AggregatorScanBarCode extends AppCompatActivity implements ZXingSca
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
-                Alert.showSuccess(getApplicationContext(),"Permission already granted");
             } else {
                 requestPermission();
             }
