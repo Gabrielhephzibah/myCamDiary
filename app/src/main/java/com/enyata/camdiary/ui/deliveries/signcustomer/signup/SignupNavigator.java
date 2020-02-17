@@ -13,5 +13,8 @@ public interface SignupNavigator {
 
     void handleError(Throwable throwable);
 
+    void history();
+
+
 
 }

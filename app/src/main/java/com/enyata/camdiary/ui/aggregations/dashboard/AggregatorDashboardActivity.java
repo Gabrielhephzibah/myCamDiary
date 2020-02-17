@@ -4,10 +4,8 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,8 +34,6 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
-import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,7 +53,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     TextView date;
     ActivityAggregatorDashboardBinding activityAggregatorDashboardBinding;
     ImageView aggregatorUrl;
-    CFAlertDialog alertDialog1;
+    CFAlertDialog alert;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -235,53 +231,29 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     public void onLogOut() {
         CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
         LayoutInflater inflater = AggregatorDashboardActivity.this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.logout_bottom_sheet,null);
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
                alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
-
-//                .setTitle("LOG-OUT")
-//                .setMessage("Are you sure you want  to Log-out")
-                .setCancelable(true)
-//                .setBackgroundColor(Color.parseColor("#21523C"))
-
+                .setCancelable(false)
                 .setHeaderView(dialogView);
         Button yes = dialogView.findViewById(R.id.yes);
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog1.dismiss();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
-       alertDialog1 = alertDialog.create();
-        alertDialog1.show();
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
 
-
-
-
-
-//        alertDialog.show();
-
-
-//        BottomSheetMaterialDialog.Builder bottomSheet = new BottomSheetMaterialDialog.Builder(AggregatorDashboardActivity.this);
-//        LayoutInflater inflater = AggregatorDashboardActivity.this.getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.logout_bottom_sheet,null);
-////        bottomSheet.setTitle("Are you Sure You want to exit this App?");
-//        bottomSheet.setPositiveButton("Yes", new BottomSheetMaterialDialog.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int which) {
-//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-//        bottomSheet.setNegativeButton("NO", new BottomSheetMaterialDialog.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int which) {
-//                dialogInterface.dismiss();
-//            }
-//        });
-//        BottomSheetMaterialDialog alert = bottomSheet.build();
-//        alert.show();
+       alert = alertDialog.create();
+        alert.show();
     }
 
     @Override

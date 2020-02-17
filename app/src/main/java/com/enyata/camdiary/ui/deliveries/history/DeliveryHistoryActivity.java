@@ -5,11 +5,15 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistory;
@@ -18,6 +22,7 @@ import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityDeliveryHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
@@ -41,6 +46,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     ActivityDeliveryHistoryBinding activityDeliveryHistoryBinding;
     ArrayList<DeliveryItemInterface> deliveryHistoryLists = new ArrayList<DeliveryItemInterface>();
     ImageView image;
+    CFAlertDialog alert;
 
 
     @Inject
@@ -104,8 +110,31 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public void logout() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = DeliveryHistoryActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+        alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
     }
 
     @Override

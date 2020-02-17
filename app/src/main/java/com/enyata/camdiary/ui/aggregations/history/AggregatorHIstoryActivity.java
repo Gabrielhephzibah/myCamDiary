@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.AggregationHistory;
@@ -40,6 +43,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     ListView listView;
     ArrayList<AggregatorHistoryList> aggregatorHistoryLists = new ArrayList<>();
     ImageView image;
+    CFAlertDialog alert;
 
 
     @Inject
@@ -126,8 +130,32 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void onLogOut() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = AggregatorHIstoryActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+        alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
+
     }
 
     @Override

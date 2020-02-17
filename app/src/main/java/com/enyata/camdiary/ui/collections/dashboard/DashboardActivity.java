@@ -8,14 +8,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
@@ -25,6 +28,7 @@ import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
+import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
@@ -48,6 +52,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     String verification_number;
     String fullName;
     ImageView collectorImage;
+    CFAlertDialog alert;
 
     @Inject
     Gson gson;
@@ -111,7 +116,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         String imageUrl = dashboardViewModel.getCollectorImage();
         Picasso.get().load(imageUrl).into(collectorImage);
 
-        Log.i("IMAGEURL", imageUrl);
 
         if (dashboardViewModel.getUserType().equals("data_collectors")){
             data.setVisibility(View.VISIBLE);
@@ -212,8 +216,31 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         @Override
         public void logout () {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
+            CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+            LayoutInflater inflater = DashboardActivity.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+            alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                    .setCancelable(false)
+                    .setHeaderView(dialogView);
+            Button yes = dialogView.findViewById(R.id.yes);
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Button no = dialogView.findViewById(R.id.no);
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alert.dismiss();
+                }
+            });
+
+            alert = alertDialog.create();
+            alert.show();
         }
 
         @Override

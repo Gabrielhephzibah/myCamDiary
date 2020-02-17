@@ -9,13 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
@@ -26,6 +30,7 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.Product;
 import com.enyata.camdiary.databinding.ActivityDeliveryDashboardBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
@@ -48,6 +53,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     DeliveryListAdapter deliveryListAdapter;
     ListView listView;
     ImageView image ;
+    CFAlertDialog alert;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -233,8 +239,31 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
     @Override
     public void logout() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = DeliveryDashboardActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+        alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
     }
 
     @Override

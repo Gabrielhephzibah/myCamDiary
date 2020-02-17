@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
@@ -25,6 +26,7 @@ import com.enyata.camdiary.databinding.ActivitySignupBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
 import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesActivity;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
@@ -45,8 +47,10 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     ImageView delivery;
     ImageView history;
+    ImageView logout;
     @Inject
     Gson gson;
+    CFAlertDialog alert;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -87,12 +91,46 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
          email = activitySignupBinding.email;
          phoneNumber = activitySignupBinding.phoneNumber;
          address = activitySignupBinding.address;
-        history = findViewById(R.id.history);
+        history = activitySignupBinding.included.history;
+        logout = activitySignupBinding.included.logout;
+
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signupViewModel.onLogout();
                 Intent intent = new Intent(getApplicationContext(), DeliveryHistoryActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(SignupActivity.this);
+                LayoutInflater inflater = SignupActivity.this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+                alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                        .setCancelable(false)
+                        .setHeaderView(dialogView);
+                Button yes = dialogView.findViewById(R.id.yes);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                Button no = dialogView.findViewById(R.id.no);
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alert.dismiss();
+                    }
+                });
+
+                alert = alertDialog.create();
+                alert.show();
             }
         });
     }
@@ -165,8 +203,31 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     @Override
     public void logout() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = SignupActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+        alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
     }
 
     @Override
@@ -195,6 +256,11 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
                 Alert.showFailed(getApplicationContext(),"Unable to Connect to the Internet");
             }
         }
+
+    }
+
+    @Override
+    public void history() {
 
     }
 }

@@ -7,14 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.Post;
@@ -56,6 +59,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
     ViewModelProviderFactory factory;
     private HistoryViewModel historyViewModel;
     ImageView collectorImage;
+    CFAlertDialog alert;
 
     ListView listView;
     ArrayList<CollectorHistoryList> collectorHistoryLists = new ArrayList<>();
@@ -150,8 +154,31 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
     @Override
     public void logout() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = HistoryActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+        alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
     }
 
     @Override

@@ -22,6 +22,8 @@ public class SignupViewModel extends BaseViewModel<SignupNavigator> {
         getNavigator().logout();
     }
 
+
+
     public boolean isEmailValid(String email) {
         return !TextUtils.isEmpty(email) && CommonUtils.isEmailValid(email);
     }

@@ -11,26 +11,29 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_width="match_parent"
+        android:paddingBottom="25dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:textColor="#ffff"
             android:textStyle="normal"
             android:fontFamily="@font/azosan"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Are you sure you want to Log-Out?"
             />
         <RelativeLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/yes"
-                style="@style/myTheme"
+                android:background="@drawable/log_out_button"
                 android:layout_width="wrap_content"
+                android:textColor="@drawable/changing_text"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Yes"/>
 
@@ -38,8 +41,10 @@
                 android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/myTheme"
+               android:textColor="@drawable/changing_text"
+                android:background="@drawable/log_out_button"
                 android:text="No"
+                android:textStyle="bold"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>
