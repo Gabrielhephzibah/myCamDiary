@@ -248,5 +248,13 @@ public class AppApiHelper implements ApiHelper {
                 .getObjectSingle(DispatcherSignUpResponse.class);
     }
 
+    @Override
+    public Single<DetailsResponse> getFarmerInfo(String verificationId) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_DETAILS+"/"+ verificationId)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(DetailsResponse.class);
+    }
+
 
 }

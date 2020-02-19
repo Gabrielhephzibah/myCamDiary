@@ -37,6 +37,8 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.Signsuccess
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
 import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
+import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorBarcodeViewModel;
+import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 import com.enyata.camdiary.ui.splash.SplashViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
@@ -99,6 +101,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(ColectorIdViewModel.class)) {
             //noinspection unchecked
             return (T) new ColectorIdViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(CollectorBarcodeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CollectorBarcodeViewModel(dataManager, schedulerProvider);
 
         } else if (modelClass.isAssignableFrom(VolumeViewModel.class)) {
             //noinspection unchecked

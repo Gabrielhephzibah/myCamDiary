@@ -58,6 +58,8 @@ public final class ApiEndPoint {
 
     public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/auth/dispatcher/signup";
 
+    public  static final  String FARMER_DETAILS = BuildConfig.BASE_URL + "/farmer/verify";
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

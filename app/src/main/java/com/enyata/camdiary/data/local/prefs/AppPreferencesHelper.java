@@ -61,6 +61,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final  String PREF_KEY_USER_IMAGE_URL = "PREF_KEY_USER_IMAGE_URL";
 
+    private  static  final  String PREF_KEY_FARMER_VERIFICATION_ID = "PREF_KEY_FAMER_VERIFICATION_ID";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -247,6 +249,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getUserImageUrl() {
         return mPrefs.getString(PREF_KEY_USER_IMAGE_URL,null);
+    }
+
+    @Override
+    public void setFarmerVerificationId(String farmerVerificationId) {
+        mPrefs.edit().putString(PREF_KEY_FARMER_VERIFICATION_ID, farmerVerificationId).apply();
+    }
+
+    @Override
+    public String getFarmerVerificationId() {
+        return mPrefs.getString(PREF_KEY_FARMER_VERIFICATION_ID,null);
     }
 
 }

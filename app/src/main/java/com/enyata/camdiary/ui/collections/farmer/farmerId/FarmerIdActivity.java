@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
@@ -59,13 +60,15 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
 
     @Override
     public void accept() {
-        String id = activityFarmerIdBinding.farmerId.getText().toString();
-        if(TextUtils.isEmpty(id)){
+        String verificationId = activityFarmerIdBinding.farmerId.getText().toString();
+
+
+        if(TextUtils.isEmpty(verificationId)){
             Alert.showFailed(getApplicationContext()," Please enter farmer id");
             return;
 
         }else if (InternetConnection.getInstance(this).isOnline()){
-            farmerIdViewModel.getFarmerDetails(id);
+            farmerIdViewModel.getFarmerDetails(verificationId);
         } else{
             Alert.showFailed(getApplicationContext(),"Please Check your Internet Connection and try again");
         }
@@ -82,7 +85,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
     public void onResponse(DetailsResponse data) {
         Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
         Details response = data.getData();
-
+        farmerIdViewModel.setFarmerId(String.valueOf(response.getId()));
         intent.putExtra("first_name",response.getFirstName());
         intent.putExtra("last_name",response.getLastName());
         intent.putExtra("phone_no", response.getContactNo());
@@ -106,6 +109,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
         }
 
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -90,6 +90,8 @@ public interface ApiHelper {
     //DispatcherSignup
     Single<DispatcherSignUpResponse>dispatcherSignUp(DispatcherSignUpRequest.Request request);
 
+    Single<DetailsResponse>getFarmerInfo(String verificationId);
+
 
 
 

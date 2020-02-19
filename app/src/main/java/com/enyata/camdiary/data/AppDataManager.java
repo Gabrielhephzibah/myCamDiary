@@ -250,6 +250,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setFarmerVerificationId(String farmerVerificationId) {
+        mPreferencesHelper.setFarmerVerificationId(farmerVerificationId);
+    }
+
+    @Override
+    public String getFarmerVerificationId() {
+        return mPreferencesHelper.getFarmerVerificationId();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -363,6 +373,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<DispatcherSignUpResponse> dispatcherSignUp(DispatcherSignUpRequest.Request request) {
         return mApiHelper.dispatcherSignUp(request);
+    }
+
+    @Override
+    public Single<DetailsResponse> getFarmerInfo(String verificationId) {
+        return mApiHelper.getFarmerInfo(verificationId);
     }
 
     @Override

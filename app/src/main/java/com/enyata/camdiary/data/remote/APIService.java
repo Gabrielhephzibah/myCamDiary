@@ -4,6 +4,7 @@ import com.enyata.camdiary.data.model.NewResponse;
 import com.enyata.camdiary.data.model.Post;
 import com.enyata.camdiary.data.model.api.response.Collection;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public interface APIService {
     @POST("aggregation")
     Call<NewResponse> savePost(@Header("Authorization") String authorization, @Body Post collection);
 
-    @GET("collection/completed/history")
-    Call<List<CollectionHistory>>getCollectionHistory(@Header("Authorization") String authorization);
+    @GET("{verificationId}")
+    Call<DetailsResponse>getfarmerDetails(@Path("verificationId")  String verificationId, @Header("Authorization") String authorization);
 
 }
 

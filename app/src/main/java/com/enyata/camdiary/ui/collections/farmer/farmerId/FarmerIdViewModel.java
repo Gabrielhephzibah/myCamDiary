@@ -23,16 +23,15 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
 
 
 
-    public void getFarmerDetails(String id){
+    public void getFarmerDetails(String verificationId){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .getFarmerDetails(id)
+                .getFarmerInfo(verificationId)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().onResponse(response);
-                    getDataManager().setFarmerId(String.valueOf(response.getData().getId()));
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -43,7 +42,13 @@ public class FarmerIdViewModel extends BaseViewModel<FarmerIdNavigator> {
 
 
 
+
     public void dispose(){
         onCleared();
+    }
+
+    public  void  setFarmerId(String id){
+        getDataManager().setFarmerId(id);
+
     }
 }

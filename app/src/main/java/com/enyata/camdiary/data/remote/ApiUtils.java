@@ -10,5 +10,11 @@ public class ApiUtils {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
 
+    public  static  final  String USER_URL = "http://stagingcamuserapi.enyata.com/v1/farmer/verify/";
+
+     public  static  APIService getFarmerDetails(){
+         return  RetrofitClient.getClient(USER_URL).create(APIService.class);
+     }
+
 
 }

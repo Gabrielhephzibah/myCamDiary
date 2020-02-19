@@ -2,6 +2,8 @@
 
 package com.enyata.camdiary.data.local.prefs;
 
+import android.view.View;
+
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
@@ -82,6 +84,10 @@ public interface PreferencesHelper {
     void setUserImageUrl(String image_url);
 
     String  getUserImageUrl();
+
+    void  setFarmerVerificationId(String farmerVerificationId);
+
+    String getFarmerVerificationId();
 
 }
 

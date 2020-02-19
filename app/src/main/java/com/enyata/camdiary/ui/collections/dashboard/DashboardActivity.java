@@ -46,6 +46,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import javax.inject.Inject;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
     String firstName;
@@ -218,31 +220,49 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         @Override
         public void logout () {
-            CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
-            LayoutInflater inflater = DashboardActivity.this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
-            alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
-                    .setCancelable(false)
-                    .setHeaderView(dialogView);
-            Button yes = dialogView.findViewById(R.id.yes);
-            yes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            Button no = dialogView.findViewById(R.id.no);
-            no.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alert.dismiss();
-                }
-            });
-
-            alert = alertDialog.create();
-            alert.show();
+        new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("LOG-OUT")
+                .setContentText("Are you sure you want to Log-" +
+                        "Out ?")
+                .setConfirmText("Yes")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                }).show();
+//            CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+//            LayoutInflater inflater = DashboardActivity.this.getLayoutInflater();
+//            View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+//            alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+//                    .setCancelable(false)
+//                    .setHeaderView(dialogView);
+//            Button yes = dialogView.findViewById(R.id.yes);
+//            yes.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+//
+//            Button no = dialogView.findViewById(R.id.no);
+//            no.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    alert.dismiss();
+//                }
+//            });
+//
+//            alert = alertDialog.create();
+//            alert.show();
         }
 
         @Override
