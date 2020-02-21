@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ui.collections.history.CollectorHistoryList;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,6 +53,9 @@ public class AggregatorHistoryAdapter extends ArrayAdapter {
 
         TextView date = listItem.findViewById(R.id.date);
         date.setText(aggregator.getDate());
+
+        ImageView historyImage = listItem.findViewById(R.id.historyImage);
+        Picasso.get().load(aggregator.getImage()).into(historyImage);
 
 
         return listItem;

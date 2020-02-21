@@ -260,6 +260,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setCollectorVerificationId(String collectorVerificationId) {
+        mPreferencesHelper.setCollectorVerificationId(collectorVerificationId);
+    }
+
+    @Override
+    public String getCollectorVerificationId() {
+        return mPreferencesHelper.getCollectorVerificationId();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }

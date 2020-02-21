@@ -67,7 +67,7 @@
 
 
                                 <TextView
-                                    android:id="@+id/forgotPassword"
+                                    android:id="@+id/dispatcherName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
@@ -83,7 +83,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignBottom="@+id/forgotPassword"
+                                    android:layout_alignBottom="@+id/dispatcherName"
                                     android:layout_marginBottom="-26dp"
                                     android:fontFamily="@font/azo_san"
                                     android:paddingTop="25dp"
@@ -97,21 +97,21 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/circle"
-                                    android:layout_width="75dp"
-                                    android:layout_height="75dp"
+                                    android:layout_width="65dp"
+                                    android:layout_height="68dp"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginRight="27dp"
-                                    android:layout_toLeftOf="@id/forgotPassword"
+                                    android:layout_toLeftOf="@id/dispatcherName"
                                     app:cardCornerRadius="50dp"
                                     app:strokeWidth="1dp">
 
                                     <ImageView
-                                        android:id="@+id/circular_image"
+                                        android:id="@+id/dispatcherImage"
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
                                         android:layout_alignParentRight="true"
-                                        android:layout_toLeftOf="@id/forgotPassword"
-                                        android:scaleType="fitCenter"
+                                        android:layout_toLeftOf="@id/dispatcherName"
+                                        android:scaleType="fitXY"
                                         android:src="@drawable/delivery_susan" />
                                 </androidx.cardview.widget.CardView>
                             </RelativeLayout>

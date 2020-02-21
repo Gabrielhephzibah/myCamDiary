@@ -82,8 +82,8 @@
                             android:textSize="14sp" />
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="75dp"
-                            android:layout_height="75dp"
+                            android:layout_width="65dp"
+                            android:layout_height="68dp"
                             app:cardCornerRadius="35dp"
                             app:strokeWidth="1dp"
                             android:layout_marginRight="27dp"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardCollectorList;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,9 @@ public class AggregatorListAdapter extends ArrayAdapter {
 
         TextView farmerId  = listItem.findViewById(R.id.farmerId);
         farmerId.setText(aggregator.getCompanyId());
+
+        ImageView image = listItem.findViewById(R.id.image);
+        Picasso.get().load(aggregator.getImage()).into(image);
 
 
 

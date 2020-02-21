@@ -102,9 +102,9 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     @Override
     public void getCollectorDetails(DetailsResponse response) {
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-
         Details data = response.getData();
         colectorIdViewModel.setCollectorName(data.getFirstName() + " " + data.getLastName());
+        colectorIdViewModel.setCollectorId(String.valueOf(data.getId()));
         String id = String.valueOf(data);
         intent.putExtra("first_name", data.getFirstName());
         intent.putExtra("last_name", data.getLastName());

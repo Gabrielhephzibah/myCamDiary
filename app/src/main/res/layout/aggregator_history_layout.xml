@@ -22,16 +22,18 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
                 app:strokeWidth="1dp"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="27dp"
                 android:layout_alignParentLeft="true">
                 <ImageView
+                    android:id="@+id/historyImage"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/farmer_ade" />
             </androidx.cardview.widget.CardView>

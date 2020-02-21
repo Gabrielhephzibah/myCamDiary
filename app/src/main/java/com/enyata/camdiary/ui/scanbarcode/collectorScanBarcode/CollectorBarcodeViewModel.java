@@ -26,4 +26,8 @@ public  String getFarmerVerificationId(){
     }
 
 
+    public void  onDispose(){
+        onCleared();
+    }
+
 }

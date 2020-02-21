@@ -63,6 +63,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final  String PREF_KEY_FARMER_VERIFICATION_ID = "PREF_KEY_FAMER_VERIFICATION_ID";
 
+    private  static  final  String PREF_KEY_COLLECTOR_VERIFICATION_ID = "PREF_KEY_COLLECTOR_VERIFICATION_ID";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -259,6 +261,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getFarmerVerificationId() {
         return mPrefs.getString(PREF_KEY_FARMER_VERIFICATION_ID,null);
+    }
+
+    @Override
+    public void setCollectorVerificationId(String collectorVerificationId) {
+        mPrefs.edit().putString(PREF_KEY_COLLECTOR_VERIFICATION_ID, collectorVerificationId).apply();
+    }
+
+    @Override
+    public String getCollectorVerificationId() {
+        return mPrefs.getString(PREF_KEY_COLLECTOR_VERIFICATION_ID,null);
     }
 
 }

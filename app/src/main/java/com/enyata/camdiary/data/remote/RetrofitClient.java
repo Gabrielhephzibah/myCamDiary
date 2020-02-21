@@ -5,6 +5,8 @@ import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.NewResponse;
 import com.google.gson.JsonObject;
 
+import javax.inject.Named;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -12,7 +14,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-   public static APIService apiService;
+
+    public static APIService apiService;
+    public static final String BASE_URL = "http://stagingcaminventoryapi.enyata.com/api/v1/";
+    public static  final  String FARMER_URL = "http://stagingcamuserapi.enyata.com/v1/farmer/verify/";
+    public static  final String COLLECTOR_URL = "http://stagingcamuserapi.enyata.com/v1/collectors/verify/";
+
 
     private static Retrofit retrofit = null;
 
@@ -22,8 +29,10 @@ public class RetrofitClient {
         return new OkHttpClient().newBuilder()
                 .addInterceptor(interceptor)
                 .build();
+
     }
 
+    @Named("retrofit_one")
     public static Retrofit getClient(String baseUrl) {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
@@ -35,6 +44,29 @@ public class RetrofitClient {
         return retrofit;
     }
 
+    @Named("retrofit_two")
+    public static Retrofit getClientFarmer(String farmerDetails) {
+        if (retrofit==null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(farmerDetails)
+                    .client(createDefaultOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
+    @Named("retrofit_three")
+    public static Retrofit getClientCollector(String collectorDetails) {
+        if (retrofit==null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(collectorDetails)
+                    .client(createDefaultOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
 
 
 }

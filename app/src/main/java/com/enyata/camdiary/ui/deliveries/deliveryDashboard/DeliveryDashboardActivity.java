@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
@@ -64,6 +65,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     LinearLayout slideLayout;
     ArrayList<DeliveryList> deliveryLists = new ArrayList<>();
     ViewPager pager;
+    int backButtonPressed = 0;
 
     ActivityDeliveryDashboardBinding activityDeliveryDashboardBinding;
 
@@ -310,6 +312,17 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
         deliveryDashboardViewModel.dispose();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressed >= 2){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonPressed++;
 
-
+        }
+    }
 }

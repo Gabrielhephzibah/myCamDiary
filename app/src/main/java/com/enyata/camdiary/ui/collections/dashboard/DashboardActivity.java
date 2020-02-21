@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.androidnetworking.error.ANError;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.BR;
@@ -70,6 +72,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     private ArrayList<DashboardCollectorList> dashboardCollectorLists = new ArrayList<>();
     private LinearLayout slideLayout;
    private RelativeLayout data;
+   int backButtonPressed = 0;
 
     int[] layouts = {R.layout.collection_first_slide, R.layout.collection_second_slide, R.layout.collection_third_slide};
 
@@ -220,49 +223,31 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         @Override
         public void logout () {
-        new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("LOG-OUT")
-                .setContentText("Are you sure you want to Log-" +
-                        "Out ?")
-                .setConfirmText("Yes")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
-                    }
-                }).show();
-//            CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
-//            LayoutInflater inflater = DashboardActivity.this.getLayoutInflater();
-//            View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
-//            alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
-//                    .setCancelable(false)
-//                    .setHeaderView(dialogView);
-//            Button yes = dialogView.findViewById(R.id.yes);
-//            yes.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
-//
-//            Button no = dialogView.findViewById(R.id.no);
-//            no.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    alert.dismiss();
-//                }
-//            });
-//
-//            alert = alertDialog.create();
-//            alert.show();
+            CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+            LayoutInflater inflater = DashboardActivity.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
+            alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                    .setCancelable(false)
+                    .setHeaderView(dialogView);
+            Button yes = dialogView.findViewById(R.id.yes);
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Button no = dialogView.findViewById(R.id.no);
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alert.dismiss();
+                }
+            });
+
+            alert = alertDialog.create();
+            alert.show();
         }
 
         @Override
@@ -299,23 +284,16 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void onBackPressed() {
-            CFAlertDialog.Builder dialog = new CFAlertDialog.Builder(this);
-                   dialog .setTitle("Exit Application");
-                    dialog.setMessage("Do you really want to exit app");
-                    dialog.setTextColor(Color.parseColor("#21523C"));
-                   dialog .setCancelable(false);
-                    dialog.addButton("Yes", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            DashboardActivity.super.onBackPressed();
-                        }
-                    });
-                  dialog .addButton("No", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialogInterface, int i) {
-                           dialogInterface.dismiss();
-                       }
-                   });
-            dialog.show();
+         if (backButtonPressed >= 2){
+             Intent intent = new Intent(Intent.ACTION_MAIN);
+             intent.addCategory(Intent.CATEGORY_HOME);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             startActivity(intent);
+         }else {
+             Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+             backButtonPressed++;
+         }
+
+
     }
 }

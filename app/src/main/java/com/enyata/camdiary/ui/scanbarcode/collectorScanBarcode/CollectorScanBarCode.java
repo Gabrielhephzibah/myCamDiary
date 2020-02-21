@@ -1,7 +1,6 @@
 package com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
@@ -9,30 +8,20 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.model.Progress;
-import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
-import com.enyata.camdiary.data.model.api.response.EnterIdErrorResponse;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityCollectorScanBarCodeBinding;
-import com.enyata.camdiary.databinding.ActivityDeliveryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardViewModel;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
@@ -45,13 +34,15 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.Manifest.permission.CAMERA;
 
-public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarCodeBinding,CollectorBarcodeViewModel> implements  ZXingScannerView.ResultHandler  {
+public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarCodeBinding,CollectorBarcodeViewModel> implements  ZXingScannerView.ResultHandler{
 
 
 
@@ -67,6 +58,7 @@ public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarC
     AlertDialog alert1;
     String farmerVerificationId;
     private  ProgressDialog progressDialog;
+    OkHttpClient client;
 
     private  CollectorBarcodeViewModel collectorBarcodeViewModel;
 
@@ -92,7 +84,8 @@ public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarC
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
         mAPIService = ApiUtils.getFarmerDetails();
-
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
@@ -172,13 +165,15 @@ break;
         progressDialog.setCancelable(false);
         progressDialog.show();
         if (InternetConnection.getInstance(this).isOnline()){
-            SetFarmerVerificationID();
+            getFarmerDetails();
+            mScannerView.stopCamera();
         }else {
             progressDialog.dismiss();
             Alert.showFailed(getApplicationContext(),"Please check your internet connection and try again");
             onResume();
 
         }
+
 
 
 
@@ -210,10 +205,14 @@ break;
     protected void onDestroy() {
         super.onDestroy();
         mScannerView.stopCamera();
+        collectorBarcodeViewModel.onDispose();
+        client.dispatcher().cancelAll();
+
+
     }
 
 
-    public  void  SetFarmerVerificationID(){
+    public  void getFarmerDetails(){
         mAPIService.getfarmerDetails(farmerVerificationId,collectorBarcodeViewModel.getAccessToken()).enqueue(new Callback<DetailsResponse>() {
             @Override
             public void onResponse(Call<DetailsResponse> call, Response<DetailsResponse> response) {
@@ -228,6 +227,7 @@ break;
                     intent.putExtra("farmer_id", response.body().getData().getVerificationId());
                     startActivity(intent);
                 }if (response.code() == 404) {
+                    progressDialog.dismiss();
                     Gson gson = new GsonBuilder().create();
                     DetailsErrorMessage error = new DetailsErrorMessage();
                     try {
@@ -237,26 +237,29 @@ break;
                     } catch (IOException e) {
                             e.printStackTrace();
                     }
-                }else {
-                    Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
-                    Intent intent = new Intent(getApplicationContext(),BarcodeActivity.class);
+                }if (response.equals(null)){
+                    progressDialog.dismiss();
+                    Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
+                    Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
                     startActivity(intent);
                 }
+        call.cancel();
+
             }
 
             @Override
             public void onFailure(Call<DetailsResponse> call, Throwable throwable) {
                 progressDialog.dismiss();
                 Log.i("FAILURE MESSAGE","REQRUEST FAILED");
-                Alert.showFailed(getApplicationContext(), "Request not Successful, please try again later");
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
                 Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
                 startActivity(intent);
 
             }
         });
 
-    }
 
+    }
 
 
 }

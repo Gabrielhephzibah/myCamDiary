@@ -35,6 +35,7 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.Signsuccess
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
+import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 import com.enyata.camdiary.ui.splash.SplashActivity;
 
@@ -150,6 +151,9 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract CollectorScanBarCode bindCollectorScanBarCode();
+
+    @ContributesAndroidInjector
+    abstract AggregatorScanBarCode bindAggregatorScanBarCode();
 
     @ContributesAndroidInjector
     abstract SplashActivity bindSplashActivity();

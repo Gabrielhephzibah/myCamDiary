@@ -33,5 +33,10 @@ public class AggregationHistoryHeader implements AggregationItemInterface {
         return date;
     }
 
+    @Override
+    public String historyImage() {
+        return null;
+    }
+
 
 }

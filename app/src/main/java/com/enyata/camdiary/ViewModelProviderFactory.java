@@ -37,6 +37,7 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.Signsuccess
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
 import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
+import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorBarcodeViewModel;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorBarcodeViewModel;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 import com.enyata.camdiary.ui.splash.SplashViewModel;
@@ -113,6 +114,10 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(AggregatorHistoryViewModel.class)) {
             //noinspection unchecked
             return (T) new AggregatorHistoryViewModel(dataManager, schedulerProvider);
+
+        } else if (modelClass.isAssignableFrom(AggregatorBarcodeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AggregatorBarcodeViewModel(dataManager, schedulerProvider);
 
         } else if (modelClass.isAssignableFrom(DeliveryDashboardViewModel.class)) {
             //noinspection unchecked

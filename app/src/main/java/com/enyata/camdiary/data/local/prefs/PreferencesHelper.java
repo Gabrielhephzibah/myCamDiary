@@ -89,5 +89,9 @@ public interface PreferencesHelper {
 
     String getFarmerVerificationId();
 
+    void  setCollectorVerificationId(String collectorVerificationId);
+
+    String getCollectorVerificationId();
+
 }
 

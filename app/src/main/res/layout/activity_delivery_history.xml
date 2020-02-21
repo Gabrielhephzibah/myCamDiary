@@ -87,8 +87,8 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/circle"
-                                    android:layout_width="75dp"
-                                    android:layout_height="75dp"
+                                    android:layout_width="65dp"
+                                    android:layout_height="68dp"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginRight="27dp"
                                     android:layout_toLeftOf="@id/dispatcherName"

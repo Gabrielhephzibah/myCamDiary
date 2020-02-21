@@ -40,6 +40,7 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -51,6 +52,8 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
     @Inject
     Gson gson;
     CFAlertDialog alert;
+    ImageView dispatcherImage;
+    TextView dispatcherName;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -94,14 +97,24 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
         history = activitySignupBinding.included.history;
         logout = activitySignupBinding.included.logout;
 
+        dispatcherImage = findViewById(R.id.dispatcherImage);
+        Picasso.get().load(signupViewModel.getDispatcherImage()).into(dispatcherImage);
+
+        dispatcherName = findViewById(R.id.dispatcherName);
+        dispatcherName.setText("Hey, " + signupViewModel.getDispatcherName());
+
+
+
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signupViewModel.onLogout();
                 Intent intent = new Intent(getApplicationContext(), DeliveryHistoryActivity.class);
                 startActivity(intent);
             }
         });
+
+
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +147,9 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
             }
         });
     }
+
+
+
 
     @Override
     public void submit() {

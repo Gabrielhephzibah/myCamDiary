@@ -42,6 +42,10 @@ public class Details {
     private String cooperativeName;
 
     @Expose
+    @SerializedName("image_url")
+    private String imageUrl;
+
+    @Expose
     @SerializedName("status")
     private String status;
 
@@ -102,4 +106,8 @@ public class Details {
         return message;
     }
 
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

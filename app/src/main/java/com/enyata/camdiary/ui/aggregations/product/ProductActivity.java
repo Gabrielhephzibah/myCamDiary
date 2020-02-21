@@ -68,6 +68,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     private ListView listView;
     private ArrayList<ProductList> productLists = new ArrayList<>();
     private String churno;
+    OkHttpClient client;
 
 
     public static Intent newIntent(Context context) {
@@ -98,10 +99,12 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         mAPIService = ApiUtils.getAPIService();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+         client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
+        Log.i("COLLECTORID", productViewModel.getCollectorId());
 
         String id = productViewModel.getCollectorId();
+
         productViewModel.getCollectorCollection(id);
         activityProductBinding = getViewDataBinding();
         listView = activityProductBinding.listView;
@@ -298,6 +301,8 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     protected void onDestroy() {
         super.onDestroy();
         productViewModel.dispose();
+        client.dispatcher().cancelAll();
+
 
     }
 }

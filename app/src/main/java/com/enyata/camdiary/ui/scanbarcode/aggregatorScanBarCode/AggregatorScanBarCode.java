@@ -4,7 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,24 +15,80 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
+import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
+import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.remote.APIService;
+import com.enyata.camdiary.data.remote.ApiUtils;
+import com.enyata.camdiary.databinding.ActivityAggregatorScanBarCodeBinding;
+import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
+import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
+import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 import com.enyata.camdiary.utils.Alert;
+import com.enyata.camdiary.utils.AppUtils;
+import com.enyata.camdiary.utils.InternetConnection;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.Result;
 
+import java.io.IOException;
+
+import javax.inject.Inject;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.CAMERA;
 
-public class AggregatorScanBarCode extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBarCodeBinding, AggregatorBarcodeViewModel> implements ZXingScannerView.ResultHandler, AggregatorScanBarcodeNavigator{
+   @Inject
+    Gson gson;
+
+   @Inject
+   ViewModelProviderFactory factory;
+   AggregatorBarcodeViewModel aggregatorBarcodeViewModel;
+     APIService mAPIService;
+    ProgressDialog progressDialog;
+    OkHttpClient client;
+
+
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
+
+    @Override
+    public int getBindingVariable() {
+        return com.enyata.camdiary.BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_aggregator_scan_bar_code;
+    }
+
+    @Override
+    public AggregatorBarcodeViewModel getViewModel() {
+        aggregatorBarcodeViewModel = ViewModelProviders.of(this,factory).get(AggregatorBarcodeViewModel.class);
+        return aggregatorBarcodeViewModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggregator_scan_bar_code);
+        mAPIService = ApiUtils.getCollectorDetails();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
@@ -105,27 +164,20 @@ public class AggregatorScanBarCode extends AppCompatActivity implements ZXingSca
         final String result = rawResult.getText();
         Log.d("QRCodeScanner", rawResult.getText());
         Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
+        aggregatorBarcodeViewModel.setCollectorVerificationId(rawResult.getText());
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait.....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        if (InternetConnection.getInstance(this).isOnline()){
+            getCollectorInfo();
+            mScannerView.stopCamera();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mScannerView.resumeCameraPreview(AggregatorScanBarCode.this);
-            }
-        });
-
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result));
-                startActivity(browserIntent);
-            }
-        });
-
-        builder.setMessage(rawResult.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+        }else {
+            progressDialog.dismiss();
+            Alert.showFailed(getApplicationContext(),"please check your Internet Connection and try again");
+            onResume();
+        }
 
     }
 
@@ -157,5 +209,56 @@ public class AggregatorScanBarCode extends AppCompatActivity implements ZXingSca
     protected void onDestroy() {
         super.onDestroy();
         mScannerView.stopCamera();
+        aggregatorBarcodeViewModel.onDispose();
+        client.dispatcher().cancelAll();
+
+
+    }
+
+    public  void getCollectorInfo(){
+            mAPIService.GetCollectorDetails(aggregatorBarcodeViewModel.getCollectorVerificationId(), aggregatorBarcodeViewModel.getAccessToken()).enqueue(new Callback<DetailsResponse>() {
+                @Override
+                public void onResponse(Call<DetailsResponse> call, Response<DetailsResponse> response) {
+                    Log.i("RESPONSE SUCCESS", "RESPONSE IS SUCCESSFUL");
+                    if (response.isSuccessful()){
+                        progressDialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
+                        aggregatorBarcodeViewModel.setCollectorId(String.valueOf(response.body().getData().getId()));
+                        intent.putExtra("first_name", response.body().getData().getFirstName());
+                        intent.putExtra("last_name", response.body().getData().getLastName());
+                        intent.putExtra("phone_number", response.body().getData().getContactNo());
+                        intent.putExtra("email", response.body().getData().getEmail());
+                        intent.putExtra("verification_id", response.body().getData().getVerificationId());
+                        startActivity(intent);
+                    }if (response.code() == 404) {
+                        progressDialog.dismiss();
+                        Gson gson = new GsonBuilder().create();
+                        DetailsErrorMessage error = new DetailsErrorMessage();
+                        try {
+                            error = gson.fromJson(response.errorBody().string(), DetailsErrorMessage.class);
+                            Alert.showFailed(getApplicationContext(), error.getError() + " please scan correct barcode");
+                            onResume();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }if (response.equals(null)){
+                        progressDialog.dismiss();
+                        Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
+                        Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
+
+                @Override
+                public void onFailure(Call<DetailsResponse> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Log.i("FAILURE MESSAGE","REQRUEST FAILED");
+                    Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+                    Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                    startActivity(intent);
+                }
+
+            });
     }
 }

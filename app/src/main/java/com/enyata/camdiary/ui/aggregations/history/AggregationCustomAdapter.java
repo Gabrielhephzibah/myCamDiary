@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.enyata.camdiary.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,9 @@ public class AggregationCustomAdapter extends BaseAdapter {
 
             TextView verificationId = convertView.findViewById(R.id.collectorId);
             verificationId.setText(aggregation.get(position).getCompanyId());
+
+            ImageView image = convertView.findViewById(R.id.historyImage);
+            Picasso.get().load(aggregation.get(position).historyImage()).into(image);
         }
         
         

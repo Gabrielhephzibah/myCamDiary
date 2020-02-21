@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
@@ -54,6 +55,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     ActivityAggregatorDashboardBinding activityAggregatorDashboardBinding;
     ImageView aggregatorUrl;
     CFAlertDialog alert;
+    int backButtonPressed = 0;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -218,7 +220,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     @Override
     public void getAggregatorTodayCollection(AggregationCollectionResponse todayCollection) {
         for (AggregatorCollections response : todayCollection.getData() ) {
-            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " "+ response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres" ));
+            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " "+ response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres" ,response.getCollectorDetails().getImageUrl()));
             aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this,aggregatorLists);
             listView.setAdapter(aggregatorListAdapter);
 
@@ -262,5 +264,18 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
         aggregatorDashboardViewModel.dispose();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressed >= 2){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonPressed++;
 
+        }
+
+    }
 }

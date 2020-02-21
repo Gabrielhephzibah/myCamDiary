@@ -5,15 +5,17 @@ public class AggregatorHistoryList {
     private String companyId;
     private  String myLitres;
     private  String date;
+    private  String image;
 
 
-    public  AggregatorHistoryList(String myName, String id,String milkLitres,String myDate){
+    public  AggregatorHistoryList(String myName, String id,String milkLitres,String myDate, String myImage){
         fullName = myName;
 
         companyId= id;
 
         myLitres = milkLitres;
         date = myDate;
+        image = myImage;
 
     }
 
@@ -55,4 +57,11 @@ public class AggregatorHistoryList {
         return date;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

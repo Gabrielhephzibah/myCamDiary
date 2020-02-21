@@ -5,13 +5,15 @@ public class AggregatorList {
     private String fullName;
     private String companyId;
     private  String myLitres;
+    private  String image;
 
-    public  AggregatorList(String myName, String id,String milkLitres){
+    public  AggregatorList(String myName, String id,String milkLitres, String myImage){
         fullName = myName;
 
         companyId= id;
 
         myLitres = milkLitres;
+        image = myImage;
 
     }
 
@@ -37,5 +39,13 @@ public class AggregatorList {
 
     public  String getMyLitres(){
         return myLitres;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String myImage) {
+        this.image = myImage;
     }
 }

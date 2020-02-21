@@ -27,7 +27,7 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.remote.APIService;
-import com.enyata.camdiary.data.remote.ApiUtils;
+
 import com.enyata.camdiary.databinding.ActivityHistoryBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;

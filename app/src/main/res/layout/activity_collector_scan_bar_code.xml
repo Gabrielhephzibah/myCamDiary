@@ -1,17 +1,17 @@
 
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode">
 
 
-    <data>
-        <import type="android.view.View" />
-        <variable
-            name="viewModel"
-            type="com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorBarcodeViewModel" />
-    </data>
+<data>
+    <import type="android.view.View" />
+    <variable
+        name="viewModel"
+        type="com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorBarcodeViewModel" />
+</data>
 
 
 <androidx.constraintlayout.widget.ConstraintLayout

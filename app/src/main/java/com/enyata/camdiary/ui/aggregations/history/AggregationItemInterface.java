@@ -10,4 +10,6 @@ public interface AggregationItemInterface {
     String getMyLitres();
 
     String getDate();
+
+     String historyImage();
 }

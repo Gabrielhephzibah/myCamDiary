@@ -4,11 +4,13 @@ public class AggregatorHistory implements  AggregationItemInterface {
     public String fullName;
     public String companyId;
     public   String myLitres;
+    public  String imageHistory;
 
-    public AggregatorHistory(String fullName, String companyId, String myLitres) {
+    public AggregatorHistory(String fullName, String companyId, String myLitres, String imageHistory) {
         this.fullName = fullName;
         this.companyId = companyId;
         this.myLitres = myLitres;
+       this.imageHistory = imageHistory;
     }
 
     @Override
@@ -34,6 +36,11 @@ public class AggregatorHistory implements  AggregationItemInterface {
     @Override
     public String getDate() {
         return null;
+    }
+
+    @Override
+    public String historyImage() {
+        return imageHistory;
     }
 
 

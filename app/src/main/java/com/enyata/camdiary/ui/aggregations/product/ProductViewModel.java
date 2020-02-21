@@ -126,6 +126,7 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
                 if (response.isSuccessful()) {
                     getNavigator().onResponse();
                 }
+                call.cancel();
             }
 
             @Override
@@ -137,8 +138,11 @@ public class ProductViewModel extends BaseViewModel<ProductNavigator> {
 
                 }
             }
+
         });
+
     }
+
 
     private MutableLiveData<CollectionResponse> collectionMutableLiveData = new MutableLiveData<>();
 

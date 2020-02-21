@@ -40,7 +40,12 @@ public class ColectorIdViewModel extends BaseViewModel<CollectorIdNavigator> {
         getDataManager().setCollectorName(name);
     }
 
+
     public void dispose() {
         onCleared();
+    }
+
+    public void setCollectorId(String id){
+        getDataManager().setCollectorId(id);
     }
 }

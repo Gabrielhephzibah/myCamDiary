@@ -28,6 +28,14 @@ public class SignupViewModel extends BaseViewModel<SignupNavigator> {
         return !TextUtils.isEmpty(email) && CommonUtils.isEmailValid(email);
     }
 
+    public String getDispatcherImage(){
+       return getDataManager().getUserImageUrl();
+    }
+
+    public  String getDispatcherName(){
+        return getDataManager().getCurrentUserName();
+    }
+
     public boolean isPhoneNumberValid(String phoneNumber){
         return !TextUtils.isEmpty(phoneNumber) & phoneNumber.length() >= 11;
     }
