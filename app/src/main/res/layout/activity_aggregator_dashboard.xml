@@ -11,9 +11,6 @@
             type="com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel" />
     </data>
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,11 +58,10 @@
                         android:textColor="#3333"
                         android:layout_marginBottom="-26dp"
                         android:textSize="14sp"
-
-
                         />
 
                     <androidx.cardview.widget.CardView
+                        android:onClick="@{()->viewModel.onProfilePix()}"
                         android:id="@+id/circle"
                         android:layout_width="65dp"
                         android:layout_height="68dp"

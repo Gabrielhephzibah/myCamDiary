@@ -35,6 +35,11 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
         getNavigator().signup();
     }
 
+    public  void onProfilePix(){
+        getNavigator().onProfilePix();
+
+    }
+
     public  String getCurrentFirstName(){
        return getDataManager().getCurrentUserName();
     }

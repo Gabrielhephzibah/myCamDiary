@@ -1,0 +1,232 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.aggregations.milkcollection.MilkCollectionActivity">
+
+
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/back"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:onClick="@{()->viewModel.onBack()}"
+                                    android:src="@drawable/ic_green_arrow" />
+
+
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/azo_sans_light"
+                                    android:gravity="center_vertical"
+                                    android:lines="1"
+                                    android:paddingTop="15dip"
+                                    android:text="Milk Collection"
+                                    android:textColor="#21523C"
+                                    android:textSize="30sp" />
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="35dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san"
+                    android:letterSpacing="0.03"
+                    android:text="Collector Name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="0.03"
+                    android:text="Adetoyin, Gabriel"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/azo_san"
+                    android:letterSpacing="0.03"
+                    android:text="Email"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="0.03"
+                    android:text="adegab@gmail.com"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/azo_san"
+                    android:letterSpacing="0.03"
+                    android:text="Total Volume"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="0.03"
+                    android:text="205"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/azo_san"
+                    android:letterSpacing="0.03"
+                    android:text="Number of Churn"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="0.03"
+                    android:text="4"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/azo_san"
+                    android:letterSpacing="0.03"
+                    android:text="Company ID"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="0.03"
+                    android:text="X3478JND8992"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/proceed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="60dip"
+                    android:layout_marginRight="100dip"
+                    android:background="@drawable/hover_button"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:onClick="@{() -> viewModel.onProceed()}"
+                    android:text="Proceed"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/changing_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:gravity="bottom">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/milk_collection"
+                    android:scaleType="fitXY" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</layout>

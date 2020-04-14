@@ -43,7 +43,11 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     String userEmail = response.getData().getEmail();
                     String firstname = response.getData().getFirstName();
                     String image_url = response.getData().getImageUrl();
-                    getDataManager().updateUserInfo(token,firstname,userEmail,image_url);
+                    String usertype = response.getData().getUserType();
+                    String lastname = response.getData().getLastName();
+                    String address = response.getData().getContactAddress();
+                    String phoneNo = response.getData().getContactNo();
+                    getDataManager().updateUserInfo(token,firstname,lastname,usertype,userEmail,image_url,phoneNo,address);
                     if(response.getData().getUserType().equals("collectors")){
                         getNavigator().goToDashBoard("collectors");
                         getDataManager().setLoggedInView("collector");
@@ -54,7 +58,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                         getNavigator().goToDashBoard("delivery");
                         getDataManager().setLoggedInView("delivery");
                     }else if (response.getData().getUserType().equals("data_collectors")){
-                        getNavigator().goToDashBoard("collectors");
+                        getNavigator().goToDashBoard("data_collectors");
                         getDataManager().setLoggedInView("data_collectors");
                     }
 
@@ -72,15 +76,12 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         getNavigator().onForgotPassword();
     }
 
-    public void setUserType(String user){
-        getDataManager().setUserType(user);
-    }
 
     public  String getUserType(){
         return  getDataManager().getUserType();
     }
 
-
+//    getDataManager().updateUserInfo(token,firstname,userEmail,image_url);
 
 }
 

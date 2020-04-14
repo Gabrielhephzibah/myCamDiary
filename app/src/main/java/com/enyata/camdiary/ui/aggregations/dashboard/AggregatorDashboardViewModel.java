@@ -22,6 +22,10 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
         getNavigator().scan();
     }
 
+    public void onProfilePix(){
+        getNavigator().onProfilePic();
+    }
+
     public void onLogout(){
         getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         getNavigator().onLogOut();

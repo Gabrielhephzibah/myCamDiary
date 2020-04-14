@@ -20,4 +20,22 @@ public class CollectorDetailViewModel extends BaseViewModel<CollectorDetailNavig
     public String getId(){
         return getDataManager().getCollectorId();
     }
+
+    public  String getCollectorFullName(){
+        return  getDataManager().getCollectorName();
+    }
+
+    public String getCollectorPhoneNumber(){
+        return  getDataManager().getCollectorPhoneNo();
+    }
+
+    public String getCollectorEmail(){
+        return getDataManager().getCollectorEmail();
+    }
+
+    public  String getCollectorVerificationId(){
+        return getDataManager().getCollectorVerificationId();
+    }
+
+
 }

@@ -11,4 +11,6 @@ public class RejectsuccessViewModel extends BaseViewModel<RejectsuccessNavigator
     public void onHome(){
         getNavigator().home();
     }
+
+    public String getFarmerFullName(){ return getDataManager().getFramerName();}
 }

@@ -112,8 +112,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ApiHeader.ProtectedApiHeader provideProtectedApiHeader(@ApiInfo String apiKey,
-                                                           PreferencesHelper preferencesHelper) {
+    ApiHeader.ProtectedApiHeader provideProtectedApiHeader(@ApiInfo String apiKey, PreferencesHelper preferencesHelper) {
         return new ApiHeader.ProtectedApiHeader(
                 preferencesHelper.getAccessToken());
     }

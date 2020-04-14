@@ -5,11 +5,14 @@ package com.enyata.camdiary.ui.base;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -17,9 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.NetworkUtils;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import dagger.android.AndroidInjection;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -37,6 +46,10 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     private ProgressDialog mProgressDialog;
     private T mViewDataBinding;
     private V mViewModel;
+    private long pausedMillis;
+    private long currentMillis;
+    Timer timer;
+    int DISCONNECT_TIMEOUT = 300000;
 
     /**
      * Override for set binding variable
@@ -138,5 +151,45 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        pausedMillis = Calendar.getInstance().getTimeInMillis();
+        Log.i("StopCurrentTime", String.valueOf(pausedMillis));
+        mViewModel.setTimeOnStop(pausedMillis);
+        Log.i("sharePrefrenece", String.valueOf(mViewModel.getTimeOnStop()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            currentMillis = Calendar.getInstance().getTimeInMillis();
+            Log.i("ResumeCurrentTime", String.valueOf(currentMillis));
+            Log.i("New StopCurrentTime", String.valueOf(mViewModel.getTimeOnStop()));
+            Log.i("What is the difference", String.valueOf(currentMillis - mViewModel.getTimeOnStop()));
+
+            if ( !(this instanceof LoginActivity) && currentMillis - mViewModel.getTimeOnStop()  > 1000 * 60 * 3 ) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                Toast.makeText(BaseActivity.this, "You have to sign in again ", Toast.LENGTH_LONG).show();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+    
+
 }
 

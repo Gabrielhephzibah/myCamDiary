@@ -15,5 +15,6 @@ public interface AggregatorDashboardNavigator {
     void numberOfCollectors(NumberOfCollectors aggregation);
     void  getAggregatorTodayCollection(AggregationCollectionResponse todayCollection);
     void  onLogOut();
+    void onProfilePic();
 
 }

@@ -6,8 +6,12 @@ import android.content.Context;
 
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
+import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
@@ -270,6 +274,112 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setFarmerName(String name) {
+        mPreferencesHelper.setFarmerName(name);
+    }
+
+    @Override
+    public String getFramerName() {
+        return mPreferencesHelper.getFramerName();
+    }
+
+    @Override
+    public void setFarmerPhoneNumber(String phoneNumber) {
+        mPreferencesHelper.setFarmerPhoneNumber(phoneNumber);
+
+    }
+
+    @Override
+    public String getFarmerPhoneNumber() {
+        return mPreferencesHelper.getFarmerPhoneNumber();
+    }
+
+    @Override
+    public void setFarmerCooperativeName(String cooperativeName) {
+        mPreferencesHelper.setFarmerCooperativeName(cooperativeName);
+
+    }
+
+    @Override
+    public String getFarmerCooperativeName() {
+        return mPreferencesHelper.getFarmerCooperativeName();
+    }
+
+    @Override
+    public void setCurrentUserLastName(String lastName) {
+        mPreferencesHelper.setCurrentUserLastName(lastName);
+    }
+
+    @Override
+    public String getCurrentUserLatName() {
+        return mPreferencesHelper.getCurrentUserLatName();
+    }
+
+    @Override
+    public void setCurrentUserType(String userType) {
+        mPreferencesHelper.setCurrentUserType(userType);
+
+    }
+
+    @Override
+    public String getCurrentUserType() {
+        return mPreferencesHelper.getCurrentUserType();
+    }
+
+    @Override
+    public void setCurrentUserAddress(String userAddress) {
+        mPreferencesHelper.setCurrentUserAddress(userAddress);
+
+    }
+
+    @Override
+    public String getCurrentUserAddress() {
+        return mPreferencesHelper.getCurrentUserAddress();
+    }
+
+    @Override
+    public void setCurrentUserPhoneNumber(String userPhoneNumber) {
+        mPreferencesHelper.setCurrentUserPhoneNumber(userPhoneNumber);
+
+    }
+
+    @Override
+    public String getCurrentUserPhoneNumber() {
+        return mPreferencesHelper.getCurrentUserPhoneNumber();
+    }
+
+    @Override
+    public void setCollectorPhoneNo(String collectorPhoneNo) {
+        mPreferencesHelper.setCollectorPhoneNo(collectorPhoneNo);
+    }
+
+    @Override
+    public String getCollectorPhoneNo() {
+        return mPreferencesHelper.getCollectorPhoneNo();
+    }
+
+    @Override
+    public void setCollectorEmail(String collectorEmail) {
+        mPreferencesHelper.setCollectorEmail(collectorEmail);
+
+    }
+
+    @Override
+    public String getCollectorEmail() {
+        return mPreferencesHelper.getCollectorEmail();
+    }
+
+    @Override
+    public void setTimeOnStop(long currentTimeOnStop) {
+        mPreferencesHelper.setTimeOnStop(currentTimeOnStop);
+    }
+
+    @Override
+    public long getTimeOnStop() {
+        return mPreferencesHelper.getTimeOnStop();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -391,6 +501,26 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<ResetPasswordResponse> userChangePassword(ChangePasswordRequest.Request request) {
+        return  mApiHelper.userChangePassword(request);
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> userEditProfile(EditProfileRequest.Request request) {
+        return mApiHelper.userEditProfile(request);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitCdsDataQuestion(CdsDataRequest.Request request) {
+        return mApiHelper.submitCdsDataQuestion(request);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitPdsDataQuestion(PdsDataRequest.Request request) {
+        return mApiHelper.submitPdsDataQuestion(request);
+    }
+
+    @Override
     public void setUserAsLoggedOut() {
 
     }
@@ -404,12 +534,19 @@ public class AppDataManager implements DataManager {
     public void updateUserInfo(
             String accessToken,
             String firstname,
-            String email, String imageUrL) {
+            String lastname,
+            String userType,
+            String email, String imageUrL, String phoneNo,
+            String address) {
 
         setAccessToken(accessToken);
         setCurrentUserName(firstname);
         setCurrentUserEmail(email);
+        setCurrentUserLastName(lastname);
+        setCurrentUserType(userType);
         setUserImageUrl(imageUrL);
+        setCurrentUserPhoneNumber(phoneNo);
+        setCurrentUserAddress(address);
     }
 
     @Override

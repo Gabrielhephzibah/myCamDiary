@@ -71,4 +71,12 @@ public abstract class BaseViewModel<N> extends ViewModel {
     public SchedulerProvider getSchedulerProvider() {
         return mSchedulerProvider;
     }
+
+    public void setTimeOnStop(long milisecond){
+        getDataManager().setTimeOnStop(milisecond);
+    }
+
+    public long getTimeOnStop(){
+      return   getDataManager().getTimeOnStop();
+    }
 }

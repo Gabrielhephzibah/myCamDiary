@@ -25,6 +25,9 @@ public class Collection {
         private String test_one;
 
         @Expose
+        private String churn_no;
+
+        @Expose
         private String test_two;
 
         @Expose
@@ -38,11 +41,14 @@ public class Collection {
 
 
 
-        public Request(String farmerId, String statusOfCollection, String volume, String testOne, String testTwo,String testThree, String approvedContainer, String message) {
+
+
+        public Request(String farmerId, String statusOfCollection, String volume, String testOne, String churnNo, String testTwo,String testThree, String approvedContainer, String message) {
             this.farmer_id = farmerId;
             this.status_of_collection = statusOfCollection;
             this.volume = volume;
             this.test_one = testOne;
+            this.churn_no = churnNo;
             this.test_two = testTwo;
             this.test_three = testThree;
             this.approved_container = approvedContainer;
@@ -82,6 +88,10 @@ public class Collection {
             return message;
         }
 
+        public String getChurnNo(){
+            return churn_no;
+        }
+
 
 
 
@@ -114,6 +124,9 @@ public class Collection {
             if (test_one != null ? !test_one.equals(request.test_one) : request.test_one != null) {
                 return false;
             }
+            if (churn_no != null ? !churn_no.equals(request.churn_no) : request.churn_no != null) {
+                return false;
+            }
 
             if (test_two != null ? !test_two.equals(request.test_two) : request.test_two != null) {
                 return false;
@@ -126,12 +139,6 @@ public class Collection {
             if (approved_container != null ? !approved_container.equals(request.approved_container) : request.approved_container != null) {
                 return false;
             }
-
-
-
-
-
-
             return message != null ? !message.equals(request.message) : request.message != null;
         }
 
@@ -142,6 +149,7 @@ public class Collection {
             result = 31 * result + (status_of_collection != null ? status_of_collection.hashCode() : 0);
             result = 31 * result + (volume != null ? volume.hashCode() : 0);
             result = 31 * result + (test_one != null ? test_one.hashCode() : 0);
+            result = 31 * result + (churn_no != null ? churn_no.hashCode() : 0);
             result = 31 * result + (test_two != null ? test_two.hashCode() : 0);
             result = 31 * result + (test_three != null ? test_three.hashCode() : 0);
             result = 31 * result + (approved_container != null ? approved_container.hashCode() : 0);

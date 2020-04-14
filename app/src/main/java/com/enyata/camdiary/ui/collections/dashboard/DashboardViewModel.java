@@ -35,7 +35,11 @@ public class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
 
     public  String getUserType(){
-        return  getDataManager().getUserType();
+        return  getDataManager().getCurrentUserType();
+    }
+
+    public void onProfilePicture(){
+        getNavigator().onProfilePicture();
     }
 
     public void getVolumeOfAcceptedCollection() {

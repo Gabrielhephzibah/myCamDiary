@@ -16,6 +16,7 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.EnterIdErrorResponse;
+import com.enyata.camdiary.data.model.api.response.ResponseMessage;
 import com.enyata.camdiary.databinding.ActivityFarmerIdBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
@@ -86,12 +87,10 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
         Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
         Details response = data.getData();
         farmerIdViewModel.setFarmerId(String.valueOf(response.getId()));
-        intent.putExtra("first_name",response.getFirstName());
-        intent.putExtra("last_name",response.getLastName());
-        intent.putExtra("phone_no", response.getContactNo());
-        intent.putExtra("coperate_name", response.getCooperativeName());
-        intent.putExtra("farmer_id",response.getVerificationId());
-        intent.putExtra("farmer_identity",response.getId());
+        farmerIdViewModel.setFarmerFullName(response.getFirstName() + " " +response.getLastName());
+        farmerIdViewModel.setFarmerCoperative(response.getCooperativeName());
+        farmerIdViewModel.setFarmerPhoneNo(response.getContactNo());
+        farmerIdViewModel.setFarmerVerificationId(response.getVerificationId());
         startActivity(intent);
     }
 
@@ -100,9 +99,9 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
     public void handleError(Throwable throwable) {
         if (throwable != null) {
             ANError error = (ANError) throwable;
-            EnterIdErrorResponse response = gson.fromJson(error.getErrorBody(), EnterIdErrorResponse.class);
+            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getError()+ ", " + "Please enter correct Id");
+                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
             }
         }else{
             Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");

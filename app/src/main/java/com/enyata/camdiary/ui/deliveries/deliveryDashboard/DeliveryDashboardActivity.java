@@ -34,6 +34,7 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActivity;
+import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryEditProfileActivity;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryActivity;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
@@ -303,6 +304,12 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     public void getBottleInventory(BottleInventoryResponse response) {
         deliveryDashboardViewModel.setInventoryCollected(response.getData());
 
+    }
+
+    @Override
+    public void onProfilePix() {
+        Intent intent = new Intent(getApplicationContext(), DeliveryEditProfileActivity.class);
+        startActivity(intent);
     }
 
 

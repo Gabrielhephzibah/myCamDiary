@@ -15,4 +15,5 @@ public interface DashboardNavigator {
     void displayRejectedVolume(VolumeResponse volume);
     void getAllEntries(AllEntries entries);
     void getTodayCollection(CollectionResponse todayCollectionResponse);
+    void onProfilePicture();
 }

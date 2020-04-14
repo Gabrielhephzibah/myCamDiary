@@ -44,29 +44,4 @@ public class RetrofitClient {
         return retrofit;
     }
 
-    @Named("retrofit_two")
-    public static Retrofit getClientFarmer(String farmerDetails) {
-        if (retrofit==null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(farmerDetails)
-                    .client(createDefaultOkHttpClient())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
-
-    @Named("retrofit_three")
-    public static Retrofit getClientCollector(String collectorDetails) {
-        if (retrofit==null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(collectorDetails)
-                    .client(createDefaultOkHttpClient())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
-
-
 }

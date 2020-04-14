@@ -93,5 +93,57 @@ public interface PreferencesHelper {
 
     String getCollectorVerificationId();
 
+    void setFarmerName(String name);
+
+    String getFramerName();
+
+    void setFarmerPhoneNumber(String phoneNumber);
+
+    String getFarmerPhoneNumber();
+
+    void setFarmerCooperativeName(String cooperativeName);
+
+    String getFarmerCooperativeName();
+
+    void setCurrentUserLastName(String lastName);
+
+    String getCurrentUserLatName();
+
+    void  setCurrentUserType(String userType);
+
+    String getCurrentUserType();
+
+    void  setCurrentUserAddress(String userAddress);
+
+    String getCurrentUserAddress();
+
+    void setCurrentUserPhoneNumber(String userPhoneNumber);
+
+    String getCurrentUserPhoneNumber();
+
+    void setCollectorPhoneNo( String collectorPhoneNo);
+
+    String  getCollectorPhoneNo();
+
+    void setCollectorEmail(String collectorEmail);
+
+    String getCollectorEmail();
+
+    void setTimeOnStop(long currentTimeOnStop);
+
+    long getTimeOnStop();
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

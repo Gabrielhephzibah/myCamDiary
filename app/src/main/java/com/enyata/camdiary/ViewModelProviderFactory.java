@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.ui.aggregations.aggregatorEditProfile.AggregatorEditProfileViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.collectorID.ColectorIdViewModel;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionViewModel;
@@ -12,7 +13,15 @@ import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewMode
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeViewModel;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHistoryViewModel;
+import com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionViewModel;
 import com.enyata.camdiary.ui.aggregations.product.ProductViewModel;
+import com.enyata.camdiary.ui.collections.collectorEditProfile.CollectorEditProfileViewModel;
+import com.enyata.camdiary.ui.collections.data.bdsData.BdsViewModel;
+import com.enyata.camdiary.ui.collections.data.cdsData.CdsDataViewModel;
+import com.enyata.camdiary.ui.collections.data.dataFarmerDetail.DataFarmerDetailViewModel;
+import com.enyata.camdiary.ui.collections.data.dataFarmerId.DataFarmerIdViewModel;
+import com.enyata.camdiary.ui.collections.data.dataScanBarcode.DataScanCodeViewModel;
+import com.enyata.camdiary.ui.collections.data.pdsData.PdsDataViewModel;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionViewModel;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
 import com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel;
@@ -25,16 +34,20 @@ import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryViewModel;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonViewModel;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessViewModel;
+import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardViewModel;
+import com.enyata.camdiary.ui.datacollector.dataCollectorEditProfile.DataCollectorEditProfileViewModel;
 import com.enyata.camdiary.ui.deliveries.bottles.BottlesViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.deliverysuccess.FinishViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.feedback.FeedbackViewModel;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardViewModel;
+import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryEditProfileViewModel;
 import com.enyata.camdiary.ui.deliveries.history.DeliveryHistoryViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmation.ConfirmationViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.SignsuccessViewModel;
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
+import com.enyata.camdiary.ui.editProfile.EditProfileViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
 import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
 import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorBarcodeViewModel;
@@ -194,9 +207,66 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(EnterVolumeViewModel.class)) {
             //noinspection unchecked
             return (T) new EnterVolumeViewModel(dataManager, schedulerProvider);
-        } else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
+        }  else if (modelClass.isAssignableFrom(MilkCollectionViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MilkCollectionViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(SplashViewModel.class)) {
             //noinspection unchecked
             return (T) new SplashViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(CdsDataViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CdsDataViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(BdsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BdsViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(DataScanCodeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataScanCodeViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(DataFarmerIdViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataFarmerIdViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(DataFarmerDetailViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataFarmerDetailViewModel(dataManager, schedulerProvider);
+        }
+
+        else if (modelClass.isAssignableFrom(PdsDataViewModel.class)) {
+            //noinspection unchecked
+            return (T) new PdsDataViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(EditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EditProfileViewModel(dataManager, schedulerProvider);
+        }
+
+        else if (modelClass.isAssignableFrom(CollectorEditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CollectorEditProfileViewModel(dataManager, schedulerProvider);
+        }
+
+        else if (modelClass.isAssignableFrom(AggregatorEditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AggregatorEditProfileViewModel(dataManager, schedulerProvider);
+        }
+
+        else if (modelClass.isAssignableFrom(DeliveryEditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DeliveryEditProfileViewModel(dataManager, schedulerProvider);
+        }
+
+        else if (modelClass.isAssignableFrom(DataCollectorDashboardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataCollectorDashboardViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(DataCollectorEditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DataCollectorEditProfileViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

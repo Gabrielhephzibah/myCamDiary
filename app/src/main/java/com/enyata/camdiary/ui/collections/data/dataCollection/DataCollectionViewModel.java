@@ -17,5 +17,35 @@ public class DataCollectionViewModel extends BaseViewModel<DataCollectionNavigat
         getNavigator().back();
     }
 
+    public  void onBDS(){
+        getNavigator().onBDS();
+    }
+
+    public void onCDS(){
+        getNavigator().onCDS();
+    }
+
+    public void onPDS(){
+        getNavigator().onPDS();
+    }
+
+    public void onScanBarcode(){
+        getNavigator().onScanbarCode();
+    }
+
+    public void onHistory(){
+        getNavigator().onHistory();
+    }
+
+    public void onLogout(){
+        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        getNavigator().onLogOut();
+
+    }
+
+    public String getUserImage(){
+        return  getDataManager().getUserImageUrl();
+    }
+
 
 }

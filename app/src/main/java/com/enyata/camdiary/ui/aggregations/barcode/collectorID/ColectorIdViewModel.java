@@ -29,7 +29,6 @@ public class ColectorIdViewModel extends BaseViewModel<CollectorIdNavigator> {
                 .subscribe(response -> {
                     setIsLoading(false);
                     getNavigator().getCollectorDetails(response);
-                    getDataManager().setCollectorId(String.valueOf(response.getData().getId()));
                 }, throwable -> {
                     setIsLoading(false);
                     getNavigator().handleError(throwable);
@@ -47,5 +46,18 @@ public class ColectorIdViewModel extends BaseViewModel<CollectorIdNavigator> {
 
     public void setCollectorId(String id){
         getDataManager().setCollectorId(id);
+    }
+
+    public void setCollectorVerificationId(String verificationId){
+        getDataManager().setCollectorVerificationId(verificationId);
+    }
+
+    public void setCollectorPhoneNumber(String phoneNumber){
+        getDataManager().setCollectorPhoneNo(phoneNumber);
+    }
+
+
+    public void  setCollectorEmail(String email){
+        getDataManager().setCollectorEmail(email);
     }
 }

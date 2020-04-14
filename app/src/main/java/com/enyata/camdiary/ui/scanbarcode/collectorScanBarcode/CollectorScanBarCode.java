@@ -12,11 +12,16 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityCollectorScanBarCodeBinding;
@@ -42,7 +47,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.CAMERA;
 
-public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarCodeBinding,CollectorBarcodeViewModel> implements  ZXingScannerView.ResultHandler{
+public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarCodeBinding,CollectorBarcodeViewModel> implements CollectorBarcodeNavigator,ZXingScannerView.ResultHandler  {
 
 
 
@@ -53,12 +58,14 @@ public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarC
     ViewModelProviderFactory factory;
 
     private static final int REQUEST_CAMERA = 1;
+
     private ZXingScannerView mScannerView;
     private APIService mAPIService;
     AlertDialog alert1;
     String farmerVerificationId;
     private  ProgressDialog progressDialog;
     OkHttpClient client;
+    ProgressBar progressBar;
 
     private  CollectorBarcodeViewModel collectorBarcodeViewModel;
 
@@ -82,10 +89,11 @@ public class CollectorScanBarCode extends BaseActivity<ActivityCollectorScanBarC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
+        collectorBarcodeViewModel.setNavigator(this);
         setContentView(mScannerView);
-        mAPIService = ApiUtils.getFarmerDetails();
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+
+
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
@@ -160,13 +168,15 @@ break;
         collectorBarcodeViewModel.setfarmerVerificationId(rawResult.getText());
         Log.i("FarmerId", collectorBarcodeViewModel.getFarmerVerificationId());
         farmerVerificationId = collectorBarcodeViewModel.getFarmerVerificationId();
+        Log.i("FARMERRRRRR", collectorBarcodeViewModel.getFarmerVerificationId());
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait.....");
         progressDialog.setCancelable(false);
         progressDialog.show();
         if (InternetConnection.getInstance(this).isOnline()){
-            getFarmerDetails();
-            mScannerView.stopCamera();
+
+            collectorBarcodeViewModel.scanCollectorBarCode(collectorBarcodeViewModel.getFarmerVerificationId());
+
         }else {
             progressDialog.dismiss();
             Alert.showFailed(getApplicationContext(),"Please check your internet connection and try again");
@@ -206,60 +216,46 @@ break;
         super.onDestroy();
         mScannerView.stopCamera();
         collectorBarcodeViewModel.onDispose();
-        client.dispatcher().cancelAll();
+
 
 
     }
 
 
-    public  void getFarmerDetails(){
-        mAPIService.getfarmerDetails(farmerVerificationId,collectorBarcodeViewModel.getAccessToken()).enqueue(new Callback<DetailsResponse>() {
-            @Override
-            public void onResponse(Call<DetailsResponse> call, Response<DetailsResponse> response) {
-                if (response.isSuccessful()){
-                    progressDialog.dismiss();
-                    collectorBarcodeViewModel.setFarmerId(String.valueOf(response.body().getData().getId()));
-                    Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
-                    intent.putExtra("first_name", response.body().getData().getFirstName());
-                    intent.putExtra("last_name", response.body().getData().getLastName());
-                    intent.putExtra("phone_no", response.body().getData().getContactNo());
-                    intent.putExtra("coperate_name", response.body().getData().getCooperativeName());
-                    intent.putExtra("farmer_id", response.body().getData().getVerificationId());
-                    startActivity(intent);
-                }if (response.code() == 404) {
-                    progressDialog.dismiss();
-                    Gson gson = new GsonBuilder().create();
-                    DetailsErrorMessage error = new DetailsErrorMessage();
-                    try {
-                        error = gson.fromJson(response.errorBody().string(), DetailsErrorMessage.class);
-                        Alert.showFailed(getApplicationContext(), error.getError() + " please scan correct barcode");
-                        onResume();
-                    } catch (IOException e) {
-                            e.printStackTrace();
-                    }
-                }if (response.equals(null)){
-                    progressDialog.dismiss();
-                    Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
-                    Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
-                    startActivity(intent);
-                }
-        call.cancel();
-
-            }
-
-            @Override
-            public void onFailure(Call<DetailsResponse> call, Throwable throwable) {
-                progressDialog.dismiss();
-                Log.i("FAILURE MESSAGE","REQRUEST FAILED");
-                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+    @Override
+    public void handleError(Throwable throwable) {
+        progressDialog.dismiss();
+        Log.i("ERRORR", "ERROR");
+        if (throwable != null ) {
+            ANError error = (ANError) throwable;
+            DetailsErrorMessage response = gson.fromJson(error.getErrorBody(), DetailsErrorMessage.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getError()+ " please scan correct barcode");
+                onResume();
+            }else {
+                Alert.showFailed(getApplicationContext(),"Error Performing Operation, please try again later ");
                 Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
                 startActivity(intent);
-
             }
-        });
 
+        }
 
     }
+
+    @Override
+    public void onResponse(DetailsResponse response) {
+        progressDialog.dismiss();
+        collectorBarcodeViewModel.setFarmerId(String.valueOf(response.getData().getId()));
+                    Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
+                    intent.putExtra("first_name", response.getData().getFirstName());
+                    intent.putExtra("last_name", response.getData().getLastName());
+                    intent.putExtra("phone_no", response.getData().getContactNo());
+                    intent.putExtra("coperate_name", response.getData().getCooperativeName());
+                    intent.putExtra("farmer_id", response.getData().getVerificationId());
+                    startActivity(intent);
+
+    }
+
 
 
 }

@@ -11,4 +11,6 @@ public class StatusOfCollectionViewModel extends BaseViewModel<StatusOfCollectio
     public void onHome(){
         getNavigator().home();
     }
+
+    public String getFarmerFullName(){ return getDataManager().getFramerName();}
 }

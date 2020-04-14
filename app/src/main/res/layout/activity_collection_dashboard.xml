@@ -60,6 +60,7 @@
                         android:textSize="14sp" />
 
                     <androidx.cardview.widget.CardView
+                        android:onClick="@{()->viewModel.onProfilePicture()}"
                         android:id="@+id/circle"
                         android:layout_width="65dp"
                         android:layout_height="68dp"
@@ -92,7 +93,8 @@
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="RedundantNamespace">
                     </androidx.viewpager.widget.ViewPager>
 
 
@@ -166,6 +168,7 @@
                     android:layout_gravity="center">
 
                     <RelativeLayout
+                        android:id="@+id/history"
 
                         android:layout_weight="1"
                         android:layout_width="0dp"
@@ -173,7 +176,7 @@
                         <ImageView
                             android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onHistory()}"
-                            android:id="@+id/history"
+                            android:id="@+id/historyIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_history"/>
@@ -190,6 +193,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/scanbarcode"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_marginLeft="0dp"
@@ -199,7 +203,7 @@
                             android:paddingBottom="10dp"
                             android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onScancode()}"
-                            android:id="@+id/scanbarcode"
+                            android:id="@+id/scanbarcodeIcon"
                             android:layout_marginLeft="0dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -219,7 +223,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:visibility="gone"
                         android:id="@+id/data"
                         android:layout_weight="1"
                         android:layout_width="0dp"

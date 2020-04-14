@@ -24,6 +24,7 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
     String volume;
     String firstName;
     String lastName;
+    String fullName;
 
 
     @Inject
@@ -60,19 +61,16 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
         TextView volumetext = activityRejectsuccessBinding.volume;
         TextView farmerName = activityRejectsuccessBinding.farmerName;
         volume = getIntent().getStringExtra("volume");
-        firstName = getIntent().getStringExtra("first_name");
-        lastName = getIntent().getStringExtra("last_name");
+        fullName = rejectsuccessViewModel.getFarmerFullName();
 
         volumetext.setText(volume + " Litres" );
-        farmerName.setText(firstName+ " "+lastName);
+        farmerName.setText(fullName);
 
     }
 
     @Override
     public void home() {
         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-        intent.putExtra("first_name", firstName);
-        intent.putExtra("last_name", lastName);
         startActivity(intent);
     }
 }

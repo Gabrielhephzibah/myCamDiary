@@ -105,14 +105,17 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         Details data = response.getData();
         colectorIdViewModel.setCollectorName(data.getFirstName() + " " + data.getLastName());
         colectorIdViewModel.setCollectorId(String.valueOf(data.getId()));
-        String id = String.valueOf(data);
-        intent.putExtra("first_name", data.getFirstName());
-        intent.putExtra("last_name", data.getLastName());
-        intent.putExtra("phone_number", data.getContactNo());
-        intent.putExtra("verification_id", data.getVerificationId());
-        intent.putExtra("email", data.getEmail());
-        intent.putExtra("coperate_name", data.getCooperativeName());
-        intent.putExtra("id", id);
+        colectorIdViewModel.setCollectorEmail(data.getEmail());
+        colectorIdViewModel.setCollectorPhoneNumber(data.getContactNo());
+        colectorIdViewModel.setCollectorVerificationId(data.getVerificationId());
+//        String id = String.valueOf(data);
+//        intent.putExtra("first_name", data.getFirstName());
+//        intent.putExtra("last_name", data.getLastName());
+//        intent.putExtra("phone_number", data.getContactNo());
+//        intent.putExtra("verification_id", data.getVerificationId());
+//        intent.putExtra("email", data.getEmail());
+//        intent.putExtra("coperate_name", data.getCooperativeName());
+//        intent.putExtra("id", id);
         startActivity(intent);
     }
 

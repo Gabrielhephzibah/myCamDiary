@@ -15,6 +15,7 @@ import com.enyata.camdiary.databinding.ActivityCollectorDetailBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
+import com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionActivity;
 import com.enyata.camdiary.ui.aggregations.product.ProductActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -34,6 +35,7 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
     @Inject
     ViewModelProviderFactory factory;
     private CollectorDetailViewModel collectorDetailViewModel;
+    String phoneNo, fullName, verificationId, collectorEmail;
     ActivityCollectorDetailBinding activityCollectorDetailBinding;
 
     public static Intent newIntent(Context context) {
@@ -61,33 +63,29 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         super.onCreate(savedInstanceState);
         collectorDetailViewModel.setNavigator(this);
         activityCollectorDetailBinding = getViewDataBinding();
+        fullName = collectorDetailViewModel.getCollectorFullName();
+        phoneNo = collectorDetailViewModel.getCollectorPhoneNumber();
+        verificationId = collectorDetailViewModel.getCollectorVerificationId();
+        collectorEmail = collectorDetailViewModel.getCollectorEmail();
 
-        firstName = getIntent().getStringExtra("first_name");
-        lastName = getIntent().getStringExtra("last_name");
-        verificationNumber = getIntent().getStringExtra("verification_id");
-        phoneNumber = getIntent().getStringExtra("phone_number");
-        email = getIntent().getStringExtra("email");
-        id = getIntent().getStringExtra("id");
+
 
         TextView name = activityCollectorDetailBinding.name;
         TextView Email = activityCollectorDetailBinding.email;
         TextView verification_number = activityCollectorDetailBinding.verificationNumber;
         TextView number = activityCollectorDetailBinding.number;
 
-        name.setText(String.format("%s %s", firstName, lastName));
-        Email.setText(email);
-        verification_number.setText(verificationNumber);
-        number.setText(phoneNumber);
+        name.setText(fullName);
+        Email.setText(collectorEmail);
+        verification_number.setText(verificationId);
+        number.setText(phoneNo);
 
     }
 
 
     @Override
     public void proceed() {
-        Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
-        intent .putExtra("id",id);
-        intent.putExtra("first_name",firstName);
-        intent.putExtra("last_name", lastName);
+        Intent intent = new Intent(getApplicationContext(), MilkCollectionActivity.class);
         startActivity(intent);
     }
 

@@ -3,8 +3,12 @@
 package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
+import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
@@ -250,10 +254,50 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<DetailsResponse> getFarmerInfo(String verificationId) {
-        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_DETAILS+"/"+ verificationId)
+        return Rx2AndroidNetworking.get(ApiEndPoint.FARMER_DETAILS+ "/"+ verificationId)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(DetailsResponse.class);
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> userChangePassword(ChangePasswordRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.CHANGE_PASSWORD)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(ResetPasswordResponse.class);
+
+    }
+
+    @Override
+    public Single<ResetPasswordResponse> userEditProfile(EditProfileRequest.Request request) {
+        return Rx2AndroidNetworking.patch(ApiEndPoint.EDIT_PROFILE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(ResetPasswordResponse.class);
+
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitCdsDataQuestion(CdsDataRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.CDS_DATA_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitPdsDataQuestion(PdsDataRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.PDS_DATA_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+
     }
 
 

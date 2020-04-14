@@ -32,7 +32,9 @@ import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityProductBinding;
+import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
+import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -284,7 +286,9 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
     @Override
     public void onFailed(Throwable throwable) {
-        Alert.showFailed(getApplicationContext(),"Request not Successful, please Check Your Internet and try again");
+        Alert.showFailed(getApplicationContext(),"Error Performing Operation, please try again later");
+        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+        startActivity(intent);
 
     }
 

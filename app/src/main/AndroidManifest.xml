@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -17,8 +19,22 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.datacollector.dataCollectorEditProfile.DataCollectorEditProfileActivity"></activity>
+        <activity android:name=".ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity" />
+        <activity android:name=".ui.deliveries.deliveryEditProfile.DeliveryEditProfileActivity" />
+        <activity android:name=".ui.aggregations.aggregatorEditProfile.AggregatorEditProfileActivity" />
+        <activity android:name=".ui.collections.collectorEditProfile.CollectorEditProfileActivity" />
+        <activity android:name=".ui.editProfile.EditProfileActivity" />
+        <activity android:name=".ui.collections.data.dataFarmerDetail.DataFarmerDetailActivity" />
+        <activity android:name=".ui.collections.data.dataFarmerId.DataFarmerIdActivity" />
+        <activity android:name=".ui.collections.data.dataScanBarcode.DataScanCodeActivity" />
+        <activity android:name=".ui.collections.data.pdsData.PdsDataActivity" />
+        <activity android:name=".ui.collections.data.bdsData.BdsDataActivity" />
+        <activity android:name=".ui.collections.data.cdsData.CdsDataActivity" />
+        <activity android:name=".ui.aggregations.milkcollection.MilkCollectionActivity" />
+        <activity android:name=".ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode" />
         <activity android:name=".ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode" />
         <activity android:name=".ui.password.ResetPasswordActivity" />
         <activity android:name=".ui.deliveries.history.DeliveryHistoryActivity" />
@@ -76,6 +92,10 @@
                 android:value=".ui.main.MainActivity" />
         </activity>
         <activity android:name=".ui.collections.farmer.farmerDetails.FarmerDetailsActivity" />
+
+        <meta-data
+            android:name="CLOUDINARY_URL"
+            android:value="cloudinary:dtt1nmogz" />
     </application>
 
 </manifest>

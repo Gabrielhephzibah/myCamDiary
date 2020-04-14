@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amitshekhar.utils.Constants;
 import com.androidnetworking.error.ANError;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.BR;
@@ -35,10 +36,12 @@ import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
+import com.enyata.camdiary.ui.collections.collectorEditProfile.CollectorEditProfileActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.editProfile.EditProfileActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
@@ -46,6 +49,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -58,7 +64,9 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
     String verification_number;
     String fullName;
     ImageView collectorImage;
+    RelativeLayout history,scanBarcode;
     CFAlertDialog alert;
+
 
     @Inject
     Gson gson;
@@ -118,15 +126,14 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         dashboardViewModel.setNavigator(this);
         activityCollectionDashboardBinding = getViewDataBinding();
         data = activityCollectionDashboardBinding.data;
+        history = activityCollectionDashboardBinding.history;
+        scanBarcode = activityCollectionDashboardBinding.scanbarcode;
         Log.i("MYYYYYYYYYYYYYY", dashboardViewModel.getUserType());
         collectorImage = findViewById(R.id.collectorImage);
         String imageUrl = dashboardViewModel.getCollectorImage();
         Picasso.get().load(imageUrl).into(collectorImage);
+        Log.i("USERTYPE", dashboardViewModel.getUserType());
 
-
-        if (dashboardViewModel.getUserType().equals("data_collectors")){
-            data.setVisibility(View.VISIBLE);
-        }
             ViewPager pager = activityCollectionDashboardBinding.pager;
             slideLayout = activityCollectionDashboardBinding.slideLayout;
             listView = activityCollectionDashboardBinding.listView;
@@ -276,7 +283,13 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             }
         }
 
-        @Override
+    @Override
+    public void onProfilePicture() {
+        Intent intent = new Intent(getApplicationContext(), CollectorEditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
         protected void onDestroy () {
             super.onDestroy();
             dashboardViewModel.dispose();
@@ -296,4 +309,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
 
     }
+
+
 }

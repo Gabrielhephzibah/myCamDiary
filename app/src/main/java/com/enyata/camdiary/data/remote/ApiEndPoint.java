@@ -56,9 +56,17 @@ public final class ApiEndPoint {
 
     public  static  final  String AGGREGATION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation/history";
 
-    public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/auth/dispatcher/signup";
+    public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/auth/signup/dispatcher";
 
-    public  static final  String FARMER_DETAILS = BuildConfig.BASE_URL + "/farmer/verify";
+    public  static final  String FARMER_DETAILS = BuildConfig.BASE_URL + "/farmer";
+
+    public  static final  String CHANGE_PASSWORD = BuildConfig.BASE_URL + "/auth/change-password";
+
+    public  static final  String EDIT_PROFILE = BuildConfig.BASE_URL + "/userprofile";
+
+    public  static final  String CDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/genSurveyCollection";
+
+    public  static final  String PDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/monthlyRecurringData";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

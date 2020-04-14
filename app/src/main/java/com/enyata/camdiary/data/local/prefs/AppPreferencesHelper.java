@@ -65,6 +65,29 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final  String PREF_KEY_COLLECTOR_VERIFICATION_ID = "PREF_KEY_COLLECTOR_VERIFICATION_ID";
 
+    private  static  final  String PREF_KEY_FARMER_NAME = "PREF_KEY_FARMER_NAME";
+
+    private static  final String PREF_KEY_FARMER_PHONE_NUMBER = "PREF_KEY_FARMER_PHONE_NUMBER";
+
+    private  static  final  String PREF_KEY_FARMER_COPERATIVE_NAME = "PREF_KEY_FARMER_COPERATIVE_NAME";
+
+    private  static  final  String PREF_KEY_CURRENT_USER_LAST_NAME = "PREF_KEY_CURRENT_USER_LAST_NAME";
+
+    private  static  final  String PREF_KEY_CURRENT_USER_TYPE = "PREF_KEY_CURRENT_USER_TYPE";
+
+    private  static  final  String PREF_KEY_CURRENT_USER_ADDRESS = "PREF_KEY_CURRENT_USER_ADDRESS";
+
+    private  static  final  String PREF_KEY_CURRENT_USER_PHONE_NUMBER = "PREF_KEY_CURRENT_PHONE_NUMBER";
+
+    private  static  final  String PREF_KEY_COLLECTOR_PHONE_NUMBER = "PREF_KEY_COLLECTOR_PHONE_NUMBER";
+
+    private  static  final  String PREF_KEY_COLLECTOR_EMAIL = "PREF_KEY_COLLECTOR_EMAIL";
+
+    private  static  final  String PREF_KEY_TIME_ON_STOP = "PREF_KEY_TIME_ON_STOP";
+
+
+
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -271,6 +294,112 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getCollectorVerificationId() {
         return mPrefs.getString(PREF_KEY_COLLECTOR_VERIFICATION_ID,null);
+    }
+
+    @Override
+    public void setFarmerName(String name) {
+        mPrefs.edit().putString(PREF_KEY_FARMER_NAME, name).apply();
+    }
+
+    @Override
+    public String getFramerName() {
+        return mPrefs.getString(PREF_KEY_FARMER_NAME,null);
+    }
+
+    @Override
+    public void setFarmerPhoneNumber(String phoneNumber) {
+        mPrefs.edit().putString(PREF_KEY_FARMER_PHONE_NUMBER,phoneNumber).apply();
+
+    }
+
+    @Override
+    public String getFarmerPhoneNumber() {
+        return mPrefs.getString(PREF_KEY_FARMER_PHONE_NUMBER,null);
+    }
+
+    @Override
+    public void setFarmerCooperativeName(String cooperativeName) {
+        mPrefs.edit().putString(PREF_KEY_FARMER_COPERATIVE_NAME,cooperativeName).apply();
+
+    }
+
+    @Override
+    public String getFarmerCooperativeName() {
+        return mPrefs.getString(PREF_KEY_FARMER_COPERATIVE_NAME,null);
+    }
+
+    @Override
+    public void setCurrentUserLastName(String lastName) {
+        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_LAST_NAME,lastName).apply();
+    }
+
+    @Override
+    public String getCurrentUserLatName() {
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_LAST_NAME,null);
+    }
+
+    @Override
+    public void setCurrentUserType(String userType) {
+        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_TYPE, userType).apply();
+
+    }
+
+    @Override
+    public String getCurrentUserType() {
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_TYPE,null);
+    }
+
+    @Override
+    public void setCurrentUserAddress(String userAddress) {
+        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_ADDRESS,userAddress).apply();
+
+    }
+
+    @Override
+    public String getCurrentUserAddress() {
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_ADDRESS,null);
+    }
+
+    @Override
+    public void setCurrentUserPhoneNumber(String userPhoneNumber) {
+        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_PHONE_NUMBER,userPhoneNumber).apply();
+
+    }
+
+    @Override
+    public String getCurrentUserPhoneNumber() {
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_PHONE_NUMBER,null);
+    }
+
+    @Override
+    public void setCollectorPhoneNo(String collectorPhoneNo) {
+        mPrefs.edit().putString(PREF_KEY_COLLECTOR_PHONE_NUMBER,collectorPhoneNo).apply();
+    }
+
+    @Override
+    public String getCollectorPhoneNo() {
+        return mPrefs.getString(PREF_KEY_COLLECTOR_PHONE_NUMBER,null);
+    }
+
+    @Override
+    public void setCollectorEmail(String collectorEmail) {
+        mPrefs.edit().putString(PREF_KEY_COLLECTOR_EMAIL,collectorEmail).apply();
+
+    }
+
+    @Override
+    public String getCollectorEmail() {
+        return mPrefs.getString(PREF_KEY_COLLECTOR_EMAIL,null);
+    }
+
+    @Override
+    public void setTimeOnStop(long currentTimeOnStop) {
+        mPrefs.edit().putLong(PREF_KEY_TIME_ON_STOP,currentTimeOnStop).apply();
+    }
+
+    @Override
+    public long getTimeOnStop() {
+        return mPrefs.getLong(PREF_KEY_TIME_ON_STOP,0);
     }
 
 }

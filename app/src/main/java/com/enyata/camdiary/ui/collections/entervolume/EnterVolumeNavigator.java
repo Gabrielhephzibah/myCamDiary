@@ -9,4 +9,5 @@ public interface EnterVolumeNavigator {
     void back();
     void handleError(Throwable throwable);
     void displayResponse(NewCollectionResponse response);
+    void dismissAllModal();
 }

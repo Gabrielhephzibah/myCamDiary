@@ -14,10 +14,12 @@ import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
+import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.utils.Alert;
@@ -64,10 +66,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void handleError(Throwable throwable) {
         if (throwable != null) {
             ANError error = (ANError) throwable;
-            CamLoginResponse response = gson.fromJson(error.getErrorBody(), CamLoginResponse.class);
+            ResetPasswordResponse response = gson.fromJson(error.getErrorBody(), ResetPasswordResponse.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(),response.getError());
+                Alert.showFailed(getApplicationContext(),response.getMessage());
             }else {
+
                 Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
             }
 
@@ -112,7 +115,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         }else if(type.equals("delivery")){
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         }else if(type.equals("data_collectors")){
-            intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
         }
 
         startActivity(intent);
@@ -127,8 +130,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void onResponse(CamLoginResponse response) {
         String user = response.getData().getUserType();
-        mLoginViewModel.setUserType(user);
-        Log.i("MY USER", mLoginViewModel.getUserType());
+
 
     }
 

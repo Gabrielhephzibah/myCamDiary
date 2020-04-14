@@ -21,11 +21,6 @@ public interface APIService {
     @POST("aggregation")
     Call<NewResponse>savePost(@Header("Authorization") String authorization, @Body Post collection);
 
-    @GET("{verificationId}")
-    Call<DetailsResponse>getfarmerDetails(@Path("verificationId")  String verificationId, @Header("Authorization") String authorization);
-
-    @GET("{collectorVerificationId}")
-    Call<DetailsResponse>GetCollectorDetails(@Path("collectorVerificationId") String verificationId, @Header("Authorization") String authorization);
 
 }
 

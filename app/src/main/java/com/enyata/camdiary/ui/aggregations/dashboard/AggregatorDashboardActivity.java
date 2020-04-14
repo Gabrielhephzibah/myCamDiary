@@ -28,6 +28,7 @@ import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
 import com.enyata.camdiary.databinding.ActivityAggregatorDashboardBinding;
+import com.enyata.camdiary.ui.aggregations.aggregatorEditProfile.AggregatorEditProfileActivity;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.history.AggregatorHIstoryActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -99,11 +100,11 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
         slideLayout = activityAggregatorDashboardBinding.slideLayout;
 
-       listView = activityAggregatorDashboardBinding.listView;
+        listView = activityAggregatorDashboardBinding.listView;
 
-       aggregator_name = activityAggregatorDashboardBinding.aggregatorName;
+        aggregator_name = activityAggregatorDashboardBinding.aggregatorName;
 
-       date = activityAggregatorDashboardBinding.date;
+        date = activityAggregatorDashboardBinding.date;
 
         date.setText(aggregatorDashboardViewModel.getCurrentDate());
         aggregator_name.setText(String.format("Hey,%s", aggregatorDashboardViewModel.getFirstName()));
@@ -112,7 +113,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
             aggregatorDashboardViewModel.getTotalNumberOfCollectors();
             aggregatorDashboardViewModel.getAggregatorTodayCollection();
-        }else{
+        } else {
             Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again");
 
         }
@@ -145,13 +146,13 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void handleError(Throwable throwable) {
-        if (throwable != null ) {
+        if (throwable != null) {
             ANError error = (ANError) throwable;
             FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
-            if (error.getErrorBody()!= null){
+            if (error.getErrorBody() != null) {
                 Alert.showFailed(getApplicationContext(), response.getResponseMessage());
-            }else {
-                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            } else {
+                Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
             }
 
         }
@@ -219,9 +220,9 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void getAggregatorTodayCollection(AggregationCollectionResponse todayCollection) {
-        for (AggregatorCollections response : todayCollection.getData() ) {
-            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " "+ response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres" ,response.getCollectorDetails().getImageUrl()));
-            aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this,aggregatorLists);
+        for (AggregatorCollections response : todayCollection.getData()) {
+            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " " + response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres", response.getCollectorDetails().getImageUrl()));
+            aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
             listView.setAdapter(aggregatorListAdapter);
 
         }
@@ -233,8 +234,8 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     public void onLogOut() {
         CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
         LayoutInflater inflater = AggregatorDashboardActivity.this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.logout_notification_sheet,null);
-               alertDialog .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+        View dialogView = inflater.inflate(R.layout.logout_notification_sheet, null);
+        alertDialog.setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
                 .setCancelable(false)
                 .setHeaderView(dialogView);
         Button yes = dialogView.findViewById(R.id.yes);
@@ -254,8 +255,14 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             }
         });
 
-       alert = alertDialog.create();
+        alert = alertDialog.create();
         alert.show();
+    }
+
+    @Override
+    public void onProfilePic() {
+        Intent intent = new Intent( getApplicationContext(), AggregatorEditProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -266,12 +273,12 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void onBackPressed() {
-        if (backButtonPressed >= 2){
+        if (backButtonPressed >= 2) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }else {
+        } else {
             Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
             backButtonPressed++;
 

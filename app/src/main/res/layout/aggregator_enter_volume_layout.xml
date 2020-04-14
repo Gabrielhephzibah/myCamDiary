@@ -8,19 +8,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="33dp"
         android:layout_marginLeft="33dp"
+        android:layout_marginTop="33dp"
         android:layout_marginRight="33dp"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Volume"
             android:fontFamily="@font/azo_sans_light"
-            android:textSize="22sp"
-            android:textColor="#21523C"/>
+            android:text="Enter Volume"
+            android:textColor="#21523C"
+            android:textSize="22sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -28,67 +27,64 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintTextAppearance= "@style/MyAppearance"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:boxStrokeWidth="10dp"
+            android:layout_marginTop="28dip"
             app:boxCornerRadiusBottomEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
-            android:layout_marginTop="28dip"
             app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="8dp">
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="10dp"
+            app:hintTextAppearance="@style/MyAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/aggregatorVolume"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:hint="Volume"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/azo_sans_light"
+                android:hint="Volume"
                 android:inputType="text"
                 android:textColor="#21523C"
-                android:textCursorDrawable= "@null" />
+                android:textCursorDrawable="@null" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
         <FrameLayout
             android:id="@+id/spinner_parent"
             android:layout_width="match_parent"
-            android:layout_marginTop="23dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp">
 
             <FrameLayout
-                android:layout_marginTop="6dp"
-                android:background="@drawable/spinner_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/spinner_border">
 
                 <Spinner
                     android:id="@+id/spinner"
-                    android:backgroundTint="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/colorPrimary"
                     android:spinnerMode="dropdown"
-                    android:textColor = "@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
             </FrameLayout>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginBottom="15dp"
+                android:background="#FFFFFF"
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
-                android:layout_marginTop="-3dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="15dp"
-                android:textSize="14sp"
                 android:text="Churn No"
                 android:textColor="@color/colorPrimary"
-                android:background="#FFFFFF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="14sp" />
         </FrameLayout>
-
 
 
         <RelativeLayout
@@ -103,11 +99,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/azo_san"
                 android:text="BACK"
-                android:textStyle="bold"
-                android:textSize="14dp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -115,19 +111,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@+id/back"
-                android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/azo_san"
                 android:text="ACCEPT"
-                android:textStyle="bold"
-                android:textSize="14dp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

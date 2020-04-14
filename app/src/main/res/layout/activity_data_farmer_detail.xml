@@ -1,0 +1,231 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.collections.data.dataFarmerDetail.DataFarmerDetailActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.collections.data.dataFarmerDetail.DataFarmerDetailViewModel" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/farmer_details_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="32dp">
+
+                <ImageView
+                    android:onClick="@{()->viewModel.onBack()}"
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_green_arrow"
+                    android:gravity="start" />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Farmers"
+                    android:letterSpacing="0.03"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details"
+                    android:letterSpacing="0.03"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/collectorCollection"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="32dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="77dp"
+                android:background="@drawable/farmer_details_white_bg"
+                android:layout_marginRight="32dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="55dp">
+                </LinearLayout>
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:letterSpacing="0.03"
+                    android:textSize="6sp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/farmerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Akin, Solomon"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.03"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number"
+                    android:layout_marginTop="14dp"
+                    android:letterSpacing="0.03"
+                    android:textSize="6sp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/farmerNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+2347032457893"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.03"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cooperative Name"
+                    android:layout_marginTop="14dp"
+                    android:letterSpacing="0.03"
+                    android:textSize="6sp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/coperateName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Xamstade"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.03"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Farmer ID"
+                    android:layout_marginTop="14dp"
+                    android:letterSpacing="0.03"
+                    android:textSize="6sp"
+                    android:fontFamily="@font/azo_san"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/verificationNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X3478JND8992"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.03"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    />
+
+
+                <Button
+                    android:onClick="@{()->viewModel.onProceed()}"
+                    android:id="@+id/proceed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="40dip"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="100dip"
+                    android:background="@drawable/hover_button"
+                    android:text="Proceed"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/changing_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/collectorCollection"
+            android:elevation="7dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/farmer_details"
+            android:backgroundTint="@color/transparent"
+            app:fabCustomSize="70dp"
+            app:maxImageSize="70dp"
+            app:layout_anchorGravity="top|center|center_horizontal" />
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

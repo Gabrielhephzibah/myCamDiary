@@ -24,8 +24,8 @@ public class StatusOfCollectionActivity extends BaseActivity<ActivitySuccessfulB
  String firstName;
  String lastName;
  String fullName;
-String coperateName;
-String verificationNumber;
+ String coperateName;
+ String verificationNumber;
 
     private ActivitySuccessfulBinding activitySuccessfulBinding;
     @Inject
@@ -56,17 +56,12 @@ String verificationNumber;
         super.onCreate(savedInstanceState);
         successfulViewModel.setNavigator(this);
         volume = getIntent().getStringExtra("volume");
-        firstName = getIntent().getStringExtra("first_name");
-        lastName = getIntent().getStringExtra("last_name");
-        respondCode = getIntent().getStringExtra("responseCode");
-        coperateName = getIntent().getStringExtra("coperate_name");
-        verificationNumber = getIntent().getStringExtra("farmer_id");
+        fullName = successfulViewModel.getFarmerFullName();
         activitySuccessfulBinding = getViewDataBinding();
         TextView litresCollected  = activitySuccessfulBinding.litresCollected;
         TextView farmerName = activitySuccessfulBinding.farmerName;
         litresCollected.setText(volume+" Litres");
 
-        fullName = firstName + " " + lastName;
         farmerName.setText(fullName);
 
 
@@ -76,10 +71,6 @@ String verificationNumber;
     @Override
     public void home() {
         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-        intent.putExtra("coperate_name",coperateName);
-        intent.putExtra("farmer_id",verificationNumber);
-        intent.putExtra("first_name", firstName);
-        intent.putExtra("last_name",lastName);
         startActivity(intent);
 
     }

@@ -1,0 +1,293 @@
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity">
+
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="29dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingBottom="23dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:paddingTop="18dip"
+                        android:fontFamily="@font/azo_sans_light"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:letterSpacing="-0.03"
+                        android:text="Hey, Ade"
+                        android:textColor="#21523C"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/azo_sans_light"
+                        android:text="How's it going?"
+                        android:textColor="#3333"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:layout_below="@+id/username"
+                        />
+
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/profilePicture"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        app:cardCornerRadius="35dp"
+                        app:strokeWidth="1dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_toLeftOf="@id/username"
+                        android:layout_alignParentRight="true">
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/dataCollectorImage"
+                            android:scaleType="fitXY"
+                            android:layout_toLeftOf="@id/forgotPassword"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/farmer_ade"/>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="27dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="27dp">
+
+                <Button
+                    android:onClick="@{()->viewModel.onCds()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:background="@drawable/btn_rounded_corners"
+                    android:text="Community Data Survey (CDS)"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:onClick="@{()->viewModel.onBds()}"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:background="@drawable/btn_rounded_corners"
+                    android:text="Baseline Data Survey (BDS)"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:onClick="@{()->viewModel.onPds()}"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:background="@drawable/btn_rounded_corners"
+                    android:text="Pastoralist Data Survey (PDS)"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/history"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/ic_collector_data_collection" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:fontFamily="@font/azo_san"
+                            android:text="Data Collection"
+                            android:textColor="#fff"
+                            android:textSize="7sp" />
+
+                    </RelativeLayout>
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="0dp"-->
+<!--                        android:layout_weight="1">-->
+
+<!--                        <ImageView-->
+<!--                            android:paddingBottom="10dp"-->
+<!--                            android:id="@+id/scanbarcode"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:layout_marginLeft="0dp"-->
+<!--                            android:layout_marginTop="2dp"-->
+<!--                            android:src="@drawable/ic_scanbarcode" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:layout_centerHorizontal="true"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            android:gravity="left"-->
+<!--                            android:text="Scan Barcode"-->
+<!--                            android:textColor="#fff"-->
+<!--                            android:textSize="7sp" />-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/data"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        >-->
+
+<!--                        <ImageView-->
+<!--                            android:paddingBottom="12dp"-->
+<!--                            android:id="@+id/data_collection"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentRight="true"-->
+<!--                            android:layout_marginLeft="0dp"-->
+<!--                            android:layout_marginTop="2dp"-->
+
+<!--                            android:src="@drawable/ic_collector_data_collection" />-->
+
+<!--                        <TextView-->
+
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignRight="@+id/data_collection"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:layout_centerHorizontal="true"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            android:gravity="left"-->
+<!--                            android:text="Data Collection"-->
+<!--                            android:textColor="#fff"-->
+<!--                            android:textSize="7sp" />-->
+
+<!--                    </RelativeLayout>-->
+
+
+                    <RelativeLayout
+                        android:onClick="@{()->viewModel.onLogOut()}"
+
+                        android:id="@+id/log"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/logout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_logout" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="0dp"
+                            android:fontFamily="@font/azo_san"
+                            android:text="Log Out"
+                            android:textColor="#fff"
+                            android:textSize="7sp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</layout>
+

@@ -61,6 +61,7 @@
                         />
 
                     <androidx.cardview.widget.CardView
+                        android:onClick="@{()->viewModel.onProfilePix()}"
                         android:id="@+id/circle"
                         android:layout_width="65dp"
                         android:layout_height="68dp"

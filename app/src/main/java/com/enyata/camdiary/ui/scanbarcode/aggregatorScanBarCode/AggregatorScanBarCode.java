@@ -1,23 +1,19 @@
 package com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.enyata.camdiary.BR;
+import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
@@ -29,10 +25,7 @@ import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeActivity;
-import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
-import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
 import com.enyata.camdiary.utils.Alert;
-import com.enyata.camdiary.utils.AppUtils;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,7 +44,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.CAMERA;
 
-public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBarCodeBinding, AggregatorBarcodeViewModel> implements ZXingScannerView.ResultHandler, AggregatorScanBarcodeNavigator{
+public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBarCodeBinding, AggregatorBarcodeViewModel> implements AggregatorBarcodeNavigator, ZXingScannerView.ResultHandler {
    @Inject
     Gson gson;
 
@@ -86,10 +79,7 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggregator_scan_bar_code);
-        mAPIService = ApiUtils.getCollectorDetails();
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
+        aggregatorBarcodeViewModel.setNavigator(this);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
 
@@ -170,7 +160,7 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
         progressDialog.setCancelable(false);
         progressDialog.show();
         if (InternetConnection.getInstance(this).isOnline()){
-            getCollectorInfo();
+           aggregatorBarcodeViewModel.scanCollectorBarcode(aggregatorBarcodeViewModel.getCollectorVerificationId());
             mScannerView.stopCamera();
 
         }else {
@@ -210,55 +200,45 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
         super.onDestroy();
         mScannerView.stopCamera();
         aggregatorBarcodeViewModel.onDispose();
-        client.dispatcher().cancelAll();
+
 
 
     }
 
-    public  void getCollectorInfo(){
-            mAPIService.GetCollectorDetails(aggregatorBarcodeViewModel.getCollectorVerificationId(), aggregatorBarcodeViewModel.getAccessToken()).enqueue(new Callback<DetailsResponse>() {
-                @Override
-                public void onResponse(Call<DetailsResponse> call, Response<DetailsResponse> response) {
-                    Log.i("RESPONSE SUCCESS", "RESPONSE IS SUCCESSFUL");
-                    if (response.isSuccessful()){
-                        progressDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-                        aggregatorBarcodeViewModel.setCollectorId(String.valueOf(response.body().getData().getId()));
-                        intent.putExtra("first_name", response.body().getData().getFirstName());
-                        intent.putExtra("last_name", response.body().getData().getLastName());
-                        intent.putExtra("phone_number", response.body().getData().getContactNo());
-                        intent.putExtra("email", response.body().getData().getEmail());
-                        intent.putExtra("verification_id", response.body().getData().getVerificationId());
-                        startActivity(intent);
-                    }if (response.code() == 404) {
-                        progressDialog.dismiss();
-                        Gson gson = new GsonBuilder().create();
-                        DetailsErrorMessage error = new DetailsErrorMessage();
-                        try {
-                            error = gson.fromJson(response.errorBody().string(), DetailsErrorMessage.class);
-                            Alert.showFailed(getApplicationContext(), error.getError() + " please scan correct barcode");
-                            onResume();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }if (response.equals(null)){
-                        progressDialog.dismiss();
-                        Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
-                        Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
-                        startActivity(intent);
-                    }
-                }
+
+    @Override
+    public void handleError(Throwable throwable) {
+        progressDialog.dismiss();
+        Log.i("ERRORRRR","FAILEEEEEDD");
+        Log.i("ERRORR", "ERROR");
+        if (throwable != null ) {
+            ANError error = (ANError) throwable;
+            DetailsErrorMessage response = gson.fromJson(error.getErrorBody(), DetailsErrorMessage.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getError() + " please scan correct barcode");
+                onResume();
+            }else {
+                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+                Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                  startActivity(intent);
+            }
+
+        }
+    }
+
+    @Override
+    public void onResponse(DetailsResponse response) {
+        progressDialog.dismiss();
+        Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
+                      aggregatorBarcodeViewModel.setCollectorId(String.valueOf(response.getData().getId()));
+                      aggregatorBarcodeViewModel.setCollectorName(response.getData().getFirstName() + " " + response.getData().getLastName());
+                      intent.putExtra("first_name", response.getData().getFirstName());
+                       intent.putExtra("last_name", response.getData().getLastName());
+                       intent.putExtra("phone_number", response.getData().getContactNo());
+                      intent.putExtra("email", response.getData().getEmail());
+                       intent.putExtra("verification_id", response.getData().getVerificationId());
+                       startActivity(intent);
 
 
-                @Override
-                public void onFailure(Call<DetailsResponse> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Log.i("FAILURE MESSAGE","REQRUEST FAILED");
-                    Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
-                    Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
-                    startActivity(intent);
-                }
-
-            });
     }
 }

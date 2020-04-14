@@ -4,9 +4,13 @@ package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
+import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
+import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
@@ -65,14 +69,10 @@ public interface ApiHelper {
     Single<DetailsResponse>getCollectorDetails(String verification_id);
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
-
     //Save Aggregation
     Single<SavedAggregationResponse> saveAggregation(Aggregation.Request request);
-
     //Pending Delivery
-
     Flowable<PendingDeliveryResponse>getPendingDelivery();
-
     //Completed Deliveries
     Single<DeliveryCompletedResponse>getDeliveryCompleted();
     //Bottle Inventory
@@ -91,6 +91,14 @@ public interface ApiHelper {
     Single<DispatcherSignUpResponse>dispatcherSignUp(DispatcherSignUpRequest.Request request);
 
     Single<DetailsResponse>getFarmerInfo(String verificationId);
+
+    Single<ResetPasswordResponse>userChangePassword(ChangePasswordRequest.Request request);
+
+    Single<ResetPasswordResponse>userEditProfile(EditProfileRequest.Request request);
+
+    Single<NewCollectionResponse>submitCdsDataQuestion(CdsDataRequest.Request request);
+
+    Single<NewCollectionResponse>submitPdsDataQuestion(PdsDataRequest.Request request);
 
 
 

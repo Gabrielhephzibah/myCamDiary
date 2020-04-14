@@ -17,5 +17,6 @@ public interface DeliveryDashboardNavigator {
     void  getDeliveryCompleted(DeliveryCompletedResponse response);
     void  getPendingDelivery(PendingDeliveryResponse response);
     void  getBottleInventory(BottleInventoryResponse response);
+    void onProfilePix();
 
 }

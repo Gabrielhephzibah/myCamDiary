@@ -65,8 +65,12 @@
             </LinearLayout>
 
 
+
+
+
+
             <LinearLayout
-                android:id="@+id/farmerDetails"
+                android:id="@+id/collectorCollection"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_marginTop="50dp"
@@ -214,7 +218,7 @@
             android:id="@+id/fab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@id/farmerDetails"
+            app:layout_anchor="@id/collectorCollection"
             android:elevation="7dp"
             android:layout_margin="12dp"
             android:backgroundTint="@color/transparent"

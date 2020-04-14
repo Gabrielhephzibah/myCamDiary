@@ -28,7 +28,8 @@ public class AggregatorSlideOneFragment extends Fragment {
         return new AggregatorSlideOneFragment();
     }
 
-    @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // init ViewModel
         aggregatorDashboardViewModel = ViewModelProviders.of(requireActivity()).get(AggregatorDashboardViewModel.class);

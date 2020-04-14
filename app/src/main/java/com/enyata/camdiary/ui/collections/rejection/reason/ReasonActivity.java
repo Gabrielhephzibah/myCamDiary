@@ -38,6 +38,8 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
     String firstName;
     String lastName;
     String infoMessage;
+    String churnNo;
+    String fullName;
     ActivityReasonBinding activityReasonBinding;
     private String test_one;
     private String test_two;
@@ -77,13 +79,14 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         activityReasonBinding = getViewDataBinding();
         textarea = activityReasonBinding.textarea;
         volume = getIntent().getStringExtra("volume");
-        firstName = getIntent().getStringExtra("first_name");
-        lastName = getIntent().getStringExtra("last_name");
+        fullName = reasonViewModel.getFarmerFullName();
+
         infoMessage = "nil";
         Log.d("volume ", volume);
         test_one = "failed";
         test_two = "failed";
         test_three = "failed";
+        churnNo = String.valueOf(0);
         approved_container = true;
 
 
@@ -106,7 +109,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
         TextView entry = (TextView) dialogView.findViewById(R.id.entry);
         TextView message = (TextView) dialogView.findViewById(R.id.message);
         entry.setText("Rejection Accepted");
-        message.setText("You have rejected "+ volume + " litres of product \nfrom " + firstName +" "+ lastName + ".\nPlease tap continue to confirm \nrejection");
+        message.setText("You have rejected "+ volume + " litres of product \nfrom " +fullName + ".\nPlease tap continue to confirm \nrejection");
 
         TextView cancel =(TextView) dialogView.findViewById(R.id.cancel);
         TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
@@ -137,6 +140,9 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
                 params.put("test_three", test_three);
                 params.put("approved_container",approved_container);
                 params.put("message",infoMessage );
+                params.put("churn_no",churnNo);
+
+
                 reasonViewModel.createRejectionCollection(params);
 
             }catch (Exception error){

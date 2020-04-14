@@ -10,11 +10,11 @@ public class Details {
     private int id;
 
     @Expose
-    @SerializedName("firstname")
+    @SerializedName("first_name")
     private String firstName;
 
     @Expose
-    @SerializedName("lastname")
+    @SerializedName("last_name")
     private String lastName;
 
     @Expose

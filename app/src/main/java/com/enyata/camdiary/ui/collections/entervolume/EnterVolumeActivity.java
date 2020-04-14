@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -33,9 +35,9 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     String first_name;
     String last_name;
     String fullName;
-    String coperateName;
-    String verificationNumber;
-    String farmer_id;
+    TextInputEditText churnNo;
+    AlertDialog.Builder dialog;
+    String churnNumber;
 
     @Inject
     Gson gson;
@@ -44,6 +46,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
     ViewModelProviderFactory factory;
     private EnterVolumeViewModel enterVolumeViewModel;
     private ActivityEnterVolumeBinding enterVolumeBinding;
+    private  AlertDialog firstModal,secondModal;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerDetailsActivity.class);
@@ -70,59 +73,95 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         super.onCreate(savedInstanceState);
         enterVolumeBinding = getViewDataBinding();
         enterVolumeViewModel.setNavigator(this);
-        first_name = getIntent().getStringExtra("first_name");
-        last_name = getIntent().getStringExtra("last_name");
-        coperateName = getIntent().getStringExtra("coperate_name");
-        verificationNumber = getIntent().getStringExtra("farmer_id");
-        farmer_id= getIntent().getStringExtra("farmer_identity");
-        fullName = first_name + " " + last_name;
+        fullName = enterVolumeViewModel.getFarmerFullName();
     }
 
     @Override
     public void accept() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(EnterVolumeActivity.this);
-        LayoutInflater inflater = EnterVolumeActivity.this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(false);
-        TextView message = (TextView) dialogView.findViewById(R.id.message);
         volume = enterVolumeBinding.volumeEditText.getText().toString();
-        message.setText("You have collected "+volume +" litres of product \nfrom "+ fullName+ " .\nPlease tap continue to confirm \nCollection");
+        if (TextUtils.isEmpty(volume)) {
+            Alert.showInfo(getApplicationContext(), "Please enter Volume");
+            return;
+        }else {
+            dialog = new AlertDialog.Builder(EnterVolumeActivity.this);
+        LayoutInflater inflater = EnterVolumeActivity.this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.collector_churn_layout, null);
+        dialog.setView(view);
+        dialog.setCancelable(false);
+        TextView back = view.findViewById(R.id.back);
+        churnNo= view.findViewById(R.id.churnNo);
+        TextView accept = view.findViewById(R.id.acceptChurn);
+        firstModal = dialog.create();
+        firstModal.show();
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    firstModal.dismiss();
 
-        TextView cancel = dialogView.findViewById(R.id.cancel);
-        TextView continuee = dialogView.findViewById(R.id.continuee);
-        final AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-
-        cancel.setOnClickListener(v -> alertDialog.dismiss());
-        continuee.setOnClickListener(v -> {
-            alertDialog.dismiss();
-
-            if (TextUtils.isEmpty(volume)) {
-                Alert.showInfo(getApplicationContext(), "Please enter volume");
-                return;
-            } else  if (InternetConnection.getInstance(this).isOnline()){
-                try {
-                    JSONObject params = new JSONObject();
-                    params.put("farmer_id",enterVolumeViewModel.getFarmerId());
-                    params.put("status_of_collection", "accepted");
-                    params.put("volume", volume);
-                    params.put("test_one", "passed");
-                    params.put("test_two", "passed");
-                    params.put("test_three", "passed");
-                    params.put("approved_container", "true");
-
-                    params.put("message","nil");
-
-                    enterVolumeViewModel.createCollection(params);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            });
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                churnNumber = churnNo.getText().toString();
+                if (TextUtils.isEmpty(churnNumber)) {
+                    Log.i("ChurnNo", churnNumber);
+                    Alert.showFailed(getApplicationContext(), "Please Enter Churn Number");
+                    return;
+                } else {
 
-            } else {
-                Alert.showFailed(getApplicationContext(),"Please check your Internet Connection and try again");
+                    final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
+                    dialog.setView(dialogView);
+                    dialog.setCancelable(false);
+                    TextView message = (TextView) dialogView.findViewById(R.id.message);
+                    volume = enterVolumeBinding.volumeEditText.getText().toString();
+                    message.setText("You have collected " + volume + " litres of product \nfrom " + fullName + " .\nPlease tap continue to confirm \nCollection");
+
+                    TextView cancel = dialogView.findViewById(R.id.cancel);
+                    TextView continuee = dialogView.findViewById(R.id.continuee);
+                    secondModal = dialog.create();
+                    secondModal.show();
+
+                    cancel.setOnClickListener(v -> secondModal.dismiss());
+                    continuee.setOnClickListener(v -> {
+                        dismissAllModal();
+
+                         if (InternetConnection.getInstance(EnterVolumeActivity.this).isOnline()) {
+                            try {
+                                JSONObject params = new JSONObject();
+                                params.put("farmer_id", enterVolumeViewModel.getFarmerId());
+                                params.put("status_of_collection", "accepted");
+                                params.put("volume", volume);
+                                params.put("test_one", "passed");
+                                params.put("churn_no",churnNumber );
+                                params.put("test_two", "passed");
+                                params.put("test_three", "passed");
+                                params.put("approved_container", "true");
+                                params.put("message", "nil");
+
+                                enterVolumeViewModel.createCollection(params);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Alert.showFailed(getApplicationContext(), "Please check your Internet Connection and try again");
+                        }
+
+
+                    });
+
+
+                }
             }
         });
+
+
+
+
+    }
+
+
     }
 
     @Override
@@ -153,6 +192,8 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         startActivity(intent);
     }
 
+
+
     @Override
     public void handleError(Throwable throwable) {
         if (throwable != null) {
@@ -172,11 +213,14 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
-        status.putExtra("first_name",first_name);
-        status.putExtra("last_name", last_name);
-        status.putExtra("coperate_name",coperateName);
-        status.putExtra("farmer_id",verificationNumber);
+
         startActivity(status);
+    }
+
+    @Override
+    public void dismissAllModal() {
+        firstModal.dismiss();
+        secondModal.dismiss();
     }
 
     @Override

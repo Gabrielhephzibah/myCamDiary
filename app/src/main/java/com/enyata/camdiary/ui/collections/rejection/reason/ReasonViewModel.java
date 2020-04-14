@@ -33,9 +33,10 @@ public class ReasonViewModel extends BaseViewModel<ReasonNavigator> {
       String testThree = params.optString("test_three");
       String approvedContainer = params.optString("approved_container");
       String message = params.optString("message");
+      String churnNo= params.optString("churn_no");
       setIsLoading(true);
       getCompositeDisposable().add(getDataManager()
-              .doCreateCollection(new Collection.Request(farmerId, statusOfCollection, volume, testOne, testTwo, testThree, approvedContainer, message))
+              .doCreateCollection(new Collection.Request(farmerId, statusOfCollection, volume, testOne, churnNo, testTwo, testThree, approvedContainer, message))
               .subscribeOn(getSchedulerProvider().io())
               .observeOn(getSchedulerProvider().ui())
               .subscribe(response -> {
@@ -56,4 +57,6 @@ public class ReasonViewModel extends BaseViewModel<ReasonNavigator> {
     public String getFarmerId(){
         return getDataManager().getFarmerId();
     }
+
+    public String getFarmerFullName(){ return getDataManager().getFramerName();}
 }

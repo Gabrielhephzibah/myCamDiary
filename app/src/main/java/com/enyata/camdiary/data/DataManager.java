@@ -20,7 +20,10 @@ public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
     void updateUserInfo(
             String accessToken,
             String firstname,
-            String email, String imageUrl);
+            String lastname,
+            String usertype,
+            String email, String imageUrl, String phoneNo,
+            String address);
 
     void updateLoginStatus(
             LoggedInMode loggedInMode);

@@ -3,6 +3,7 @@ package com.enyata.camdiary.data.model.api.request;
 import android.util.Log;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class CamLogin {
 
@@ -12,10 +13,10 @@ public class CamLogin {
 
     public static class Request {
 
-        @Expose
+
         private String email;
 
-        @Expose
+
         private String password;
 
         public Request(String email, String password) {
@@ -60,6 +61,8 @@ public class CamLogin {
             result = 31 * result + (password != null ? password.hashCode() : 0);
             return result;
         }
+
+
     }
 
 }
