@@ -68,6 +68,9 @@ public final class ApiEndPoint {
 
     public  static final  String PDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/monthlyRecurringData";
 
+    public  static final  String BDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/farmerRegDataCollection";
+
+
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

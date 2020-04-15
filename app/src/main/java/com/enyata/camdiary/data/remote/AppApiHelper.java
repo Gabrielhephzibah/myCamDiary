@@ -3,6 +3,7 @@
 package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
@@ -298,6 +299,15 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectSingle(NewCollectionResponse.class);
 
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitBdsDataQuestion(BdsDataRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.BDS_DATA_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
     }
 
 

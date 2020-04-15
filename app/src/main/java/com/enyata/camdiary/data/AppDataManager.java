@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
@@ -518,6 +519,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<NewCollectionResponse> submitPdsDataQuestion(PdsDataRequest.Request request) {
         return mApiHelper.submitPdsDataQuestion(request);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> submitBdsDataQuestion(BdsDataRequest.Request request) {
+        return mApiHelper.submitBdsDataQuestion(request);
     }
 
     @Override

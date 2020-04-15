@@ -55,9 +55,6 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
     String[] kujeOption = {"","Kuje","Chibiri","Guabe","Kwaku", "Kabi","Rubochi","Gwargwada","Gudun Karya","Kujekwa","Yenche"};
     String[] kwaliOption = {"","Kwali Road","Yangoji","Pai","Kilankwa", "Dafa","Kundu","Ashara","Gumbo","Wako","Yebu"};
     String[] abujaMunicpalOption = {"","City Centre","Garki","Kabusa","Wuse", "Gwarinpa","Jiwa","Gui","Karshi","Orozo","Karu","Nyanya","Gwagwa"};
-
-
-
     ImageView biodataToggle,incomeToggle, locationToggle,farmInfoToggle;
 
 
@@ -211,6 +208,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
                }
                selectedGender = ( String) gender.getSelectedItem();
                selectedMaritalStatus = (String) maritalStatus.getSelectedItem();
+
                 if(InternetConnection.getInstance(CdsDataActivity.this).isOnline()) {
                    CdsDataRequest.Request request = new CdsDataRequest.Request(firstNameText,lastNameText,selectedGender,ageText,selectedMaritalStatus,phoneNoText,selectedWard,selectedAreaCouncil,communityNameText,sourcesIncomeText,mainIncomeText,weekEarnText,monthEarnText,adult18Text,milkPerDayText,milkForSaleText,challengesText,abujaCowText,totalCowText,milkingCowText,feedbackText);
                    cdsDataViewModel.submitCdsDataCollection(request);
@@ -221,12 +219,6 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
            }
        });
-
-
-//        selectedFinalAssess  = finalAssessSpinner.getSelectedItem().toString();
-
-
-
 
 
     }
@@ -312,7 +304,6 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
                 break;
             }
         }
-//        Alert.showSuccess(getApplicationContext(), response.getResponseMessage());
 
 
     }

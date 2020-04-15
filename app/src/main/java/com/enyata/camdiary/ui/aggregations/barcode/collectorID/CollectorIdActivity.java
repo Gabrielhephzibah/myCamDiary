@@ -108,14 +108,6 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
         colectorIdViewModel.setCollectorEmail(data.getEmail());
         colectorIdViewModel.setCollectorPhoneNumber(data.getContactNo());
         colectorIdViewModel.setCollectorVerificationId(data.getVerificationId());
-//        String id = String.valueOf(data);
-//        intent.putExtra("first_name", data.getFirstName());
-//        intent.putExtra("last_name", data.getLastName());
-//        intent.putExtra("phone_number", data.getContactNo());
-//        intent.putExtra("verification_id", data.getVerificationId());
-//        intent.putExtra("email", data.getEmail());
-//        intent.putExtra("coperate_name", data.getCooperativeName());
-//        intent.putExtra("id", id);
         startActivity(intent);
     }
 

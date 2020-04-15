@@ -11,6 +11,10 @@
             type="com.enyata.camdiary.ui.collections.data.bdsData.BdsViewModel" />
     </data>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -56,7 +60,8 @@
                         android:textSize="30sp" />
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/circle"
+                        android:onClick="@{()->viewModel.onUploadPicture()}"
+                        android:id="@+id/uploadPicture"
                         app:cardBackgroundColor="@color/transparent"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -66,9 +71,9 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/circular_image"
+                            android:id="@+id/farmerImage"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_picture"
+                            android:src="@drawable/ic_add_plus"
                             android:layout_toLeftOf="@id/forgotPassword"
                             android:layout_alignParentRight="true" />
                     </androidx.cardview.widget.CardView>
@@ -165,7 +170,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
-                                    android:id="@+id/answer1"
+                                    android:id="@+id/firstName"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -205,7 +210,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
-                                    android:id="@+id/answer2"
+                                    android:id="@+id/lastName"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -240,7 +245,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
                                     <Spinner
-                                        android:id="@+id/spinner"
+                                        android:id="@+id/genderSpinner"
                                         android:backgroundTint="@color/colorPrimary"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
@@ -280,7 +285,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
-                                    android:id="@+id/ageEdit"
+                                    android:id="@+id/age"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -315,7 +320,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
                                     <Spinner
-                                        android:id="@+id/marriedSpinner"
+                                        android:id="@+id/maritalSpinner"
                                         android:backgroundTint="@color/colorPrimary"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
@@ -355,7 +360,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
-
+                                    android:id="@+id/familyName"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -394,7 +399,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
-                                    android:id="@+id/phoneNoEdit"
+                                    android:id="@+id/phoneNumber"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -413,7 +418,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="How many children 18 years and above are in your household?"
+                                android:text="How many children under 18 years are in your household?"
                                 android:textColor="@color/colorPrimary"
                                 android:fontFamily="@font/azo_san"
                                 android:letterSpacing="-0.03"
@@ -432,6 +437,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/below18"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -468,6 +474,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/below16"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -505,6 +512,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/below16InSch"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -542,6 +550,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/adult18Above"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -595,40 +604,40 @@
                         android:orientation="vertical"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginTop="14dp"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="What is the name of your electoral ward?"
-                                android:textColor="@color/colorPrimary"
-                                android:fontFamily="@font/azo_san"
-                                android:letterSpacing="-0.03"
-                                android:textSize="11sp"/>
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_marginTop="4dp"
-                                android:layout_height="wrap_content">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:layout_marginTop="14dp"-->
+<!--                            android:layout_height="wrap_content">-->
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="What is the name of your electoral ward?"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                android:letterSpacing="-0.03"-->
+<!--                                android:textSize="11sp"/>-->
+<!--                            <FrameLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_marginTop="4dp"-->
+<!--                                android:layout_height="wrap_content">-->
 
-                                <FrameLayout
-                                    android:background="@drawable/spinner_border"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-                                    <Spinner
-                                        android:backgroundTint="@color/colorPrimary"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="30dp"
-                                        android:layout_marginTop="5dp"
-                                        android:spinnerMode="dropdown"
-                                        android:textColor = "@color/colorPrimary"
-                                        android:textSize="12sp" />
-                                </FrameLayout>
-                            </FrameLayout>
+<!--                                <FrameLayout-->
+<!--                                    android:background="@drawable/spinner_border"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content">-->
+<!--                                    <Spinner-->
+<!--                                        android:backgroundTint="@color/colorPrimary"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="30dp"-->
+<!--                                        android:layout_marginTop="5dp"-->
+<!--                                        android:spinnerMode="dropdown"-->
+<!--                                        android:textColor = "@color/colorPrimary"-->
+<!--                                        android:textSize="12sp" />-->
+<!--                                </FrameLayout>-->
+<!--                            </FrameLayout>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -653,6 +662,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
                                     <Spinner
+                                        android:id="@+id/areaCouncilSpinner"
                                         android:backgroundTint="@color/colorPrimary"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
@@ -662,6 +672,42 @@
                                         android:textSize="12sp" />
                                 </FrameLayout>
                             </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="14dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="What is the name of your electoral ward?"
+                                android:textColor="@color/colorPrimary"
+                                android:fontFamily="@font/azo_san"
+                                android:letterSpacing="-0.03"
+                                android:textSize="11sp"/>
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="4dp"
+                                android:layout_height="wrap_content">
+
+                                <FrameLayout
+                                    android:background="@drawable/spinner_border"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <Spinner
+                                        android:id="@+id/electoralWardSpinner"
+                                        android:backgroundTint="@color/colorPrimary"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginTop="5dp"
+                                        android:spinnerMode="dropdown"
+                                        android:textColor = "@color/colorPrimary"
+                                        android:textSize="12sp" />
+                                </FrameLayout>
+                            </FrameLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -691,6 +737,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/communityName"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -773,6 +820,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/sourcesOfIncome"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -810,6 +858,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/mainIncome"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -847,6 +896,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/weekEarning"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -884,6 +934,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/monthlyEarning"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -921,6 +972,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/marketTime"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -978,42 +1030,6 @@
                         android:orientation="vertical"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginTop="14dp"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="What are your sources of your Cooperative?"
-                                android:textColor="@color/colorPrimary"
-                                android:fontFamily="@font/azo_san"
-                                android:letterSpacing="-0.03"
-                                android:textSize="11sp"/>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:hintTextAppearance= "@style/MyAppearance"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                app:boxStrokeWidth="10dp"
-                                app:boxCornerRadiusBottomEnd="8dp"
-                                app:boxCornerRadiusBottomStart="8dp"
-                                app:boxCornerRadiusTopEnd="8dp"
-                                app:boxCornerRadiusTopStart="8dp">
-
-                                <EditText
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="match_parent"
-                                    android:hint="Answer"
-                                    android:textSize="14sp"
-                                    android:fontFamily="@font/azo_sans_light"
-                                    android:textColor="#21523C"
-                                    android:textCursorDrawable= "@null" />
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1038,6 +1054,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
                                     <Spinner
+                                        android:id="@+id/coperativeNameSpinner"
                                         android:backgroundTint="@color/colorPrimary"
                                         android:layout_width="match_parent"
                                         android:layout_height="30dp"
@@ -1123,6 +1140,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/milkPerDay"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1161,6 +1179,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/houseHoldConsume"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1198,6 +1217,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/milkForSale"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1236,6 +1256,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/milkChallenges"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1273,6 +1294,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/cowInAbuja"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1310,6 +1332,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/totalCow"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1347,6 +1370,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/milkingCow"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1356,6 +1380,7 @@
                                     android:textCursorDrawable= "@null" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1370,29 +1395,66 @@
                                 android:fontFamily="@font/azo_san"
                                 android:letterSpacing="-0.03"
                                 android:textSize="11sp"/>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:hintTextAppearance= "@style/MyAppearance"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                app:boxStrokeWidth="10dp"
-                                app:boxCornerRadiusBottomEnd="8dp"
-                                app:boxCornerRadiusBottomStart="8dp"
-                                app:boxCornerRadiusTopEnd="8dp"
-                                app:boxCornerRadiusTopStart="8dp">
+                                android:layout_marginTop="4dp"
+                                android:layout_height="wrap_content">
 
-                                <EditText
-                                    android:layout_height="wrap_content"
+                                <FrameLayout
+                                    android:background="@drawable/spinner_border"
                                     android:layout_width="match_parent"
-                                    android:hint="Answer"
-                                    android:textSize="14sp"
-                                    android:fontFamily="@font/azo_sans_light"
-                                    android:textColor="#21523C"
-                                    android:textCursorDrawable= "@null" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    android:layout_height="wrap_content">
+                                    <Spinner
+                                        android:id="@+id/animalFeedInterestSpinner"
+                                        android:backgroundTint="@color/colorPrimary"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginTop="5dp"
+                                        android:spinnerMode="dropdown"
+                                        android:textColor = "@color/colorPrimary"
+                                        android:textSize="12sp" />
+                                </FrameLayout>
+                            </FrameLayout>
+
                         </LinearLayout>
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:layout_marginTop="14dp"-->
+<!--                            android:layout_height="wrap_content">-->
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Are you interested in buying animal feed?"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                android:letterSpacing="-0.03"-->
+<!--                                android:textSize="11sp"/>-->
+
+<!--                            <com.google.android.material.textfield.TextInputLayout-->
+<!--                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                app:hintTextAppearance= "@style/MyAppearance"-->
+<!--                                app:boxStrokeColor="@color/colorPrimary"-->
+<!--                                app:boxStrokeWidth="10dp"-->
+<!--                                app:boxCornerRadiusBottomEnd="8dp"-->
+<!--                                app:boxCornerRadiusBottomStart="8dp"-->
+<!--                                app:boxCornerRadiusTopEnd="8dp"-->
+<!--                                app:boxCornerRadiusTopStart="8dp">-->
+
+<!--                                <EditText-->
+<!--                                    android:id="@+id/animalFieldInterest"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:hint="Answer"-->
+<!--                                    android:textSize="14sp"-->
+<!--                                    android:fontFamily="@font/azo_sans_light"-->
+<!--                                    android:textColor="#21523C"-->
+<!--                                    android:textCursorDrawable= "@null" />-->
+<!--                            </com.google.android.material.textfield.TextInputLayout>-->
+<!--                        </LinearLayout>-->
 
 
                         <LinearLayout
@@ -1422,6 +1484,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/animalFieldQuantity"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1459,6 +1522,7 @@
                                 app:boxCornerRadiusTopStart="8dp">
 
                                 <EditText
+                                    android:id="@+id/recommendation"
                                     android:layout_height="wrap_content"
                                     android:layout_width="match_parent"
                                     android:hint="Answer"
@@ -1494,6 +1558,7 @@ given by the pastoralist."
                                 android:background="@drawable/text_area_background">
 
                                 <EditText
+                                    android:id="@+id/feedback"
                                     android:layout_height="70dp"
                                     android:layout_width="match_parent"
                                     android:hint="Feedback"
@@ -1520,11 +1585,11 @@ given by the pastoralist."
                         android:layout_height="wrap_content">
 
                         <Button
-                            android:id="@+id/submit"
+                            android:onClick="@{()->viewModel.onSubmitBds()}"
+                            android:id="@+id/submitBds"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
                             android:background="@drawable/hover_button"
                             android:text="Submit"
                             android:fontFamily="@font/azo_san_bold"
@@ -1537,51 +1602,20 @@ given by the pastoralist."
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </LinearLayout>
-
-
-
-
-
             </LinearLayout>
-
-
-
-
-
-
 
         </LinearLayout>
     </ScrollView>
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
 </layout>

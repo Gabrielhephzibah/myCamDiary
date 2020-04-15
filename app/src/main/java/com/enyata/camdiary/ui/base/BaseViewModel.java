@@ -79,4 +79,6 @@ public abstract class BaseViewModel<N> extends ViewModel {
     public long getTimeOnStop(){
       return   getDataManager().getTimeOnStop();
     }
+
+    public String getToken(){return  getDataManager().getAccessToken();}
 }

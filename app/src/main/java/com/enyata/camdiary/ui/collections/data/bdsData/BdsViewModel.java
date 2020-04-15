@@ -1,6 +1,7 @@
 package com.enyata.camdiary.ui.collections.data.bdsData;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
@@ -35,5 +36,34 @@ public class BdsViewModel extends BaseViewModel<BdsDataNavigator> {
 
     public void onBack(){
         getNavigator().onBack();
+    }
+
+    public void onSubmitBds(){
+        getNavigator().onSubmitBds();
+    }
+
+    public void onUploadPicture(){
+        getNavigator().onUploadPicture();
+    }
+
+    public void onSubmitBdsDataQuestion(BdsDataRequest.Request request){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+               .submitBdsDataQuestion(request)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+
+    public void onDispose(){
+        onCleared();
     }
 }

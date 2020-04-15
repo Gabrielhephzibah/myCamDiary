@@ -244,14 +244,12 @@ public class AggregatorEditProfileFragment extends Fragment {
                     public void onStart(String requestId) {
                         Log.i("START", "STARTTTTT");
                         dialog.show();
-//                        progressBar.setVisibility(View.VISIBLE);
 
                     }
 
                     @Override
                     public void onProgress(String requestId, long bytes, long totalBytes) {
                         Double progress = (double) bytes / totalBytes;
-//                        progressBar.setVisibility(View.VISIBLE);
                         dialog.show();
                         Log.i("PROGRESS", "PROGRESS");
 
@@ -262,7 +260,6 @@ public class AggregatorEditProfileFragment extends Fragment {
                         if (resultData != null) {
                             Log.i("SUCCESS", "SUCCESS");
                             dialog.dismiss();
-//                            progressBar.setVisibility(View.GONE);
                             imageURL = (String) resultData.get("url");
                             cloudinaryID = (String) resultData.get("public_id").toString();
                             cloudinaryImage = MediaManager.get().url().transformation(new Transformation()).resourceType("image").generate(cloudinaryID + ".jpg");
@@ -276,7 +273,6 @@ public class AggregatorEditProfileFragment extends Fragment {
 
                     @Override
                     public void onError(String requestId, ErrorInfo error) {
-//                        progressBar.setVisibility(View.GONE);
                         Log.i("ERROR", "ERROR");
                         dialog.dismiss();
                         Alert.showFailed(getActivity(), "Error Uploading Result, Please try again later ");
@@ -286,7 +282,6 @@ public class AggregatorEditProfileFragment extends Fragment {
                     public void onReschedule(String requestId, ErrorInfo error) {
                         Log.i("SCHEDULE", "SCHEDULE");
                         dialog.dismiss();
-//                        progressBar.setVisibility(View.GONE);
                         Alert.showFailed(getActivity(), "Uploading is taking time,please take picture again");
 
                     }

@@ -3,6 +3,7 @@
 package com.enyata.camdiary.data.remote;
 
 import com.enyata.camdiary.data.model.api.request.Aggregation;
+import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
@@ -99,6 +100,8 @@ public interface ApiHelper {
     Single<NewCollectionResponse>submitCdsDataQuestion(CdsDataRequest.Request request);
 
     Single<NewCollectionResponse>submitPdsDataQuestion(PdsDataRequest.Request request);
+
+    Single<NewCollectionResponse>submitBdsDataQuestion(BdsDataRequest.Request request);
 
 
 
