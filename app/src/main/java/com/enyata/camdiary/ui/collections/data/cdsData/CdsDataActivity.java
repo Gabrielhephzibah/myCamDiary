@@ -225,6 +225,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
     @Override
     public void onBioData() {
+        hideKeyboard();
         if (bioData.getVisibility()== View.GONE){
             bioData.setVisibility(View.VISIBLE);
             biodataToggle.setImageResource(R.drawable.ic_icon_open);
@@ -237,6 +238,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
     @Override
     public void onLocationInfo() {
+        hideKeyboard();
         if (locationInfo.getVisibility()==View.GONE){
             locationInfo.setVisibility(View.VISIBLE);
             locationToggle.setImageResource(R.drawable.ic_icon_open);
@@ -249,6 +251,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
     @Override
     public void onIncomeSources() {
+        hideKeyboard();
         if (incomeSource.getVisibility()==View.GONE){
             incomeSource.setVisibility(View.VISIBLE);
             incomeToggle.setImageResource(R.drawable.ic_icon_open);

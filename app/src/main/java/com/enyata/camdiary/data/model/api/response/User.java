@@ -42,7 +42,7 @@ public class User {
     private String contactAddress;
 
     @Expose
-    @SerializedName("user_type")
+    @SerializedName("staff_type")
     private String userType;
 
     @Expose

@@ -69,7 +69,6 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         collectorEmail = collectorDetailViewModel.getCollectorEmail();
 
 
-
         TextView name = activityCollectorDetailBinding.name;
         TextView Email = activityCollectorDetailBinding.email;
         TextView verification_number = activityCollectorDetailBinding.verificationNumber;
@@ -85,6 +84,8 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
 
     @Override
     public void proceed() {
+
+
         Intent intent = new Intent(getApplicationContext(), MilkCollectionActivity.class);
         startActivity(intent);
     }

@@ -3,6 +3,8 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">stagingcamuserapi.enyata.com</domain>
         <domain includeSubdomains="true">stagingcaminventoryapi.enyata.com</domain>
+        <domain includeSubdomains="true">http://res.cloudinary.com</domain>
+
     </domain-config>
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>

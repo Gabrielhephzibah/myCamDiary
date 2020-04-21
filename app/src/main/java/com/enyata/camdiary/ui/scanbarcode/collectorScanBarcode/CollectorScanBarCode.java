@@ -19,9 +19,11 @@ import android.widget.RelativeLayout;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.FarmerIdResponse;
+import com.enyata.camdiary.data.model.api.response.ResponseMessage;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityCollectorScanBarCodeBinding;
@@ -184,9 +186,6 @@ break;
 
         }
 
-
-
-
     }
 
     @Override
@@ -222,15 +221,16 @@ break;
     }
 
 
+
     @Override
     public void handleError(Throwable throwable) {
         progressDialog.dismiss();
         Log.i("ERRORR", "ERROR");
         if (throwable != null ) {
             ANError error = (ANError) throwable;
-            DetailsErrorMessage response = gson.fromJson(error.getErrorBody(), DetailsErrorMessage.class);
+            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getError()+ " please scan correct barcode");
+                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
                 onResume();
             }else {
                 Alert.showFailed(getApplicationContext(),"Error Performing Operation, please try again later ");
@@ -247,11 +247,10 @@ break;
         progressDialog.dismiss();
         collectorBarcodeViewModel.setFarmerId(String.valueOf(response.getData().getId()));
                     Intent intent = new Intent(getApplicationContext(), FarmerDetailsActivity.class);
-                    intent.putExtra("first_name", response.getData().getFirstName());
-                    intent.putExtra("last_name", response.getData().getLastName());
-                    intent.putExtra("phone_no", response.getData().getContactNo());
-                    intent.putExtra("coperate_name", response.getData().getCooperativeName());
-                    intent.putExtra("farmer_id", response.getData().getVerificationId());
+                     collectorBarcodeViewModel.setFarmerFullName(response.getData().getFirstName() + " " +response.getData().getLastName());
+                    collectorBarcodeViewModel.setFarmerCoperative(response.getData().getCooperativeName());
+                    collectorBarcodeViewModel.setFarmerPhoneNo(response.getData().getContactNo());
+                    collectorBarcodeViewModel.setFarmerVerificationId(response.getData().getVerificationId());
                     startActivity(intent);
 
     }

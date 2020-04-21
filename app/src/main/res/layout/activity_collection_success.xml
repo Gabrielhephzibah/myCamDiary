@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Collection"
+                    android:text="Aggregation"
                     android:letterSpacing="0.03"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/azo_san_bold"
@@ -83,11 +83,11 @@
                     />
 
                 <TextView
-                    android:id="@+id/collectorTextView"
+                    android:id="@+id/collectorName"
                     android:layout_marginTop="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adetoyin Gabriel"
+                    android:text=""
                     android:textSize="22sp"
                     android:letterSpacing="0.03"
                     android:textStyle="bold"
@@ -97,32 +97,6 @@
                     />
 
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Farmer"
-                    android:letterSpacing="0.03"
-                    android:layout_marginTop="13dp"
-                    android:textSize="7sp"
-                    android:fontFamily="@font/azo_san"
-                    android:textColor="@color/colorPrimary"
-                    android:gravity="left"
-                    />
-
-                <TextView
-                    android:id="@+id/farmerTextView"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Akin Solomon"
-                    android:textSize="22sp"
-                    android:letterSpacing="0.03"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/azo_san_bold"
-                    android:textColor="@color/colorPrimary"
-                    android:gravity="left"
-                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,11 +110,11 @@
                     />
 
                 <TextView
-                    android:id="@+id/volumeTextView"
+                    android:id="@+id/aggregationVolume"
                     android:layout_marginTop="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="40 Litres"
+                    android:text=""
                     android:textSize="22sp"
                     android:letterSpacing="0.03"
                     android:textStyle="bold"
@@ -151,7 +125,7 @@
 
 
                 <Button
-                    android:onClick="@{() -> viewModel.onNext()}"
+                    android:onClick="@{() -> viewModel.onHome()}"
                     android:id="@+id/next"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,25 +134,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="100dip"
                     android:background="@drawable/hover_button"
-                    android:text="Next"
-                    android:fontFamily="@font/azo_san_bold"
-                    android:textAllCaps="false"
-                    android:textColor="@drawable/changing_text"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:onClick="@{() -> viewModel.onNext()}"
-                    android:id="@+id/last"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="95dip"
-                    android:layout_marginTop="37dip"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="100dip"
-                    android:background="@drawable/hover_button"
-                    android:text="Next"
+                    android:text="Home"
                     android:fontFamily="@font/azo_san_bold"
                     android:textAllCaps="false"
                     android:textColor="@drawable/changing_text"

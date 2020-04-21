@@ -49,4 +49,14 @@ public class AggregatorBarcodeViewModel extends BaseViewModel<AggregatorBarcodeN
     public void setCollectorName(String name){
         getDataManager().setCollectorName(name);
     }
+
+
+    public void setCollectorPhoneNumber(String phoneNumber){
+        getDataManager().setCollectorPhoneNo(phoneNumber);
+    }
+
+
+    public void  setCollectorEmail(String email){
+        getDataManager().setCollectorEmail(email);
+    }
 }

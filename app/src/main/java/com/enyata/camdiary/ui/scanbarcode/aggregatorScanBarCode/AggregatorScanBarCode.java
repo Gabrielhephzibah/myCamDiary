@@ -16,8 +16,11 @@ import android.util.Log;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
+import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.DetailsErrorMessage;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.ResponseMessage;
 import com.enyata.camdiary.data.remote.APIService;
 import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.databinding.ActivityAggregatorScanBarCodeBinding;
@@ -213,9 +216,9 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
         Log.i("ERRORR", "ERROR");
         if (throwable != null ) {
             ANError error = (ANError) throwable;
-            DetailsErrorMessage response = gson.fromJson(error.getErrorBody(), DetailsErrorMessage.class);
+            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getError() + " please scan correct barcode");
+                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
                 onResume();
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
@@ -227,16 +230,14 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
     }
 
     @Override
-    public void onResponse(DetailsResponse response) {
+    public void onResponse(CollectorDetailsResponse response) {
         progressDialog.dismiss();
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
                       aggregatorBarcodeViewModel.setCollectorId(String.valueOf(response.getData().getId()));
                       aggregatorBarcodeViewModel.setCollectorName(response.getData().getFirstName() + " " + response.getData().getLastName());
-                      intent.putExtra("first_name", response.getData().getFirstName());
-                       intent.putExtra("last_name", response.getData().getLastName());
-                       intent.putExtra("phone_number", response.getData().getContactNo());
-                      intent.putExtra("email", response.getData().getEmail());
-                       intent.putExtra("verification_id", response.getData().getVerificationId());
+                        aggregatorBarcodeViewModel.setCollectorEmail(response.getData().getEmail());
+                         aggregatorBarcodeViewModel.setCollectorPhoneNumber(response.getData().getContactNo());
+                        aggregatorBarcodeViewModel.setCollectorVerificationId(response.getData().getVerificationId());
                        startActivity(intent);
 
 

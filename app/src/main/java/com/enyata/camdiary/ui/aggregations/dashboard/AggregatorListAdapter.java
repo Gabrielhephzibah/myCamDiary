@@ -47,11 +47,11 @@ public class AggregatorListAdapter extends ArrayAdapter {
         litres.setText(aggregator.getMyLitres());
 
 
-        TextView farmerId  = listItem.findViewById(R.id.farmerId);
-        farmerId.setText(aggregator.getCompanyId());
+        TextView collectorId  = listItem.findViewById(R.id.collectorId);
+        collectorId.setText(aggregator.getCompanyId());
 
         ImageView image = listItem.findViewById(R.id.image);
-        Picasso.get().load(aggregator.getImage()).into(image);
+        Picasso.get().load(aggregator.getImage()).fit().into(image);
 
 
 

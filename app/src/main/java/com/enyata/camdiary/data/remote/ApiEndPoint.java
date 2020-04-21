@@ -14,9 +14,9 @@ public final class ApiEndPoint {
 
     public static final String LOGIN_URL = BuildConfig.BASE_URL + "/";
 
-    public static final String ACCEPTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection/accepted";
+    public static final String ACCEPTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection?status=accepted";
 
-    public static final String REJECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection/rejected";
+    public static final String REJECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection?status=rejected";
 
     public static final String TODAYS_COLLECTION= BuildConfig.INVENTORY_BASE_URL + "/collection/today";
 
@@ -69,6 +69,10 @@ public final class ApiEndPoint {
     public  static final  String PDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/monthlyRecurringData";
 
     public  static final  String BDS_DATA_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection/farmerRegDataCollection";
+
+    public  static final  String MILK_COLLECTION_DATA = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collection";
+
+    public  static final  String CREATE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
 
     private ApiEndPoint() {

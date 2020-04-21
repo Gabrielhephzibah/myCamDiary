@@ -100,9 +100,6 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
         Picasso.get().load(imageUrl).into(collectorImage);
 
-        if (historyViewModel.getUserType().equals("data_collectors")){
-            data.setVisibility(View.VISIBLE);
-        }
         listView = activityHistoryBinding.listView;
         TextView collectorName = activityHistoryBinding.collectorName;
         collectorName.setText("Hey" + "," + historyViewModel.getCuurentUser());

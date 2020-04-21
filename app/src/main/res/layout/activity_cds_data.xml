@@ -160,6 +160,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -201,6 +202,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -280,6 +282,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -359,6 +362,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -398,6 +402,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -447,41 +452,6 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <!--                <LinearLayout-->
-                        <!--                    android:layout_width="match_parent"-->
-                        <!--                    android:orientation="vertical"-->
-                        <!--                    android:layout_marginTop="14dp"-->
-                        <!--                    android:layout_height="wrap_content">-->
-                        <!--                    <TextView-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="wrap_content"-->
-                        <!--                        android:text="What is the name of your electoral ward?"-->
-                        <!--                        android:textColor="@color/colorPrimary"-->
-                        <!--                        android:fontFamily="@font/azo_san"-->
-                        <!--                        android:letterSpacing="-0.03"-->
-                        <!--                        android:textSize="11sp"/>-->
-                        <!--                    <FrameLayout-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_marginTop="4dp"-->
-                        <!--                        android:layout_height="wrap_content">-->
-
-                        <!--                        <FrameLayout-->
-                        <!--                            android:background="@drawable/spinner_border"-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content">-->
-                        <!--                            <Spinner-->
-                        <!--                                android:id="@+id/electoralWardSpinner"-->
-                        <!--                                android:backgroundTint="@color/colorPrimary"-->
-                        <!--                                android:layout_width="match_parent"-->
-                        <!--                                android:layout_height="30dp"-->
-                        <!--                                android:layout_marginTop="5dp"-->
-                        <!--                                android:spinnerMode="dropdown"-->
-                        <!--                                android:textColor = "@color/colorPrimary"-->
-                        <!--                                android:textSize="12sp" />-->
-                        <!--                        </FrameLayout>-->
-                        <!--                    </FrameLayout>-->
-
-                        <!--                </LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -594,6 +564,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -677,6 +648,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -716,6 +688,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -755,6 +728,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -794,6 +768,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -876,6 +851,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -915,6 +891,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -955,6 +932,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="text"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -994,6 +972,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -1033,6 +1012,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />
@@ -1072,6 +1052,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
+                                    android:inputType="number"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />

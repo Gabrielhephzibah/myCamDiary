@@ -25,6 +25,7 @@ public class CollectionSuccessActivity extends BaseActivity<ActivityCollectionSu
     @Inject
     ViewModelProviderFactory factory;
     private CollectionSuccessViewModel collectionSuccessViewModel;
+    String collectorName;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AggregatorDashboardActivity.class);
@@ -51,22 +52,21 @@ public class CollectionSuccessActivity extends BaseActivity<ActivityCollectionSu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         collectionSuccessViewModel.setNavigator(this);
+        collectorName = collectionSuccessViewModel.getCollectorName();
 
-        String volume = getIntent().getStringExtra("volume");
-        String collector = getIntent().getStringExtra("collector");
-        String farmer = getIntent().getStringExtra("farmer");
 
-        TextView volumeTextView = findViewById(R.id.volumeTextView);
+        String volume = getIntent().getStringExtra("aggregationVolume");
+
+        TextView volumeTextView = findViewById(R.id.aggregationVolume);
         volumeTextView.setText(String.format("%s Litres ", volume));
-        TextView collectorTextView = findViewById(R.id.collectorTextView);
-        collectorTextView.setText(collector);
-        TextView farmerTextView = findViewById(R.id.farmerTextView);
-        farmerTextView.setText(farmer);
+        TextView collectorTextView = findViewById(R.id.collectorName);
+        collectorTextView.setText(collectorName);
     }
 
+
     @Override
-    public void next() {
-        Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+    public void onHome() {
+        Intent intent = new Intent( getApplicationContext(), AggregatorDashboardActivity.class);
         startActivity(intent);
     }
 }

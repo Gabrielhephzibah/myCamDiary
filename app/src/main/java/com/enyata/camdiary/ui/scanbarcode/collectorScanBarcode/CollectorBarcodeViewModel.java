@@ -47,4 +47,12 @@ public  String getFarmerVerificationId(){
                }));
    }
 
+    public void setFarmerFullName(String name){getDataManager().setFarmerName(name);}
+
+    public  void  setFarmerPhoneNo(String  farmerPhoneNo){getDataManager().setFarmerPhoneNumber(farmerPhoneNo);}
+
+    public void  setFarmerCoperative(String coperativeName){getDataManager().setFarmerCooperativeName(coperativeName);}
+
+    public void setFarmerVerificationId(String verificationId){getDataManager().setFarmerVerificationId(verificationId);}
+
 }

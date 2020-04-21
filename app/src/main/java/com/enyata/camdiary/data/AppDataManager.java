@@ -9,6 +9,7 @@ import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
+import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
@@ -24,10 +25,13 @@ import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorDetails;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
+import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
@@ -437,7 +441,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<DetailsResponse> getCollectorDetails(String verification_id) {
+    public Single<CollectorDetailsResponse> getCollectorDetails(String verification_id) {
         return mApiHelper.getCollectorDetails(verification_id);
     }
 
@@ -524,6 +528,16 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<NewCollectionResponse> submitBdsDataQuestion(BdsDataRequest.Request request) {
         return mApiHelper.submitBdsDataQuestion(request);
+    }
+
+    @Override
+    public Single<MilkCollectionDataResponse> getMilkCollectionData(String collectorId) {
+        return mApiHelper.getMilkCollectionData(collectorId);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> createAggregation(CreateAggregationRequest.Request request) {
+        return mApiHelper.createAggregation(request);
     }
 
     @Override

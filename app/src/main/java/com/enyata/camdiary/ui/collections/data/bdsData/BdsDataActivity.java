@@ -252,6 +252,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onBioData() {
+        hideKeyboard();
         if (bioDataFragment.getVisibility()== View.GONE){
             bioDataFragment.setVisibility(View.VISIBLE);
             bioDataToggle.setImageResource(R.drawable.ic_icon_open);
@@ -264,6 +265,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onLocationInfo() {
+        hideKeyboard();
         if (locationInfo.getVisibility()== View.GONE){
             locationInfo.setVisibility(View.VISIBLE);
             locationToggle.setImageResource(R.drawable.ic_icon_open);
@@ -276,6 +278,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onIncomeSource() {
+        hideKeyboard();
         if (incomeSourceFragment.getVisibility()== View.GONE){
             incomeSourceFragment.setVisibility(View.VISIBLE);
             incomeToggle.setImageResource(R.drawable.ic_icon_open);
@@ -288,6 +291,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onCoperativeInfo() {
+        hideKeyboard();
         if (coperativeInfo.getVisibility()== View.GONE){
             coperativeInfo.setVisibility(View.VISIBLE);
             coperativeToggle.setImageResource(R.drawable.ic_icon_open);
@@ -300,6 +304,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onFarmInfo() {
+        hideKeyboard();
         if (farmInfo.getVisibility()== View.GONE){
             farmInfo.setVisibility(View.VISIBLE);
             farmInfoToggle.setImageResource(R.drawable.ic_icon_open);

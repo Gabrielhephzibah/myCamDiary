@@ -92,12 +92,12 @@
                     android:textSize="9sp" />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/collectorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_san_bold"
                     android:letterSpacing="0.03"
-                    android:text="Adetoyin, Gabriel"
+                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -114,11 +114,12 @@
                     android:textSize="9sp" />
 
                 <TextView
+                    android:id="@+id/collectorEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_san_bold"
                     android:letterSpacing="0.03"
-                    android:text="adegab@gmail.com"
+                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -135,11 +136,12 @@
                     android:textSize="9sp" />
 
                 <TextView
+                    android:id="@+id/collectorVolume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_san_bold"
                     android:letterSpacing="0.03"
-                    android:text="205"
+                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -156,11 +158,12 @@
                     android:textSize="9sp" />
 
                 <TextView
+                    android:id="@+id/numberOfChurn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_san_bold"
                     android:letterSpacing="0.03"
-                    android:text="4"
+                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -177,18 +180,20 @@
                     android:textSize="9sp" />
 
                 <TextView
+                    android:id="@+id/verificationId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_san_bold"
                     android:letterSpacing="0.03"
-                    android:text="X3478JND8992"
+                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
 
                 <Button
-                    android:id="@+id/proceed"
+                    android:visibility="gone"
+                    android:id="@+id/milkproceed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -224,6 +229,14 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
 
     </FrameLayout>

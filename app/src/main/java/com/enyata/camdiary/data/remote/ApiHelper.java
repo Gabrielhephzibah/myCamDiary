@@ -8,6 +8,7 @@ import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
 import com.enyata.camdiary.data.model.api.request.Collection;
+import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
@@ -21,10 +22,13 @@ import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorDetails;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
+import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
@@ -67,7 +71,7 @@ public interface ApiHelper {
     // Get Collection's history
     Flowable<CollectionResponse> getAllCollection();
     //Get Collectors Details
-    Single<DetailsResponse>getCollectorDetails(String verification_id);
+    Single<CollectorDetailsResponse>getCollectorDetails(String verification_id);
     //Get Farmer Details
     Single<DetailsResponse> getFarmerDetails(String id);
     //Save Aggregation
@@ -102,6 +106,10 @@ public interface ApiHelper {
     Single<NewCollectionResponse>submitPdsDataQuestion(PdsDataRequest.Request request);
 
     Single<NewCollectionResponse>submitBdsDataQuestion(BdsDataRequest.Request request);
+
+    Single<MilkCollectionDataResponse>getMilkCollectionData(String collectorId);
+
+    Single<NewCollectionResponse>createAggregation(CreateAggregationRequest.Request request);
 
 
 

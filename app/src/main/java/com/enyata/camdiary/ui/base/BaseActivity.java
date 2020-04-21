@@ -94,7 +94,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         performDependencyInjection();
         super.onCreate(savedInstanceState);
         performDataBinding();
-        openActivityOnTokenExpire();
+//        openActivityOnTokenExpire();
     }
 
     public T getViewDataBinding() {
@@ -128,6 +128,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     }
 
     public void openActivityOnTokenExpire() {
+
         jwt = new JWT(mViewModel.getToken());
         if (jwt.isExpired(5)) {
             startActivity(LoginActivity.newIntent(this).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

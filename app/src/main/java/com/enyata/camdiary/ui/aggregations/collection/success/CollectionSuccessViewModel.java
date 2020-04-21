@@ -9,7 +9,11 @@ public class CollectionSuccessViewModel extends BaseViewModel<CollectionSuccessN
         super(dataManager, schedulerProvider);
     }
 
-    public void onNext(){
-        getNavigator().next();
+    public void onHome(){
+        getNavigator().onHome();
+    }
+
+    public String getCollectorName(){
+        return  getDataManager().getCollectorName();
     }
 }

@@ -72,31 +72,31 @@
                 />
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Farmer"
-                android:letterSpacing="0.03"
-                android:layout_marginTop="13dp"
-                android:textSize="7sp"
-                android:fontFamily="@font/azo_san"
-                android:textColor="@color/colorPrimary"
-                android:gravity="left"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Farmer"-->
+<!--                android:letterSpacing="0.03"-->
+<!--                android:layout_marginTop="13dp"-->
+<!--                android:textSize="7sp"-->
+<!--                android:fontFamily="@font/azo_san"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:gravity="left"-->
+<!--                />-->
 
-            <TextView
-                android:id="@+id/farmerName"
-                android:layout_marginTop="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Akin Solomon"
-                android:textSize="22sp"
-                android:letterSpacing="0.03"
-                android:textStyle="bold"
-                android:fontFamily="@font/azo_san_bold"
-                android:textColor="@color/colorPrimary"
-                android:gravity="left"
-                />
+<!--            <TextView-->
+<!--                android:id="@+id/farmerName"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Akin Solomon"-->
+<!--                android:textSize="22sp"-->
+<!--                android:letterSpacing="0.03"-->
+<!--                android:textStyle="bold"-->
+<!--                android:fontFamily="@font/azo_san_bold"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:gravity="left"-->
+<!--                />-->
 
 
 

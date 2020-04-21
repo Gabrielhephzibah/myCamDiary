@@ -15,7 +15,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
-import com.enyata.camdiary.data.token.DecodeToken;
+
 import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -80,7 +80,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
 
-
     @Override
     public void loginClick() {
         if (InternetConnection.getInstance(this).isOnline()) {
@@ -108,7 +107,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToDashBoard(String type) {
-
         Intent intent = null;
         if(type.equals("collectors")){
             intent = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -132,13 +130,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void onResponse(CamLoginResponse response) {
 
-        String token = response.getData().getToken();
-        try {
-            decoded = DecodeToken.decoded(token);
-            Log.i("DECODED",decoded);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String token = response.getData().getToken();
+//        try {
+//            decoded = DecodeToken.decoded(token);
+//            Log.i("DECODED",decoded);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
     }

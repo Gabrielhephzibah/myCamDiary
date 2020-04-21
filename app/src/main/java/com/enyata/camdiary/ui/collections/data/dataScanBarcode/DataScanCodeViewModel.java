@@ -21,4 +21,8 @@ public class DataScanCodeViewModel extends BaseViewModel<DataScanCodeNavigator> 
     public String getCurrentUserType(){
         return  getDataManager().getCurrentUserType();
     }
+
+    public void  onScanBarCode(){
+        getNavigator().onScanBarCode();
+    }
 }

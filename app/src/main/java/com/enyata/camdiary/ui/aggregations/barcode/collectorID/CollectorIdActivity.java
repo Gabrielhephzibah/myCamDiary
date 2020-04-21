@@ -11,8 +11,11 @@ import android.widget.EditText;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.CollectorDetails;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.Details;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
+import com.enyata.camdiary.data.model.api.response.ResponseMessage;
 import com.enyata.camdiary.databinding.ActivityCollectorIdBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
@@ -68,9 +71,9 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     public void handleError(Throwable throwable) {
         if (throwable != null) {
             ANError error = (ANError) throwable;
-            Details response = gson.fromJson(error.getErrorBody(), Details.class);
+            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getError());
+                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to Connect to the Internet");
             }
@@ -100,9 +103,9 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
     }
 
     @Override
-    public void getCollectorDetails(DetailsResponse response) {
+    public void getCollectorDetails(CollectorDetailsResponse response) {
         Intent intent = new Intent(getApplicationContext(), CollectorDetailActivity.class);
-        Details data = response.getData();
+        CollectorDetails data = response.getData();
         colectorIdViewModel.setCollectorName(data.getFirstName() + " " + data.getLastName());
         colectorIdViewModel.setCollectorId(String.valueOf(data.getId()));
         colectorIdViewModel.setCollectorEmail(data.getEmail());

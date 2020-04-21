@@ -1,6 +1,7 @@
 package com.enyata.camdiary.ui.aggregations.history;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.enyata.camdiary.R;
 import com.squareup.picasso.Picasso;
 
@@ -64,7 +66,9 @@ public class AggregationCustomAdapter extends BaseAdapter {
             verificationId.setText(aggregation.get(position).getCompanyId());
 
             ImageView image = convertView.findViewById(R.id.historyImage);
-            Picasso.get().load(aggregation.get(position).historyImage()).into(image);
+            Glide.with(context).load(aggregation.get(position).historyImage()).into(image);
+//            Picasso.get().load(aggregation.get(position).historyImage()).fit().into(image);
+
         }
         
         

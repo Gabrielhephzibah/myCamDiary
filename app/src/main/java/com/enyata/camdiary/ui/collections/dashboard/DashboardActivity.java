@@ -46,15 +46,16 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.inject.Inject;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardBinding, DashboardViewModel> implements DashboardNavigator {
 
@@ -108,13 +109,19 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void handleError(Throwable throwable) {
+
         if (throwable != null ) {
-            ANError error = (ANError) throwable;
-            FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
-            if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
-            }else {
-                Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+            try {
+                ANError error = (ANError) throwable;
+                FarmerIdResponse response = gson.fromJson(error.getErrorBody(),FarmerIdResponse.class);
+                if (error.getErrorBody()!= null){
+                    Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+                }else {
+                    Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
+                }
+            }catch (IllegalStateException | JsonSyntaxException exception){
+                exception.printStackTrace();
+                Alert.showFailed(getApplicationContext(),"An unknown error has occurred");
             }
 
         }
@@ -131,6 +138,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         Log.i("MYYYYYYYYYYYYYY", dashboardViewModel.getUserType());
         collectorImage = findViewById(R.id.collectorImage);
         String imageUrl = dashboardViewModel.getCollectorImage();
+        Log.i("IMAGEURL", imageUrl);
         Picasso.get().load(imageUrl).into(collectorImage);
         Log.i("USERTYPE", dashboardViewModel.getUserType());
 

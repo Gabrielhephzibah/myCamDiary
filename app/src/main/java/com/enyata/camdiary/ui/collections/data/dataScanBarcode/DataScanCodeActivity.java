@@ -14,6 +14,7 @@ import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.data.dataFarmerId.DataFarmerIdActivity;
 import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity;
+import com.enyata.camdiary.ui.scanbarcode.dataCollectorScanBarcode.DataCollectorBarcodeActivity;
 
 import javax.inject.Inject;
 
@@ -65,6 +66,11 @@ public class DataScanCodeActivity extends  BaseActivity<ActivityDataScanCodeBind
                 break;
             }
         }
-//
+    }
+
+    @Override
+    public void onScanBarCode() {
+        Intent intent = new Intent(getApplicationContext(), DataCollectorBarcodeActivity.class);
+        startActivity(intent);
     }
 }

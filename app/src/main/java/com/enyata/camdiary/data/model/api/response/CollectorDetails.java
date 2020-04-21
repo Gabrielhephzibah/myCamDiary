@@ -1,0 +1,98 @@
+package com.enyata.camdiary.data.model.api.response;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class CollectorDetails {
+
+    @Expose
+    @SerializedName("id")
+    private int id;
+
+    @Expose
+    @SerializedName("firstname")
+    private String firstName;
+
+    @Expose
+    @SerializedName("lastname")
+    private String lastName;
+
+    @Expose
+    @SerializedName("email")
+    private String email;
+
+    @Expose
+    @SerializedName("contact_no")
+    private String contactNo;
+
+    @Expose
+    @SerializedName("contact_address")
+    private String contactAddress;
+
+    @Expose
+    @SerializedName("user_type")
+    private String userType;
+
+    @Expose
+    @SerializedName("verification_id")
+    private String verificationId;
+
+    @Expose
+    @SerializedName("cooperative_name")
+    private String cooperativeName;
+
+    @Expose
+    @SerializedName("user_state")
+    private String userState;
+
+    @Expose
+    @SerializedName("image_url")
+    private String imageUrl;
+
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public String getContactAddress() {
+        return contactAddress;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public String getVerificationId() {
+        return verificationId;
+    }
+
+    public String getCooperativeName() {
+        return cooperativeName;
+    }
+
+    public String getUserState() {
+        return userState;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+}

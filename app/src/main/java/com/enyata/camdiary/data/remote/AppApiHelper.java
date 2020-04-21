@@ -6,6 +6,7 @@ import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ChangePasswordRequest;
+import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
@@ -22,10 +23,13 @@ import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorDetails;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
+import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
 import com.enyata.camdiary.data.model.api.response.NumberOfCollectors;
@@ -33,6 +37,7 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
+import com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionActivity;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import javax.inject.Inject;
@@ -153,11 +158,11 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<DetailsResponse> getCollectorDetails(String verification_id) {
+    public Single<CollectorDetailsResponse> getCollectorDetails(String verification_id) {
         return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTORS_DETAILS+ "/" + verification_id)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
-                .getObjectSingle(DetailsResponse.class);
+                .getObjectSingle(CollectorDetailsResponse.class);
     }
 
     @Override
@@ -304,6 +309,23 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Single<NewCollectionResponse> submitBdsDataQuestion(BdsDataRequest.Request request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.BDS_DATA_COLLECTION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+    }
+
+    @Override
+    public Single<MilkCollectionDataResponse> getMilkCollectionData(String collectorId) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.MILK_COLLECTION_DATA+ "/"+ collectorId)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(MilkCollectionDataResponse.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> createAggregation(CreateAggregationRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.CREATE_AGGREGATION)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(request)
                 .build()

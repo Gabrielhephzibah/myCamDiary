@@ -90,6 +90,7 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
 
     @Override
     public void onIncomeSource() {
+        hideKeyboard();
         if (incomeFragment.getVisibility()== View.GONE){
             incomeFragment.setVisibility(View.VISIBLE);
             incomeToggle.setImageResource(R.drawable.ic_icon_open);
@@ -104,6 +105,7 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
 
     @Override
     public void onFarmInfo() {
+        hideKeyboard();
         if (farmInfoFragment.getVisibility()== View.GONE){
             farmInfoFragment.setVisibility(View.VISIBLE);
             farmInfoToggle.setImageResource(R.drawable.ic_icon_open);
