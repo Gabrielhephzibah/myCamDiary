@@ -31,6 +31,7 @@ import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
+import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
 import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -538,6 +539,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<NewCollectionResponse> createAggregation(CreateAggregationRequest.Request request) {
         return mApiHelper.createAggregation(request);
+    }
+
+    @Override
+    public Flowable<ElectoralWardResponse> getElectoralWard(String areaCouncil) {
+        return mApiHelper.getElectoralWard(areaCouncil);
     }
 
     @Override

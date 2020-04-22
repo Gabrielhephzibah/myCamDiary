@@ -37,6 +37,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityBdsDataBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -50,6 +51,7 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -76,7 +78,9 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     animalFeedQuantity,recommendation,feedback;
     ImageView farmerImage;
     int currentapiVersion;
+    boolean spinnerSelected;
     ProgressDialog dialog;
+    List<String> electoralWards;
     String cloudinaryImage, imageURL, cloudinaryID;
     private static final int REQUEST_PERMISSION = 1;
     private static int PICK_FROM_GALLERY = 1;
@@ -88,12 +92,12 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     String[] genderOption = {"","Male","Female"};
     String[] maritalStatusOption = {"","Yes","No"};
     String[] areaCouncilOption = {"","Abaji","Bwari","Gwagalada","Kuje", "Kwali","Abuja Municipal"};
-    String[] abajiOption = {"","Abaji Central","Abaji North East","Abaji South East","Agyana/Pandagi", "Rimba Ebagi","Nuku","Alu Mamagi","Yaba","Gurdi","Gawu"};
-    String[] bwariOption = {"","Bwari Central","Kuduru","Igu","Shere", "Kawu","Ushafa","Dutse Alhaji","Byazhin","Kubwa","Usuma"};
-    String[] gwagaladaOption = {"","Gwagalada Centre","Kutunku","Staff Quarters","Ibwa", "Dobi","Paiko","Tungan Maje","Zuba","Ikwa","Gwako"};
-    String[] kujeOption = {"","Kuje","Chibiri","Guabe","Kwaku", "Kabi","Rubochi","Gwargwada","Gudun Karya","Kujekwa","Yenche"};
-    String[] kwaliOption = {"","Kwali Road","Yangoji","Pai","Kilankwa", "Dafa","Kundu","Ashara","Gumbo","Wako","Yebu"};
-    String[] abujaMunicpalOption = {"","City Centre","Garki","Kabusa","Wuse", "Gwarinpa","Jiwa","Gui","Karshi","Orozo","Karu","Nyanya","Gwagwa"};
+//    String[] abajiOption = {"","Abaji Central","Abaji North East","Abaji South East","Agyana/Pandagi", "Rimba Ebagi","Nuku","Alu Mamagi","Yaba","Gurdi","Gawu"};
+//    String[] bwariOption = {"","Bwari Central","Kuduru","Igu","Shere", "Kawu","Ushafa","Dutse Alhaji","Byazhin","Kubwa","Usuma"};
+//    String[] gwagaladaOption = {"","Gwagalada Centre","Kutunku","Staff Quarters","Ibwa", "Dobi","Paiko","Tungan Maje","Zuba","Ikwa","Gwako"};
+//    String[] kujeOption = {"","Kuje","Chibiri","Guabe","Kwaku", "Kabi","Rubochi","Gwargwada","Gudun Karya","Kujekwa","Yenche"};
+//    String[] kwaliOption = {"","Kwali Road","Yangoji","Pai","Kilankwa", "Dafa","Kundu","Ashara","Gumbo","Wako","Yebu"};
+//    String[] abujaMunicpalOption = {"","City Centre","Garki","Kabusa","Wuse", "Gwarinpa","Jiwa","Gui","Karshi","Orozo","Karu","Nyanya","Gwagwa"};
 
 
 
@@ -193,46 +197,11 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         areaCouncil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 1: {
-                        ArrayAdapter<String> abajiWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, abajiOption);
-                        electoralWard.setAdapter(abajiWardAdapter);
-                        break;
-                    }
-                    case 2: {
-                        ArrayAdapter<String> bwariWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, bwariOption);
-                        electoralWard.setAdapter(bwariWardAdapter);
-                        break;
-                    }
-                    case 3: {
-                        ArrayAdapter<String> gwagaladaWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, gwagaladaOption);
-                        electoralWard.setAdapter(gwagaladaWardAdapter);
-                        break;
-                    }
-                    case 4: {
-                        ArrayAdapter<String> kujeWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, kujeOption);
-                        electoralWard.setAdapter(kujeWardAdapter);
-                        break;
-                    }
-                    case 5: {
-                        ArrayAdapter<String> kwaliWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, kwaliOption);
-                        electoralWard.setAdapter(kwaliWardAdapter);
-                        break;
-                    }
-
-                    case 6: {
-                        ArrayAdapter<String> abujaWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item, abujaMunicpalOption);
-                        electoralWard.setAdapter(abujaWardAdapter);
-                        break;
-                    }
-
-                    default: {
-                        ArrayAdapter<String> defaultWardAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item);
-                        electoralWard.setAdapter(defaultWardAdapter);
-                        break;
-                    }
-
-
+                if (!spinnerSelected) {
+                    spinnerSelected = true;
+                    return;
+                }else {
+                    bdsViewModel.getElectoralWard(areaCouncil.getSelectedItem().toString());
                 }
 
             }
@@ -319,13 +288,13 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     @Override
     public void onBack() {
         switch (bdsViewModel.getCurrentUserType()){
-            case "collectors": {
+            case "collector": {
                 Intent intent = new Intent( getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
 
-            case "data_collectors": {
+            case "data collector": {
                 Intent intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
                 startActivity(intent);
                 break;
@@ -371,6 +340,8 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         }
         genderSelected = ( String) gender.getSelectedItem();
         maritalStatusSelected = (String) maritalStatus.getSelectedItem();
+        Log.i("Electoral ward", electoralWardSelected);
+        Log.i("Area Council", areaCouncilWardSelected);
 
         if(InternetConnection.getInstance(BdsDataActivity.this).isOnline()) {
             BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL,firstNameText,lastNameText,genderSelected,ageText,maritalStatusSelected,familyNameText,phoneNoText,electoralWardSelected,areaCouncilWardSelected,communityNameText,copereativeNameSelected,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,marketDayText,childrenUnder18Text,below16Text,below16InSchText,adult18AboveText,milkPerDayText,milkConsumeText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,animalFeedInterestSelected,animalFeedQuatityText,recommendationText,feedbackText);
@@ -403,13 +374,13 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     @Override
     public void onResponse(NewCollectionResponse response) {
         switch (bdsViewModel.getCurrentUserType()){
-            case "collectors":{
+            case "collector":{
                 Alert.showSuccess(getApplicationContext(), response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
-            case  "data_collectors":{
+            case  "data collector":{
                 Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(),DataCollectorDashboardActivity.class);
                 startActivity(intent);
@@ -431,6 +402,8 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         }
 
     }
+
+
 
     private boolean checkExternalPermission() {
         return (ContextCompat.checkSelfPermission(getApplicationContext().getApplicationContext(), WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
@@ -581,8 +554,18 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     }
 
     @Override
+    public void onElectoralWardResponse(ElectoralWardResponse response) {
+        electoralWards = response.getData();
+        ArrayAdapter<String>electoralWardAdapter = new ArrayAdapter<>(BdsDataActivity.this,android.R.layout.simple_spinner_item, electoralWards);
+        electoralWard.setAdapter(electoralWardAdapter);
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         bdsViewModel.onDispose();
     }
+
+
 }

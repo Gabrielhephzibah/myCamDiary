@@ -74,6 +74,8 @@ public final class ApiEndPoint {
 
     public  static final  String CREATE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
+    public static final String GET_ELECTORAL_WARD = BuildConfig.INVENTORY_BASE_URL + "/collection/location/ward?area_council=";
+
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

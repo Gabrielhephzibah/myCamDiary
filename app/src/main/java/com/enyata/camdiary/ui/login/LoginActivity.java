@@ -108,13 +108,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void goToDashBoard(String type) {
         Intent intent = null;
-        if(type.equals("collectors")){
+        if(type.equals("collector")){
             intent = new Intent(getApplicationContext(), DashboardActivity.class);
         }else if(type.equals("aggregator")){
             intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
-        }else if(type.equals("delivery")){
+        }else if(type.equals("dispatcher")){
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
-        }else if(type.equals("data_collectors")){
+        }else if(type.equals("data collector")){
             intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
         }
 

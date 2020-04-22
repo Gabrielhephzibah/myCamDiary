@@ -29,6 +29,7 @@ import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
+import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
 import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -330,6 +331,14 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(request)
                 .build()
                 .getObjectSingle(NewCollectionResponse.class);
+    }
+
+    @Override
+    public Flowable<ElectoralWardResponse> getElectoralWard(String areaCouncil) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.GET_ELECTORAL_WARD + areaCouncil)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(ElectoralWardResponse.class);
     }
 
 

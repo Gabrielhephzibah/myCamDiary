@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,7 @@ import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityCdsDataBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -30,6 +32,8 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsDataViewModel>implements CdsNavigator {
@@ -38,6 +42,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
     @Inject
     Gson gson;
     CdsDataViewModel cdsDataViewModel;
+    boolean spinnerSelected;
     ActivityCdsDataBinding activityCdsDataBinding;
     LinearLayout bioData,locationInfo, incomeSource, farmInfo;
     EditText firstName,lastName,age,phoneNo,adult18Avove,communityName,sourcesIncome,mainIncome,weekEarn,monthEarn, milkPerDay,milkForSale,challenges,abujaCow,
@@ -46,6 +51,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
     Button submitCds;
     String firstNameText, lastNameText, ageText,phoneNoText, adult18Text, communityNameText,sourcesIncomeText, mainIncomeText,weekEarnText, monthEarnText, milkPerDayText,milkForSaleText,challengesText,abujaCowText,totalCowText,
     milkingCowText,feedbackText ,selectedAreaCouncil,selectedWard,selectedGender, selectedMaritalStatus;
+    List<String> electoralWards;
     String[] genderOption = {"","Male","Female"};
     String[] maritalStatusOption = {"","Yes","No"};
     String[] areaCouncilOption = {"","Abaji","Bwari","Gwagalada","Kuje", "Kwali","Abuja Municipal"};
@@ -112,8 +118,6 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
         submitCds = activityCdsDataBinding.submitCds;
 
 
-
-
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item,genderOption);
         gender.setAdapter(genderAdapter);
 
@@ -126,46 +130,11 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
         areaCouncil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 1: {
-                        ArrayAdapter<String> abajiWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, abajiOption);
-                        electoralWard.setAdapter(abajiWardAdapter);
-                        break;
-                    }
-                    case 2: {
-                        ArrayAdapter<String> bwariWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, bwariOption);
-                        electoralWard.setAdapter(bwariWardAdapter);
-                        break;
-                    }
-                    case 3: {
-                        ArrayAdapter<String> gwagaladaWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, gwagaladaOption);
-                        electoralWard.setAdapter(gwagaladaWardAdapter);
-                        break;
-                    }
-                    case 4: {
-                        ArrayAdapter<String> kujeWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, kujeOption);
-                        electoralWard.setAdapter(kujeWardAdapter);
-                        break;
-                    }
-                    case 5: {
-                        ArrayAdapter<String> kwaliWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, kwaliOption);
-                        electoralWard.setAdapter(kwaliWardAdapter);
-                        break;
-                    }
-
-                    case 6: {
-                        ArrayAdapter<String> abujaWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item, abujaMunicpalOption);
-                        electoralWard.setAdapter(abujaWardAdapter);
-                        break;
-                    }
-
-                    default: {
-                        ArrayAdapter<String> defaultWardAdapter = new ArrayAdapter<>(CdsDataActivity.this, android.R.layout.simple_spinner_item);
-                        electoralWard.setAdapter(defaultWardAdapter);
-                        break;
-                    }
-
-
+                if (!spinnerSelected) {
+                    spinnerSelected = true;
+                    return;
+                }else {
+                    cdsDataViewModel.getElectoralWard(areaCouncil.getSelectedItem().toString());
                 }
 
             }
@@ -208,6 +177,8 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
                }
                selectedGender = ( String) gender.getSelectedItem();
                selectedMaritalStatus = (String) maritalStatus.getSelectedItem();
+               Log.i("Electoral ward", selectedWard);
+               Log.i("Area Council", selectedAreaCouncil);
 
                 if(InternetConnection.getInstance(CdsDataActivity.this).isOnline()) {
                    CdsDataRequest.Request request = new CdsDataRequest.Request(firstNameText,lastNameText,selectedGender,ageText,selectedMaritalStatus,phoneNoText,selectedWard,selectedAreaCouncil,communityNameText,sourcesIncomeText,mainIncomeText,weekEarnText,monthEarnText,adult18Text,milkPerDayText,milkForSaleText,challengesText,abujaCowText,totalCowText,milkingCowText,feedbackText);
@@ -277,13 +248,12 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
     @Override
     public void onBack() {
         switch (cdsDataViewModel.getCurrentUserType()){
-            case "collectors": {
+            case "collector": {
                 Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
-
-            case "data_collectors": {
+            case "data collector": {
                 Intent intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
                 startActivity(intent);
                 break;
@@ -294,13 +264,13 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
     @Override
     public void onResponse(NewCollectionResponse response) {
         switch (cdsDataViewModel.getCurrentUserType()){
-            case "collectors":{
+            case "collector":{
                 Alert.showSuccess(getApplicationContext(), response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
-            case  "data_collectors":{
+            case  "data collector":{
                 Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(),DataCollectorDashboardActivity.class);
                 startActivity(intent);
@@ -322,6 +292,15 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
+    }
+
+    @Override
+    public void onElectoralWardResponse(ElectoralWardResponse response) {
+        Log.i("RESPONSE", "RESPONSE SUCCESSFUL" + response.getData());
+      electoralWards = response.getData();
+        ArrayAdapter<String>electoralWardAdapter = new ArrayAdapter<>(CdsDataActivity.this,android.R.layout.simple_spinner_item, electoralWards);
+        electoralWard.setAdapter(electoralWardAdapter);
+
     }
 
 

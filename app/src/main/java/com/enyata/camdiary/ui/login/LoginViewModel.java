@@ -48,18 +48,18 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     String address = response.getData().getContactAddress();
                     String phoneNo = response.getData().getContactNo();
                     getDataManager().updateUserInfo(token,firstname,lastname,usertype,userEmail,image_url,phoneNo,address);
-                    if(response.getData().getUserType().equals("collectors")){
-                        getNavigator().goToDashBoard("collectors");
+                    if(response.getData().getUserType().equals("collector")){
+                        getNavigator().goToDashBoard("collector");
                         getDataManager().setLoggedInView("collector");
                     }else if(response.getData().getUserType().equals("aggregator")){
                         getNavigator().goToDashBoard("aggregator");
                         getDataManager().setLoggedInView("aggregator");
-                    }else if (response.getData().getUserType().equals("delivery")){
-                        getNavigator().goToDashBoard("delivery");
-                        getDataManager().setLoggedInView("delivery");
-                    }else if (response.getData().getUserType().equals("data_collectors")){
-                        getNavigator().goToDashBoard("data_collectors");
-                        getDataManager().setLoggedInView("data_collectors");
+                    }else if (response.getData().getUserType().equals("dispatcher")){
+                        getNavigator().goToDashBoard("dispatcher");
+                        getDataManager().setLoggedInView("dispatcher");
+                    }else if (response.getData().getUserType().equals("data collector")){
+                        getNavigator().goToDashBoard("data collector");
+                        getDataManager().setLoggedInView("data collector");
                     }
 
                 }, throwable -> {

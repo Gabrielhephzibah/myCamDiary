@@ -55,12 +55,12 @@ public class DataScanCodeActivity extends  BaseActivity<ActivityDataScanCodeBind
     @Override
     public void onBack() {
         switch (dataScanCodeViewModel.getCurrentUserType()){
-            case "collectors": {
+            case "collector": {
                 Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
-            case "data_collectors":{
+            case "data collector":{
                 Intent intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
                 startActivity(intent);
                 break;

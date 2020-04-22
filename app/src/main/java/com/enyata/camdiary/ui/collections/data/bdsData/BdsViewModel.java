@@ -62,6 +62,21 @@ public class BdsViewModel extends BaseViewModel<BdsDataNavigator> {
 
     }
 
+    public void getElectoralWard(String areaCouncil){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getElectoralWard(areaCouncil)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onElectoralWardResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
 
     public void onDispose(){
         onCleared();

@@ -153,13 +153,13 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
     @Override
     public void onResponse(NewCollectionResponse response) {
         switch (pdsDataViewModel.getCurrentUserType()){
-            case "collectors":{
+            case "collector":{
                 Alert.showSuccess(getApplicationContext(), response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(), DataCollectionActivity.class);
                 startActivity(intent);
                 break;
             }
-            case  "data_collectors":{
+            case  "data collector":{
                 Alert.showSuccess(getApplicationContext(),response.getResponseMessage());
                 Intent intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
                 startActivity(intent);

@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
             intent = new Intent(getApplicationContext(),DashboardActivity.class);
         }else if(type.equals("aggregator")){
             intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
-        }else if (type.equals("delivery")){
+        }else if (type.equals("dispatcher")){
             intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
         }else {
             intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
