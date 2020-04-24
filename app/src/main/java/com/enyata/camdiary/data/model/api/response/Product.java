@@ -15,60 +15,70 @@ public class Product  implements Serializable {
     private int id;
 
     @Expose
-    @SerializedName("name")
-    private String name;
+    @SerializedName("title")
+    private String title;
 
     @Expose
     @SerializedName("quantity")
     private String quantity;
 
-    @Expose
-    @SerializedName("image_url")
-    private String imageUrl;
-
-    @Expose
-    @SerializedName("product_order_id")
-    private int productOrderId;
-
-    @Expose
-    @SerializedName("price")
-    private String price;
-
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getQuantity() {
         return quantity;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public int getProductOrderId() {
-        return productOrderId;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-
     @Override
     public String toString() {
         return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", quqntity='" + quantity+ '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", productOrderId='" + productOrderId + '\'' +
-                ", price='" + price + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", quantity='" + quantity + '\'' +
                 '}';
     }
+
+
+    //    public int getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public String getQuantity() {
+//        return quantity;
+//    }
+//
+//    public String getImageUrl() {
+//        return imageUrl;
+//    }
+//
+//    public int getProductOrderId() {
+//        return productOrderId;
+//    }
+//
+//    public String getPrice() {
+//        return price;
+//    }
+//
+//
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "id='" + id + '\'' +
+//                ", name='" + name + '\'' +
+//                ", quqntity='" + quantity+ '\'' +
+//                ", imageUrl='" + imageUrl + '\'' +
+//                ", productOrderId='" + productOrderId + '\'' +
+//                ", price='" + price + '\'' +
+//                '}';
+//    }
     
 }

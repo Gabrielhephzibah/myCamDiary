@@ -19,16 +19,17 @@ public class  DeliveryList implements Serializable {
     private  String number;
     private  String itemId;
     private ArrayList<Product>products;
-
+    private  String orderId;
     private  String customerAdress;
 
-    public DeliveryList(String myName, String items, String number, String itemId, String customerAdress, ArrayList<Product>product) {
+    public DeliveryList(String myName, String items, String number, String itemId, String customerAdress, ArrayList<Product>product,String orderId) {
         this.myName = myName;
         this.items = items;
         this.number = number;
         this.itemId = itemId;
         this.products = product;
         this.customerAdress = customerAdress;
+        this.orderId = orderId;
     }
 
     public void setMyName(String customerName){
@@ -77,5 +78,13 @@ public class  DeliveryList implements Serializable {
 
     public void setCustomerAdreess(String customerAdreess) {
         this.customerAdress = customerAdreess;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

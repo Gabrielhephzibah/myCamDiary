@@ -3,9 +3,7 @@ package com.enyata.camdiary.data.model.api.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DispatcherSignUpResponse {
-
-
+public class DeliveryDetailResponse {
     @Expose
     @SerializedName("message")
     private String message;
@@ -18,6 +16,9 @@ public class DispatcherSignUpResponse {
     @SerializedName("status")
     private String status;
 
+    @Expose
+    @SerializedName("data")
+    private CustomerOrderDetails data;
 
 
     public String getMessage() {
@@ -30,5 +31,9 @@ public class DispatcherSignUpResponse {
 
     public String getStatus() {
         return status;
+    }
+
+    public CustomerOrderDetails getData() {
+        return data;
     }
 }

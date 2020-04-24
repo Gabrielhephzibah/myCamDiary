@@ -5,15 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class PendingData {
-
+public class CustomerOrderDetails {
     @Expose
     @SerializedName("id")
     private int id;
 
     @Expose
-    @SerializedName("delivery_status")
-    private String deliveryStatus;
+    @SerializedName("dispatcher_id")
+    private int dispatcherId;
 
     @Expose
     @SerializedName("shopify_order_reference")
@@ -29,15 +28,14 @@ public class PendingData {
 
     @Expose
     @SerializedName("ordered_products")
-    private List<Product> orderedProducts;
-
+    private List<Product> ordered_products;
 
     public int getId() {
         return id;
     }
 
-    public String getDeliveryStatus() {
-        return deliveryStatus;
+    public int getDispatcherId() {
+        return dispatcherId;
     }
 
     public String getShopifyOrderReference() {
@@ -52,7 +50,7 @@ public class PendingData {
         return deliveryDetails;
     }
 
-    public List<Product> getOrderedProducts() {
-        return orderedProducts;
+    public List<Product> getOrdered_products() {
+        return ordered_products;
     }
 }

@@ -133,6 +133,10 @@ public interface PreferencesHelper {
 
     long getTimeOnStop();
 
+    void setShopifyId(String shopifyId);
+
+    String getShopifyId();
+
 
 
 

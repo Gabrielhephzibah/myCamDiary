@@ -48,9 +48,6 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
         return (String) DateFormat.format("dd/MM/yyyy",new java.util.Date());
     }
 
-    public void setCustomerName(String name){
-        getDataManager().setCustomerName(name);
-    }
 
     public void getPendingDelivery(){
         getCompositeDisposable().add(getDataManager()
@@ -131,6 +128,14 @@ public class DeliveryDashboardViewModel extends BaseViewModel<DeliveryDashboardN
 
     public  String getDispatcherImage(){
         return getDataManager().getUserImageUrl();
+    }
+
+    public  void  setShopifyId(String shopifyId){
+        getDataManager().setShopifyId(shopifyId);
+    }
+
+    public  String getShopifyId(){
+        return  getDataManager().getShopifyId();
     }
 
 

@@ -11,6 +11,10 @@
             type="com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsViewModel" />
     </data>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +48,7 @@
                     android:layout_marginTop="17dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Deliveries"
+                    android:text="Order Details"
                     android:textColor="@color/colorPrimary"
                     android:textSize="30sp"
                     android:fontFamily="@font/azo_san"
@@ -65,7 +69,7 @@
                   android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Devon Samuel"
+                    android:text=""
                     android:textSize="12sp"
                     android:fontFamily="@font/azo_san_bold"
                     android:textStyle="bold"
@@ -89,7 +93,7 @@
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="17 Ozumba Mbadiwe, Victoria Island, Lagos"
+                    android:text=""
                     android:textSize="12sp"
                     android:fontFamily="@font/azo_san_bold"
                     android:textStyle="bold"
@@ -113,7 +117,7 @@
                     android:id="@+id/phoneNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+2348024456793"
+                    android:text=""
                     android:textSize="12sp"
                     android:fontFamily="@font/azo_san_bold"
                     android:textColor="@color/deliveryColor"
@@ -121,28 +125,6 @@
                     />
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Delivery Instructions"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/azo_san"
-                    android:textColor="#CECECE"
-                    android:layout_marginTop="20dp"
-                    />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem ipsum lorem ipsum ipsum lorem ipsumipsum
-lorem ipsumipsum lorem ipsumipsum lorem ipsum"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/azo_san_bold"
-                    android:textStyle="bold"
-                    android:textColor="@color/deliveryColor"
-                    android:layout_marginTop="0dp"
-                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -164,7 +146,8 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
 
 
                 <Button
-                    android:id="@+id/deliver"
+                    android:visibility="gone"
+                    android:id="@+id/deliverButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -195,6 +178,16 @@ lorem ipsumipsum lorem ipsumipsum lorem ipsum"
 
 
     </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
 
 
 </layout>

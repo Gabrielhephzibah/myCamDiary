@@ -26,10 +26,12 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -69,7 +71,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.LOGIN_URL + "auth/signin")
+        return Rx2AndroidNetworking.post(ApiEndPoint.LOGIN_URL + "auth/signin/staff")
                 .addBodyParameter(request)
                 .build()
                 .getObjectSingle(CamLoginResponse.class);
@@ -209,12 +211,12 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<NewCollectionResponse> addNewDelivery(DeliveryCollection.Request request) {
-       return Rx2AndroidNetworking.post(ApiEndPoint.DELIVERY_COLLECTION)
+    public Single<DispatcherSignUpResponse> addNewDelivery(DeliveryCollection.Request request) {
+       return Rx2AndroidNetworking.post(ApiEndPoint.CREATE_DELIVERY)
                 .addBodyParameter(request)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
-                .getObjectSingle(NewCollectionResponse.class);
+                .getObjectSingle(DispatcherSignUpResponse.class);
     }
 
     @Override
@@ -339,6 +341,22 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(ElectoralWardResponse.class);
+    }
+
+    @Override
+    public Flowable<GetCoperativeNameResponse> getCooperativeName() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.GET_COPERATIVE_NAME)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(GetCoperativeNameResponse.class);
+    }
+
+    @Override
+    public Flowable<DeliveryDetailResponse> getOrderDetails(String shopifyId) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.GET_ORDER_DETAILS + "/" + shopifyId)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(DeliveryDetailResponse.class);
     }
 
 

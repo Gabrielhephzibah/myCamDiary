@@ -213,7 +213,6 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
         status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
-
         startActivity(status);
     }
 

@@ -10,28 +10,28 @@ public class DispatcherSignUpRequest {
 
     public static class  Request{
         @Expose
-        @SerializedName("firstname")
-        private String firstname;
+        @SerializedName("first_name")
+        private String firstName;
 
         @Expose
-        @SerializedName("lastname")
-        private String lastname;
-
-        @Expose
-        @SerializedName("phoneNumber")
-        private String phoneNumber;
+        @SerializedName("last_name")
+        private String lastName;
 
         @Expose
         @SerializedName("email")
         private String email ;
 
         @Expose
+        @SerializedName("phone")
+        private String phoneNumber;
+
+        @Expose
         @SerializedName("address")
         private String address;
 
         public Request(String firstname, String lastname, String phoneNumber, String email, String address) {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            this.firstName = firstname;
+            this.lastName = lastname;
             this.phoneNumber = phoneNumber;
             this.email = email;
             this.address = address;
@@ -39,11 +39,11 @@ public class DispatcherSignUpRequest {
 
 
         public String getFirstname() {
-            return firstname;
+            return firstName;
         }
 
         public String getLastname() {
-            return lastname;
+            return lastName;
         }
 
         public String getPhoneNumber() {
@@ -71,9 +71,9 @@ public class DispatcherSignUpRequest {
 
             Request request = (Request)obj;
 
-            if (firstname != null ? !firstname.equals(request.firstname) : request.firstname != null) {
+            if (firstName != null ? !firstName.equals(request.firstName) : request.firstName != null) {
                 return false;
-            }if (lastname != null ? !lastname.equals(request.lastname) : request.lastname != null) {
+            }if (lastName != null ? !lastName.equals(request.lastName) : request.lastName != null) {
                 return false;
             }if (phoneNumber != null ? !phoneNumber.equals(request.phoneNumber) : request.phoneNumber != null) {
                 return false;
@@ -86,8 +86,8 @@ public class DispatcherSignUpRequest {
         @Override
         public int hashCode() {
             int result = 0;
-            result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-            result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+            result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+            result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
             result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
             result = 31 * result + (email != null ? email.hashCode() : 0);
             result = 31 * result + (address != null ? address.hashCode() : 0);
@@ -98,8 +98,8 @@ public class DispatcherSignUpRequest {
         @Override
         public String toString() {
             return "DispatcherSignup{" +
-                    "firstname='" + firstname + '\'' +
-                    ", lastname='" + lastname + '\'' +
+                    "firstname='" + firstName + '\'' +
+                    ", lastname='" + lastName + '\'' +
                     ", phoneNumber='" + phoneNumber + '\'' +
                     ", email='" + email + '\'' +
                     ", address='" + address + '\'' +

@@ -78,6 +78,22 @@ public class BdsViewModel extends BaseViewModel<BdsDataNavigator> {
     }
 
 
+    public void  getCoperativeName(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getCooperativeName()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onGetCoperativeResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onGetCoperativeError(throwable);
+                }));
+    }
+
+
     public void onDispose(){
         onCleared();
     }

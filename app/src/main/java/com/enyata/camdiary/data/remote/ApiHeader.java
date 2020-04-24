@@ -34,6 +34,9 @@ public class ApiHeader {
         return mPublicApiHeader;
     }
 
+
+
+
     public static final class ProtectedApiHeader {
 
         @Expose
@@ -52,6 +55,13 @@ public class ApiHeader {
             this.Authorization = Authorization;
         }
     }
+
+
+
+
+
+
+
 
     public static final class PublicApiHeader {
 

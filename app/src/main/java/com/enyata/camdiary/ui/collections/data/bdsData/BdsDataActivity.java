@@ -38,6 +38,7 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityBdsDataBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -88,6 +89,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     String firstNameText, lastNameText, ageText, familyNameText,phoneNoText,childrenUnder18Text, below16Text, below16InSchText, adult18AboveText, communityNameText,sourcesIncomeText,mainIncomeText,weekEarningText, monthlyEarningText, marketDayText,milkPerDayText,milkConsumeText,milkForSaleText,challengesText,cowInAbujaText, totalCowText,milkingCowText,
     animalFeedQuatityText, recommendationText, feedbackText, genderSelected, maritalStatusSelected,electoralWardSelected,areaCouncilWardSelected,copereativeNameSelected, animalFeedInterestSelected;
     String [] cooperativeNameOption = {"","Paiko","Zuba","falaku","lumo"};
+    List<String>getCoperativeName;
     String [] animalFieldInterestOption = {"","Yes","No"};
     String[] genderOption = {"","Male","Female"};
     String[] maritalStatusOption = {"","Yes","No"};
@@ -176,14 +178,14 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("please wait");
+        bdsViewModel.getCoperativeName();
 
 
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item,genderOption);
         gender.setAdapter(genderAdapter);
 
 
-        ArrayAdapter<String> cooperativeNameAdapter= new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item,cooperativeNameOption);
-        coperativeName.setAdapter(cooperativeNameAdapter);
+
 
         ArrayAdapter<String> animalFeedInterestAdapter = new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item,animalFieldInterestOption);
         animalFeedInterest.setAdapter(animalFeedInterestAdapter);
@@ -342,6 +344,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         maritalStatusSelected = (String) maritalStatus.getSelectedItem();
         Log.i("Electoral ward", electoralWardSelected);
         Log.i("Area Council", areaCouncilWardSelected);
+        Log.i("COPERATIVENAME",copereativeNameSelected);
 
         if(InternetConnection.getInstance(BdsDataActivity.this).isOnline()) {
             BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL,firstNameText,lastNameText,genderSelected,ageText,maritalStatusSelected,familyNameText,phoneNoText,electoralWardSelected,areaCouncilWardSelected,communityNameText,copereativeNameSelected,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,marketDayText,childrenUnder18Text,below16Text,below16InSchText,adult18AboveText,milkPerDayText,milkConsumeText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,animalFeedInterestSelected,animalFeedQuatityText,recommendationText,feedbackText);
@@ -558,6 +561,21 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         electoralWards = response.getData();
         ArrayAdapter<String>electoralWardAdapter = new ArrayAdapter<>(BdsDataActivity.this,android.R.layout.simple_spinner_item, electoralWards);
         electoralWard.setAdapter(electoralWardAdapter);
+
+    }
+
+    @Override
+    public void onGetCoperativeResponse(GetCoperativeNameResponse response) {
+        Log.i("CoperativeResponse ","Response Responsible" + String.valueOf(response.getData()));
+        getCoperativeName = response.getData();
+        ArrayAdapter<String> cooperativeNameAdapter= new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item,getCoperativeName);
+        coperativeName.setAdapter(cooperativeNameAdapter);
+
+    }
+
+    @Override
+    public void onGetCoperativeError(Throwable throwable) {
+        Log.i("ERROR", "Error");
 
     }
 

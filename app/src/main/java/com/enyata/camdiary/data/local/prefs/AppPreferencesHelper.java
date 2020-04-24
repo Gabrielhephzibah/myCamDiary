@@ -85,6 +85,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private  static  final  String PREF_KEY_TIME_ON_STOP = "PREF_KEY_TIME_ON_STOP";
 
+    private  static  final  String PREF_KEY_SHOPIFY_ID = "PREF_KEY_SHOPIFY_ID";
+
 
 
 
@@ -400,6 +402,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public long getTimeOnStop() {
         return mPrefs.getLong(PREF_KEY_TIME_ON_STOP,0);
+    }
+
+    @Override
+    public void setShopifyId(String shopifyId) {
+        mPrefs.edit().putString(PREF_KEY_SHOPIFY_ID, shopifyId).apply();
+    }
+
+    @Override
+    public String getShopifyId() {
+        return mPrefs.getString(PREF_KEY_SHOPIFY_ID, null);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.enyata.camdiary.ui.collections.data.cdsData;
 
+import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 
 public interface CdsNavigator {

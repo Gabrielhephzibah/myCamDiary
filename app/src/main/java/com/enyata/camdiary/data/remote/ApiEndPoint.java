@@ -40,13 +40,13 @@ public final class ApiEndPoint {
 
     public  static  final  String SAVE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
-    public  static  final String PENDING_DELIVERY = BuildConfig.INVENTORY_BASE_URL + "/delivery/assigned";
+    public  static  final String PENDING_DELIVERY = BuildConfig.TRANSACTION_BASE_URL + "/order/dispatcher/assigned";
 
-    public  static  final  String DELIVERY_COMPLETED = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/count";
+    public  static  final  String DELIVERY_COMPLETED = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/today";
 
     public  static  final  String BOTTLE_INVENTORY = BuildConfig.INVENTORY_BASE_URL + "/delivery/bottles";
 
-    public static final String DELIVERY_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/delivery";
+    public static final String CREATE_DELIVERY = BuildConfig.INVENTORY_BASE_URL + "/delivery";
 
     public  static  final  String RESET_PASSWORD = BuildConfig.BASE_URL + "/auth/reset-password-begin";
 
@@ -56,7 +56,7 @@ public final class ApiEndPoint {
 
     public  static  final  String AGGREGATION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation/history";
 
-    public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/auth/signup/dispatcher";
+    public static final String DISPATCHER_SIGNUP =BuildConfig.BASE_URL+ "/customer/signup/dispatcher";
 
     public  static final  String FARMER_DETAILS = BuildConfig.BASE_URL + "/farmer";
 
@@ -75,6 +75,11 @@ public final class ApiEndPoint {
     public  static final  String CREATE_AGGREGATION = BuildConfig.INVENTORY_BASE_URL + "/aggregation";
 
     public static final String GET_ELECTORAL_WARD = BuildConfig.INVENTORY_BASE_URL + "/collection/location/ward?area_council=";
+
+    public  static final  String GET_COPERATIVE_NAME = BuildConfig.BASE_URL + "/cooperatives/name";
+
+    public  static final  String GET_ORDER_DETAILS = BuildConfig.TRANSACTION_BASE_URL + "/order/dispatcher/assigned";
+
 
 
     private ApiEndPoint() {

@@ -173,16 +173,16 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
         if (!signupViewModel.isLengthEqualsTothree(firstNamee)){
             Alert.showFailed(getApplicationContext(), "First-name length must be three or more");
             return;
-        }if (!signupViewModel.isLengthuptoTothree(lastNamee)) {
+        }else if (!signupViewModel.isLengthuptoTothree(lastNamee)) {
             Alert.showFailed(getApplicationContext(), "Last-name length must be three or more");
             return;
-        }if (!signupViewModel.isEmailValid(emaill)){
+        }else if (!signupViewModel.isEmailValid(emaill)){
             Alert.showFailed(getApplicationContext(),"Please enter a valid mail address");
             return;
-        }if (!signupViewModel.isPhoneNumberValid(phoneNumberr)){
+        }else if (!signupViewModel.isPhoneNumberValid(phoneNumberr)){
             Alert.showFailed(getApplicationContext(),"Please enter a valid phone number");
             return;
-        }if (!signupViewModel.isAddressEmpty(addresss)){
+        }else if (!signupViewModel.isAddressEmpty(addresss)){
             Alert.showFailed(getApplicationContext(),"Please enter a valid Address");
         }
         else {
@@ -254,7 +254,7 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     @Override
     public void dispatcherSignup(DispatcherSignUpResponse response) {
-        Alert.showSuccess(getApplicationContext(), "Sign-up Successful, A message has been sent to your mail, Please check your inbox ");
+        Alert.showSuccess(getApplicationContext(), response.getMessage()+ " " + "A message has been sent to your mail, Please check your inbox ");
         Intent intent = new Intent(getApplicationContext(), SignsuccessActivity.class);
         startActivity(intent);
 
@@ -266,7 +266,7 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
             ANError error  = (ANError) throwable;
             DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
             if (error.getErrorBody()!=null){
-                Alert.showFailed(getApplicationContext(), response.getMessage());
+                Alert.showFailed(getApplicationContext(), response.getMessage() + " " + " email or phone number already taken");
 
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to Connect to the Internet");
@@ -279,4 +279,6 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
     public void history() {
 
     }
+
+
 }

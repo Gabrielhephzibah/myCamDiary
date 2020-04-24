@@ -17,6 +17,7 @@ android {
         debug {
             buildConfigField("String", "BASE_URL", '"http://stagingcamuserapi.enyata.com/v1"')
             buildConfigField("String", "INVENTORY_BASE_URL", '"http://stagingcaminventoryapi.enyata.com/api/v1"')
+            buildConfigField("String", "TRANSACTION_BASE_URL", '"http://stagingcamtransactionapi.enyata.com/api/v1"')
             buildConfigField("String", "API_KEY", '"http://www.mocky.io/v2"')
         }
         release {

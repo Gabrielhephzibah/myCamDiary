@@ -25,10 +25,12 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -64,7 +66,6 @@ public interface ApiHelper {
     Single<AllEntries> getAllEntries();
     // Get Today's collection
     Flowable<CollectionResponse> getTodaysCollection();
-
     // Get collector collection
     Flowable<CollectionResponse>getCollectorCollection(String id);
     //GET Aggregator today's collection
@@ -84,7 +85,7 @@ public interface ApiHelper {
     //Bottle Inventory
     Single<BottleInventoryResponse>getBottleInventory();
     //  Delivery Collection
-    Single<NewCollectionResponse>addNewDelivery(DeliveryCollection.Request request);
+    Single<DispatcherSignUpResponse>addNewDelivery(DeliveryCollection.Request request);
     //Reset password
     Single<ResetPasswordResponse> resetPassword(ResetPasswordRequest.Request request);
     //Collection History
@@ -113,6 +114,11 @@ public interface ApiHelper {
     Single<NewCollectionResponse>createAggregation(CreateAggregationRequest.Request request);
 
     Flowable<ElectoralWardResponse>getElectoralWard(String areaCouncil);
+
+    Flowable<GetCoperativeNameResponse>getCooperativeName();
+
+    Flowable<DeliveryDetailResponse>getOrderDetails(String shopifyId);
+
 
 
 

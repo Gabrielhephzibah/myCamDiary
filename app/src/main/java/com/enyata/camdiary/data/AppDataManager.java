@@ -28,10 +28,12 @@ import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryHistoryResponseData;
 import com.enyata.camdiary.data.model.api.response.DetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.MilkCollectionDataResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectionResponse;
@@ -386,6 +388,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setShopifyId(String shopifyId) {
+        mPreferencesHelper.setShopifyId(shopifyId);
+    }
+
+    @Override
+    public String getShopifyId() {
+        return mPreferencesHelper.getShopifyId();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -472,7 +484,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<NewCollectionResponse> addNewDelivery(DeliveryCollection.Request request) {
+    public Single<DispatcherSignUpResponse> addNewDelivery(DeliveryCollection.Request request) {
         return mApiHelper.addNewDelivery(request);
     }
 
@@ -544,6 +556,16 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<ElectoralWardResponse> getElectoralWard(String areaCouncil) {
         return mApiHelper.getElectoralWard(areaCouncil);
+    }
+
+    @Override
+    public Flowable<GetCoperativeNameResponse> getCooperativeName() {
+        return mApiHelper.getCooperativeName();
+    }
+
+    @Override
+    public Flowable<DeliveryDetailResponse> getOrderDetails(String shopifyId) {
+        return mApiHelper.getOrderDetails(shopifyId);
     }
 
     @Override

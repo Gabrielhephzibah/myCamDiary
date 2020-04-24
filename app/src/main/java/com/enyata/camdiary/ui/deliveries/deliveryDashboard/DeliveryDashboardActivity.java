@@ -25,6 +25,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
+import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.PendingData;
 import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
@@ -131,12 +132,21 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
             String customerName = delivery.getMyName();
             String  customerAddress= delivery.getCustomerAdreess();
             String contactNo = delivery.getNumber();
+            String Id = delivery.getItemsId();
+            String orderId = delivery.getOrderId();
+            deliveryDashboardViewModel.setShopifyId(delivery.getItemsId());
+
+
+            Log.i("ID",Id);
+            Log.i("ORDERID", orderId);
+
+
             ArrayList<Product> namee = delivery.getProducts();
 
 
             for (int i = 0; i < namee.size(); i++){
                 Product obj = namee.get(i);
-               String productName = obj.getName();
+               String productName = obj.getTitle();
                 String productQuantity = obj.getQuantity();
                  Log.i("PRODUCTNAME", productName);
                  Log.i("PRODUCTQUQANTITY", productQuantity);
@@ -184,9 +194,9 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     public void handleError(Throwable throwable) {
         if (throwable != null) {
             ANError error = (ANError) throwable;
-            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+            DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(),response.getResponseMessage());
+                Alert.showFailed(getApplicationContext(),response.getMessage());
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
             }
@@ -279,19 +289,9 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
     public void getPendingDelivery(PendingDeliveryResponse response) {
 
         for (PendingData pendingData : response.getData()){
-            int orderId = pendingData.getOrderId();
-            String name = pendingData.getUsers().getFirstName() + " " + pendingData.getUsers().getLastName();
-            deliveryDashboardViewModel.setOrderId(String.valueOf(orderId));
-            deliveryDashboardViewModel.setCustomerName(name);
+            String name = pendingData.getDeliveryDetails().getFirstName() + " " + pendingData.getDeliveryDetails().getLastName();
 
-            String items;
-            if (pendingData.getProductCount().equals("1")){
-                items= pendingData.getProductCount() + " item";
-            }else {
-                 items = pendingData.getProductCount()+ " items";
-            }
-
-            deliveryLists.add(new DeliveryList(pendingData.getUsers().getFirstName()+ ","+" "+pendingData.getUsers().getLastName(),items,pendingData.getUsers().getContactNo(),pendingData.getUsers().getVerificationId(),pendingData.getAddress(), (ArrayList<Product>) pendingData.getProducts()));
+            deliveryLists.add(new DeliveryList(pendingData.getDeliveryDetails().getFirstName()+ ","+" "+pendingData.getDeliveryDetails().getLastName(),"4 Items","09089765643",pendingData.getShopifyOrderReference(),pendingData.getDeliveryDetails().getAddress(), (ArrayList<Product>) pendingData.getOrderedProducts(),String.valueOf(pendingData.getId())));
           deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
 
           listView.setAdapter(deliveryListAdapter);

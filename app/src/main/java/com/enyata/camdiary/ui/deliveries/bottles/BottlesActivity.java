@@ -1,5 +1,6 @@
 package com.enyata.camdiary.ui.deliveries.bottles;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -9,15 +10,21 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
+import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
+import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityBottlesBinding;
+import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryActivity;
 import com.enyata.camdiary.ui.deliveries.deliveries_delivery.delivery.DeliveryViewModel;
@@ -40,6 +47,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
     ViewModelProviderFactory factory;
     private BottlesViewModel bottlesViewModel;
     ActivityBottlesBinding activityBottlesBinding;
+    String customerName;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, BottlesActivity.class);
@@ -68,30 +76,51 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         bottlesViewModel.setNavigator(this);
         activityBottlesBinding = getViewDataBinding();
        EditText editText = activityBottlesBinding.editText;
-
+       Log.i("ORDERID", bottlesViewModel.getOrderId());
+       customerName = bottlesViewModel.getCustomerName();
 
     }
 
     @Override
     public void finish() {
-        Log.i("ORDERID", bottlesViewModel.getOrderId());
-        if (InternetConnection.getInstance(this).isOnline()) {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(BottlesActivity.this);
+        LayoutInflater inflater = BottlesActivity.this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(false);
+        TextView cancel = dialogView.findViewById(R.id.cancel);
+        TextView continuee = dialogView.findViewById(R.id.continuee);
+        TextView message = dialogView.findViewById(R.id.message);
+        message.setText(String.format("You have just delivered CamDiary Products to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
+        final AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
 
+        cancel.setOnClickListener(v -> alertDialog.dismiss());
+        continuee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+
+        if (InternetConnection.getInstance(BottlesActivity.this).isOnline()) {
             DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(), bottlesViewModel.getOrderId());
             bottlesViewModel.addNewDelivery(request);
 
-            Intent intent = new Intent(getApplicationContext(), FinishActivity.class);
-            intent.putExtra("Bottles", activityBottlesBinding.editText.getText().toString());
-            startActivity(intent);
         } else {
             Alert.showFailed(getApplicationContext(), "Please check your network connection and try again");
         }
+            }
+        });
+
+
     }
 
     @Override
-    public void onResponse(NewCollectionResponse response) {
+    public void onResponse(DispatcherSignUpResponse response) {
         Log.i("REQUESSST SUCCESSS", "YOUR REQUEST IS SUCCESSFULL");
-        Alert.showSuccess(getApplicationContext(),"ORDER COMPLETED");
+        Alert.showSuccess(getApplicationContext(), response.getMessage());
+        Intent intent = new Intent(getApplicationContext(), FinishActivity.class);
+        intent.putExtra("Bottles", activityBottlesBinding.editText.getText().toString());
+        startActivity(intent);
 
     }
 
@@ -99,9 +128,9 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
     public void handleError(Throwable throwable) {
         if (throwable!=null){
             ANError error =  (ANError) throwable;
-            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+            DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(),response.getResponseMessage());
+                Alert.showFailed(getApplicationContext(),response.getMessage());
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to Connect to  the internet");
             }
@@ -121,4 +150,5 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         super.onDestroy();
         bottlesViewModel.onDispose();
     }
+
 }

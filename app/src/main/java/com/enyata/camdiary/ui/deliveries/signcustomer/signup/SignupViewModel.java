@@ -69,4 +69,8 @@ public class SignupViewModel extends BaseViewModel<SignupNavigator> {
                     getNavigator().handleError(throwable);
                 }));
     }
+
+    public void onDispose(){
+        onCleared();
+    }
 }

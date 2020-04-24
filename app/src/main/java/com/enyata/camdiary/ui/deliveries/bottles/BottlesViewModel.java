@@ -28,13 +28,16 @@ public class BottlesViewModel extends BaseViewModel<BottlesNavigator> {
     }
 
     public  void addNewDelivery(DeliveryCollection.Request request){
+        setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .addNewDelivery(request)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
+                    setIsLoading(false);
                     getNavigator().onResponse(response);
                 }, throwable -> {
+                    setIsLoading(false);
                     getNavigator().handleError(throwable);
 
                 }));
@@ -43,4 +46,6 @@ public class BottlesViewModel extends BaseViewModel<BottlesNavigator> {
    public  void onDispose(){
         onCleared();
    }
+
+
 }

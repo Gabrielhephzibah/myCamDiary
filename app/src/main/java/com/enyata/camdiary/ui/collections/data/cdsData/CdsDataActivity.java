@@ -23,6 +23,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
 import com.enyata.camdiary.data.model.api.response.ElectoralWardResponse;
+import com.enyata.camdiary.data.model.api.response.GetCoperativeNameResponse;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.databinding.ActivityCdsDataBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
@@ -302,6 +303,8 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
         electoralWard.setAdapter(electoralWardAdapter);
 
     }
+
+
 
 
     @Override
