@@ -1,5 +1,6 @@
 package com.enyata.camdiary.ui.deliveries.deliveryEditProfile;
 
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 
 public interface DeliveryEditProfileNavigator {
@@ -7,5 +8,5 @@ public interface DeliveryEditProfileNavigator {
     void handleError(Throwable throwable);
 
     void onResponse(ResetPasswordResponse response);
-    void onEditProfile(ResetPasswordResponse response);
+    void onEditProfile(CollectorDetailsResponse response);
 }

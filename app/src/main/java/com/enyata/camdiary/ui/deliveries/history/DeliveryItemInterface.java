@@ -13,4 +13,6 @@ public interface DeliveryItemInterface {
 
     String getDate();
 
+    String getProductCount();
+
 }

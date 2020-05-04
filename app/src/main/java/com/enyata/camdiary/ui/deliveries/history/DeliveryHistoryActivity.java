@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -145,31 +147,38 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public void deliveryHistory(DeliveryHistoryResponseData response) {
+        try {
+
+
 
         for (DeliveryHistoryResponse data : response.getData()) {
             String[] formatted = data.getDate().split(" ");
             String[] formattedDate = formatted[0].split("-");
             String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
             deliveryHistoryLists.add(new DeliveryHistoryHeader(date));
-            List<DeliveryHistory>deliveryHistory = data.getDeliveryHistory();
+            List<DeliveryHistory> deliveryHistory = data.getDeliveryHistory();
             for (int i = 0; i < deliveryHistory.size(); i++) {
                 String items;
                 DeliveryHistory history = deliveryHistory.get(i);
-                String firstName = history.getOrder().getUsers().getFirstName();
-                String lastName = history.getOrder().getUsers().getLastName();
-                String contactNo = history.getOrder().getUsers().getContactNo();
-                String verificationNo = history.getOrder().getUsers().getVerificationId();
-                String productCount = history.getOrder().getProductCount();
-                if (history.getOrder().getProductCount().equals("1")) {
-                    items = history.getOrder().getProductCount() + " item";
+                String firstName = history.getCustomerDetails().getFirstName();
+                String lastName = history.getCustomerDetails().getLastName();
+                String contactNo = history.getCustomerDetails().getPhone();
+                String shopifyOrderReference = history.getShopifyOrderReference();
+                String productCount = history.getProductsCount();
+                if (productCount.equals("1")) {
+                    items = history.getProductsCount() + " item";
                 } else {
-                    items = history.getOrder().getProductCount() + " items";
+                    items = history.getProductsCount() + " items";
                 }
 
-                deliveryHistoryLists.add(new DispatcherHistory(firstName + " " + lastName, items, contactNo, verificationNo));
+                deliveryHistoryLists.add(new DispatcherHistory(firstName + " " + lastName, items, contactNo, shopifyOrderReference, items));
                 DeliveryCustomAdapter customAdapter = new DeliveryCustomAdapter(DeliveryHistoryActivity.this, deliveryHistoryLists);
                 listView.setAdapter(customAdapter);
             }
+        }
+    }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.i("Unknown Error", e.getMessage());
         }
 
 
@@ -177,6 +186,9 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public void handleError(Throwable throwable) {
+
+        Log.i("ERROR", throwable.getMessage());
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -186,14 +198,15 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
                 Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
             }
         }
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(), "An unknown error occurred");
+        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         deliveryHistoryViewModel.onDispose();
     }
 }

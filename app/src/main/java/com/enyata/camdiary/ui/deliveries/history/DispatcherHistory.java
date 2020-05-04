@@ -6,12 +6,14 @@ public class DispatcherHistory implements  DeliveryItemInterface {
     public String items;
     public   String number;
     public String itemId;
+    public  String productCount;
 
-    public DispatcherHistory(String myName, String items, String number, String itemId) {
+    public DispatcherHistory(String myName, String items, String number, String itemId, String productCount) {
         this.myName = myName;
         this.items = items;
         this.number = number;
         this.itemId = itemId;
+        this.productCount = productCount;
     }
 
     @Override
@@ -43,4 +45,11 @@ public class DispatcherHistory implements  DeliveryItemInterface {
     public String getDate() {
         return null;
     }
+
+    @Override
+    public String getProductCount() {
+        return productCount;
+    }
+
+
 }

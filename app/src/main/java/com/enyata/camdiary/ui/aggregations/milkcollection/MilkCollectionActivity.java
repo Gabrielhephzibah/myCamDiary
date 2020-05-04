@@ -30,6 +30,7 @@ import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActi
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.zip.Inflater;
 
@@ -174,22 +175,40 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
 
     @Override
     public void handleError(Throwable throwable) {
-       Log.i("THROWABLE", throwable.getMessage());
-
+        try {
+            if (throwable != null) {
+                ANError error = (ANError) throwable;
+                NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+                if (error.getErrorBody()!= null){
+                    Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+                }
+            }else{
+                Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
+            }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
+
+
 
     @Override
     public void getMilkCollectionData(MilkCollectionDataResponse response) {
-        Log.i("Success", String.valueOf(response));
-        milkProceed.setVisibility(View.VISIBLE);
-        milkCollectionViewModel.setCollectorName(response.getCollector().getCollector().getFirstName() + " " +response.getCollector().getCollector().getLastName());
-        collectorName.setText(String.format("%s %s", response.getCollector().getCollector().getFirstName(), response.getCollector().getCollector().getLastName()));
-        email.setText(response.getCollector().getCollector().getEmail());
-        volume.setText(response.getCollector().getTotalVolume());
-        numberOfChurn.setText(response.getCollector().getNumberOfChurns());
-        verificationId.setText(response.getCollector().getCollector().getVerificationId());
+        try {
 
+            Log.i("Success", String.valueOf(response));
+            milkProceed.setVisibility(View.VISIBLE);
+            milkCollectionViewModel.setCollectorName(response.getCollector().getCollector().getFirstName() + " " + response.getCollector().getCollector().getLastName());
+            collectorName.setText(String.format("%s %s", response.getCollector().getCollector().getFirstName(), response.getCollector().getCollector().getLastName()));
+            email.setText(response.getCollector().getCollector().getEmail());
+            volume.setText(response.getCollector().getTotalVolume());
+            numberOfChurn.setText(response.getCollector().getNumberOfChurns());
+            verificationId.setText(response.getCollector().getCollector().getVerificationId());
 
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.i("Error", e.getMessage());
+        }
     }
 
     @Override
@@ -205,6 +224,7 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
 
     @Override
     public void aggregationHandleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -214,7 +234,9 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     public void dismissAllmodal(){

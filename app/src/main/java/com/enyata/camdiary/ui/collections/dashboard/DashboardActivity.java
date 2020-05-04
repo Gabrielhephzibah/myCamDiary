@@ -121,6 +121,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
                 }
             }catch (IllegalStateException | JsonSyntaxException exception){
                 exception.printStackTrace();
+                Log.i("ERROR", exception.getMessage());
                 Alert.showFailed(getApplicationContext(),"An unknown error has occurred");
             }
 
@@ -138,7 +139,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
         Log.i("MYYYYYYYYYYYYYY", dashboardViewModel.getUserType());
         collectorImage = findViewById(R.id.collectorImage);
         String imageUrl = dashboardViewModel.getCollectorImage();
-        Log.i("IMAGEURL", imageUrl);
         Picasso.get().load(imageUrl).into(collectorImage);
         Log.i("USERTYPE", dashboardViewModel.getUserType());
 
@@ -282,13 +282,19 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
         @Override
         public void getTodayCollection (CollectionResponse todayCollectionResponse){
-        Log.i("RESPONSE", todayCollectionResponse.getData().toString());
-
+//        Log.i("RESPONSE", todayCollectionResponse.getData().toString());
+        try {
             for (Collection response : todayCollectionResponse.getData()) {
                 dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName() + "  " + response.getFarmer().getLastName(), response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume() + " litres"));
                 DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
                 listView.setAdapter(dashboardCollectorAdapter);
             }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+
+            Log.i("An Unknown error ", e.getMessage());
+        }
+
         }
 
     @Override

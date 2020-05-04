@@ -37,6 +37,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -148,6 +149,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             FarmerIdResponse response = gson.fromJson(error.getErrorBody(), FarmerIdResponse.class);
@@ -158,7 +160,9 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             }
 
         }
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     @Override
@@ -222,12 +226,19 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
 
     @Override
     public void getAggregatorTodayCollection(AggregationCollectionResponse todayCollection) {
-        for (AggregatorCollections response : todayCollection.getData()) {
-            aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " " + response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres", response.getCollectorDetails().getImageUrl()));
-            aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
-            listView.setAdapter(aggregatorListAdapter);
-
+        try {
+            for (AggregatorCollections response : todayCollection.getData()) {
+                aggregatorLists.add(new AggregatorList(response.getCollectorDetails().getFirstName() + " " + response.getCollectorDetails().getLastName(), response.getCollectorDetails().getVerificationId(), response.getAggregationTotalVolume() + " litres", response.getCollectorDetails().getImageUrl()));
+                aggregatorListAdapter = new AggregatorListAdapter(AggregatorDashboardActivity.this, aggregatorLists);
+                listView.setAdapter(aggregatorListAdapter);
         }
+
+
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.i("An Uknown ", e.getMessage());
+        }
+
 
 
     }

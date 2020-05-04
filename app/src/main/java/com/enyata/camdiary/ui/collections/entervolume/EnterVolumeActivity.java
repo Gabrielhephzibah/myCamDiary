@@ -25,6 +25,7 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONObject;
 
@@ -103,6 +104,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 churnNumber = churnNo.getText().toString();
                 if (TextUtils.isEmpty(churnNumber)) {
                     Log.i("ChurnNo", churnNumber);
@@ -164,13 +166,10 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     }
 
-    @Override
-    public void onResponseError() {
-        Alert.showFailed(getApplicationContext(), "Unable to connect");
-    }
 
     @Override
     public void reject() {
+        hideKeyboard();
          volume = enterVolumeBinding.volumeEditText.getText().toString();
 
         if (TextUtils.isEmpty(volume)){
@@ -196,6 +195,7 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -205,13 +205,15 @@ public class EnterVolumeActivity extends BaseActivity<ActivityEnterVolumeBinding
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(), "An unknown error occurred");
+        }
     }
 
     @Override
     public void displayResponse(NewCollectionResponse response) {
         Alert.showSuccess(getApplicationContext(),"Collection Successful");
         Intent status = new Intent(getApplicationContext(), StatusOfCollectionActivity.class);
-        status.putExtra("responseCode", response.getResponseCode());
         status.putExtra("volume",volume);
         startActivity(status);
     }

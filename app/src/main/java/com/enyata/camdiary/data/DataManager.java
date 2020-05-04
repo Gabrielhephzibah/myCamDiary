@@ -17,6 +17,9 @@ public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 
     void updateApiHeader(Long userId, String accessToken);
 
+    void updateUserProfile(String firstName, String lastName, String imageUrl, String phoneNo, String address);
+
+
     void updateUserInfo(
             String accessToken,
             String firstname,

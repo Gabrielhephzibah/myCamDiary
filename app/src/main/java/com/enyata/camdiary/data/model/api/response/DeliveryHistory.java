@@ -9,56 +9,55 @@ public class DeliveryHistory {
     private int id;
 
     @Expose
-    @SerializedName("deliverer_id")
-    private int delivererId;
+    @SerializedName("delivery_status")
+    private String deliveryStatus ;
 
     @Expose
-    @SerializedName("bottles")
-    private int bottles;
+    @SerializedName("dispatcher_id")
+    private int dispatcherId ;
 
     @Expose
-    @SerializedName("order_id")
-    private int orderId;
-
-
-    @Expose
-    @SerializedName("created_at")
-    private String createdAt;
+    @SerializedName("shopify_order_reference")
+    private String shopifyOrderReference;
 
     @Expose
-    @SerializedName("updated_at")
-    private String updatedAt;
+    @SerializedName("date_completed")
+    private String dateCompleted ;
 
     @Expose
-    @SerializedName("order")
-    private Order order;
+    @SerializedName("customer_details")
+    private DeliveryDetails customerDetails ;
+
+    @Expose
+    @SerializedName("products_count")
+    private String productsCount ;
 
 
     public int getId() {
         return id;
     }
 
-    public int getDelivererId() {
-        return delivererId;
+    public String getDeliveryStatus() {
+        return deliveryStatus;
     }
 
-    public int getBottles() {
-        return bottles;
+    public int getDispatcherId() {
+        return dispatcherId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public String getShopifyOrderReference() {
+        return shopifyOrderReference;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getDateCompleted() {
+        return dateCompleted;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public DeliveryDetails getCustomerDetails() {
+        return customerDetails;
     }
 
-    public Order getOrder() {
-        return order;
+    public String getProductsCount() {
+        return productsCount;
     }
 }

@@ -30,6 +30,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -101,6 +102,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null ) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -110,6 +112,9 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
                 Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
             }
 
+        }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
     }
@@ -160,27 +165,34 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
     @Override
     public void getAggregationHistory(AggregationHistoryResponse response) {
-        for (AggregationHistory history : response.getAggregationHistory()){
-            String[] formatted = history.getDate().split(" ");
-            String[] formattedDate = formatted[0].split("-");
-            String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
-
-            aggregationList.add(new AggregationHistoryHeader(date));
-             List<AggregatorCollections> aggregatorCollections = history.getAggregatorCollections();
-             for (int i = 0; i< aggregatorCollections.size(); i++){
-                 AggregatorCollections collections = aggregatorCollections.get(i);
-                 String firstName = collections.getCollectorDetails().getFirstName();
-                 String lastName = collections.getCollectorDetails().getLastName();
-                 String verificationId = collections.getCollectorDetails().getVerificationId();
-                 String volume = collections.getAggregationTotalVolume();
-                 String image = collections.getCollectorDetails().getImageUrl();
-
-                 aggregationList.add(new AggregatorHistory(firstName + " " +lastName, verificationId,volume + " litres",image));
-                 AggregationCustomAdapter customAdapter = new AggregationCustomAdapter(AggregatorHIstoryActivity.this, aggregationList);
-                 listView.setAdapter(customAdapter);
+        try {
 
 
-             }
+            for (AggregationHistory history : response.getAggregationHistory()) {
+                String[] formatted = history.getDate().split(" ");
+                String[] formattedDate = formatted[0].split("-");
+                String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
+
+                aggregationList.add(new AggregationHistoryHeader(date));
+                List<AggregatorCollections> aggregatorCollections = history.getAggregatorCollections();
+                for (int i = 0; i < aggregatorCollections.size(); i++) {
+                    AggregatorCollections collections = aggregatorCollections.get(i);
+                    String firstName = collections.getCollectorDetails().getFirstName();
+                    String lastName = collections.getCollectorDetails().getLastName();
+                    String verificationId = collections.getCollectorDetails().getVerificationId();
+                    String volume = collections.getAggregationTotalVolume();
+                    String image = collections.getCollectorDetails().getImageUrl();
+
+                    aggregationList.add(new AggregatorHistory(firstName + " " + lastName, verificationId, volume + " litres", image));
+                    AggregationCustomAdapter customAdapter = new AggregationCustomAdapter(AggregatorHIstoryActivity.this, aggregationList);
+                    listView.setAdapter(customAdapter);
+
+
+                }
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.i("unknown error", e.getMessage());
         }
     }
 

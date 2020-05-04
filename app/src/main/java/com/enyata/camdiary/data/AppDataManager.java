@@ -524,7 +524,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<ResetPasswordResponse> userEditProfile(EditProfileRequest.Request request) {
+    public Single<CollectorDetailsResponse> userEditProfile(EditProfileRequest.Request request) {
         return mApiHelper.userEditProfile(request);
     }
 
@@ -576,6 +576,15 @@ public class AppDataManager implements DataManager {
     @Override
     public void updateApiHeader(Long userId, String accessToken) {
         mApiHelper.getApiHeader().getProtectedApiHeader().setAuthorization(accessToken);
+    }
+
+    @Override
+    public void updateUserProfile(String firstName, String lastName, String imageUrl, String phoneNo, String address) {
+        setCurrentUserName(firstName);
+        setCurrentUserLastName(lastName);
+        setUserImageUrl(imageUrl);
+        setCurrentUserPhoneNumber(phoneNo);
+        setCurrentUserAddress(address);
     }
 
     @Override

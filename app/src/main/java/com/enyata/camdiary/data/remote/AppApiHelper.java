@@ -280,12 +280,12 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<ResetPasswordResponse> userEditProfile(EditProfileRequest.Request request) {
+    public Single<CollectorDetailsResponse> userEditProfile(EditProfileRequest.Request request) {
         return Rx2AndroidNetworking.patch(ApiEndPoint.EDIT_PROFILE)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(request)
                 .build()
-                .getObjectSingle(ResetPasswordResponse.class);
+                .getObjectSingle(CollectorDetailsResponse.class);
 
     }
 

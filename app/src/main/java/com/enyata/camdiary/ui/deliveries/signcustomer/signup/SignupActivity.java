@@ -40,6 +40,7 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -262,6 +263,7 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable!=null){
             ANError error  = (ANError) throwable;
             DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
@@ -273,6 +275,9 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
             }
         }
 
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     @Override

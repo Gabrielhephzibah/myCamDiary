@@ -33,6 +33,7 @@ import com.enyata.camdiary.ui.deliveries.deliveries_delivery.details.DetailsActi
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONObject;
 
@@ -91,7 +92,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         TextView cancel = dialogView.findViewById(R.id.cancel);
         TextView continuee = dialogView.findViewById(R.id.continuee);
         TextView message = dialogView.findViewById(R.id.message);
-        message.setText(String.format("You have just delivered CamDiary Products to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
+        message.setText(String.format("You have just delivered CamDiary Product to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
         final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
@@ -126,6 +127,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable!=null){
             ANError error =  (ANError) throwable;
             DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
@@ -136,7 +138,9 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
             }
         }
 
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     @Override

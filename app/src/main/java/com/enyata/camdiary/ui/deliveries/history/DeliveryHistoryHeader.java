@@ -37,6 +37,10 @@ public class DeliveryHistoryHeader implements  DeliveryItemInterface {
             return date;
         }
 
+    @Override
+    public String getProductCount() {
+        return null;
+    }
 
 
 }

@@ -50,7 +50,7 @@ public class DataCollectorEditProfileFragment extends Fragment {
 
     Button submit;
     EditText firstName,lastName,email,phoneNumber,address;
-    String cloudinaryImage, imageURL, cloudinaryID;
+    String cloudinaryImage, cloudinaryID;
     ProgressDialog dialog;
 
     String firstNameText, lastNameText, emailText, phoneNumberText, addressText,userImage,userType, userFirstName, userLastName, userEmail,userPhoneNumber, userAddress;
@@ -124,7 +124,7 @@ public class DataCollectorEditProfileFragment extends Fragment {
                 lastNameText = lastName.getText().toString();
                 phoneNumberText = phoneNumber.getText().toString();
                 addressText = address.getText().toString();
-                EditProfileRequest.Request request = new EditProfileRequest.Request(firstNameText,lastNameText,addressText,phoneNumberText,imageURL);
+                EditProfileRequest.Request request = new EditProfileRequest.Request(firstNameText,lastNameText,addressText,phoneNumberText,userImage);
                 if (InternetConnection.getInstance(getActivity()).isOnline()) {
                     dataCollectorEditProfileViewModel.userEditProfile(request);
                 }else {
@@ -269,11 +269,11 @@ public class DataCollectorEditProfileFragment extends Fragment {
                             Log.i("SUCCESS", "SUCCESS");
                             dialog.dismiss();
 //                            progressBar.setVisibility(View.GONE);
-                            imageURL = (String) resultData.get("url");
+                            userImage = (String) resultData.get("url");
                             cloudinaryID = (String) resultData.get("public_id").toString();
                             cloudinaryImage = MediaManager.get().url().transformation(new Transformation()).resourceType("image").generate(cloudinaryID + ".jpg");
                             Alert.showSuccess(getActivity(),"Image uploaded successfully");
-                            Log.i("imageURL", imageURL);
+                            Log.i("userImage", userImage);
                             Log.i("cloudinaryID", cloudinaryID);
 
                         }

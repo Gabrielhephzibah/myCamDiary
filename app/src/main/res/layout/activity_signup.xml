@@ -203,18 +203,18 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <CheckBox
-                                android:id="@+id/checkbox4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="-10dp"
-                                android:buttonTint="@color/colorPrimary"
-                                android:fontFamily="@font/azo_san"
-                                android:scaleX="0.70"
-                                android:scaleY="0.70"
-                                android:text="Keep you updated on news and offers"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="10sp" />
+<!--                            <CheckBox-->
+<!--                                android:id="@+id/checkbox4"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="-10dp"-->
+<!--                                android:buttonTint="@color/colorPrimary"-->
+<!--                                android:fontFamily="@font/azo_san"-->
+<!--                                android:scaleX="0.70"-->
+<!--                                android:scaleY="0.70"-->
+<!--                                android:text="Keep you updated on news and offers"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="10sp" />-->
 
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -222,6 +222,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:boxCornerRadiusBottomEnd="8dp"
+                                android:layout_marginTop="18dp"
                                 app:boxCornerRadiusBottomStart="8dp"
                                 app:boxCornerRadiusTopEnd="8dp"
                                 app:boxCornerRadiusTopStart="8dp"
@@ -242,15 +243,6 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:fontFamily="@font/azo_san"
-                                android:letterSpacing="-0.03"
-                                android:text="Optional"
-                                android:textColor="#F7C9AB"
-                                android:textSize="10sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -258,6 +250,7 @@
                                 android:layout_height="wrap_content"
                                 app:boxCornerRadiusBottomEnd="8dp"
                                 app:boxCornerRadiusBottomStart="8dp"
+                                android:layout_marginTop="18dp"
                                 app:boxCornerRadiusTopEnd="8dp"
                                 app:boxCornerRadiusTopStart="8dp"
                                 app:boxStrokeColor="@color/colorPrimary"

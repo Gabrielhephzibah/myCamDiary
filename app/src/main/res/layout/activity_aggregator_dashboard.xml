@@ -235,6 +235,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:id="@+id/logOut"
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onLogout()}"

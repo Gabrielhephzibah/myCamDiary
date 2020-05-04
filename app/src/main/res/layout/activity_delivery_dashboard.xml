@@ -203,7 +203,7 @@
                             android:paddingBottom="10dp"
                             android:layout_marginTop="2dp"
                             android:onClick="@{() -> viewModel.onHistory()}"
-                            android:id="@+id/scanbarcode"
+                            android:id="@+id/history"
                             android:layout_marginLeft="0dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

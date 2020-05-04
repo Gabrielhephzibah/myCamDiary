@@ -25,6 +25,7 @@ import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessA
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONObject;
 
@@ -195,6 +196,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -205,15 +207,15 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
             }
 
         }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
-
     @Override
     public void onResponse(NewCollectionResponse response) {
         Alert.showSuccess(getApplicationContext(),"Rejection Successful");
         Intent intent = new Intent(getApplicationContext(), RejectsuccessActivity.class);
         intent.putExtra("volume",volume);
-        intent.putExtra("first_name", firstName);
-        intent.putExtra("last_name", lastName);
         startActivity(intent);
 
     }

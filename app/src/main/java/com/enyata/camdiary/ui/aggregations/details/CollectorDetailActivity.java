@@ -84,8 +84,6 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
 
     @Override
     public void proceed() {
-
-
         Intent intent = new Intent(getApplicationContext(), MilkCollectionActivity.class);
         startActivity(intent);
     }

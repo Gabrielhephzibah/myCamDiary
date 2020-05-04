@@ -42,6 +42,12 @@ public class DeliveryEditProfileViewModel extends BaseViewModel<DeliveryEditProf
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response ->{
+                    String firstname = response.getData().getFirstName();
+                    String image_url = response.getData().getImageUrl();
+                    String lastname = response.getData().getLastName();
+                    String address = response.getData().getContactAddress();
+                    String phoneNo = response.getData().getContactNo();
+                    getDataManager().updateUserProfile(firstname,lastname,image_url,phoneNo,address);
                     setIsLoading(false);
                     getNavigator().onEditProfile(response);
                 },throwable -> {

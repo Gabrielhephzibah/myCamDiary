@@ -4,6 +4,7 @@ apply from: '../config/quality/quality.gradle'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "com.enyata.camdiary"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -12,6 +13,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         debug {
@@ -34,6 +36,13 @@ android {
     dataBinding {
         enabled = true
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
 }
 
 dependencies {
@@ -151,6 +160,11 @@ dependencies {
 
     //decode token
     implementation 'com.auth0.android:jwtdecode:1.1.1'
+    // Robolectric
+
+    testImplementation "org.robolectric:robolectric:4.3.1"
+
+//    testImplementation 'org.robolectric:robolectric:4.3'
 
 
 }

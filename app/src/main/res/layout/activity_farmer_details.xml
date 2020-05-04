@@ -185,24 +185,24 @@
                 />
 
 
-            <Button
-                android:id="@+id/proceed"
-                android:onClick="@{() -> viewModel.onProceed()}"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dip"
-                android:layout_marginTop="40dip"
                 android:layout_gravity="center"
-                android:layout_marginRight="100dip"
-                android:background="@drawable/hover_button"
-                android:text="Proceed"
-                android:fontFamily="@font/azo_san_bold"
-                android:textAllCaps="false"
-                android:textColor="@drawable/changing_text"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-
+                android:layout_marginTop="39dp">
+                <Button
+                    android:id="@+id/proceed"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/hover_button"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:onClick="@{() -> viewModel.onProceed()}"
+                    android:text="Proceed"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/changing_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -211,7 +211,6 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab2"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/collectorCollection"
@@ -222,11 +221,6 @@
         app:fabCustomSize="70dp"
         app:maxImageSize="70dp"
         app:layout_anchorGravity="top|center|center_horizontal" />
-
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

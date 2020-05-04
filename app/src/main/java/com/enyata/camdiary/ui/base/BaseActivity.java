@@ -128,12 +128,8 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     }
 
     public void openActivityOnTokenExpire() {
-
-        jwt = new JWT(mViewModel.getToken());
-        if (jwt.isExpired(5)) {
-            startActivity(LoginActivity.newIntent(this).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            finish();
-        }
+        startActivity(LoginActivity.newIntent(this));
+        finish();
     }
 
     public void performDependencyInjection() {
@@ -157,6 +153,44 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
+    }
+
+        @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        pausedMillis = Calendar.getInstance().getTimeInMillis();
+        Log.i("StopCurrentTime", String.valueOf(pausedMillis));
+        mViewModel.setTimeOnStop(pausedMillis);
+        Log.i("sharePrefrenece", String.valueOf(mViewModel.getTimeOnStop()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            currentMillis = Calendar.getInstance().getTimeInMillis();
+            Log.i("ResumeCurrentTime", String.valueOf(currentMillis));
+            Log.i("New StopCurrentTime", String.valueOf(mViewModel.getTimeOnStop()));
+            Log.i("What is the difference", String.valueOf(currentMillis - mViewModel.getTimeOnStop()));
+
+            if ( !(this instanceof LoginActivity) && currentMillis - mViewModel.getTimeOnStop()  > 1000 * 60 * 15 ) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                Toast.makeText(BaseActivity.this, "Time out, please sign in again ", Toast.LENGTH_LONG).show();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 

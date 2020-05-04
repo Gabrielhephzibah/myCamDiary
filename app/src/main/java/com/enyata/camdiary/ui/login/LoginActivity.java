@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -20,6 +22,7 @@ import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
+import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideOneFragment;
 import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
@@ -39,6 +42,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Inject
     Gson gson;
     private String decoded;
+    EditText email,password;
+    int backButtonPressed = 0;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -47,6 +52,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     public static Intent newIntent(Context context) {
         return new Intent(context, LoginActivity.class);
+    }
+
+    public static LoginActivity newInstance() {
+        return new LoginActivity();
     }
 
     @Override
@@ -113,6 +122,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToDashBoard(String type) {
+        email.setText("");
+        password.setText("");
         Intent intent = null;
         if(type.equals("collector")){
             intent = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -136,14 +147,20 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void onResponse(CamLoginResponse response) {
 
-//        String token = response.getData().getToken();
-//        try {
-//            decoded = DecodeToken.decoded(token);
-//            Log.i("DECODED",decoded);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressed >= 2) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonPressed++;
+
+        }
 
     }
 
@@ -152,6 +169,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         super.onCreate(savedInstanceState);
         mActivityLoginBinding = getViewDataBinding();
         mLoginViewModel.setNavigator(this);
+        email = mActivityLoginBinding.emailTextView;
+        password = mActivityLoginBinding.passwordTextView;
 
     }
 }

@@ -31,6 +31,10 @@ public class PendingData {
     @SerializedName("ordered_products")
     private List<Product> orderedProducts;
 
+    @Expose
+    @SerializedName("product_count")
+    private String productCount;
+
 
     public int getId() {
         return id;
@@ -54,5 +58,9 @@ public class PendingData {
 
     public List<Product> getOrderedProducts() {
         return orderedProducts;
+    }
+
+    public String  getProductCount() {
+        return productCount;
     }
 }

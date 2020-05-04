@@ -24,6 +24,7 @@ import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActi
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -97,6 +98,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
@@ -107,6 +109,9 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
             Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
         }
 
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
 

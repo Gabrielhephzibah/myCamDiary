@@ -37,6 +37,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -115,6 +116,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             VolumeResponse response = gson.fromJson(error.getErrorBody(), VolumeResponse.class);
@@ -125,7 +127,9 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
             }
 
         }
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     @Override
@@ -180,6 +184,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
     @Override
     public void getCollectionHistory(CollectionHistoryResponse response) {
+        try {
         for (CollectionHistory history : response.getData()) {
             String date = history.getDate();
             collectionList.add(new CollectorHistoryHeader(date));
@@ -197,6 +202,12 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
                 listView.setAdapter(adapter);
 
             }
+        }
+
+    }catch (NullPointerException e){
+            e.printStackTrace();
+
+            Log.i("An Uknown ", e.getMessage());
         }
     }
 

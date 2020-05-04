@@ -61,8 +61,12 @@ public class DeliveryCustomAdapter extends BaseAdapter {
                 TextView itemId = (TextView) convertView.findViewById(R.id.itemsId);
                 itemId.setText(((DispatcherHistory) item.get(position)).getItemId());
 
-                TextView items = (TextView) convertView.findViewById(R.id.items);
-                items.setText(((DispatcherHistory) item.get(position)).getItems());
+//                TextView items = (TextView) convertView.findViewById(R.id.items);
+//                items.setText(((DispatcherHistory) item.get(position)).getItems());
+
+                TextView itemCount = convertView.findViewById(R.id.itemCount);
+                itemCount.setText(((DispatcherHistory) item.get(position)).getProductCount());
+
             }
 
 

@@ -35,8 +35,6 @@ public class ApiHeader {
     }
 
 
-
-
     public static final class ProtectedApiHeader {
 
         @Expose

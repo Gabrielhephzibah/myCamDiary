@@ -17,6 +17,10 @@ public class DeliveryDetails {
     private String lastName;
 
     @Expose
+    @SerializedName("phone")
+    private String phone;
+
+    @Expose
     @SerializedName("address")
     private String address;
 
@@ -39,6 +43,10 @@ public class DeliveryDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public String getAddress() {

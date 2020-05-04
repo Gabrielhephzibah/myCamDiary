@@ -115,7 +115,7 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
         detailsViewModel.setCustomerName(customerName);
         name.setText(String.format("%s %s", response.getData().getDeliveryDetails().getFirstName(), response.getData().getDeliveryDetails().getLastName()));
         addresss.setText(String.format("%s %s %s", response.getData().getDeliveryDetails().getAddress(), response.getData().getDeliveryDetails().getCity(), response.getData().getDeliveryDetails().getCountry()));
-        phoneNoo.setText("O9067564534");
+        phoneNoo.setText(response.getData().getDeliveryDetails().getPhone());
         list = response.getData().getOrdered_products();
         try {
             for (int i = 0; i < list.size(); i++){

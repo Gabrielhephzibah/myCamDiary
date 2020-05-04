@@ -23,6 +23,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -64,6 +65,7 @@ public class ResetPasswordActivity extends BaseActivity<ActivityResetPasswordBin
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable!= null){
             ANError error = (ANError) throwable;
             ResetPasswordResponse response = gson.fromJson(error.getErrorBody(), ResetPasswordResponse.class);
@@ -72,6 +74,9 @@ public class ResetPasswordActivity extends BaseActivity<ActivityResetPasswordBin
             }else {
                 Alert.showFailed(getApplicationContext(),"Unable to Connect to the Internet");
             }
+        }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(), "An unknown error occurred");
         }
     }
 

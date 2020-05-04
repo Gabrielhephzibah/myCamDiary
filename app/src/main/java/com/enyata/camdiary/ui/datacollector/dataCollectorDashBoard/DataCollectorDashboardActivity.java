@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.R;
@@ -41,6 +42,7 @@ public class DataCollectorDashboardActivity extends BaseActivity<ActivityDataCol
     CardView profilePicture;
     String currentUserImage,currentUserName;
     CFAlertDialog alert;
+    int backButtonPressed = 0;
 
     @Override
     public int getBindingVariable() {
@@ -66,10 +68,8 @@ public class DataCollectorDashboardActivity extends BaseActivity<ActivityDataCol
         dataCollectorImage = activityDataCollectorBinding.dataCollectorImage;
         userName = activityDataCollectorBinding.username;
         profilePicture = activityDataCollectorBinding.profilePicture;
-
         currentUserImage = dataCollectorDashboardViewModel.getCurrentUserImage();
         currentUserName = dataCollectorDashboardViewModel.getCurrentUserName();
-
         Picasso.get().load(currentUserImage).into(dataCollectorImage);
         userName.setText(String.format("Hey, %s ", dataCollectorDashboardViewModel.getCurrentUserName()));
         profilePicture.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +79,6 @@ public class DataCollectorDashboardActivity extends BaseActivity<ActivityDataCol
                 startActivity(intent);
             }
         });
-
-
-
 
     }
 
@@ -132,5 +129,21 @@ public class DataCollectorDashboardActivity extends BaseActivity<ActivityDataCol
 
         alert = alertDialog.create();
         alert.show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressed >= 2){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonPressed++;
+        }
+
+
     }
 }

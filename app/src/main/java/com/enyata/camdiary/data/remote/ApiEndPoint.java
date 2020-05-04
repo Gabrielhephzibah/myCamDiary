@@ -52,7 +52,7 @@ public final class ApiEndPoint {
 
     public  static  final String COLLECTION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/collection/completed/history";
 
-    public  static  final  String DELIVERY_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/delivery/completed/history";
+    public  static  final  String DELIVERY_HISTORY = BuildConfig.TRANSACTION_BASE_URL + "/order/dispatcher/history";
 
     public  static  final  String AGGREGATION_HISTORY = BuildConfig.INVENTORY_BASE_URL + "/aggregation/history";
 

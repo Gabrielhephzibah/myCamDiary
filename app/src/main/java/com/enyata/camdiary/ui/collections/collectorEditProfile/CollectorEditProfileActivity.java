@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import com.androidnetworking.error.ANError;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DispatcherSignUpResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.databinding.ActivityCollectorEditProfileBinding;
@@ -30,6 +31,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -136,6 +138,7 @@ public class CollectorEditProfileActivity extends BaseActivity<ActivityCollector
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             ResetPasswordResponse response = gson.fromJson(error.getErrorBody(), ResetPasswordResponse.class);
@@ -146,6 +149,9 @@ public class CollectorEditProfileActivity extends BaseActivity<ActivityCollector
                 Alert.showFailed(getApplicationContext(), "Unable to Connect to the Internet");
             }
         }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
     @Override
@@ -155,10 +161,8 @@ public class CollectorEditProfileActivity extends BaseActivity<ActivityCollector
     }
 
     @Override
-    public void onEditProfile(ResetPasswordResponse response) {
+    public void onEditProfile(CollectorDetailsResponse response) {
         Alert.showSuccess(getApplicationContext(),response.getMessage());
-        Intent intent =  new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
     }
 
     @Override

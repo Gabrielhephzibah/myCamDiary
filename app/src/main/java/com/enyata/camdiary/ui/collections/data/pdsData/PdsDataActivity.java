@@ -25,6 +25,7 @@ import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollector
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -118,6 +119,7 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
 
     @Override
     public void onSubmitPds() {
+        hideKeyboard();
         Log.i("FarmerVID", farmerVerificationId);
         sourcesIncomeText = sourcesIncome.getText().toString();
         mainIncomeText = mainIncome.getText().toString();
@@ -171,6 +173,7 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -181,6 +184,9 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
 
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
 

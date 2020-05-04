@@ -32,6 +32,7 @@ import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollector
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.List;
 
@@ -172,7 +173,8 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
                if (electoralWard!=null && electoralWard.getSelectedItem()!=null){
                    selectedWard = electoralWard.getSelectedItem().toString();
-               }else {
+               }
+               else {
                    Alert.showFailed(getApplicationContext(),"Area Council and electoral ward are required");
                    return;
                }
@@ -180,12 +182,18 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
                selectedMaritalStatus = (String) maritalStatus.getSelectedItem();
                Log.i("Electoral ward", selectedWard);
                Log.i("Area Council", selectedAreaCouncil);
-
-                if(InternetConnection.getInstance(CdsDataActivity.this).isOnline()) {
-                   CdsDataRequest.Request request = new CdsDataRequest.Request(firstNameText,lastNameText,selectedGender,ageText,selectedMaritalStatus,phoneNoText,selectedWard,selectedAreaCouncil,communityNameText,sourcesIncomeText,mainIncomeText,weekEarnText,monthEarnText,adult18Text,milkPerDayText,milkForSaleText,challengesText,abujaCowText,totalCowText,milkingCowText,feedbackText);
-                   cdsDataViewModel.submitCdsDataCollection(request);
+               if (selectedWard.equals("select electoral ward")){
+                   Alert.showFailed(getApplicationContext(),"Please select electoral ward");
+                   electoralWard.requestFocus();
+                   return;
                }else {
-                   Alert.showFailed(getApplicationContext(),"Please check your internet connection and try again");
+                   if (InternetConnection.getInstance(CdsDataActivity.this).isOnline()) {
+
+                       CdsDataRequest.Request request = new CdsDataRequest.Request(firstNameText, lastNameText, selectedGender, ageText, selectedMaritalStatus, phoneNoText, selectedWard, selectedAreaCouncil, communityNameText, sourcesIncomeText, mainIncomeText, weekEarnText, monthEarnText, adult18Text, milkPerDayText, milkForSaleText, challengesText, abujaCowText, totalCowText, milkingCowText, feedbackText);
+                       cdsDataViewModel.submitCdsDataCollection(request);
+                   } else {
+                       Alert.showFailed(getApplicationContext(), "Please check your internet connection and try again");
+                   }
                }
 
 
@@ -284,6 +292,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -293,14 +302,19 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(), "An unknown error occurred");
+        }
     }
 
     @Override
     public void onElectoralWardResponse(ElectoralWardResponse response) {
         Log.i("RESPONSE", "RESPONSE SUCCESSFUL" + response.getData());
       electoralWards = response.getData();
+      electoralWards.add(0, "select electoral ward");
         ArrayAdapter<String>electoralWardAdapter = new ArrayAdapter<>(CdsDataActivity.this,android.R.layout.simple_spinner_item, electoralWards);
         electoralWard.setAdapter(electoralWardAdapter);
+
 
     }
 

@@ -122,7 +122,7 @@ public class CollectorEditProfileFragment extends Fragment {
                 lastNameText = lastName.getText().toString();
                 phoneNumberText = phoneNumber.getText().toString();
                 addressText = address.getText().toString();
-                EditProfileRequest.Request request = new EditProfileRequest.Request(firstNameText,lastNameText,addressText,phoneNumberText,imageURL);
+                EditProfileRequest.Request request = new EditProfileRequest.Request(firstNameText,lastNameText,addressText,phoneNumberText,userImage);
                 if (InternetConnection.getInstance(getActivity()).isOnline()) {
                     collectorEditProfileViewModel.userEditProfile(request);
                 }else {
@@ -267,11 +267,11 @@ public class CollectorEditProfileFragment extends Fragment {
                             Log.i("SUCCESS", "SUCCESS");
                             dialog.dismiss();
 //                            progressBar.setVisibility(View.GONE);
-                            imageURL = (String) resultData.get("url");
+                            userImage = (String) resultData.get("url");
                             cloudinaryID = (String) resultData.get("public_id").toString();
                             cloudinaryImage = MediaManager.get().url().transformation(new Transformation()).resourceType("image").generate(cloudinaryID + ".jpg");
                             Alert.showSuccess(getActivity(),"Image uploaded successfully");
-                            Log.i("imageURL", imageURL);
+                            Log.i("UserIMAGE", userImage);
                             Log.i("cloudinaryID", cloudinaryID);
 
                         }

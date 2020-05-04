@@ -49,6 +49,7 @@ import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollector
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -306,6 +307,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void onSubmitBds() {
+        hideKeyboard();
         firstNameText = firstName.getText().toString();
         lastNameText = lastName.getText().toString();
         ageText = age.getText().toString();
@@ -345,17 +347,23 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         Log.i("Electoral ward", electoralWardSelected);
         Log.i("Area Council", areaCouncilWardSelected);
         Log.i("COPERATIVENAME",copereativeNameSelected);
-
-        if(InternetConnection.getInstance(BdsDataActivity.this).isOnline()) {
-            BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL,firstNameText,lastNameText,genderSelected,ageText,maritalStatusSelected,familyNameText,phoneNoText,electoralWardSelected,areaCouncilWardSelected,communityNameText,copereativeNameSelected,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,marketDayText,childrenUnder18Text,below16Text,below16InSchText,adult18AboveText,milkPerDayText,milkConsumeText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,animalFeedInterestSelected,animalFeedQuatityText,recommendationText,feedbackText);
-            bdsViewModel.onSubmitBdsDataQuestion(request);
-
+        if (electoralWardSelected.equals("select electoral ward")){
+            Alert.showFailed(getApplicationContext(),"select electoral ward");
+            return;
+        }else if (copereativeNameSelected.equals("select cooperative name")){
+            Alert.showFailed(getApplicationContext(),"select cooperative name");
+            return;
         }else {
-            Alert.showFailed(getApplicationContext(),"Please check your internet connection and try again");
+            if (InternetConnection.getInstance(BdsDataActivity.this).isOnline()) {
+                BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL, firstNameText, lastNameText, genderSelected, ageText, maritalStatusSelected, familyNameText, phoneNoText, electoralWardSelected, areaCouncilWardSelected, communityNameText, copereativeNameSelected, sourcesIncomeText, mainIncomeText, weekEarningText, monthlyEarningText, marketDayText, childrenUnder18Text, below16Text, below16InSchText, adult18AboveText, milkPerDayText, milkConsumeText, milkForSaleText, challengesText, cowInAbujaText, totalCowText, milkingCowText, animalFeedInterestSelected, animalFeedQuatityText, recommendationText, feedbackText);
+                bdsViewModel.onSubmitBdsDataQuestion(request);
+
+            } else {
+                Alert.showFailed(getApplicationContext(), "Please check your internet connection and try again");
+            }
+
+
         }
-
-
-
 
 
     }
@@ -394,6 +402,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
@@ -403,7 +412,9 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
-
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+        }
     }
 
 
@@ -559,6 +570,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     @Override
     public void onElectoralWardResponse(ElectoralWardResponse response) {
         electoralWards = response.getData();
+        electoralWards.add(0, "select electoral ward");
         ArrayAdapter<String>electoralWardAdapter = new ArrayAdapter<>(BdsDataActivity.this,android.R.layout.simple_spinner_item, electoralWards);
         electoralWard.setAdapter(electoralWardAdapter);
 
@@ -568,6 +580,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     public void onGetCoperativeResponse(GetCoperativeNameResponse response) {
         Log.i("CoperativeResponse ","Response Responsible" + String.valueOf(response.getData()));
         getCoperativeName = response.getData();
+        getCoperativeName.add(0, "select cooperative name");
         ArrayAdapter<String> cooperativeNameAdapter= new ArrayAdapter<>(BdsDataActivity.this, android.R.layout.simple_spinner_item,getCoperativeName);
         coperativeName.setAdapter(cooperativeNameAdapter);
 
@@ -576,7 +589,20 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     @Override
     public void onGetCoperativeError(Throwable throwable) {
         Log.i("ERROR", "Error");
+        try {
+        if (throwable != null) {
+            ANError error = (ANError) throwable;
+            NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
+            if (error.getErrorBody()!= null){
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+            }
+        }else{
+            Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
+        }
 
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An  unknown error occurred");
+        }
     }
 
     @Override

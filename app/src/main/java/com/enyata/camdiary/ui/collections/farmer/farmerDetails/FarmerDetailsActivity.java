@@ -61,13 +61,6 @@ public class FarmerDetailsActivity extends BaseActivity<ActivityFarmerDetailsBin
         phonenumber = farmerDetailsViewModel.getFramerPhoneNo();
         coperateName = farmerDetailsViewModel.getFarmerCoperative();
         verificationNumber = farmerDetailsViewModel.getFarmerVerificationNo();
-//        firstName = getIntent().getStringExtra("first_name");
-//        lastname = getIntent().getStringExtra("last_name");
-//        phonenumber = getIntent().getStringExtra("phone_no");
-//        coperateName = getIntent().getStringExtra("coperate_name");
-//        verificationNumber = getIntent().getStringExtra("farmer_id");
-//        farmer_id = getIntent().getStringExtra("farmer_identity");
-
 
         TextView farmerName = activityFarmerDetailsBinding.farmerName;
         TextView farmerNumber = activityFarmerDetailsBinding.farmerNumber;
@@ -85,11 +78,6 @@ public class FarmerDetailsActivity extends BaseActivity<ActivityFarmerDetailsBin
     @Override
     public void proceed() {
         Intent intent =  new Intent(getApplicationContext(), EnterVolumeActivity.class);
-//        intent.putExtra("first_name", firstName);
-//        intent.putExtra("last_name", lastname);
-//        intent.putExtra("coperate_name",coperateName);
-//        intent.putExtra("farmer_id",verificationNumber);
-//        intent.putExtra("farmer_identity",farmer_id);
         startActivity(intent);
     }
 

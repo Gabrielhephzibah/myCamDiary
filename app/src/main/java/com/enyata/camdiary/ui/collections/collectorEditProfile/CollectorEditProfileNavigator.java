@@ -1,5 +1,6 @@
 package com.enyata.camdiary.ui.collections.collectorEditProfile;
 
+import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 
 public interface CollectorEditProfileNavigator {
@@ -8,5 +9,5 @@ public interface CollectorEditProfileNavigator {
     void handleError(Throwable throwable);
 
     void onResponse(ResetPasswordResponse response);
-    void onEditProfile(ResetPasswordResponse response);
+    void onEditProfile(CollectorDetailsResponse response);
 }

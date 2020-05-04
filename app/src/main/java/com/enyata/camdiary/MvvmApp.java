@@ -4,12 +4,14 @@ package com.enyata.camdiary;
 
 import android.app.Activity;
 import android.app.Application;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.cloudinary.android.MediaManager;
 import com.enyata.camdiary.di.component.DaggerAppComponent;
 import com.enyata.camdiary.utils.AppLogger;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,13 +41,25 @@ public class MvvmApp extends Application implements HasActivityInjector {
 
     @Override
     public void onCreate() {
+//        super.onCreate();
         super.onCreate();
+        try {
+            Picasso.setSingletonInstance(new Picasso.Builder(this).build());
+        } catch (IllegalStateException e) {
+            Log.i("Exception", "Exception");
+        }
 
-        Map config = new HashMap();
-        config.put("cloud_name", "dtt1nmogz");
-        config.put("api_key", "754277299533971");
-        config.put("api_secret", "hwuDlRgCtSpxKOg9rcY43AtsZvw");
-        MediaManager.init(getApplicationContext().getApplicationContext(), config);
+
+        try {
+            Map config = new HashMap();
+            config.put("cloud_name", "dtt1nmogz");
+            config.put("api_key", "754277299533971");
+            config.put("api_secret", "hwuDlRgCtSpxKOg9rcY43AtsZvw");
+            MediaManager.init(getApplicationContext().getApplicationContext(), config);
+        } catch (IllegalStateException e) {
+            Log.i("Exception", "Exception");
+        }
+
 
         DaggerAppComponent.builder()
                 .application(this)
@@ -53,8 +67,6 @@ public class MvvmApp extends Application implements HasActivityInjector {
                 .inject(this);
 
         AppLogger.init();
-
-
 
 
         AndroidNetworking.initialize(getApplicationContext());

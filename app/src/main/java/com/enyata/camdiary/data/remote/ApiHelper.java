@@ -101,7 +101,7 @@ public interface ApiHelper {
 
     Single<ResetPasswordResponse>userChangePassword(ChangePasswordRequest.Request request);
 
-    Single<ResetPasswordResponse>userEditProfile(EditProfileRequest.Request request);
+    Single<CollectorDetailsResponse>userEditProfile(EditProfileRequest.Request request);
 
     Single<NewCollectionResponse>submitCdsDataQuestion(CdsDataRequest.Request request);
 

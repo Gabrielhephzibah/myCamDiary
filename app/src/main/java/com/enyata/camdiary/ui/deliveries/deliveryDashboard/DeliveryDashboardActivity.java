@@ -42,6 +42,7 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -192,6 +193,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
     @Override
     public void handleError(Throwable throwable) {
+        try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
             DispatcherSignUpResponse response = gson.fromJson(error.getErrorBody(), DispatcherSignUpResponse.class);
@@ -201,6 +203,9 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
                 Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
             }
 
+        }
+        }catch (IllegalStateException | JsonSyntaxException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }
 
@@ -287,14 +292,27 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
     @Override
     public void getPendingDelivery(PendingDeliveryResponse response) {
+        try {
 
-        for (PendingData pendingData : response.getData()){
-            String name = pendingData.getDeliveryDetails().getFirstName() + " " + pendingData.getDeliveryDetails().getLastName();
 
-            deliveryLists.add(new DeliveryList(pendingData.getDeliveryDetails().getFirstName()+ ","+" "+pendingData.getDeliveryDetails().getLastName(),"4 Items","09089765643",pendingData.getShopifyOrderReference(),pendingData.getDeliveryDetails().getAddress(), (ArrayList<Product>) pendingData.getOrderedProducts(),String.valueOf(pendingData.getId())));
-          deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this,deliveryLists);
+            for (PendingData pendingData : response.getData()) {
+                String name = pendingData.getDeliveryDetails().getFirstName() + " " + pendingData.getDeliveryDetails().getLastName();
 
-          listView.setAdapter(deliveryListAdapter);
+                String itemCount;
+                if (pendingData.getProductCount().equals("1")) {
+                    itemCount = pendingData.getProductCount() + " item";
+                } else {
+                    itemCount = pendingData.getProductCount() + " items";
+                }
+
+                deliveryLists.add(new DeliveryList(pendingData.getDeliveryDetails().getFirstName() + "," + " " + pendingData.getDeliveryDetails().getLastName(), itemCount, pendingData.getDeliveryDetails().getPhone(), pendingData.getShopifyOrderReference(), pendingData.getDeliveryDetails().getAddress(), (ArrayList<Product>) pendingData.getOrderedProducts(), String.valueOf(pendingData.getId())));
+                deliveryListAdapter = new DeliveryListAdapter(DeliveryDashboardActivity.this, deliveryLists);
+
+                listView.setAdapter(deliveryListAdapter);
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.i("Unknown Error", e.getMessage());
         }
 
 
