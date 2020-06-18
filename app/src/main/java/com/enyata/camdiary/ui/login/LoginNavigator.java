@@ -18,6 +18,8 @@ public interface LoginNavigator {
 
     void onForgotPassword();
 
+    void onGoOffline();
+
     void onResponse(CamLoginResponse response);
 
 

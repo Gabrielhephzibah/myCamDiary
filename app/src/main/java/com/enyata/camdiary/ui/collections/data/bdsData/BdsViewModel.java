@@ -30,12 +30,13 @@ public class BdsViewModel extends BaseViewModel<BdsDataNavigator> {
         getNavigator().onFarmInfo();
     }
 
-    public String getCurrentUserType(){
-        return  getDataManager().getCurrentUserType();
-    }
-
     public void onBack(){
         getNavigator().onBack();
+    }
+
+
+    public String getCurrentUserType(){
+        return  getDataManager().getCurrentUserType();
     }
 
     public void onSubmitBds(){

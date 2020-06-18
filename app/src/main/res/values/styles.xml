@@ -14,7 +14,7 @@
   ~  limitations under the License
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="theme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -33,7 +33,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24px</item>
     </style>
 
-    <style name="AppThemeFullScreen" parent="AppTheme">
+    <style name="AppThemeFullScreen" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="android:windowBackground">@color/white</item>
@@ -43,6 +43,8 @@
         <item name="spinBars">false</item>
         <item name="color">@color/white</item>
     </style>
+
+
 
     <style name="TextAppearance.Text.Regular" parent="android:TextAppearance">
         <item name="fontPath">fonts/source-sans-pro/SourceSansPro-Regular.ttf</item>
@@ -181,6 +183,8 @@
 
     </style>
 
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -229,9 +233,24 @@
         <item name="material_dialog_negative_button_text_color">@color/colorAccent</item>
 
     </style>
+    <style name="AppTheme.resize" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+   <style name="TabLayout" parent="Widget.MaterialComponents.TabLayout">
+       <item name="android:textSize">16sp</item>
+       <item name="android:fontFamily">@font/azo_san</item>
+   </style>
+
+    <style name="RadiusButton" parent="Widget.MaterialComponents.Button">
+       <item name="cornerRadius">40dp</item>
+        <item name="android:buttonCornerRadius" tools:targetApi="p">23dp</item>
     </style>
 
 

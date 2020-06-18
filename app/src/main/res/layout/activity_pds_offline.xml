@@ -1,0 +1,781 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="46dp"
+                    android:layout_marginRight="28dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:onClick="@{()->viewModel.onBack()}"
+                        android:src="@drawable/ic_green_arrow" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/forgotPassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:fontFamily="@font/azo_sans_light"
+                            android:gravity="center_vertical"
+                            android:letterSpacing="-0.03"
+                            android:lines="1"
+                            android:paddingTop="18dip"
+                            android:text="Data Collection"
+                            android:textColor="#21523C"
+                            android:textSize="30sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="28dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/azo_san"
+                        android:text="Fill the forms below"
+                        android:textColor="#21523C"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="120dp">
+
+
+                        <!--FIRST PART OF QUESTION.......................................................-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/btn_rounded_corners"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:onClick="@{()->viewModel.onIncomeSource()}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="Sources of Income"
+                                    android:textColor="#fff" />
+
+                                <ImageView
+                                    android:id="@+id/incomeToggle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_keyboard_arrow_right_white" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/incomeFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="What are your sources of income?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/sourcesOfIncome"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="text"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="What is your main source of income?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/mainIncome"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="text"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How much do you earn in a week?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/weekEarning"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How much do you earn in a month?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/monthlyEarning"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many times do you go to the market in a week?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/marketTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <!--    SECOND SECTION OF QUESTION ##################################################################-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/btn_rounded_corners"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:onClick="@{()->viewModel.onFarmInfo()}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="Farm Information"
+                                    android:textColor="#fff" />
+
+                                <ImageView
+                                    android:id="@+id/farmInfoToggle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_keyboard_arrow_right_white" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/farmInfoFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many litres do you milk per cow per day?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/milkPerDay"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many litres of milk does your household consume per day?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/houseHoldConsume"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many litres of milk do you process for sale?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/milkForSale"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="Do you have any challenges with milk production and sales?
+ Please specify if any."
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/milkChallenges"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="text"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many cows do you have in Abuja?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/abujaCow"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many cows do you have in total (in and outside Abuja)?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/totalCow"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="How many milking cows do you have in Abuja?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/milkingCow"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="number"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="Would you recommend Câm to others?"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxStrokeColor="@color/colorPrimary"
+                                    app:boxStrokeWidth="10dp"
+                                    app:hintTextAppearance="@style/MyAppearance">
+
+                                    <EditText
+                                        android:id="@+id/recommendation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:hint="Answer"
+                                        android:inputType="text"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="-0.03"
+                                    android:text="Please enter any feedback, questions or recommendations
+given by the pastoralist."
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="11sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:background="@drawable/text_area_background">
+
+                                    <EditText
+                                        android:id="@+id/feedback"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="70dp"
+                                        android:backgroundTint="#fff"
+                                        android:fontFamily="@font/azo_sans_light"
+                                        android:gravity="top"
+                                        android:hint="Feedback"
+                                        android:inputType="text|textMultiLine"
+                                        android:textColor="#21523C"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="90dip"
+                            android:layout_marginTop="17dip"
+                            android:layout_marginRight="90dip"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/submitPds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/hover_button"
+                                android:fontFamily="@font/azo_san_bold"
+                                android:onClick="@{()->viewModel.onSubmitPds()}"
+                                android:text="Submit"
+                                android:textAllCaps="false"
+                                android:textColor="@drawable/changing_text"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
+</layout>

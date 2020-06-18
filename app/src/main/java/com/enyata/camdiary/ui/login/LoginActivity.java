@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
 import com.androidnetworking.error.ANError;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
@@ -25,6 +29,7 @@ import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideOneFragment;
 import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
@@ -44,6 +49,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     private String decoded;
     EditText email,password;
     int backButtonPressed = 0;
+    CFAlertDialog alert;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -142,6 +148,35 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void onForgotPassword() {
         Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onGoOffline() {
+        CFAlertDialog.Builder alertDialog = new CFAlertDialog.Builder(this);
+        LayoutInflater inflater = LoginActivity.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.offline_notification_layout, null);
+        alertDialog.setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                .setCancelable(false)
+                .setHeaderView(dialogView);
+        Button yes = dialogView.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), OfflineDashboardActivity.class);
+            startActivity(intent);
+            }
+        });
+
+        Button no = dialogView.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        alert = alertDialog.create();
+        alert.show();
     }
 
     @Override

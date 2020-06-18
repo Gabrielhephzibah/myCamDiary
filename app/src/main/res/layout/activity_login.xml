@@ -28,13 +28,43 @@
                     android:layout_marginTop="-16dp"
                     android:background="@drawable/calabash_women"
                     android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="44dp"
-                        android:layout_marginTop="46dp"
-                        android:src="@drawable/welcometext" />
+                       <ImageView
+                           android:id="@+id/welcomeText"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/welcometext"/>
+
+                        <Button
+                            android:onClick="@{()->viewModel.onGoOffline()}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@drawable/go_offline_button_bg"
+                            android:layout_alignParentRight="true"
+                            android:text="Go offline"
+                            android:textAllCaps="false"
+                            android:letterSpacing="-0.01"
+                            android:lineSpacingExtra="1sp"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/azo_san"
+                            android:layout_alignParentEnd="true"/>
+
+
+                    </RelativeLayout>
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="44dp"-->
+<!--                        android:layout_marginTop="46dp"-->
+<!--                        android:src="@drawable/welcometext" />-->
                 </LinearLayout>
 
                 <LinearLayout

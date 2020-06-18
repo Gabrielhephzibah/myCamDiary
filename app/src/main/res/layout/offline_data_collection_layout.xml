@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+           android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/cds"
+                android:paddingLeft="12sp"
+                android:layout_height="40dp"
+                android:background="@drawable/offline_data_collection_border"
+                android:text="Community Data Survey (CDS)"
+                android:textAllCaps="false"
+                android:gravity="left|center_vertical"
+                android:textColor="#FFF"
+                android:fontFamily="@font/azo_san"
+                android:textStyle="normal" />
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/bds"
+                android:layout_width="match_parent"
+                android:paddingLeft="12sp"
+                android:layout_height="40dp"
+                android:background="@drawable/offline_data_collection_border"
+                android:text="Baseline Data Survey (BDS)"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:gravity="left|center_vertical"
+                android:fontFamily="@font/azo_san"
+                android:textStyle="normal" />
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/pds"
+                android:paddingLeft="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAllCaps="false"
+                android:gravity="left|center_vertical"
+                android:background="@drawable/offline_data_collection_border"
+                android:text="Pastoralist Data Survey (PDS)"
+                android:textColor="#FFF"
+                android:fontFamily="@font/azo_san"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="top">
+
+
+            <ScrollView
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:fillViewport="true"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="21dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:onClick="@{()->viewModel.onBack()}"
+                            android:id="@+id/back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_green_arrow"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:layout_marginTop="18dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data Collection"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="30sp"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="30dp"
+                            android:layout_height="41dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/offline_tablayout_background">
+                            <com.google.android.material.tabs.TabLayout
+                                android:id="@+id/offlineTabLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:tabBackground="@drawable/offline_tab_changing_state"
+                                app:tabSelectedTextColor="@color/white"
+                                app:tabTextColor="@color/colorPrimary"
+                                app:tabTextAppearance="@style/TabLayout"
+                                app:tabMode="fixed" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#EBEBEB"/>
+                        <LinearLayout
+                            android:id="@+id/toggleLayout"
+                            android:layout_marginTop="30dp"
+                            android:paddingBottom="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/down"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/included"
+                layout="@layout/offline_fixed_bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+            </include>
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</layout>

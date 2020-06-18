@@ -47,7 +47,8 @@ ext {
     gsonVersion = '2.8.2'
     calligraphyVersion = '2.2.0'
     glideVersion = '3.7.0'
-    roomDatabaseVersion = '2.0.0'
+//    roomDatabaseVersion = '2.0.0'
+    roomDatabaseVersion = '2.2.3'
     rx2FastAndroidNetworking = '1.0.1'
 
     dagger2Version = '2.16'

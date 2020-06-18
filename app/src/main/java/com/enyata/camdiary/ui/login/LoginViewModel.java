@@ -76,6 +76,9 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         getNavigator().onForgotPassword();
     }
 
+    public void onGoOffline(){
+        getNavigator().onGoOffline();
+    }
 
     public  String getUserType(){
         return  getDataManager().getUserType();

@@ -320,7 +320,6 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
 
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

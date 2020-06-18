@@ -21,7 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.scanbarcode.dataCollectorScanBarcode.DataCollectorBarcodeActivity"></activity>
+        <activity android:name=".ui.offlinecollection.savedData.OfflineSavedDataActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity" />
+        <activity android:name=".ui.scanbarcode.dataCollectorScanBarcode.DataCollectorBarcodeActivity" />
         <activity android:name=".ui.datacollector.dataCollectorEditProfile.DataCollectorEditProfileActivity" />
         <activity android:name=".ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity" />
         <activity android:name=".ui.deliveries.deliveryEditProfile.DeliveryEditProfileActivity" />

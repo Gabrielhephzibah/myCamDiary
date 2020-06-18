@@ -49,9 +49,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     private V mViewModel;
     private long pausedMillis;
     private long currentMillis;
-    JWT jwt;
-    Timer timer;
-    int DISCONNECT_TIMEOUT = 300000;
+
 
     /**
      * Override for set binding variable
@@ -155,10 +153,10 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         mViewDataBinding.executePendingBindings();
     }
 
-        @Override
-    protected void onPause() {
-        super.onPause();
-    }
+//        @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
 
     @Override
     protected void onStop() {
@@ -178,12 +176,12 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
             Log.i("New StopCurrentTime", String.valueOf(mViewModel.getTimeOnStop()));
             Log.i("What is the difference", String.valueOf(currentMillis - mViewModel.getTimeOnStop()));
 
-            if ( !(this instanceof LoginActivity) && currentMillis - mViewModel.getTimeOnStop()  > 1000 * 60 * 15 ) {
+            if ( !(this instanceof LoginActivity) && currentMillis - mViewModel.getTimeOnStop()  > 1000 * 60 * 30 ) {
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
-                Toast.makeText(BaseActivity.this, "Time out, please sign in again ", Toast.LENGTH_LONG).show();
+                Toast.makeText(BaseActivity.this, "You have left the app idle for some time, please login again", Toast.LENGTH_LONG).show();
             }
 
         }catch (Exception e){

@@ -48,6 +48,11 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.Signsuccess
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupActivity;
 import com.enyata.camdiary.ui.editProfile.EditProfileActivity;
 import com.enyata.camdiary.ui.login.LoginActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarCode;
@@ -214,4 +219,20 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract DataCollectorBarcodeActivity bindDataCollectorBarcodeActivity();
+
+    @ContributesAndroidInjector
+    abstract OfflineDashboardActivity bindOfflineDashboardActivity();
+
+    @ContributesAndroidInjector
+    abstract CdsOfflineActivity bindCdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract BdsOfflineActivity bindBdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract PdsOfflineActivity bindPdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract OfflineSavedDataActivity bindOfflineSavedDataActivity();
+
 }

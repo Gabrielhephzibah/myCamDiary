@@ -49,6 +49,12 @@ import com.enyata.camdiary.ui.deliveries.signcustomer.confirmsuccess.Signsuccess
 import com.enyata.camdiary.ui.deliveries.signcustomer.signup.SignupViewModel;
 import com.enyata.camdiary.ui.editProfile.EditProfileViewModel;
 import com.enyata.camdiary.ui.login.LoginViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
+import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataViewModel;
 import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
 import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorBarcodeViewModel;
 import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorBarcodeViewModel;
@@ -273,6 +279,26 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         else if (modelClass.isAssignableFrom(DataCollectorBarcodeViewModel.class)) {
             //noinspection unchecked
             return (T) new DataCollectorBarcodeViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(OfflineDashboardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new OfflineDashboardViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(CdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CdsOfflineViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(BdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BdsOfflineViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(PdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new PdsOfflineViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(OfflineSavedDataViewModel.class)) {
+            //noinspection unchecked
+            return (T) new OfflineSavedDataViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
