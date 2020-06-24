@@ -9,14 +9,17 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.db.CdsDataCollection;
 import com.enyata.camdiary.databinding.ActivityOfflineDashboardBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryChangePasswordFragment;
@@ -24,6 +27,8 @@ import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryEditProfile
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,6 +43,7 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
     Fragment milkCollection = new OfflineMilkCollectionFragment();
     Fragment dataCollection = new OfflineDataCollectionFragment();
     ImageView home,savedData,logout;
+    int backButtonPressed = 0;
 
 
     @Override
@@ -124,8 +130,22 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
 
 
     @Override
-    public void onBack() {
+    public void onBackToLogin() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressed >= 2) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Press the back button twice to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonPressed++;
+
+        }
     }
 }

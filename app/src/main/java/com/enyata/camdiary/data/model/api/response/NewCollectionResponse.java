@@ -13,6 +13,10 @@ public class NewCollectionResponse {
     @SerializedName("responseCode")
     private String responseCode;
 
+    @Expose
+    @SerializedName("message")
+    private String message;
+
 
     public String getResponseMessage() {
         return responseMessage;
@@ -22,4 +26,5 @@ public class NewCollectionResponse {
         return responseCode;
     }
 
+    public String getMessage() { return message; }
 }

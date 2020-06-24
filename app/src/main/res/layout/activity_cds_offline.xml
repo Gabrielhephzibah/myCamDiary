@@ -91,6 +91,7 @@
                         android:paddingBottom="120dp">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@drawable/btn_rounded_corners"
@@ -122,11 +123,11 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/bioDataFragment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="gone">
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -161,7 +162,7 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/azo_sans_light"
                                         android:hint="Answer"
-                                        android:inputType="text"
+                                        android:inputType="textCapSentences"
                                         android:textColor="#21523C"
                                         android:textCursorDrawable="@null"
                                         android:textSize="14sp" />
@@ -1111,6 +1112,7 @@ given by the pastoralist."
                             android:orientation="vertical">
 
                             <Button
+                                android:onClick="@{()->viewModel.onSubmitCds()}"
                                 android:id="@+id/submitCds"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

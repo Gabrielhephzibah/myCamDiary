@@ -119,7 +119,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
                 }else {
                     Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
                 }
-            }catch (IllegalStateException | JsonSyntaxException exception){
+            }catch (IllegalStateException | JsonSyntaxException|NullPointerException exception){
                 exception.printStackTrace();
                 Log.i("ERROR", exception.getMessage());
                 Alert.showFailed(getApplicationContext(),"An unknown error has occurred");

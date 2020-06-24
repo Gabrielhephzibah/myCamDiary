@@ -99,6 +99,7 @@
     <string name="adress"><font size="5">Address</font></string>
     <string name="nextText">NEXT</string>
     <string name="finishText">FINISH</string>
+    <string name="form_pick_photos">open</string>
 
 
 </resources>

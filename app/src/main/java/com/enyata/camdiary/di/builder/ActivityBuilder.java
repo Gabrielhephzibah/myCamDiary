@@ -7,6 +7,7 @@ import com.enyata.camdiary.ui.aggregations.barcode.collectorID.CollectorIdActivi
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionActivity;
 import com.enyata.camdiary.ui.aggregations.collection.success.CollectionSuccessActivity;
+import com.enyata.camdiary.ui.aggregations.collectorCollection.CollectorCollectionActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailActivity;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeActivity;
@@ -51,6 +52,10 @@ import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editBdsOffline.EditBdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline.EditCdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
@@ -234,5 +239,17 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract OfflineSavedDataActivity bindOfflineSavedDataActivity();
+
+    @ContributesAndroidInjector
+    abstract EditCdsOfflineActivity bindEditCdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract EditPdsOfflineActivity bindEditPdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract EditBdsOfflineActivity bindEditBdsOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract CollectorCollectionActivity bindCollectorCollectionActivity();
 
 }

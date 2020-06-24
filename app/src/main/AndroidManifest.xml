@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.aggregations.collectorCollection.CollectorCollectionActivity"></activity>
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.editBdsOffline.EditBdsOfflineActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineActivity" />
+        <activity android:name=".ui.offlinecollection.offlineDataSurvey.editCdsOffline.EditCdsOfflineActivity" />
         <activity android:name=".ui.offlinecollection.savedData.OfflineSavedDataActivity" />
         <activity android:name=".ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity" />
         <activity android:name=".ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineActivity" />

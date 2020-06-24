@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:layout_height="wrap_content">
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_height="70dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X3478JND8992"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Farmer ID"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Volume"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+
+                    <!--                    <LinearLayout-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="right"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_height="wrap_content">-->
+<!--                        <Button-->
+<!--                            android:onClick="@{()->viewModel.onViewMore()}"-->
+
+<!--                            android:layout_width="95dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:background="@drawable/collection_button"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            android:minHeight="35dp"-->
+<!--                            android:text="View more"-->
+<!--                            android:textAllCaps="false"-->
+<!--                            android:textColor="#FFFFFF"-->
+<!--                            android:textSize="10sp" />-->
+
+
+<!--                    </LinearLayout>-->
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_height="70dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X3478JND8992"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Farmer ID"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Volume"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:gravity="right"-->
+                    <!--                        android:layout_gravity="center_vertical"-->
+                    <!--                        android:layout_height="wrap_content">-->
+                    <!--                        <Button-->
+                    <!--                            android:onClick="@{()->viewModel.onViewMore()}"-->
+
+                    <!--                            android:layout_width="95dp"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:background="@drawable/collection_button"-->
+                    <!--                            android:fontFamily="@font/azo_san"-->
+                    <!--                            android:minHeight="35dp"-->
+                    <!--                            android:text="View more"-->
+                    <!--                            android:textAllCaps="false"-->
+                    <!--                            android:textColor="#FFFFFF"-->
+                    <!--                            android:textSize="10sp" />-->
+
+
+                    <!--                    </LinearLayout>-->
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_height="70dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X3478JND8992"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Farmer ID"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Volume"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_height="70dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X3478JND8992"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Farmer ID"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Volume"
+                            android:fontFamily="@font/azo_san"
+                            android:textSize="11sp"
+                            android:textColor="#21523C" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50 Litres"
+                            android:textSize="8sp"
+                            android:fontFamily="@font/azo_san"
+                            android:textColor="#787878"/>
+
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/close"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:layout_gravity="center"
+        android:background="@drawable/hover_button"
+        android:text="Close"
+        android:fontFamily="@font/azo_san_bold"
+        android:textAllCaps="false"
+        android:textColor="@drawable/changing_text"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

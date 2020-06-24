@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="27dp"
+        android:paddingBottom="18dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/deleteMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#3D3D3D"
+            android:textSize="14sp"
+            android:fontFamily="@font/azo_san"
+            android:text="Are you sure you want to delete\nXamstade from the milk collction \nlist"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="38dp"
+            android:layout_height="wrap_content">
+
+            <Button
+              android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_and_nobg_button"
+                android:text="No"
+                android:fontFamily="@font/azo_san_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+               android:id="@+id/yes"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_and_nobg_button"
+                android:text="Yes"
+                android:fontFamily="@font/azo_san_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

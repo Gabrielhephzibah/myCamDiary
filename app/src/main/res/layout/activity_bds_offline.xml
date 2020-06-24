@@ -23,8 +23,6 @@
              android:layout_width="match_parent"
              android:orientation="vertical"
              android:layout_height="match_parent">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +30,6 @@
                 android:layout_marginLeft="28dp"
                 android:layout_marginRight="28dp"
                 android:orientation="vertical">
-
                <ImageView
                    android:onClick="@{()->viewModel.onBack()}"
                    android:id="@+id/back"
@@ -40,12 +37,9 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/ic_green_arrow"
                    android:gravity="start" />
-
-
                <RelativeLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
-
                   <TextView
                       android:id="@+id/forgotPassword"
                       android:layout_width="wrap_content"
@@ -1006,13 +1000,11 @@
                   </LinearLayout>
 
                   <LinearLayout
-                      android:visibility="gone"
                       android:id="@+id/coperativeFragment"
                       android:layout_width="match_parent"
                       android:orientation="vertical"
+                      android:visibility="gone"
                       android:layout_height="wrap_content">
-
-
                      <LinearLayout
                          android:layout_width="match_parent"
                          android:orientation="vertical"
@@ -1026,26 +1018,29 @@
                             android:fontFamily="@font/azo_san"
                             android:letterSpacing="-0.03"
                             android:textSize="11sp"/>
-                        <FrameLayout
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="4dp"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:hintTextAppearance= "@style/MyAppearance"
+                            app:boxStrokeColor="@color/colorPrimary"
+                            app:boxStrokeWidth="10dp"
+                            app:boxCornerRadiusBottomEnd="8dp"
+                            app:boxCornerRadiusBottomStart="8dp"
+                            app:boxCornerRadiusTopEnd="8dp"
+                            app:boxCornerRadiusTopStart="8dp">
 
-                           <FrameLayout
-                               android:background="@drawable/spinner_border"
+                           <EditText
+                               android:id="@+id/cooperativeName"
+                               android:layout_height="wrap_content"
                                android:layout_width="match_parent"
-                               android:layout_height="wrap_content">
-                              <Spinner
-                                  android:id="@+id/coperativeNameSpinner"
-                                  android:backgroundTint="@color/colorPrimary"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="30dp"
-                                  android:layout_marginTop="5dp"
-                                  android:spinnerMode="dropdown"
-                                  android:textColor = "@color/colorPrimary"
-                                  android:textSize="12sp" />
-                           </FrameLayout>
-                        </FrameLayout>
+                               android:hint="Answer"
+                               android:inputType="text"
+                               android:textSize="14sp"
+                               android:fontFamily="@font/azo_sans_light"
+                               android:textColor="#21523C"
+                               android:textCursorDrawable= "@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                      </LinearLayout>
 

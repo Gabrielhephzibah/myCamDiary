@@ -7,6 +7,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 
+import com.enyata.camdiary.data.local.db.CamDiaryDataBase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.enyata.camdiary.BuildConfig;
@@ -54,8 +55,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
-        return Room.databaseBuilder(context, AppDatabase.class, dbName).fallbackToDestructiveMigration()
+    CamDiaryDataBase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
+        return Room.databaseBuilder(context, CamDiaryDataBase.class, dbName).fallbackToDestructiveMigration()
                 .build();
     }
 

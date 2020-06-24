@@ -23,9 +23,7 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
-import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
-import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
@@ -42,6 +40,9 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
+import com.enyata.camdiary.data.model.db.BdsDataCollections;
+import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.PdsDataCollection;
 import com.google.gson.Gson;
 import com.enyata.camdiary.data.local.db.DbHelper;
 import com.enyata.camdiary.data.local.prefs.PreferencesHelper;
@@ -52,6 +53,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
@@ -612,4 +615,63 @@ public class AppDataManager implements DataManager {
     }
 
 
+    @Override
+    public Flowable<List<CdsDataCollection>> getAllCdsData() {
+        return mDbHelper.getAllCdsData();
+    }
+
+    @Override
+    public Completable addNewCdsData(CdsDataCollection cdsDataCollection) {
+        return mDbHelper.addNewCdsData(cdsDataCollection);
+    }
+
+    @Override
+    public Completable deleteCdsData(CdsDataCollection cdsDataCollection) {
+        return mDbHelper.deleteCdsData(cdsDataCollection);
+    }
+
+    @Override
+    public Completable updateCdsData(CdsDataCollection cdsDataCollection) {
+        return mDbHelper.updateCdsData(cdsDataCollection);
+    }
+
+    @Override
+    public Flowable<List<PdsDataCollection>> getAllPdsData() {
+        return mDbHelper.getAllPdsData();
+    }
+
+    @Override
+    public Completable addNewPdsData(PdsDataCollection pdsDataCollection) {
+        return mDbHelper.addNewPdsData(pdsDataCollection);
+    }
+
+    @Override
+    public Completable deletePdsData(PdsDataCollection pdsDataCollection) {
+        return mDbHelper.deletePdsData(pdsDataCollection);
+    }
+
+    @Override
+    public Completable updatePdsData(PdsDataCollection pdsDataCollection) {
+        return mDbHelper.updatePdsData(pdsDataCollection);
+    }
+
+    @Override
+    public Flowable<List<BdsDataCollections>> getAllBdsData() {
+        return mDbHelper.getAllBdsData();
+    }
+
+    @Override
+    public Completable addNewBdsData(BdsDataCollections bdsDataCollection) {
+        return mDbHelper.addNewBdsData(bdsDataCollection);
+    }
+
+    @Override
+    public Completable deleteBdsData(BdsDataCollections bdsDataCollection) {
+        return mDbHelper.deleteBdsData(bdsDataCollection);
+    }
+
+    @Override
+    public Completable updateBdsData(BdsDataCollections bdsDataCollection) {
+        return mDbHelper.updateBdsData(bdsDataCollection);
+    }
 }

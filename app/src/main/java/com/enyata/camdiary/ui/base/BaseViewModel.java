@@ -2,7 +2,11 @@
 
 package com.enyata.camdiary.ui.base;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -30,6 +34,7 @@ public abstract class BaseViewModel<N> extends ViewModel {
     private CompositeDisposable mCompositeDisposable;
 
     private WeakReference<N> mNavigator;
+
 
     public BaseViewModel(DataManager dataManager,
                          SchedulerProvider schedulerProvider) {

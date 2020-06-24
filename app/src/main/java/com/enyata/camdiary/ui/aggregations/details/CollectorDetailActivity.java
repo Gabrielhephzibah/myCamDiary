@@ -13,6 +13,7 @@ import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityCollectorDetailBinding;
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanActivity;
+import com.enyata.camdiary.ui.aggregations.collectorCollection.CollectorCollectionActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionActivity;
@@ -68,7 +69,6 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
         verificationId = collectorDetailViewModel.getCollectorVerificationId();
         collectorEmail = collectorDetailViewModel.getCollectorEmail();
 
-
         TextView name = activityCollectorDetailBinding.name;
         TextView Email = activityCollectorDetailBinding.email;
         TextView verification_number = activityCollectorDetailBinding.verificationNumber;
@@ -84,8 +84,10 @@ public class CollectorDetailActivity extends BaseActivity<ActivityCollectorDetai
 
     @Override
     public void proceed() {
-        Intent intent = new Intent(getApplicationContext(), MilkCollectionActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CollectorCollectionActivity.class);
         startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), MilkCollectionActivity.class);
+//        startActivity(intent);
     }
 
     @Override

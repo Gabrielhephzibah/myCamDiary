@@ -13,16 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.enyata.camdiary.R;
+import com.enyata.camdiary.data.local.db.DataBaseClient;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity;
 
 public class OfflineDataCollectionFragment extends Fragment {
+    OfflineDashboardViewModel offlineDashboardViewModel;
+    DataBaseClient dataBaseClient;
     Button cds,bds,pds;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable

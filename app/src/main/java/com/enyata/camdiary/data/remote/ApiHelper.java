@@ -39,6 +39,7 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
+import com.enyata.camdiary.data.model.db.CdsDataCollection;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;

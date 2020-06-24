@@ -2,14 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     tools:context=".ui.offlinecollection.savedData.OfflineSavedDataActivity">
 
     <data>
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataViewModel" />
+            type="com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataViewModel"/>
     </data>
 
 
@@ -43,14 +42,15 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/back"
+                            android:onClick="@{()->viewModel.onBackToDashboard()}"
+                            android:id="@+id/backToDashboard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="start"
-                            android:onClick="@{()->viewModel.onBack()}"
                             android:src="@drawable/ic_green_arrow" />
 
                         <TextView
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="18dp"
@@ -83,7 +83,7 @@
                                 app:tabMode="fixed"
                                 app:tabSelectedTextColor="@color/white"
                                 app:tabTextAppearance="@style/TabLayout"
-                                app:tabTextColor="@color/colorPrimary" />
+                                app:tabTextColor="#305ED1" />
                         </LinearLayout>
 
                         <View
@@ -95,7 +95,7 @@
                             android:id="@+id/savedDataToggleLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="26dp"
                             android:orientation="vertical">
 
                         </LinearLayout>

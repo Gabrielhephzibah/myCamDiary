@@ -171,6 +171,7 @@ public class CdsDataActivity extends BaseActivity<ActivityCdsDataBinding,CdsData
                feedbackText = feedback.getText().toString();
                selectedAreaCouncil = areaCouncil.getSelectedItem().toString();
 
+
                if (electoralWard!=null && electoralWard.getSelectedItem()!=null){
                    selectedWard = electoralWard.getSelectedItem().toString();
                }

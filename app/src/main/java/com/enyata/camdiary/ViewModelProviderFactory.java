@@ -1,5 +1,8 @@
 package com.enyata.camdiary;
 
+import android.app.Application;
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -9,6 +12,7 @@ import com.enyata.camdiary.ui.aggregations.barcode.collectorID.ColectorIdViewMod
 import com.enyata.camdiary.ui.aggregations.barcode.scanbarcode.ScanViewModel;
 import com.enyata.camdiary.ui.aggregations.collection.last.LastCollectionViewModel;
 import com.enyata.camdiary.ui.aggregations.collection.success.CollectionSuccessViewModel;
+import com.enyata.camdiary.ui.aggregations.collectorCollection.CollectorCollectionViewModel;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardViewModel;
 import com.enyata.camdiary.ui.aggregations.details.CollectorDetailViewModel;
 import com.enyata.camdiary.ui.aggregations.entervolume.VolumeViewModel;
@@ -52,6 +56,10 @@ import com.enyata.camdiary.ui.login.LoginViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.bdsoffline.BdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editBdsOffline.EditBdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline.EditCdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline.EditCdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataViewModel;
@@ -73,8 +81,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     private final DataManager dataManager;
     private final SchedulerProvider schedulerProvider;
 
+
     @Inject
-    public ViewModelProviderFactory(DataManager dataManager,
+    public ViewModelProviderFactory( DataManager dataManager,
                                     SchedulerProvider schedulerProvider) {
         this.dataManager = dataManager;
         this.schedulerProvider = schedulerProvider;
@@ -299,6 +308,21 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         else if (modelClass.isAssignableFrom(OfflineSavedDataViewModel.class)) {
             //noinspection unchecked
             return (T) new OfflineSavedDataViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(EditCdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EditCdsOfflineViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(EditPdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EditPdsOfflineViewModel(dataManager, schedulerProvider);
+        }else if (modelClass.isAssignableFrom(EditBdsOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EditBdsOfflineViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(CollectorCollectionViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CollectorCollectionViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

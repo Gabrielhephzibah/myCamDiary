@@ -140,6 +140,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         }else if(type.equals("data collector")){
             intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
         }
+//        showLoading();
 
         startActivity(intent);
     }

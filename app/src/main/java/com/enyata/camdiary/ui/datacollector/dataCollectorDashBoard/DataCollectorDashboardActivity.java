@@ -2,7 +2,6 @@ package com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.databinding.ActivityDataCollectorBinding;
@@ -46,7 +46,7 @@ public class DataCollectorDashboardActivity extends BaseActivity<ActivityDataCol
 
     @Override
     public int getBindingVariable() {
-        return BR.viewModel;
+        return com.enyata.camdiary.BR.viewModel;
     }
 
     @Override
