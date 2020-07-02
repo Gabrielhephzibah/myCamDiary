@@ -4,6 +4,7 @@ import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
 import com.enyata.camdiary.data.model.NewResponse;
 import com.google.gson.JsonObject;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import javax.inject.Named;
 
@@ -20,6 +21,11 @@ public class RetrofitClient {
     public static  final  String FARMER_URL = "http://stagingcamuserapi.enyata.com/v1/farmer/verify/";
     public static  final String COLLECTOR_URL = "http://stagingcamuserapi.enyata.com/v1/collectors/verify/";
 
+    public  Retrofit getRetrofit() {
+        return retrofit;
+
+    }
+
 
     private static Retrofit retrofit = null;
 
@@ -32,11 +38,12 @@ public class RetrofitClient {
 
     }
 
-    @Named("retrofit_one")
+
     public static Retrofit getClient(String baseUrl) {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(createDefaultOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

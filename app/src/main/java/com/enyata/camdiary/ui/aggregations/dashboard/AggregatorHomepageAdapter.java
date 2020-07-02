@@ -21,13 +21,15 @@ public class AggregatorHomepageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0){
             return AggregatorSlideOneFragment.newInstance();
+        }else if (position == 1){
+            return  AggregatorSlideThreeFragment.newInstance();
         }else {
-            return  AggregatorSlideTwoFragment.newInstance();
+            return AggregatorSlideTwoFragment.newInstance();
         }
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

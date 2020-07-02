@@ -180,6 +180,8 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorHint">#5021523C</item>
+        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowIsTranslucent">true</item>-->
 
     </style>
 
@@ -251,6 +253,26 @@
     <style name="RadiusButton" parent="Widget.MaterialComponents.Button">
        <item name="cornerRadius">40dp</item>
         <item name="android:buttonCornerRadius" tools:targetApi="p">23dp</item>
+    </style>
+
+    <style name="DialogTheme" parent="android:Theme.Dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="RoundedCornersDialog" parent="Theme.MaterialComponents.Dialog">
+       <item name="dialogCornerRadius">4dp</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.MaterialComponents.Dialog.Alert">
+
+        <!-- dialog_background is drawable shape with corner radius -->
+        <item name="android:background">@drawable/rounded_corners</item>
+
     </style>
 
 

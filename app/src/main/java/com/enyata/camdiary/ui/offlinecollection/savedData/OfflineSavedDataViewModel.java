@@ -1,15 +1,21 @@
 package com.enyata.camdiary.ui.offlinecollection.savedData;
 
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 
 import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
+import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
+import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
 import com.enyata.camdiary.ui.base.BaseViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineNavigator;
 import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
 
@@ -67,7 +73,7 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
 
     }
 
-    public void deleteDataOnUpoad(CdsDataCollection cdsDataCollection){
+    public void deleteDataOnUpload(CdsDataCollection cdsDataCollection){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .deleteCdsData(cdsDataCollection)
@@ -81,6 +87,54 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
                 }));
 
     }
+
+
+    public void deletePdsOnUpload(PdsDataCollection pdsDataCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .deletePdsData(pdsDataCollection)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(() -> {
+                    setIsLoading(false);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public void deleteBdsOnUpload(BdsDataCollections bdsDataCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .deleteBdsData(bdsDataCollection)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(() -> {
+                    setIsLoading(false);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public void deleteCollectionOnUpload(MilkCollection milkCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .deleteMilkCollectionData(milkCollection)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(() -> {
+                    setIsLoading(false);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onSubmitCollectionError(throwable);
+                }));
+
+    }
+
+
 
     public void getAllPdsData(){
         setIsLoading(true);
@@ -102,6 +156,22 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .deletePdsData(pdsDataCollection)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(() -> {
+                    setIsLoading(false);
+                    getNavigator().onDeleteResponse();
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public void deleteMilkCollection(MilkCollection milkCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .deleteMilkCollectionData(milkCollection)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(() -> {
@@ -182,6 +252,41 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
     }
 
 
+    public void loginToUploadBDS(String email, String password){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .login(new CamLogin.Request(email, password))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    String accessToken = response.getData().getToken();
+                    getDataManager().setAccessToken(accessToken);
+                    setIsLoading(false);
+                    getNavigator().onLoginBDSResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onLoginError(throwable);
+                }));
+    }
+
+    public void loginToUploadCollection(String email, String password){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .login(new CamLogin.Request(email, password))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    String accessToken = response.getData().getToken();
+                    getDataManager().setAccessToken(accessToken);
+                    setIsLoading(false);
+                    getNavigator().onLoginCollectionResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onLoginCollectionError(throwable);
+                }));
+    }
+
+
 
 
     public void getAllCdsDataAndUpload(){
@@ -200,6 +305,74 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
 
     }
 
+    public void getAllPdsDataAndUpload(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getAllPdsData()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onGetPdsUploadResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public void getAllCollectionDataAndUpload(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getAllMilkCollectionData()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onGetCollectionUploadResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public void getAllBdsDataAndUpload(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getAllBdsData()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onGetBdsUploadResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+
+    public void getAllMilkCollection(){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .getAllMilkCollectionData()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onMilkCollectionResponse(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+
+    }
+
+    public String getCurrentDate(){
+        return (String) DateFormat.format("dd-MM-yyyy", new java.util.Date());
+    }
 
     public Single<NewCollectionResponse>submitCdsData(CdsDataRequest.Request request){
       return getDataManager().submitCdsDataQuestion(request);
@@ -209,8 +382,32 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
         return  getDataManager().getAllCdsData();
     }
 
+    public Single<NewCollectionResponse>submitPDSData(PdsDataRequest.Request request){
+        return getDataManager().submitPdsDataQuestion(request);
+    }
+
+    public Single<NewCollectionResponse>submitBDSData(BdsDataRequest.Request request){
+        return  getDataManager().submitBdsDataQuestion(request);
+    }
+    public String getAccesstoken(){
+        return  getDataManager().getAccessToken();
+    }
+
+//    public Single<NewCollectionResponse>submitMilkCollection(NewCreateCollectionRequest.Request request){
+//        return getDataManager().newCreateCollection(request);
+//    }
+
     public Single<Boolean> emptycheck(){
         return  collection().isEmpty();
+    }
+
+    public boolean checkifCdsIsEmpty() {
+        return getCdsData() == null;
+    }
+
+
+    public Flowable<List<CdsDataCollection>>getCdsData() {
+        return getDataManager().getAllCdsData();
     }
 
 }

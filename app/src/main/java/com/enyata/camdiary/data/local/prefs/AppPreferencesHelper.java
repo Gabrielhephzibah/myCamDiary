@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.di.PreferenceInfo;
@@ -86,6 +87,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private  static  final  String PREF_KEY_TIME_ON_STOP = "PREF_KEY_TIME_ON_STOP";
 
     private  static  final  String PREF_KEY_SHOPIFY_ID = "PREF_KEY_SHOPIFY_ID";
+
+    private  static  final  String PREF_KEY_CHURN_DETAILS = "PREF_KEY_CHURN_DETAILS";
+
+    private static final String PREF_KEY_OFFLINE_FARMER_ID = "PREF_KEY_OFFLINE_FARMER_ID";
+
+    private static final String PREF_KEY_REJECTED_VOLUME = "PREF_KEY_REJECTED_VOLUME";
 
 
 
@@ -412,6 +419,47 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getShopifyId() {
         return mPrefs.getString(PREF_KEY_SHOPIFY_ID, null);
+    }
+
+    @Override
+    public void setChurnDetails(List<ChurnDetailsData> churnDetails) {
+        Gson gson = new Gson();
+        String json = gson.toJson(churnDetails);
+        mPrefs.edit().putString(PREF_KEY_CHURN_DETAILS, json).apply();
+    }
+
+    @Override
+    public List<ChurnDetailsData> getChurnDetails() {
+        Gson gson = new Gson();
+        String json = mPrefs.getString(PREF_KEY_CHURN_DETAILS, null);
+        Type type = new TypeToken<List<ChurnDetailsData>>() {
+        }.getType();
+        return gson.fromJson(json, type);
+    }
+
+    @Override
+    public void deleteChurnDetails(List<ChurnDetailsData> churnDetailsData) {
+        mPrefs.edit().remove("PREF_KEY_CHURN_DETAILS").apply();
+    }
+
+    @Override
+    public void setOfflineFarmerId(String offlineFarmerId) {
+        mPrefs.edit().putString(PREF_KEY_OFFLINE_FARMER_ID,offlineFarmerId).apply();
+    }
+
+    @Override
+    public String getOfflineFarmerId() {
+        return mPrefs.getString(PREF_KEY_OFFLINE_FARMER_ID,null);
+    }
+
+    @Override
+    public void setRejectionVolumee(String rejectionVolume) {
+        mPrefs.edit().putString(PREF_KEY_REJECTED_VOLUME,rejectionVolume).apply();
+    }
+
+    @Override
+    public String getRejectedVolumee() {
+        return mPrefs.getString(PREF_KEY_REJECTED_VOLUME,null);
     }
 
 }

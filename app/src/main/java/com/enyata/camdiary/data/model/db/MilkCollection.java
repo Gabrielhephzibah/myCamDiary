@@ -4,25 +4,62 @@ package com.enyata.camdiary.data.model.db;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
+
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
-@Entity
+@Entity(tableName = "milk_collection")
 public class MilkCollection implements Serializable {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+
+    @SerializedName("farmer_id")
     @ColumnInfo(name = "farmer_id")
     private  String farmerId;
 
-    @ColumnInfo(name = "volume")
-    private String volume;
 
-    @ColumnInfo(name = "churn_no")
-    private String churnNo;
+    @SerializedName("status_of_collection")
+    @ColumnInfo(name = "status_of_collection")
+    private String statusOfCollection;
 
-    @ColumnInfo(name = "status")
-    private String status;
+
+    @SerializedName("test_one")
+    @ColumnInfo(name = "test_one")
+    private String testOne;
+
+
+    @SerializedName("test_two")
+    @ColumnInfo(name = "test_two")
+    private String testTwo;
+
+
+    @SerializedName("test_three")
+    @ColumnInfo(name = "test_three")
+    private String testThree;
+
+
+    @SerializedName("approved_container")
+    @ColumnInfo(name = "approved_container")
+    private boolean approvedContainer;
+
+
+    @SerializedName("message")
+    @ColumnInfo(name = "message")
+    private String message;
+
+
+    @TypeConverters({Converters.class})
+    @SerializedName("churn_details")
+    @ColumnInfo(name = "churn_details")
+    private List<ChurnDetailsData>churnDetails;
+
 
 
     public int getId() {
@@ -41,28 +78,60 @@ public class MilkCollection implements Serializable {
         this.farmerId = farmerId;
     }
 
-    public String getVolume() {
-        return volume;
+    public String getStatusOfCollection() {
+        return statusOfCollection;
     }
 
-    public void setVolume(String volume) {
-        this.volume = volume;
+    public void setStatusOfCollection(String statusOfCollection) {
+        this.statusOfCollection = statusOfCollection;
     }
 
-    public String getChurnNo() {
-        return churnNo;
+    public String getTestOne() {
+        return testOne;
     }
 
-    public void setChurnNo(String churnNo) {
-        this.churnNo = churnNo;
+    public void setTestOne(String testOne) {
+        this.testOne = testOne;
     }
 
-    public String getStatus() {
-        return status;
+    public String getTestTwo() {
+        return testTwo;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTestTwo(String testTwo) {
+        this.testTwo = testTwo;
+    }
+
+    public String getTestThree() {
+        return testThree;
+    }
+
+    public void setTestThree(String testThree) {
+        this.testThree = testThree;
+    }
+
+    public boolean isApprovedContainer() {
+        return approvedContainer;
+    }
+
+    public void setApprovedContainer(boolean approvedContainer) {
+        this.approvedContainer = approvedContainer;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<ChurnDetailsData> getChurnDetails() {
+        return churnDetails;
+    }
+
+    public void setChurnDetails(List<ChurnDetailsData> churnDetails) {
+        this.churnDetails = churnDetails;
     }
 
     @Override
@@ -70,9 +139,13 @@ public class MilkCollection implements Serializable {
         return "MilkCollection{" +
                 "id=" + id +
                 ", farmerId='" + farmerId + '\'' +
-                ", volume='" + volume + '\'' +
-                ", churnNo='" + churnNo + '\'' +
-                ", status='" + status + '\'' +
+                ", statusOfCollection='" + statusOfCollection + '\'' +
+                ", testOne='" + testOne + '\'' +
+                ", testTwo='" + testTwo + '\'' +
+                ", testThree='" + testThree + '\'' +
+                ", approvedContainer=" + approvedContainer +
+                ", message='" + message + '\'' +
+                ", churnDetails=" + churnDetails +
                 '}';
     }
 }

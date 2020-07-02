@@ -5,6 +5,7 @@ package com.enyata.camdiary.data.local.db;
 
 import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
 
 import java.util.List;
@@ -89,6 +90,21 @@ public class AppDbHelper implements DbHelper {
     @Override
     public Completable updateBdsData(BdsDataCollections bdsDataCollection) {
         return mAppDatabase.bdsDao().updateBdsData(bdsDataCollection);
+    }
+
+    @Override
+    public Flowable<List<MilkCollection>> getAllMilkCollectionData() {
+        return mAppDatabase.milkDao().getAllMilkCollection();
+    }
+
+    @Override
+    public Completable addNewMilkCollectionData(MilkCollection milkCollection) {
+        return mAppDatabase.milkDao().addMilkCollection(milkCollection);
+    }
+
+    @Override
+    public Completable deleteMilkCollectionData(MilkCollection milkCollection) {
+        return mAppDatabase.milkDao().deleteMilkCollection(milkCollection);
     }
 
 

@@ -142,8 +142,6 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
                 params.put("approved_container",approved_container);
                 params.put("message",infoMessage );
                 params.put("churn_no",churnNo);
-
-
                 reasonViewModel.createRejectionCollection(params);
 
             }catch (Exception error){

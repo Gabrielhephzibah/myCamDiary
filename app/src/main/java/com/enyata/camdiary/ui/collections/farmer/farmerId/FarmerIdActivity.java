@@ -62,6 +62,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
 
     @Override
     public void accept() {
+        hideKeyboard();
         String verificationId = activityFarmerIdBinding.farmerId.getText().toString();
 
 
@@ -109,7 +110,7 @@ public class  FarmerIdActivity extends BaseActivity<ActivityFarmerIdBinding,Farm
             Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
         }
 
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException|NullPointerException|ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

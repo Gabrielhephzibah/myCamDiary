@@ -43,7 +43,6 @@ import javax.inject.Inject;
  */
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator {
-
     @Inject
     Gson gson;
     private String decoded;
@@ -199,6 +198,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         }
 
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

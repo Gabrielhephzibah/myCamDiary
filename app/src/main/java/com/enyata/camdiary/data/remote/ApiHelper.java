@@ -12,6 +12,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -55,6 +56,8 @@ public interface ApiHelper {
     Single<CamLoginResponse> login(CamLogin.Request request);
     // Create Collection
     Single<NewCollectionResponse> doCreateCollection(Collection.Request request);
+
+    Single<NewCollectionResponse>newCreateCollection(NewCreateCollectionRequest request);
     // Get accepted Volume
     Single<VolumeResponse> getAcceptedVolume();
     //get aggregation volume

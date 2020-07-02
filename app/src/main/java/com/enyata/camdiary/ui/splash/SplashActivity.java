@@ -4,6 +4,7 @@ package com.enyata.camdiary.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -30,6 +31,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     ViewModelProviderFactory factory;
     
     private SplashViewModel mSplashViewModel;
+    private static int SPLASH_TIME_OUT = 1000;
 
     @Override
     public int getBindingVariable() {
@@ -73,6 +75,18 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSplashViewModel.setNavigator(this);
-        mSplashViewModel.decideNextActivity();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                mSplashViewModel.decideNextActivity();
+            }
+        }, SPLASH_TIME_OUT);
+//        }
+
     }
+//        mSplashViewModel.decideNextActivity();
+
+
 }

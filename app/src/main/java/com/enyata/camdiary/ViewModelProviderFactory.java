@@ -26,6 +26,8 @@ import com.enyata.camdiary.ui.collections.data.dataFarmerDetail.DataFarmerDetail
 import com.enyata.camdiary.ui.collections.data.dataFarmerId.DataFarmerIdViewModel;
 import com.enyata.camdiary.ui.collections.data.dataScanBarcode.DataScanCodeViewModel;
 import com.enyata.camdiary.ui.collections.data.pdsData.PdsDataViewModel;
+import com.enyata.camdiary.ui.collections.newentervolume.NewEnterVolumeViewModel;
+import com.enyata.camdiary.ui.collections.rejection.newreason.NewReasonViewModel;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionViewModel;
 import com.enyata.camdiary.ui.collections.barcode.BarcodeViewModel;
 import com.enyata.camdiary.ui.collections.constant.ConstantLayoutViewModel;
@@ -61,6 +63,7 @@ import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline.EditCdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineViewModel;
+import com.enyata.camdiary.ui.offlinecollection.offlineMilkCollection.milkRejectionOffline.MilkRejectionOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataViewModel;
 import com.enyata.camdiary.ui.password.ResetPasswordViewModel;
@@ -323,6 +326,18 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         else if (modelClass.isAssignableFrom(CollectorCollectionViewModel.class)) {
             //noinspection unchecked
             return (T) new CollectorCollectionViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(MilkRejectionOfflineViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MilkRejectionOfflineViewModel(dataManager, schedulerProvider);
+
+        }else if (modelClass.isAssignableFrom(NewEnterVolumeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NewEnterVolumeViewModel(dataManager, schedulerProvider);
+        }
+        else if (modelClass.isAssignableFrom(NewReasonViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NewReasonViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

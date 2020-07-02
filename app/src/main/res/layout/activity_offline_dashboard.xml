@@ -58,6 +58,7 @@
                             android:gravity="start" />
 
                         <TextView
+                            android:id="@+id/headerText"
                             android:layout_marginTop="18dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

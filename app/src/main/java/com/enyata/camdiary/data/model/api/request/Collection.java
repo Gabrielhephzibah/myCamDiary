@@ -92,11 +92,6 @@ public class Collection {
             return churn_no;
         }
 
-
-
-
-
-
         @Override
         public boolean equals(Object obj) {
             if (this == obj) {

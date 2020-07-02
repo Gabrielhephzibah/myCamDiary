@@ -64,17 +64,17 @@ public class BdsDataSurveyAdapter extends RecyclerView.Adapter<BdsDataSurveyAdap
             phoneNumber = itemView.findViewById(R.id.phoneNumber);
             gender = itemView.findViewById(R.id.gender);
             delete = itemView.findViewById(R.id.deleteBtn);
-            edit = itemView.findViewById(R.id.editBtn);
+//            edit = itemView.findViewById(R.id.editBtn);
             parent = itemView.findViewById(R.id.parent);
             this.onBdsDataListener = onBdsDataListener;
 
 
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onBdsDataListener.onBdsEditClick(getAdapterPosition());
-                }
-            });
+//            edit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    onBdsDataListener.onBdsEditClick(getAdapterPosition());
+//                }
+//            });
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,5 +97,9 @@ public class BdsDataSurveyAdapter extends RecyclerView.Adapter<BdsDataSurveyAdap
 
     public List<BdsDataCollections> getData() {
         return bdsDataCollection;
+    }
+
+    public int getSize(){
+        return bdsDataCollection.size();
     }
 }

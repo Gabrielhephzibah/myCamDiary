@@ -82,7 +82,7 @@ public class CdsDataSurveyAdapter extends RecyclerView.Adapter<CdsDataSurveyAdap
             phoneNumber = itemView.findViewById(R.id.phoneNumber);
             gender = itemView.findViewById(R.id.gender);
             delete = itemView.findViewById(R.id.deleteBtn);
-            edit = itemView.findViewById(R.id.editBtn);
+//            edit = itemView.findViewById(R.id.editBtn);
             parent = itemView.findViewById(R.id.parent);
             this.onDataListener = onDataListener;
 
@@ -101,12 +101,12 @@ public class CdsDataSurveyAdapter extends RecyclerView.Adapter<CdsDataSurveyAdap
                 }
             });
 
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onDataListener.onEditClick(getAdapterPosition());
-                }
-            });
+//            edit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    onDataListener.onEditClick(getAdapterPosition());
+//                }
+//            });
 
         }
     }

@@ -12,11 +12,15 @@ import android.widget.TextView;
 import com.enyata.camdiary.BR;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.DataManager;
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.databinding.ActivityRejectsuccessBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionActivity;
 import com.enyata.camdiary.ui.collections.data.dataCollection.DataCollectionViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,6 +29,9 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
     String firstName;
     String lastName;
     String fullName;
+    String rejectedVolume;
+    List<ChurnDetailsData>churnDetailsData;
+
 
 
     @Inject
@@ -60,10 +67,11 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
         activityRejectsuccessBinding = getViewDataBinding();
         TextView volumetext = activityRejectsuccessBinding.volume;
         TextView farmerName = activityRejectsuccessBinding.farmerName;
-        volume = getIntent().getStringExtra("volume");
+        rejectedVolume = rejectsuccessViewModel.getRejectedVolume();
         fullName = rejectsuccessViewModel.getFarmerFullName();
+        churnDetailsData = rejectsuccessViewModel.getChurnDetails();
 
-        volumetext.setText(volume + " Litres" );
+        volumetext.setText(rejectedVolume + " Litres" );
         farmerName.setText(fullName);
 
     }
@@ -72,5 +80,6 @@ public class RejectsuccessActivity extends BaseActivity<ActivityRejectsuccessBin
     public void home() {
         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
         startActivity(intent);
+        rejectsuccessViewModel.deleteChurnDetails(churnDetailsData);
     }
 }

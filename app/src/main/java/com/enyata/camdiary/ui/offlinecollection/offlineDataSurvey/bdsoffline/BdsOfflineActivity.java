@@ -362,7 +362,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
         }if (animalFeedInterest!=null && animalFeedInterest.getSelectedItem()!=null) {
             animalFeedInterestSelected = (String) animalFeedInterest.getSelectedItem();
         }
-        isEditTextValueEmpty(firstNameText,lastNameText,ageText,phoneNoText,adult18AboveText,communityNameText,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,milkPerDayText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,feedbackText,areaCouncilWardSelected,genderSelected,maritalStatusSelected,electoralWardSelected,marketDayText,milkConsumeText,recommendationText,below16Text,below16InSchText,childrenUnder18Text,animalFeedInterestSelected,farmerImageBitmap,familyNameText,copereativeNameText);
+        isEditTextValueEmpty(firstNameText,lastNameText,ageText,phoneNoText,adult18AboveText,communityNameText,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,milkPerDayText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,feedbackText,areaCouncilWardSelected,genderSelected,maritalStatusSelected,electoralWardSelected,marketDayText,milkConsumeText,recommendationText,below16Text,below16InSchText,childrenUnder18Text,animalFeedInterestSelected,farmerImageBitmap,familyNameText,copereativeNameText,animalFeedQuatityText);
 
         Log.i("FIRSTName",firstNameText);
         Log.i("LASTName",lastNameText);
@@ -507,7 +507,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
     }
 
 
-    public void isEditTextValueEmpty(String first_name, String last_name, String age, String phoneNo, String adult18, String communityName,String sourcesOfIncome, String mainIncome, String weekEarn, String monthEarn, String milkPerDay, String milkForSale, String challenges,String abujaCow, String totalCow, String milkingCow,String feedback, String areaCouncil,String gender, String maritalStatus, String ward, String marketday, String householdConsp, String recommendation, String below16, String below16InSch, String childrenUnder18, String animalFeedInterest, String imageBitmap, String familname, String cooperativeName ){
+    public void isEditTextValueEmpty(String first_name, String last_name, String age, String phoneNo, String adult18, String communityName,String sourcesOfIncome, String mainIncome, String weekEarn, String monthEarn, String milkPerDay, String milkForSale, String challenges,String abujaCow, String totalCow, String milkingCow,String feedback, String areaCouncil,String gender, String maritalStatus, String ward, String marketday, String householdConsp, String recommendation, String below16, String below16InSch, String childrenUnder18, String animalFeedInterest, String imageBitmap, String familname, String cooperativeName, String animalFeedQuantity){
         if (first_name.isEmpty()){
             Alert.showFailed(getApplicationContext(),"first name is required");
         }else if (last_name.isEmpty()){
@@ -569,7 +569,9 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
             Alert.showFailed(getApplicationContext()," image  is required");
         }else if (familname.isEmpty()){
             Alert.showFailed(getApplicationContext()," family is required");
-        }else if (cooperativeName.isEmpty()){
+        }else if (animalFeedQuantity.isEmpty()){
+            Alert.showFailed(getApplicationContext()," animal feed quantity is required");
+        } else if (cooperativeName.isEmpty()){
             Alert.showFailed(getApplicationContext()," cooperative name is required");
         }else {
             BdsDataCollections bdsDataCollection = new BdsDataCollections();

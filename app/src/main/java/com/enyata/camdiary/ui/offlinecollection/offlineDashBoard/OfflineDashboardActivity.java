@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enyata.camdiary.BR;
@@ -26,6 +27,7 @@ import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryChangePassw
 import com.enyata.camdiary.ui.deliveries.deliveryEditProfile.DeliveryEditProfileFragment;
 import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
+import com.enyata.camdiary.utils.Alert;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
@@ -43,7 +45,9 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
     Fragment milkCollection = new OfflineMilkCollectionFragment();
     Fragment dataCollection = new OfflineDataCollectionFragment();
     ImageView home,savedData,logout;
+    TextView headerText;
     int backButtonPressed = 0;
+
 
 
     @Override
@@ -70,6 +74,7 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
         tabLayout = activityOfflineDashboardBinding.offlineTabLayout;
         toggleLayout = activityOfflineDashboardBinding.toggleLayout;
         home = activityOfflineDashboardBinding.included.offlineHome;
+        headerText = activityOfflineDashboardBinding.headerText;
         savedData = activityOfflineDashboardBinding.included.offlineSavedData;
         logout = activityOfflineDashboardBinding.included.offlineLogout;
         tabLayout.addTab(tabLayout.newTab().setText("Data Collection"),true);
@@ -93,6 +98,7 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
                         FragmentTransaction fragment =fragmentMa.beginTransaction();
                         fragment.replace(R.id.toggleLayout,milkCollection);
                         fragment.commit();
+                        headerText.setText("Milk Collection");
                         break;
                     }
                     default:{
@@ -100,6 +106,7 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
                         FragmentTransaction fragmenttrans =fragment.beginTransaction();
                         fragmenttrans.replace(R.id.toggleLayout,dataCollection);
                         fragmenttrans.commit();
+                        headerText.setText("Data Collection");
                         break;
 
                     }
@@ -126,6 +133,14 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -133,6 +148,30 @@ public class OfflineDashboardActivity extends BaseActivity<ActivityOfflineDashbo
     public void onBackToLogin() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResponse() {
+        Log.i("SUCCESFUL","SUCCESSFUL");
+        Alert.showSuccess(getApplicationContext(), "Collection submitted successfully");
+        Intent intent = new Intent(getApplicationContext(),OfflineDashboardActivity.class);
+        startActivity(intent);
+        offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
+        Log.i("DETAILS", String.valueOf(offlineDashboardViewModel.getChurnDetails()));
+
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+        Log.i("ERROR","There was an error");
+        if (throwable!=null){
+            Alert.showFailed(getApplicationContext(),"Collection not successfully submitted");
+            Intent intent = new Intent(getApplicationContext(),OfflineDashboardActivity.class);
+            startActivity(intent);
+            offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
+
+        }
+
     }
 
     @Override

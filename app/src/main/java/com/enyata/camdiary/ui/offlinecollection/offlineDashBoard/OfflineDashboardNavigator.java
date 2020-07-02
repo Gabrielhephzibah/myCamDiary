@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface OfflineDashboardNavigator {
     void onBackToLogin();
+    void onResponse();
+    void handleError(Throwable throwable);
 
 }

@@ -4,6 +4,7 @@ package com.enyata.camdiary.data.local.db;
 
 import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
 
 import java.util.List;
@@ -41,6 +42,12 @@ public interface DbHelper {
     Completable deleteBdsData(BdsDataCollections bdsDataCollection);
 
     Completable updateBdsData(BdsDataCollections bdsDataCollection);
+
+    Flowable<List<MilkCollection>>getAllMilkCollectionData();
+
+    Completable addNewMilkCollectionData(MilkCollection milkCollection);
+
+    Completable deleteMilkCollectionData(MilkCollection milkCollection);
 
 
 

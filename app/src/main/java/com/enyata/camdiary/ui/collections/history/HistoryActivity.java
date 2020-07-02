@@ -193,7 +193,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
                 Collection data = collectionHistory.get(i);
                 String firstName = data.getFarmer().getFirstName();
                 String lastName = data.getFarmer().getLastName();
-                String litres = String.valueOf(data.getVolume());
+                String litres = String.valueOf(data.getVolumeCollected());
                 String statusOfCollection = data.getStatusOfCollection();
                 String verificationNumber = data.getFarmer().getVerificationId();
                 String companyName = data.getFarmer().getCooperativeName();

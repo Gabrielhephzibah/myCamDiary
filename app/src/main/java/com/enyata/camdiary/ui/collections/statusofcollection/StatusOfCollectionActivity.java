@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.databinding.ActivityCollectionDashboardBinding;
 import com.enyata.camdiary.databinding.ActivitySuccessfulBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,12 +28,19 @@ public class StatusOfCollectionActivity extends BaseActivity<ActivitySuccessfulB
  String lastName;
  String fullName;
  String coperateName;
- String verificationNumber;
+ TextView churnId, volumeText;
+    String prefix;
+    String volumePrefix;
+    StringBuilder stringVolume;
+    StringBuilder stringChurn;
+
+    String verificationNumber;
+ List<ChurnDetailsData>churnDetailsData;
 
     private ActivitySuccessfulBinding activitySuccessfulBinding;
     @Inject
     ViewModelProviderFactory factory;
-    private StatusOfCollectionViewModel successfulViewModel;
+    private StatusOfCollectionViewModel statusOfCollectionViewModel;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FarmerDetailsActivity.class);
@@ -47,21 +57,42 @@ public class StatusOfCollectionActivity extends BaseActivity<ActivitySuccessfulB
 
     @Override
     public StatusOfCollectionViewModel getViewModel() {
-        successfulViewModel = ViewModelProviders.of(this,factory).get(StatusOfCollectionViewModel.class);
-        return successfulViewModel;
+        statusOfCollectionViewModel = ViewModelProviders.of(this,factory).get(StatusOfCollectionViewModel.class);
+        return statusOfCollectionViewModel;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        successfulViewModel.setNavigator(this);
-        volume = getIntent().getStringExtra("volume");
-        fullName = successfulViewModel.getFarmerFullName();
+        statusOfCollectionViewModel.setNavigator(this);
+        fullName = statusOfCollectionViewModel.getFarmerFullName();
         activitySuccessfulBinding = getViewDataBinding();
-        TextView litresCollected  = activitySuccessfulBinding.litresCollected;
-        TextView farmerName = activitySuccessfulBinding.farmerName;
-        litresCollected.setText(volume+" Litres");
+        churnId = activitySuccessfulBinding.churnId;
+        volumeText = activitySuccessfulBinding.volumeText;
 
+        TextView farmerName = activitySuccessfulBinding.farmerName;
+        churnDetailsData = statusOfCollectionViewModel.getChurnDetails();
+        prefix = " ";
+        volumePrefix = " ";
+         stringVolume = new StringBuilder();
+         stringChurn = new StringBuilder();
+
+        for (int i = 0; i <churnDetailsData.size(); i ++) {
+            ChurnDetailsData data = churnDetailsData.get(i);
+            String textChurn = data.getChurnId();
+            String textVolume = data.getVolume();
+
+
+                stringChurn.append(textChurn);
+                 stringChurn.append("\n");
+
+
+
+                stringVolume.append(textVolume).append(" Litres");
+                stringVolume.append("\n");
+        }
+        churnId.setText(stringChurn);
+        volumeText.setText(stringVolume);
         farmerName.setText(fullName);
 
 
@@ -70,8 +101,10 @@ public class StatusOfCollectionActivity extends BaseActivity<ActivitySuccessfulB
 
     @Override
     public void home() {
+        churnDetailsData = statusOfCollectionViewModel.getChurnDetails();
         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
         startActivity(intent);
+        statusOfCollectionViewModel.deleteChurnDetails(churnDetailsData);
 
     }
 }

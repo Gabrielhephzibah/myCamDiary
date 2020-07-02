@@ -86,36 +86,59 @@
         android:textStyle="bold" />
 
 
-    <RelativeLayout
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/forgotPasswordLayout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginLeft="12dp"-->
+<!--        android:layout_marginTop="14dip">-->
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="14dip">
+<!--        <ImageView-->
+<!--            android:id="@+id/padlock"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:layout_toLeftOf="@id/forgotPassword"-->
+<!--            android:lines="1"-->
+<!--            android:src="@drawable/padlock" />-->
 
-        <ImageView
-            android:id="@+id/padlock"
-            android:layout_width="wrap_content"
+<!--        <TextView-->
+<!--            android:id="@+id/forgotPassword"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:fontFamily="@font/azo_san"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:lines="1"-->
+<!--            android:text="@string/forget_password"-->
+<!--            android:textColor="#21523C"-->
+<!--            android:textSize="12sp" />-->
+<!--    </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_toLeftOf="@id/forgotPassword"
-            android:lines="1"
-            android:src="@drawable/padlock" />
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="23dp">
 
-        <TextView
-            android:id="@+id/forgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="5dp"
-            android:fontFamily="@font/azo_san"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:text="@string/forget_password"
-            android:textColor="#21523C"
-            android:textSize="12sp" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:textColor="#21523C"
+                android:fontFamily="@font/azo_san"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_gravity="right"
+                android:gravity="right"/>
+
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

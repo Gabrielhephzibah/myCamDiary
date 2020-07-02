@@ -18,10 +18,10 @@
             android:textColor="#ffff"
             android:textStyle="normal"
             android:fontFamily="@font/azosan"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Not for Aggregation and Delivery. Are you sure you want to continue?"
+            android:text="ONLY for Collectors and Data-Collectors.  Are you sure you want to continue?"
             />
         <RelativeLayout
             android:layout_marginTop="22dp"

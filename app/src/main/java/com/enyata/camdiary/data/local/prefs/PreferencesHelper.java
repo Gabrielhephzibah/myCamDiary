@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.data.model.api.request.AggregationCollection;
 
 import java.util.ArrayList;
@@ -136,6 +137,20 @@ public interface PreferencesHelper {
     void setShopifyId(String shopifyId);
 
     String getShopifyId();
+
+     void setChurnDetails(List<ChurnDetailsData> churnDetails);
+
+     List<ChurnDetailsData>getChurnDetails();
+
+     void deleteChurnDetails(List<ChurnDetailsData>churnDetailsData);
+
+     void setOfflineFarmerId(String  offlineFarmerId);
+
+     String getOfflineFarmerId();
+
+     void setRejectionVolumee(String  rejectionVolume);
+
+     String  getRejectedVolumee();
 
 
 

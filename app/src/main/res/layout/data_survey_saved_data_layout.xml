@@ -52,7 +52,7 @@
 
 
         <LinearLayout
-            android:visibility="gone"
+           android:visibility="gone"
             android:id="@+id/cdsFragment"
             android:layout_width="match_parent"
             android:layout_height="450dp"
@@ -66,6 +66,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/cdsDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -74,7 +75,7 @@
                     android:gravity="right"
                     android:text="20-06-2020"
                     android:textColor="#959595"
-                    android:textSize="8sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,8 +86,6 @@
                         android:id="@+id/cdsRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="330dp"/>
-
-
 
 
                 </LinearLayout>
@@ -167,6 +166,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/bdsDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -175,7 +175,7 @@
                     android:gravity="right"
                     android:text="20-06-2020"
                     android:textColor="#959595"
-                    android:textSize="8sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -268,6 +268,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pdsDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -276,7 +277,7 @@
                     android:gravity="right"
                     android:text="20-06-2020"
                     android:textColor="#959595"
-                    android:textSize="8sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

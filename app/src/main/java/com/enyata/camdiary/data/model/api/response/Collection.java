@@ -11,19 +11,15 @@ public class Collection {
 
     @Expose
     @SerializedName("collector_id")
-    private int collectorId;
+    private String collectorId;
 
     @Expose
     @SerializedName("farmer_id")
-    private int farmerId;
+    private String farmerId;
 
     @Expose
     @SerializedName("status_of_collection")
     private String statusOfCollection;
-
-    @Expose
-    @SerializedName("volume")
-    private int volume;
 
     @Expose
     @SerializedName("created_at")
@@ -54,6 +50,10 @@ public class Collection {
     private String message;
 
     @Expose
+    @SerializedName("volume_collected")
+    private String volumeCollected;
+
+    @Expose
     @SerializedName("farmer")
     private Details farmerDetails;
     
@@ -62,11 +62,11 @@ public class Collection {
         return id;
     }
 
-    public int getFarmerId() {
+    public String getFarmerId() {
         return farmerId;
     }
 
-    public int getCollectorId() {
+    public String getCollectorId() {
         return collectorId;
     }
 
@@ -74,8 +74,8 @@ public class Collection {
         return statusOfCollection;
     }
 
-    public int getVolume() {
-        return volume;
+    public String getVolumeCollected() {
+        return volumeCollected;
     }
 
     public String getCreatedAt() {
@@ -115,7 +115,7 @@ public class Collection {
                 ",collectorId = '"+ collectorId +
                 ", farmerId='" + farmerId + '\'' +
                 ", statusOfCollection='" + statusOfCollection + '\'' +
-                ", volume='" + volume + '\'' +
+                ", volume='" + volumeCollected + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 ", testOne='" + testOne + '\'' +

@@ -64,7 +64,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     ViewModelProviderFactory factory;
     private AggregatorDashboardViewModel aggregatorDashboardViewModel;
     ViewPager pager;
-    int[] layouts = {R.layout.aggregator_first_slide, R.layout.aggregator_second_slide};
+    int[] layouts = {R.layout.aggregator_first_slide, R.layout.aggregator_third_slide, R.layout.aggregator_second_slide};
     private AggregatorDashboardAdapter aggregatorDashboardAdapter;
     LinearLayout slideLayout;
     ImageView[] slider_dash;
@@ -160,7 +160,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException|NullPointerException|ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

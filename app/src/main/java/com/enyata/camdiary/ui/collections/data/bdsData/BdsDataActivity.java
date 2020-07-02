@@ -82,6 +82,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
     int currentapiVersion;
     boolean spinnerSelected;
     ProgressDialog dialog;
+    String animalFeedRequirement;
     List<String> electoralWards;
     String cloudinaryImage, imageURL, cloudinaryID;
     private static final int REQUEST_PERMISSION = 1;
@@ -331,6 +332,12 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
         totalCowText = totalCow.getText().toString();
         milkingCowText = milkingCow.getText().toString();
         animalFeedQuatityText = animalFeedQuantity.getText().toString();
+        if (animalFeedQuatityText.isEmpty()){
+            animalFeedRequirement = "0";
+
+        }else {
+            animalFeedRequirement = animalFeedQuatityText;
+        }
         recommendationText = recommendation.getText().toString();
         feedbackText = feedback.getText().toString();
         animalFeedInterestSelected = animalFeedInterest.getSelectedItem().toString();
@@ -355,7 +362,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             return;
         }else {
             if (InternetConnection.getInstance(BdsDataActivity.this).isOnline()) {
-                BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL, firstNameText, lastNameText, genderSelected, ageText, maritalStatusSelected, familyNameText, phoneNoText, electoralWardSelected, areaCouncilWardSelected, communityNameText, copereativeNameSelected, sourcesIncomeText, mainIncomeText, weekEarningText, monthlyEarningText, marketDayText, childrenUnder18Text, below16Text, below16InSchText, adult18AboveText, milkPerDayText, milkConsumeText, milkForSaleText, challengesText, cowInAbujaText, totalCowText, milkingCowText, animalFeedInterestSelected, animalFeedQuatityText, recommendationText, feedbackText);
+                BdsDataRequest.Request request = new BdsDataRequest.Request(imageURL, firstNameText, lastNameText, genderSelected, ageText, maritalStatusSelected, familyNameText, phoneNoText, electoralWardSelected, areaCouncilWardSelected, communityNameText, copereativeNameSelected, sourcesIncomeText, mainIncomeText, weekEarningText, monthlyEarningText, marketDayText, childrenUnder18Text, below16Text, below16InSchText, adult18AboveText, milkPerDayText, milkConsumeText, milkForSaleText, challengesText, cowInAbujaText, totalCowText, milkingCowText, animalFeedInterestSelected, animalFeedRequirement, recommendationText, feedbackText);
                 bdsViewModel.onSubmitBdsDataQuestion(request);
 
             } else {

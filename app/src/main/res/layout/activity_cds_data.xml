@@ -152,6 +152,7 @@
                                 app:boxCornerRadiusTopStart="8dp"
                                 app:boxStrokeColor="@color/colorPrimary"
                                 app:boxStrokeWidth="10dp"
+                                android:inputType="textCapWords"
                                 app:hintTextAppearance="@style/MyAppearance">
 
                                 <EditText
@@ -160,7 +161,8 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/azo_sans_light"
                                     android:hint="Answer"
-                                    android:inputType="text"
+                                    android:capitalize="sentences"
+                                    android:inputType="textCapWords"
                                     android:textColor="#21523C"
                                     android:textCursorDrawable="@null"
                                     android:textSize="14sp" />

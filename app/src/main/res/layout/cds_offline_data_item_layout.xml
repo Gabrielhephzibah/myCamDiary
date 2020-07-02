@@ -70,30 +70,17 @@
                 android:layout_alignParentEnd="true"
                 android:layout_height="match_parent">
 
-
-            <Button
-                android:layout_marginRight="10dp"
-                android:id="@+id/editBtn"
-                android:layout_width="72dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_with_two_radius"
-                android:fontFamily="@font/azo_san"
-                android:minHeight="35dp"
-                android:text="Edit"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp" />
                 <Button
-                    android:layout_toRightOf="@+id/editBtn"
+                   android:layout_alignParentRight="true"
                     android:id="@+id/deleteBtn"
                     android:layout_width="72dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_with_radius_white"
+                    android:background="@drawable/border_with_two_radius"
                     android:fontFamily="@font/azo_san"
                     android:minHeight="35dp"
                     android:text="Delete"
                     android:textAllCaps="false"
-                    android:textColor="#4F4F4F"
+                    android:textColor="#FFFFFF"
                     android:textSize="10sp" />
             </RelativeLayout>
 

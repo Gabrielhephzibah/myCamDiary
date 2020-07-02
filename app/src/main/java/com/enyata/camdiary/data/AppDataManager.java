@@ -5,6 +5,7 @@ package com.enyata.camdiary.data;
 import android.content.Context;
 
 import com.enyata.camdiary.data.model.AggregationSavedCollection;
+import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.data.model.api.request.Aggregation;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
@@ -13,6 +14,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -42,6 +44,7 @@ import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
 import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
 import com.google.gson.Gson;
 import com.enyata.camdiary.data.local.db.DbHelper;
@@ -401,6 +404,42 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setChurnDetails(List<ChurnDetailsData> churnDetails) {
+        mPreferencesHelper.setChurnDetails(churnDetails);
+    }
+
+    @Override
+    public List<ChurnDetailsData> getChurnDetails() {
+        return mPreferencesHelper.getChurnDetails();
+    }
+
+    @Override
+    public void deleteChurnDetails(List<ChurnDetailsData> churnDetailsData) {
+        mPreferencesHelper.deleteChurnDetails(churnDetailsData);
+    }
+
+    @Override
+    public void setOfflineFarmerId(String offlineFarmerId) {
+        mPreferencesHelper.setOfflineFarmerId(offlineFarmerId);
+    }
+
+    @Override
+    public String getOfflineFarmerId() {
+        return mPreferencesHelper.getOfflineFarmerId();
+    }
+
+    @Override
+    public void setRejectionVolumee(String rejectionVolume) {
+        mPreferencesHelper.setRejectionVolumee(rejectionVolume);
+
+    }
+
+    @Override
+    public String getRejectedVolumee() {
+        return mPreferencesHelper.getRejectedVolumee();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -408,6 +447,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<NewCollectionResponse> doCreateCollection(Collection.Request request) {
         return mApiHelper.doCreateCollection(request);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> newCreateCollection(NewCreateCollectionRequest request) {
+        return mApiHelper.newCreateCollection(request);
     }
 
     @Override
@@ -673,5 +717,20 @@ public class AppDataManager implements DataManager {
     @Override
     public Completable updateBdsData(BdsDataCollections bdsDataCollection) {
         return mDbHelper.updateBdsData(bdsDataCollection);
+    }
+
+    @Override
+    public Flowable<List<MilkCollection>> getAllMilkCollectionData() {
+        return mDbHelper.getAllMilkCollectionData();
+    }
+
+    @Override
+    public Completable addNewMilkCollectionData(MilkCollection milkCollection) {
+        return mDbHelper.addNewMilkCollectionData(milkCollection);
+    }
+
+    @Override
+    public Completable deleteMilkCollectionData(MilkCollection milkCollection) {
+        return mDbHelper.deleteMilkCollectionData(milkCollection);
     }
 }

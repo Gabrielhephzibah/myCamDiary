@@ -21,9 +21,11 @@ import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
+import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
 import com.enyata.camdiary.databinding.ActivityOfflineSavedDataBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
+import com.enyata.camdiary.ui.login.LoginActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.dataSurveySavedData.DataSurveySavedDataFragement;
 import com.enyata.camdiary.ui.offlinecollection.savedData.milkCollectionSavedData.MilkCollectionSavedDataFragment;
@@ -49,7 +51,6 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
     Fragment dataCollection = new DataSurveySavedDataFragement();
     ImageView home,savedData,logout,backToDashboard;
     MilkCollectionSavedDataFragment milkCollectionSavedDataFragment;
-
 
 
     @Override
@@ -142,6 +143,14 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 //        MilkCollectionSavedDataFragment fragmente =  (MilkCollectionSavedDataFragment) getSupportFragmentManager().findFragmentById(R.id.bdsRecyclerView);
     }
@@ -209,7 +218,27 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
     }
 
     @Override
+    public void onLoginCollectionError(Throwable throwable) {
+
+    }
+
+    @Override
     public void onGetCdsUploadResponse(List<CdsDataCollection> cdsDataCollections) {
+
+    }
+
+    @Override
+    public void onGetPdsUploadResponse(List<PdsDataCollection> cdsDataCollections) {
+
+    }
+
+    @Override
+    public void onGetBdsUploadResponse(List<BdsDataCollections> bdsDataCollections) {
+
+    }
+
+    @Override
+    public void onGetCollectionUploadResponse(List<MilkCollection> milkCollections) {
 
     }
 
@@ -224,7 +253,27 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
     }
 
     @Override
+    public void onSubmitCollectionError(Throwable throwable) {
+
+    }
+
+    @Override
     public void onLoginPDSResponse(CamLoginResponse response) {
+
+    }
+
+    @Override
+    public void onLoginBDSResponse(CamLoginResponse response) {
+
+    }
+
+    @Override
+    public void onLoginCollectionResponse(CamLoginResponse response) {
+
+    }
+
+    @Override
+    public void onMilkCollectionResponse(List<MilkCollection> milkCollections) {
 
     }
 

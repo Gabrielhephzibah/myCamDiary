@@ -109,7 +109,6 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 
     @Override
     public void handleError(Throwable throwable) {
-
         if (throwable != null ) {
             try {
                 ANError error = (ANError) throwable;
@@ -119,7 +118,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
                 }else {
                     Alert.showFailed(getApplicationContext(),"Unable to connect to the internet");
                 }
-            }catch (IllegalStateException | JsonSyntaxException|NullPointerException exception){
+            }catch (IllegalStateException | JsonSyntaxException|NullPointerException|ClassCastException exception){
                 exception.printStackTrace();
                 Log.i("ERROR", exception.getMessage());
                 Alert.showFailed(getApplicationContext(),"An unknown error has occurred");
@@ -149,12 +148,12 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             TextView today = activityCollectionDashboardBinding.today;
 
             today.setText(dashboardViewModel.getCurrentDate());
-            firstName = getIntent().getStringExtra("first_name");
-            lastName = getIntent().getStringExtra("last_name");
-            coperateName = getIntent().getStringExtra("coperate_name");
-            verification_number = getIntent().getStringExtra("farmer_id");
+//            firstName = getIntent().getStringExtra("first_name");
+//            lastName = getIntent().getStringExtra("last_name");
+//            coperateName = getIntent().getStringExtra("coperate_name");
+//            verification_number = getIntent().getStringExtra("farmer_id");
 
-            fullName = firstName + " " + lastName;
+//            fullName = firstName + " " + lastName;
 
             username.setText(String.format("Hey,%s", dashboardViewModel.getFirstName()));
 
@@ -285,7 +284,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
 //        Log.i("RESPONSE", todayCollectionResponse.getData().toString());
         try {
             for (Collection response : todayCollectionResponse.getData()) {
-                dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName() + "  " + response.getFarmer().getLastName(), response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolume() + " litres"));
+                dashboardCollectorLists.add(new DashboardCollectorList(response.getFarmer().getFirstName() + "  " + response.getFarmer().getLastName(), response.getFarmer().getCooperativeName(), response.getFarmer().getVerificationId(), response.getStatusOfCollection(), response.getVolumeCollected() + " litres"));
                 DashboardCollectorAdapter dashboardCollectorAdapter = new DashboardCollectorAdapter(DashboardActivity.this, dashboardCollectorLists);
                 listView.setAdapter(dashboardCollectorAdapter);
             }

@@ -31,6 +31,8 @@ import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerDetails.FarmerDetailsActivity;
 import com.enyata.camdiary.ui.collections.farmer.farmerId.FarmerIdActivity;
 import com.enyata.camdiary.ui.collections.history.HistoryActivity;
+import com.enyata.camdiary.ui.collections.newentervolume.NewEnterVolumeActivity;
+import com.enyata.camdiary.ui.collections.rejection.newreason.NewReasonActivity;
 import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.ui.collections.statusofcollection.StatusOfCollectionActivity;
@@ -57,6 +59,7 @@ import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editCdsOffline
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.editPdsOffline.EditPdsOfflineViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.pdsoffline.PdsOfflineActivity;
+import com.enyata.camdiary.ui.offlinecollection.offlineMilkCollection.milkRejectionOffline.MilkRejectionOfflineActivity;
 import com.enyata.camdiary.ui.offlinecollection.savedData.OfflineSavedDataActivity;
 import com.enyata.camdiary.ui.password.ResetPasswordActivity;
 import com.enyata.camdiary.ui.scanbarcode.aggregatorScanBarCode.AggregatorScanBarCode;
@@ -251,5 +254,14 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract CollectorCollectionActivity bindCollectorCollectionActivity();
+
+    @ContributesAndroidInjector
+    abstract MilkRejectionOfflineActivity bindMilkRejectionOfflineActivity();
+
+    @ContributesAndroidInjector
+    abstract NewEnterVolumeActivity bindNewEnterVolumeActivity();
+
+    @ContributesAndroidInjector
+    abstract NewReasonActivity bindNewReasonActivity();
 
 }

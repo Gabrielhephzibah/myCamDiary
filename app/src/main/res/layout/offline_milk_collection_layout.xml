@@ -26,15 +26,20 @@
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:boxStrokeWidth="10dp"
+                android:inputType="text|textCapCharacters"
                 app:hintTextAppearance="@style/MyAppearance"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/farmerId"
                     android:layout_width="match_parent"
+                    android:maxLines="1"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_sans_light"
                     android:hint="Farmer's ID"
+                    android:textAllCaps="true"
+                    android:inputType="text"
                     android:textColor="#21523C"
                     android:textCursorDrawable="@null" />
 
@@ -42,7 +47,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
@@ -71,10 +76,13 @@
                         app:passwordToggleTint="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/milkVolume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/azo_sans_light"
-                            android:hint="Churn ID"
+                            android:hint="Volume"
+                            android:maxLines="1"
+                            android:inputType="numberDecimal"
                             android:textColor="#21523C"
                             android:textCursorDrawable="@null" />
 
@@ -99,10 +107,13 @@
                         app:passwordToggleTint="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
+                           android:id="@+id/churnId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/azo_sans_light"
-                            android:hint="Volume"
+                            android:hint="Churn ID"
+                            android:maxLines="1"
+                            android:inputType="number"
                             android:textColor="#21523C"
                             android:textCursorDrawable="@null" />
 
@@ -111,6 +122,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/addMore"
                         android:layout_marginTop="5dp"
                        android:layout_alignParentRight="true"
                         android:layout_width="35dp"
@@ -144,11 +156,13 @@
                 android:layout_marginTop="20dp"/>
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
                 <RadioButton
+                    android:id="@+id/acceptRadioBtn"
                     android:layout_marginLeft="73dp"
                     android:layout_width="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
@@ -157,6 +171,7 @@
                     android:text="Accept"/>
 
                 <RadioButton
+                    android:id="@+id/rejectRadioButton"
                     android:layout_marginLeft="75dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -170,42 +185,15 @@
 
             </LinearLayout>
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="15dip"-->
-<!--                app:boxCornerRadiusBottomEnd="8dp"-->
-<!--                app:boxCornerRadiusBottomStart="8dp"-->
-<!--                app:boxCornerRadiusTopEnd="8dp"-->
-<!--                app:boxCornerRadiusTopStart="8dp"-->
-<!--                app:boxStrokeColor="@color/colorPrimary"-->
-<!--                app:boxStrokeWidth="10dp"-->
-<!--                app:hintTextAppearance="@style/MyAppearance"-->
-<!--                app:passwordToggleEnabled="true"-->
-<!--                app:passwordToggleTint="@color/colorPrimary">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/azo_sans_light"-->
-<!--                    android:hint="Status"-->
-<!--                    android:textColor="#21523C"-->
-<!--                    android:textCursorDrawable="@null" />-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
             <Button
-                android:id="@+id/signin"
-                android:layout_width="match_parent"
+                android:id="@+id/saveCollection"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="110dip"
                 android:layout_marginTop="34dip"
-                android:layout_marginRight="110dip"
                 android:background="@drawable/hover_button"
                 android:fontFamily="@font/azo_san"
-                android:text="Sign In"
+                android:text="Save"
                 android:textAllCaps="false"
                 android:textColor="@drawable/changing_text"
                 android:textSize="16sp"

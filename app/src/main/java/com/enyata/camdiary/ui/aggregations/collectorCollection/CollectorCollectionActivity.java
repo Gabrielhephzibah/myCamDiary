@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +56,7 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
 
     @Override
     public void onViewMore() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this,R.style.DialogStyle);
        LayoutInflater inflater = CollectorCollectionActivity.this.getLayoutInflater();
         View view =  inflater.inflate(R.layout.view_more_layout,null);
         alertBuilder.setView(view);

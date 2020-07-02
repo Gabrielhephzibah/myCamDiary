@@ -10,6 +10,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
 import com.enyata.camdiary.data.model.api.response.AggregationCollectionResponse;
@@ -79,6 +80,15 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<NewCollectionResponse> doCreateCollection(Collection.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.NEW_COLLECTION)
+                .addBodyParameter(request)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> newCreateCollection(NewCreateCollectionRequest request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.NEW_COLLECTION)
                 .addBodyParameter(request)
                 .addHeaders(mApiHeader.getProtectedApiHeader())

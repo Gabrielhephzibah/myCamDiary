@@ -1,0 +1,291 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.collections.newentervolume.NewEnterVolumeActivity">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.enyata.camdiary.ui.collections.newentervolume.NewEnterVolumeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="32dp"
+                                android:layout_marginTop="30dp"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/back"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:onClick="@{() -> viewModel.onBack()}"
+                                    android:src="@drawable/ic_green_arrow" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="0.03"
+                                    android:text="Enter"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="30sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/azo_san"
+                                    android:letterSpacing="0.03"
+                                    android:text="Volume"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="30sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="29dp"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginRight="29dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <com.google.android.material.textfield.TextInputLayout
+                                                android:id="@+id/milkTextBox"
+                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:boxCornerRadiusBottomEnd="8dp"
+                                                app:boxCornerRadiusBottomStart="8dp"
+                                                app:boxCornerRadiusTopEnd="8dp"
+                                                app:boxCornerRadiusTopStart="8dp"
+                                                app:boxStrokeColor="@color/colorPrimary"
+                                                app:boxStrokeWidth="10dp"
+                                                app:hintTextAppearance="@style/MyAppearance"
+                                                app:passwordToggleEnabled="true"
+                                                app:passwordToggleTint="@color/colorPrimary">
+
+                                                <com.google.android.material.textfield.TextInputEditText
+                                                    android:id="@+id/milkVolume"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:fontFamily="@font/azo_sans_light"
+                                                    android:hint="Volume"
+                                                    android:inputType="numberDecimal"
+                                                    android:textColor="#21523C"
+                                                    android:textCursorDrawable="@null" />
+
+                                            </com.google.android.material.textfield.TextInputLayout>
+
+                                            <com.google.android.material.textfield.TextInputLayout
+                                                android:id="@+id/churn"
+                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="18dp"
+                                                android:layout_toRightOf="@+id/milkTextBox"
+                                                android:layout_weight="1"
+                                                app:boxCornerRadiusBottomEnd="8dp"
+                                                app:boxCornerRadiusBottomStart="8dp"
+                                                app:boxCornerRadiusTopEnd="8dp"
+                                                app:boxCornerRadiusTopStart="8dp"
+                                                app:boxStrokeColor="@color/colorPrimary"
+                                                app:boxStrokeWidth="10dp"
+                                                app:hintTextAppearance="@style/MyAppearance"
+                                                app:passwordToggleEnabled="true"
+                                                app:passwordToggleTint="@color/colorPrimary">
+
+                                                <com.google.android.material.textfield.TextInputEditText
+                                                    android:id="@+id/churnId"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:fontFamily="@font/azo_sans_light"
+                                                    android:hint="Churn ID"
+                                                    android:inputType="text"
+                                                    android:textColor="#21523C"
+                                                    android:textCursorDrawable="@null" />
+
+                                            </com.google.android.material.textfield.TextInputLayout>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/addMore"
+                                            android:layout_width="35dp"
+                                            android:layout_height="47dp"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@drawable/one_side_radius"
+                                            android:gravity="center">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_add_more" />
+                                        </LinearLayout>
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+                                <!--                                <com.google.android.material.textfield.TextInputLayout-->
+                                <!--                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+                                <!--                                    android:layout_width="match_parent"-->
+                                <!--                                    android:layout_height="wrap_content"-->
+                                <!--                                    app:hintTextAppearance= "@style/MyAppearance"-->
+                                <!--                                    app:boxStrokeColor="@color/colorPrimary"-->
+                                <!--                                    app:boxStrokeWidth="10dp"-->
+                                <!--                                    app:boxCornerRadiusBottomEnd="8dp"-->
+                                <!--                                    app:boxCornerRadiusBottomStart="8dp"-->
+                                <!--                                    android:layout_marginTop="17dip"-->
+                                <!--                                    app:boxCornerRadiusTopEnd="8dp"-->
+                                <!--                                    app:boxCornerRadiusTopStart="8dp">-->
+
+                                <!--                                    <com.google.android.material.textfield.TextInputEditText-->
+                                <!--                                        android:id="@+id/volumeEditText"-->
+                                <!--                                        android:layout_height="wrap_content"-->
+                                <!--                                        android:layout_width="match_parent"-->
+                                <!--                                        android:hint="Volume"-->
+                                <!--                                        android:fontFamily="@font/azo_sans_light"-->
+                                <!--                                        android:inputType="text"-->
+                                <!--                                        android:textColor="#21523C"-->
+                                <!--                                        android:textCursorDrawable= "@null" />-->
+
+                                <!--                                </com.google.android.material.textfield.TextInputLayout>-->
+
+
+                                <Button
+                                    android:id="@+id/acceptVolume"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="100dip"
+                                    android:layout_marginTop="40dip"
+                                    android:layout_marginRight="100dip"
+                                    android:background="@drawable/bg_and_nobg_button"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:onClick="@{() -> viewModel.onAccept()}"
+                                    android:text="Accept"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+
+                                <Button
+                                    android:id="@+id/rejectVolume"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="100dip"
+                                    android:layout_marginTop="24dip"
+                                    android:layout_marginRight="100dip"
+                                    android:background="@drawable/bg_and_nobg_button"
+                                    android:fontFamily="@font/azo_san_bold"
+                                    android:onClick="@{() -> viewModel.onReject()}"
+                                    android:text="Reject"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/down"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include
+                        layout="@layout/clear_cow_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true">
+
+                    </include>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/address_looking_up"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

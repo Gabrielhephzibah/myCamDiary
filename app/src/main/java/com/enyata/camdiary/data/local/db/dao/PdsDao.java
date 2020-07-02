@@ -25,7 +25,6 @@ public interface PdsDao {
     @Update
     Completable updatePdsData(PdsDataCollection pdsData);
 
-
     @Delete
     Completable deletePdsData(PdsDataCollection pdsData);
 

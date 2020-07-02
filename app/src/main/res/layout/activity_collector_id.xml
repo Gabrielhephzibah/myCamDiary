@@ -90,6 +90,8 @@
                         android:id="@+id/collectorId"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:maxLines="1"
+                        android:inputType="text"
                         android:backgroundTint="@color/colorPrimary"
                         android:textColor="#fff"
                         android:textColorHint="#fff"
