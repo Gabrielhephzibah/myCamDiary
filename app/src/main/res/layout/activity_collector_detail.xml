@@ -193,12 +193,10 @@
                 <Button
                     android:onClick="@{() -> viewModel.onProceed()}"
                     android:id="@+id/proceed"
-                    android:layout_width="match_parent"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dip"
                     android:layout_marginTop="40dip"
                     android:layout_gravity="center"
-                    android:layout_marginRight="100dip"
                     android:background="@drawable/hover_button"
                     android:text="Proceed"
                     android:fontFamily="@font/azo_san_bold"

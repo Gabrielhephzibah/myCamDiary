@@ -290,6 +290,7 @@ public class DashboardActivity extends BaseActivity<ActivityCollectionDashboardB
             }
         }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
 
             Log.i("An Unknown error ", e.getMessage());
         }

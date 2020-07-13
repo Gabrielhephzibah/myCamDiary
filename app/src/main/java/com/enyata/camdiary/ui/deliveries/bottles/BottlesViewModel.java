@@ -47,5 +47,9 @@ public class BottlesViewModel extends BaseViewModel<BottlesNavigator> {
         onCleared();
    }
 
+   public  String getCustomerPhoneNo(){
+        return  getDataManager().getCustomerPhoneNo();
+   }
+
 
 }

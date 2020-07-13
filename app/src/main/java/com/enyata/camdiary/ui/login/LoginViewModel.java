@@ -3,12 +3,15 @@
 package com.enyata.camdiary.ui.login;
 
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.utils.CommonUtils;
 import com.enyata.camdiary.utils.rx.SchedulerProvider;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * Created by Sanni Michael on 10/12/2019.
@@ -37,7 +40,8 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     setIsLoading(false);
-                    getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_IN);
+                    try {
+                        getDataManager().updateLoginStatus(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_IN);
                     getNavigator().onResponse(response);
                     String token = response.getData().getToken();
                     String userEmail = response.getData().getEmail();
@@ -60,6 +64,10 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     }else if (response.getData().getUserType().equals("data collector")){
                         getNavigator().goToDashBoard("data collector");
                         getDataManager().setLoggedInView("data collector");
+                    }
+                    }catch (NullPointerException | IllegalStateException | ClassCastException | JsonSyntaxException exception){
+                        Log.d("USERTYPE", "uSER_TYPE DOES NOT EXIST");
+                        getNavigator().onCatchError();
                     }
 
                 }, throwable -> {

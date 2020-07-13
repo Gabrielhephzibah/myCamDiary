@@ -94,6 +94,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_REJECTED_VOLUME = "PREF_KEY_REJECTED_VOLUME";
 
+    private static final String PREF_KEY_CUSTOMER_PHONE_NO = "PREF_KEY_CUSTOMER_PHONE_NO";
+
 
 
 
@@ -460,6 +462,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public String getRejectedVolumee() {
         return mPrefs.getString(PREF_KEY_REJECTED_VOLUME,null);
+    }
+
+    @Override
+    public void setCustomerPhoneNo(String customerPhoneNo) {
+        mPrefs.edit().putString(PREF_KEY_CUSTOMER_PHONE_NO,customerPhoneNo).apply();
+    }
+
+    @Override
+    public String getCustomerPhoneNo() {
+        return mPrefs.getString(PREF_KEY_CUSTOMER_PHONE_NO,null);
     }
 
 }

@@ -49,6 +49,9 @@ public abstract class BaseViewModel<N> extends ViewModel {
         super.onCleared();
     }
 
+
+
+
     public CompositeDisposable getCompositeDisposable() {
         return mCompositeDisposable;
     }

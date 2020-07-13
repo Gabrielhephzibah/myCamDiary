@@ -33,6 +33,7 @@ import com.enyata.camdiary.ui.scanbarcode.collectorScanBarcode.CollectorScanBarC
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.zxing.Result;
 
 import javax.inject.Inject;
@@ -207,18 +208,25 @@ public class DataCollectorBarcodeActivity extends BaseActivity<ActivityDataColle
     public void handleError(Throwable throwable) {
         progressDialog.dismiss();
         Log.i("ERRORR", "ERROR");
-        if (throwable != null ) {
-            ANError error = (ANError) throwable;
-            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
-            if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
-                onResume();
-            }else {
-                Alert.showFailed(getApplicationContext(),"Error Performing Operation, please try again later ");
-                Intent intent = new Intent(getApplicationContext(), DataScanCodeActivity.class);
-                startActivity(intent);
+        try {
+
+
+            if (throwable != null) {
+                ANError error = (ANError) throwable;
+                ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
+                if (error.getErrorBody() != null) {
+                    Alert.showFailed(getApplicationContext(), response.getMessage() + ", " + "Please enter a valid Id");
+                    onResume();
+                } else {
+                    Alert.showFailed(getApplicationContext(), "Error Performing Operation, please try again later ");
+                    Intent intent = new Intent(getApplicationContext(), DataScanCodeActivity.class);
+                    startActivity(intent);
+                }
+
             }
 
+        }catch (NullPointerException | ClassCastException | JsonSyntaxException | IllegalStateException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
     }

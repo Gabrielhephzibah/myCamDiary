@@ -200,7 +200,6 @@ public class PdsOfflineActivity extends BaseActivity<ActivityPdsOfflineBinding,P
         Log.i("Error",throwable.getMessage());
         Alert.showFailed(getApplicationContext(),"Error while saving data");
 
-
     }
 
 
@@ -209,6 +208,10 @@ public class PdsOfflineActivity extends BaseActivity<ActivityPdsOfflineBinding,P
             Alert.showFailed(getApplicationContext(), "first name is required");
         } else if (last_name.isEmpty()) {
             Alert.showFailed(getApplicationContext(), "last name is required");
+        } else if (first_name.length() < 3) {
+            Alert.showFailed(getApplicationContext(), "first name must be greater than three");
+        } else if (last_name.length() < 3) {
+            Alert.showFailed(getApplicationContext(), "last name must be greater than three");
         } else if (recommendation.isEmpty()) {
             Alert.showFailed(getApplicationContext(), "recommendation is required");
         } else if (phoneNo.isEmpty()) {

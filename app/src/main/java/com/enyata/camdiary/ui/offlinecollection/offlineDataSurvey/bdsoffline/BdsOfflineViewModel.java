@@ -58,19 +58,19 @@ public class BdsOfflineViewModel extends BaseViewModel<BdsOfflineNavigator> {
 
     }
 
-    public void getBdsData(){
-        setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
-                .getAllBdsData()
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    setIsLoading(false);
-                    getNavigator().onGetResponse(response);
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
-
-    }
+//    public void getBdsData(){
+//        setIsLoading(true);
+//        getCompositeDisposable().add(getDataManager()
+//                .getAllBdsData()
+//                .subscribeOn(getSchedulerProvider().io())
+//                .observeOn(getSchedulerProvider().ui())
+//                .subscribe(response -> {
+//                    setIsLoading(false);
+//                    getNavigator().onGetResponse(response);
+//                }, throwable -> {
+//                    setIsLoading(false);
+//                    getNavigator().handleError(throwable);
+//                }));
+//
+//    }
 }

@@ -10,6 +10,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
@@ -22,8 +23,10 @@ import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.ChurnDetails;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
@@ -367,6 +370,31 @@ public class AppApiHelper implements ApiHelper {
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectFlowable(DeliveryDetailResponse.class);
+    }
+
+    @Override
+    public Flowable<CollectorCollectionResponse>GetCollectorCollections(String collectorVerificationId) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.GET_COLLECTOR_COLLECTION + collectorVerificationId + "/" + "churns")
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(CollectorCollectionResponse.class);
+    }
+
+    @Override
+    public Flowable<ChurnDetails> getChurnDetails(String collectorVerificationId, String churnId) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.GET_CHURN_DETAILS + collectorVerificationId + "/" + "churns" + "/" + churnId)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectFlowable(ChurnDetails.class);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> newCreateAggregation(NewAggregationRequest.Request request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.CREATE_AGGREGATION)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(request)
+                .build()
+                .getObjectSingle(NewCollectionResponse.class);
     }
 
 

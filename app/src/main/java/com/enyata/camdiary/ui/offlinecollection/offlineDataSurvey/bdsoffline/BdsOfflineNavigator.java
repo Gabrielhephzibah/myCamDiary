@@ -15,5 +15,5 @@ public interface BdsOfflineNavigator {
     void onSubmitBds();
     void onResponse();
     void handleError(Throwable throwable);
-    void onGetResponse(List<BdsDataCollections> bdsDataCollection);
+//    void onGetResponse(List<BdsDataCollections> bdsDataCollection);
 }

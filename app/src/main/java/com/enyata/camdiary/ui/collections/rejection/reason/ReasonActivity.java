@@ -205,7 +205,7 @@ public class ReasonActivity extends BaseActivity<ActivityReasonBinding,ReasonVie
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException |NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

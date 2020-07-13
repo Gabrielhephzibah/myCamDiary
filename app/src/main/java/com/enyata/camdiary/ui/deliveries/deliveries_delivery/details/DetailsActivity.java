@@ -47,7 +47,7 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
     ArrayList<DeliveryItemList>deliveryItemLists = new ArrayList<>();
     DeliveryItemAdapter deliveryItemAdapter;
     TextView name;
-    String customerName;
+    String customerName,customerPhoneNumber;
     TextView addresss;
     TextView phoneNoo;
     ListView listView;
@@ -112,7 +112,10 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
         deliverButton.setVisibility(View.VISIBLE);
         detailsViewModel.setOrderId(String.valueOf(response.getData().getId()));
         customerName = response.getData().getDeliveryDetails().getFirstName()+" "+ response.getData().getDeliveryDetails().getLastName();
+        customerPhoneNumber = response.getData().getDeliveryDetails().getPhone();
         detailsViewModel.setCustomerName(customerName);
+        detailsViewModel.setCustomerPhoneNo(customerPhoneNumber);
+
         name.setText(String.format("%s %s", response.getData().getDeliveryDetails().getFirstName(), response.getData().getDeliveryDetails().getLastName()));
         addresss.setText(String.format("%s %s %s", response.getData().getDeliveryDetails().getAddress(), response.getData().getDeliveryDetails().getCity(), response.getData().getDeliveryDetails().getCountry()));
         phoneNoo.setText(response.getData().getDeliveryDetails().getPhone());
@@ -129,6 +132,7 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
         }
         }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
     }
@@ -147,7 +151,7 @@ public class DetailsActivity extends BaseActivity<ActivityDetailsBinding,Details
                 }
 
             }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException |NullPointerException |ClassCastException exception){
             Alert.showFailed(getApplicationContext(), "An unknown error occurred");
         }
 

@@ -22,6 +22,10 @@ public interface LoginNavigator {
 
     void onResponse(CamLoginResponse response);
 
+    void onCatchError();
+
+
+
 
 
 }

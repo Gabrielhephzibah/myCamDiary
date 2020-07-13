@@ -110,4 +110,23 @@ public class Details {
     public String getImageUrl() {
         return imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Details{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", contactAddress='" + contactAddress + '\'' +
+                ", userType='" + userType + '\'' +
+                ", verificationId='" + verificationId + '\'' +
+                ", cooperativeName='" + cooperativeName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", status='" + status + '\'' +
+                ", error='" + error + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

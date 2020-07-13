@@ -20,6 +20,7 @@ import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.myData.ChurnDetailsData;
 import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.response.NewCollectionResponse;
+import com.enyata.camdiary.data.remote.RetrofitClient;
 import com.enyata.camdiary.databinding.ActivityNewReasonBinding;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.entervolume.EnterVolumeActivity;
@@ -28,12 +29,19 @@ import com.enyata.camdiary.ui.collections.rejection.reason.ReasonActivity;
 import com.enyata.camdiary.ui.collections.rejection.rejectsuccess.RejectsuccessActivity;
 import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
+import com.google.gson.JsonSyntaxException;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
 
 public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,NewReasonViewModel>implements NewReasonNavigator {
     @Inject
@@ -49,6 +57,7 @@ public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,New
     String farmerName;
     String rejectionVolume;
     List<ChurnDetailsData>churnRejection;
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     EditText textarea;
     private String message;
@@ -188,6 +197,27 @@ public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,New
     public void handleError(Throwable throwable) {
         hideLoading();
         Log.d("ERROR","ERROR");
+        if (throwable!=null){
+            try {
+                if (throwable instanceof HttpException) {
+                    Log.i("HTTP", "HTTP");
+                    Converter<ResponseBody, NewCollectionResponse> errorConverter = retrofitClient.getRetrofit().responseBodyConverter(NewCollectionResponse.class, new Annotation[0]);
+                    try {
+                        NewCollectionResponse error = errorConverter.convert(((HttpException) throwable).response().errorBody());
+                        Alert.showFailed(getApplicationContext(), error.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+                    }
+
+                } else {
+                    Alert.showFailed(getApplicationContext(), "Unable to connect to internet");
+                }
+            } catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception) {
+                Alert.showFailed(getApplicationContext(), "An unknown error occurred");
+            }
+        }
+
 
 
     }

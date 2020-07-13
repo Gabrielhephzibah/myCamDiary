@@ -149,8 +149,6 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
     public void deliveryHistory(DeliveryHistoryResponseData response) {
         try {
 
-
-
         for (DeliveryHistoryResponse data : response.getData()) {
             String[] formatted = data.getDate().split(" ");
             String[] formattedDate = formatted[0].split("-");
@@ -178,6 +176,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
         }
     }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             Log.i("Unknown Error", e.getMessage());
         }
 
@@ -186,8 +185,6 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
 
     @Override
     public void handleError(Throwable throwable) {
-
-        Log.i("ERROR", throwable.getMessage());
         try {
         if (throwable != null) {
             ANError error = (ANError) throwable;
@@ -198,7 +195,7 @@ public class DeliveryHistoryActivity extends BaseActivity<ActivityDeliveryHistor
                 Alert.showFailed(getApplicationContext(), "Unable to connect to the Internet");
             }
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception){
             Alert.showFailed(getApplicationContext(), "An unknown error occurred");
         }
     }

@@ -204,7 +204,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException |ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }
@@ -312,6 +312,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
             }
         }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             Log.i("Unknown Error", e.getMessage());
         }
 

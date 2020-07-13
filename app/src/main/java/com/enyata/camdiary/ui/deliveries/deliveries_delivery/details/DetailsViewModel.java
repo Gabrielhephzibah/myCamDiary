@@ -52,5 +52,7 @@ public class DetailsViewModel extends BaseViewModel<DetailsNavigator> {
         getDataManager().setCustomerName(name);
     }
 
+    public void  setCustomerPhoneNo(String phoneNo){getDataManager().setCustomerPhoneNo(phoneNo);}
+
 
 }

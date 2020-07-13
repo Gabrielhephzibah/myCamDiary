@@ -79,6 +79,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
        EditText editText = activityBottlesBinding.editText;
        Log.i("ORDERID", bottlesViewModel.getOrderId());
        customerName = bottlesViewModel.getCustomerName();
+       Log.d("CUSTOMER PHONE NO", bottlesViewModel.getCustomerPhoneNo());
 
     }
 
@@ -89,7 +90,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
         dialog.setView(dialogView);
         dialog.setCancelable(false);
-        TextView cancel = dialogView.findViewById(R.id.cancel);
+        TextView cancel = dialogView.findViewById(R.id.cancelCollection);
         TextView continuee = dialogView.findViewById(R.id.continuee);
         TextView message = dialogView.findViewById(R.id.message);
         message.setText(String.format("You have just delivered CamDiary Product to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
@@ -138,7 +139,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
             }
         }
 
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException |ClassCastException |NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

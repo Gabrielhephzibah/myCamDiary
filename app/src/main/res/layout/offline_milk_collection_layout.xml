@@ -26,7 +26,7 @@
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:boxStrokeWidth="10dp"
-                android:inputType="text|textCapCharacters"
+                android:inputType="text"
                 app:hintTextAppearance="@style/MyAppearance"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/colorPrimary">
@@ -38,6 +38,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/azo_sans_light"
                     android:hint="Farmer's ID"
+                    android:lines="1"
                     android:textAllCaps="true"
                     android:inputType="text"
                     android:textColor="#21523C"
@@ -113,7 +114,7 @@
                             android:fontFamily="@font/azo_sans_light"
                             android:hint="Churn ID"
                             android:maxLines="1"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:textColor="#21523C"
                             android:textCursorDrawable="@null" />
 

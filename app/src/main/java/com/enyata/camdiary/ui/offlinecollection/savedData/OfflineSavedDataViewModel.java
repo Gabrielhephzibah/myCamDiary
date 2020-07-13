@@ -2,6 +2,7 @@ package com.enyata.camdiary.ui.offlinecollection.savedData;
 
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
@@ -14,6 +15,8 @@ import com.enyata.camdiary.data.model.db.BdsDataCollections;
 import com.enyata.camdiary.data.model.db.CdsDataCollection;
 import com.enyata.camdiary.data.model.db.MilkCollection;
 import com.enyata.camdiary.data.model.db.PdsDataCollection;
+import com.enyata.camdiary.data.remote.APIService;
+import com.enyata.camdiary.data.remote.ApiUtils;
 import com.enyata.camdiary.ui.base.BaseViewModel;
 import com.enyata.camdiary.ui.offlinecollection.offlineDataSurvey.cdsoffline.CdsOfflineNavigator;
 import com.enyata.camdiary.utils.CommonUtils;
@@ -23,11 +26,17 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNavigator> {
     public OfflineSavedDataViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
+
+    CompositeDisposable disposable = new CompositeDisposable();
+    private APIService mAPIService;
     public void onBackToDashboard(){
         getNavigator().onBackToDashboard();
     }
@@ -370,6 +379,77 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
 
     }
 
+    public void submitCdsDataCollection(CdsDataRequest.Request request, CdsDataCollection cdsDataCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .submitCdsDataQuestion(request)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onCdsUploadResponse(response, cdsDataCollection);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onSubmitCdsDataError(throwable);
+                }));
+
+    }
+
+
+    public void onSubmitBdsDataCollection(BdsDataRequest.Request request, BdsDataCollections bdsDataCollections){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .submitBdsDataQuestion(request)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onBdsUploadResponse(response,bdsDataCollections);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onSubmitCdsDataError(throwable);
+                }));
+
+    }
+
+
+    public void submitPdsDataCollection(PdsDataRequest.Request request, PdsDataCollection pdsDataCollection){
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .submitPdsDataQuestion(request)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().onPdsUploadResponse(response,pdsDataCollection);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().onSubmitCdsDataError(throwable);
+                }));
+
+    }
+
+
+    public void createMilkCollection(NewCreateCollectionRequest request, MilkCollection milkCollection) {
+        mAPIService = ApiUtils.getAPIService();
+        getCompositeDisposable().add(
+                mAPIService.createNewCollection(getDataManager().getAccessToken(),request )
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(response -> {
+                            getNavigator().onMilkCollectionUploadResponse(response, milkCollection);
+//                            Intent i = new Intent(getApplicationContext(), ResponseActivity.class);
+//                            startActivity(i);
+                            Log.i("RESPONSE","RESPONSE IS SUCESSFULK");
+                        },throwable -> {
+                            Log.i("Error","ERRROR");
+                            getNavigator().onSubmitCollectionError(throwable);
+
+//
+                        }));
+    }
+
+
     public String getCurrentDate(){
         return (String) DateFormat.format("dd-MM-yyyy", new java.util.Date());
     }
@@ -393,21 +473,39 @@ public class OfflineSavedDataViewModel extends BaseViewModel<OfflineSavedDataNav
         return  getDataManager().getAccessToken();
     }
 
-//    public Single<NewCollectionResponse>submitMilkCollection(NewCreateCollectionRequest.Request request){
-//        return getDataManager().newCreateCollection(request);
-//    }
-
-    public Single<Boolean> emptycheck(){
-        return  collection().isEmpty();
-    }
-
     public boolean checkifCdsIsEmpty() {
         return getCdsData() == null;
     }
+
+    public boolean checkIfBdsIsEmpty(){return  getBdsData() == null; }
+
+    public  boolean checkIfPdsIsEmpty(){return  getPdsData() == null;}
+
+    public  boolean checkIfMilkCollectionIsEmpty(){return getMilkCollectionData() == null;}
 
 
     public Flowable<List<CdsDataCollection>>getCdsData() {
         return getDataManager().getAllCdsData();
     }
+
+
+    public Flowable<List<BdsDataCollections>>getBdsData() {
+        return getDataManager().getAllBdsData();
+    }
+
+    public Flowable<List<PdsDataCollection>>getPdsData() {
+        return getDataManager().getAllPdsData();
+    }
+
+    public Flowable<List<MilkCollection>>getMilkCollectionData() {
+        return getDataManager().getAllMilkCollectionData();
+    }
+
+
+    public void dispose(){
+        onCleared();
+    }
+
+
 
 }

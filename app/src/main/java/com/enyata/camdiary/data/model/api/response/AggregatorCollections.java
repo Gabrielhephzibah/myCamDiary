@@ -13,10 +13,9 @@ public class AggregatorCollections {
     @SerializedName("volume")
     private int volume;
 
-
     @Expose
     @SerializedName("aggregator_id")
-    private int aggregatorId;
+    private String aggregatorId;
 
     @Expose
     @SerializedName("churn_no")
@@ -43,14 +42,13 @@ public class AggregatorCollections {
     private  String aggregationTotalVolume;
 
 
-
     public int getId() {
         return id;
     }
 
     public  int getVolume(){return volume;}
 
-    public  int getAggregatorId(){ return aggregatorId; }
+    public  String getAggregatorId(){ return aggregatorId; }
 
     public  int getChurnNo(){return churnNo;}
 

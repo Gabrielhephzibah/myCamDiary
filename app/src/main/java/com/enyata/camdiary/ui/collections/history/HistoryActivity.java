@@ -127,7 +127,7 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }
@@ -186,7 +186,11 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
     public void getCollectionHistory(CollectionHistoryResponse response) {
         try {
         for (CollectionHistory history : response.getData()) {
-            String date = history.getDate();
+            String[] formatted = history.getDate().split(" ");
+            String[] formattedDate = formatted[0].split("-");
+            String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
+
+//            String date = history.getDate();
             collectionList.add(new CollectorHistoryHeader(date));
             List<Collection> collectionHistory = history.getCollectionHistory();
             for (int i = 0; i < collectionHistory.size(); i++) {
@@ -206,8 +210,9 @@ public class HistoryActivity extends BaseActivity<ActivityHistoryBinding, Histor
 
     }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
 
-            Log.i("An Uknown ", e.getMessage());
+            Log.i("An Unknown ", e.getMessage());
         }
     }
 

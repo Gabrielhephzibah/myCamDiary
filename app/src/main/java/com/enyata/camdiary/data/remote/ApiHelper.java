@@ -12,6 +12,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
@@ -21,8 +22,10 @@ import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.ChurnDetails;
 import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
@@ -122,6 +125,12 @@ public interface ApiHelper {
     Flowable<GetCoperativeNameResponse>getCooperativeName();
 
     Flowable<DeliveryDetailResponse>getOrderDetails(String shopifyId);
+
+    Flowable<CollectorCollectionResponse>GetCollectorCollections(String collectorVerificationId);
+
+    Flowable<ChurnDetails>getChurnDetails(String collectorVerificationId, String churnId);
+
+    Single<NewCollectionResponse>newCreateAggregation(NewAggregationRequest.Request request);
 
 
 

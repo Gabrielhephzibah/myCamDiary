@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirm"
+                    android:text="Aggregation"
                     android:textSize="24sp"
                     android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/azo_san_bold"
@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Collected from"
+                android:text="Collector's Name"
                 android:letterSpacing="0.03"
                 android:textSize="7sp"
                 android:fontFamily="@font/azo_san"
@@ -134,12 +134,12 @@
 
                 <TextView
                     android:id="@+id/back"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/azo_san"
-                    android:text="BACK"
+                    android:text="HOME"
                     android:textStyle="bold"
                     android:textSize="14dp"/>
 
@@ -148,12 +148,12 @@
                     android:id="@+id/next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/back"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/azo_san"
                     android:text="NEXT"
-                    android:textStyle="bold"
-                    android:textSize="14dp"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>

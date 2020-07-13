@@ -80,6 +80,12 @@ public final class ApiEndPoint {
 
     public  static final  String GET_ORDER_DETAILS = BuildConfig.TRANSACTION_BASE_URL + "/order/dispatcher/assigned";
 
+    public  static final  String GET_COLLECTOR_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collection/";
+
+    public  static final  String GET_CHURN_DETAILS = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collection/";
+
+
+
 
 
     private ApiEndPoint() {

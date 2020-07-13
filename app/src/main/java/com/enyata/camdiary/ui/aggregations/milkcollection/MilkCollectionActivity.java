@@ -32,6 +32,7 @@ import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.nio.channels.CancelledKeyException;
 import java.util.zip.Inflater;
 
 import javax.inject.Inject;
@@ -185,7 +186,7 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
             }else{
                 Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
             }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException |ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }
@@ -207,6 +208,7 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
 
         }catch (NullPointerException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             Log.i("Error", e.getMessage());
         }
     }
@@ -234,7 +236,7 @@ public class MilkCollectionActivity extends BaseActivity<ActivityMilkCollectionB
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

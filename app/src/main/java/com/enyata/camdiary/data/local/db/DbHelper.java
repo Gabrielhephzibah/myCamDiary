@@ -49,6 +49,8 @@ public interface DbHelper {
 
     Completable deleteMilkCollectionData(MilkCollection milkCollection);
 
+    List<CdsDataCollection>getCdsDataAndUpload();
+
 
 
 

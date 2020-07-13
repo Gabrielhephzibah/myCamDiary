@@ -154,7 +154,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
         areaCouncil = activityBdsOfflineBinding.areaCouncilSpinner;
         coperativeName = activityBdsOfflineBinding.cooperativeName;
         animalFeedInterest = activityBdsOfflineBinding.animalFeedInterestSpinner;
-        bdsOfflineViewModel.getBdsData();
+//        bdsOfflineViewModel.getBdsData();
 
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(BdsOfflineActivity.this, android.R.layout.simple_spinner_item,genderOption);
         gender.setAdapter(genderAdapter);
@@ -362,7 +362,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
         }if (animalFeedInterest!=null && animalFeedInterest.getSelectedItem()!=null) {
             animalFeedInterestSelected = (String) animalFeedInterest.getSelectedItem();
         }
-        isEditTextValueEmpty(firstNameText,lastNameText,ageText,phoneNoText,adult18AboveText,communityNameText,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,milkPerDayText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,feedbackText,areaCouncilWardSelected,genderSelected,maritalStatusSelected,electoralWardSelected,marketDayText,milkConsumeText,recommendationText,below16Text,below16InSchText,childrenUnder18Text,animalFeedInterestSelected,farmerImageBitmap,familyNameText,copereativeNameText,animalFeedQuatityText);
+        isEditTextValueEmpty(firstNameText,lastNameText,ageText,phoneNoText,adult18AboveText,communityNameText,sourcesIncomeText,mainIncomeText,weekEarningText,monthlyEarningText,milkPerDayText,milkForSaleText,challengesText,cowInAbujaText,totalCowText,milkingCowText,feedbackText,areaCouncilWardSelected,genderSelected,maritalStatusSelected,electoralWardSelected,marketDayText,milkConsumeText,recommendationText,below16Text,below16InSchText,childrenUnder18Text,animalFeedInterestSelected,farmerImageBitmap,familyNameText,copereativeNameText);
 
         Log.i("FIRSTName",firstNameText);
         Log.i("LASTName",lastNameText);
@@ -423,11 +423,11 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
         }
 
     }
-
-    @Override
-    public void onGetResponse(List<BdsDataCollections> bdsDataCollection) {
-        Log.i("Success","Data" + bdsDataCollection);
-    }
+//
+//    @Override
+//    public void onGetResponse(List<BdsDataCollections> bdsDataCollection) {
+//        Log.i("Success","Data" + bdsDataCollection);
+//    }
 
     private boolean checkExternalPermission() {
         return (ContextCompat.checkSelfPermission(getApplicationContext().getApplicationContext(), WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
@@ -507,12 +507,17 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
     }
 
 
-    public void isEditTextValueEmpty(String first_name, String last_name, String age, String phoneNo, String adult18, String communityName,String sourcesOfIncome, String mainIncome, String weekEarn, String monthEarn, String milkPerDay, String milkForSale, String challenges,String abujaCow, String totalCow, String milkingCow,String feedback, String areaCouncil,String gender, String maritalStatus, String ward, String marketday, String householdConsp, String recommendation, String below16, String below16InSch, String childrenUnder18, String animalFeedInterest, String imageBitmap, String familname, String cooperativeName, String animalFeedQuantity){
+    public void isEditTextValueEmpty(String first_name, String last_name, String age, String phoneNo, String adult18, String communityName,String sourcesOfIncome, String mainIncome, String weekEarn, String monthEarn, String milkPerDay, String milkForSale, String challenges,String abujaCow, String totalCow, String milkingCow,String feedback, String areaCouncil,String gender, String maritalStatus, String ward, String marketday, String householdConsp, String recommendation, String below16, String below16InSch, String childrenUnder18, String animalFeedInterest, String imageBitmap, String familname, String cooperativeName){
         if (first_name.isEmpty()){
             Alert.showFailed(getApplicationContext(),"first name is required");
-        }else if (last_name.isEmpty()){
+        }else if (first_name.length() < 3) {
+            Alert.showFailed(getApplicationContext(), "first name must be greater than three");
+        } else if (last_name.isEmpty()){
             Alert.showFailed(getApplicationContext(),"last name is required");
-        }else if (age.isEmpty()){
+        }else if (last_name.length() < 3) {
+            Alert.showFailed(getApplicationContext(), "last name must be grater than three");
+        }
+        else if (age.isEmpty()){
             Alert.showFailed(getApplicationContext(),"age is required");
         }else if (phoneNo.isEmpty()){
             Alert.showFailed(getApplicationContext(),"phone number is required");
@@ -569,8 +574,6 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
             Alert.showFailed(getApplicationContext()," image  is required");
         }else if (familname.isEmpty()){
             Alert.showFailed(getApplicationContext()," family is required");
-        }else if (animalFeedQuantity.isEmpty()){
-            Alert.showFailed(getApplicationContext()," animal feed quantity is required");
         } else if (cooperativeName.isEmpty()){
             Alert.showFailed(getApplicationContext()," cooperative name is required");
         }else {
@@ -602,7 +605,14 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
             bdsDataCollection.setChildrenBelow16(below16Text);
             bdsDataCollection.setChildrenBelow16InSch(below16InSchText);
             bdsDataCollection.setChildrenUnder18(childrenUnder18Text);
-            bdsDataCollection.setBagsOfAnimalFeed(animalFeedQuatityText);
+            if (animalFeedQuatityText.isEmpty()){
+                bdsDataCollection.setBagsOfAnimalFeed("0");
+
+            }else {
+                bdsDataCollection.setBagsOfAnimalFeed(animalFeedQuatityText);
+            }
+
+
             bdsDataCollection.setAnimalFeedInterest(animalFeedInterestSelected);
             bdsDataCollection.setCooperativeName(copereativeNameText);
             bdsDataCollection.setFamilyName(familyNameText);

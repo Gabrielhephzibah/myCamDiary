@@ -34,7 +34,11 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.zxing.Result;
+
+import org.cloudinary.json.JSONString;
+import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -226,18 +230,23 @@ break;
     public void handleError(Throwable throwable) {
         progressDialog.dismiss();
         Log.i("ERRORR", "ERROR");
-        if (throwable != null ) {
-            ANError error = (ANError) throwable;
-            ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
-            if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getMessage()+ ", " + "Please enter a valid Id");
-                onResume();
-            }else {
-                Alert.showFailed(getApplicationContext(),"Error Performing Operation, please try again later ");
-                Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
-                startActivity(intent);
-            }
+        try {
 
+            if (throwable != null) {
+                ANError error = (ANError) throwable;
+                ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
+                if (error.getErrorBody() != null) {
+                    Alert.showFailed(getApplicationContext(), response.getMessage() + ", " + "Please enter a valid Id");
+                    onResume();
+                } else {
+                    Alert.showFailed(getApplicationContext(), "Error Performing Operation, please try again later ");
+                    Intent intent = new Intent(getApplicationContext(), BarcodeActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        }catch (ClassCastException |NullPointerException | JsonSyntaxException| IllegalStateException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
     }

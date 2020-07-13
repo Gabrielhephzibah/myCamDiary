@@ -138,7 +138,7 @@ public class AggregatorEditProfileActivity extends BaseActivity<ActivityAggregat
                 Alert.showFailed(getApplicationContext(), "Unable to Connect to the Internet");
             }
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException|NullPointerException|ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

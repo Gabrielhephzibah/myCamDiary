@@ -138,7 +138,7 @@ public class DeliveryEditProfileActivity extends BaseActivity<ActivityDeliveryEd
             }
         }
 
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

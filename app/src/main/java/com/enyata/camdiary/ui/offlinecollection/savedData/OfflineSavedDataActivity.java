@@ -47,8 +47,8 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
     ActivityOfflineSavedDataBinding activityOfflineSavedDataBinding;
     TabLayout tabLayout;
     LinearLayout toggleLayout;
-    Fragment milkCollection = new MilkCollectionSavedDataFragment();
-    Fragment dataCollection = new DataSurveySavedDataFragement();
+    Fragment milkCollection ;
+    Fragment dataCollection;
     ImageView home,savedData,logout,backToDashboard;
     MilkCollectionSavedDataFragment milkCollectionSavedDataFragment;
 
@@ -80,6 +80,8 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
         savedData = activityOfflineSavedDataBinding.included.offlineSavedData;
         logout = activityOfflineSavedDataBinding.included.offlineLogout;
         backToDashboard = activityOfflineSavedDataBinding.backToDashboard;
+        milkCollection = new MilkCollectionSavedDataFragment();
+        dataCollection = new DataSurveySavedDataFragement();
 
         tabLayout.addTab(tabLayout.newTab().setText("Data Collection"), true);
         tabLayout.addTab(tabLayout.newTab().setText("Milk Collection"));
@@ -132,6 +134,7 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), OfflineDashboardActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -140,6 +143,7 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), OfflineDashboardActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -148,6 +152,7 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -277,5 +282,30 @@ public class OfflineSavedDataActivity extends BaseActivity<ActivityOfflineSavedD
 
     }
 
+    @Override
+    public void onCdsUploadResponse(NewCollectionResponse response, CdsDataCollection cdsDataCollection) {
 
+    }
+
+    @Override
+    public void onBdsUploadResponse(NewCollectionResponse response, BdsDataCollections bdsDataCollections) {
+
+    }
+
+    @Override
+    public void onPdsUploadResponse(NewCollectionResponse response, PdsDataCollection pdsDataCollections) {
+
+    }
+
+    @Override
+    public void onMilkCollectionUploadResponse(NewCollectionResponse response, MilkCollection milkCollection) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ON DESTROY","ACTIVITY UNDESTROY CALLED");
+        offlineSavedDataViewModel.dispose();
+    }
 }

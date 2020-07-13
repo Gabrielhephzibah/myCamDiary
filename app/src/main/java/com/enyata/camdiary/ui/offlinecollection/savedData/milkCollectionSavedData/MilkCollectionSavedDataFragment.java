@@ -74,15 +74,14 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
     private MilkCollectionAdapter milkCollectionAdapter;
     RecyclerView milkCollectionRecyclerView;
     MilkCollection milkCollection;
-    AlertDialog alertDialog,milkCollectionDialog;
+    AlertDialog alertDialog, milkCollectionDialog;
     Button uploadMilkCollection;
     TextInputEditText password, email;
     String passWord, eMail;
-    private APIService mAPIService;
     TextView date;
     RelativeLayout forgotPassword;
     RetrofitClient retrofitClient = new RetrofitClient();
-    private final CompositeDisposable disposables = new CompositeDisposable();
+
 
 
     @Override
@@ -90,14 +89,15 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
         super.onCreate(savedInstanceState);
         offlineSavedDataViewModel = ViewModelProviders.of(requireActivity()).get(OfflineSavedDataViewModel.class);
         offlineSavedDataViewModel.setNavigator(this);
-        mAPIService = ApiUtils.getAPIService();
+
+
     }
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.milk_collection_saved_data_layout,container,false);
+        View view = inflater.inflate(R.layout.milk_collection_saved_data_layout, container, false);
         return view;
     }
 
@@ -111,19 +111,20 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
         addRecyclerViewDivider(milkCollectionRecyclerView);
         offlineSavedDataViewModel.getAllMilkCollection();
         date.setText(offlineSavedDataViewModel.getCurrentDate());
+
         uploadMilkCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = MilkCollectionSavedDataFragment.this.getLayoutInflater();
-                View viewItem = inflater.inflate(R.layout.offline_upload_modal,null);
+                View viewItem = inflater.inflate(R.layout.offline_upload_modal, null);
                 alertBuilder.setView(viewItem);
                 alertBuilder.setCancelable(false);
                 Button signInUpload = viewItem.findViewById(R.id.signInToUpload);
                 password = viewItem.findViewById(R.id.passwordTextView);
                 email = viewItem.findViewById(R.id.emailTextView);
 //                forgotPassword = viewItem.findViewById(R.id.forgotPasswordLayout);
-                TextView close  = viewItem.findViewById(R.id.close);
+                TextView close = viewItem.findViewById(R.id.close);
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -151,7 +152,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
                                         return;
                                     }
                                     hideKeyboard();
-                                    offlineSavedDataViewModel.loginToUploadCollection(eMail,passWord);
+                                    offlineSavedDataViewModel.loginToUploadCollection(eMail, passWord);
                                     FragmentUtils.showLoading(getActivity());
                                 } else {
                                     Alert.showInfo(getActivity(), "Password length must be seven or more");
@@ -162,8 +163,8 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
 
                             }
 
-                        }else {
-                            Alert.showFailed(getActivity(),"Please check your internet connection and try again");
+                        } else {
+                            Alert.showFailed(getActivity(), "Please check your internet connection and try again");
 
                         }
 
@@ -185,8 +186,8 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
 
     @Override
     public void handleError(Throwable throwable) {
-        if (throwable!=null){
-            Alert.showFailed(getActivity(),  "Error while processing request");
+        if (throwable != null) {
+            Alert.showFailed(getActivity(), "Error while processing request");
         }
 
     }
@@ -198,7 +199,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
 
     @Override
     public void onDeleteResponse() {
-        Alert.showSuccess(getActivity(),"Collection deleted Successfully");
+        Alert.showSuccess(getActivity(), "Collection deleted Successfully");
     }
 
     @Override
@@ -229,15 +230,15 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
             if (throwable != null) {
                 ANError error = (ANError) throwable;
                 ResetPasswordResponse response = gson.fromJson(error.getErrorBody(), ResetPasswordResponse.class);
-                if (error.getErrorBody()!= null){
-                    Alert.showFailed(getActivity(),response.getMessage());
-                }else {
+                if (error.getErrorBody() != null) {
+                    Alert.showFailed(getActivity(), response.getMessage());
+                } else {
 
                     Alert.showFailed(getActivity(), "Unable to connect to the Internet");
                 }
 
             }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        } catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception) {
             Alert.showFailed(getActivity(), "An unknown error occurred");
         }
 
@@ -262,8 +263,9 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
     @Override
     public void onGetCollectionUploadResponse(List<MilkCollection> milkCollections) {
         Log.i("MILKCollectionaSSSS", String.valueOf(milkCollections));
+
         try {
-            for (int i = 0; i<milkCollections.size();i++){
+            for (int i = 0; i < milkCollections.size(); i++) {
                 MilkCollection milkData = milkCollections.get(i);
                 milkCollection = milkCollectionAdapter.getData().get(i);
                 String farmerId = milkData.getFarmerId();
@@ -273,7 +275,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
                 String testThree = milkData.getTestThree();
                 String message = milkData.getMessage();
                 boolean approvedContainer = milkData.isApprovedContainer();
-                List<ChurnDetailsData>churnDetailsData = milkData.getChurnDetails();
+                List<ChurnDetailsData> churnDetailsData = milkData.getChurnDetails();
 //                Log.i("FarmerId",farmerId);
 //                Log.i("Status",status);
 //                Log.i("testOne",testOne);
@@ -283,37 +285,40 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
 //                Log.i("approvedContainer",String.valueOf(approvedContainer));
 //                Log.i("ChurnDetails",String.valueOf(churnDetailsData));
 
-                if (InternetConnection.getInstance(getActivity()).isOnline()){
+                if (InternetConnection.getInstance(getActivity()).isOnline()) {
+
+                    NewCreateCollectionRequest request = new NewCreateCollectionRequest(farmerId, status, testOne, testTwo, testThree, approvedContainer, message, churnDetailsData);
+                    offlineSavedDataViewModel.createMilkCollection(request,milkCollection);
                     FragmentUtils.showLoading(getActivity());
-                    NewCreateCollectionRequest request = new NewCreateCollectionRequest(farmerId,status,testOne,testTwo,testThree,approvedContainer,message,churnDetailsData);
-                    disposables.add( mAPIService.createNewCollection(offlineSavedDataViewModel.getAccesstoken(),request )
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(response -> {
-                                FragmentUtils.hideLoading();
-                                Alert.showSuccess(getActivity(),response.getResponseMessage());
-                                offlineSavedDataViewModel.deleteCollectionOnUpload(milkCollection);
-                                if (milkCollections.isEmpty()){
-                                    uploadMilkCollection.setVisibility(View.GONE);
-                                }else {
-                                    uploadMilkCollection.setVisibility(View.VISIBLE);
-                                }
 
-                                Log.i("RESPONSE","RESPONSE IS SUCESSFULK");
-                            },throwable -> {
-                                FragmentUtils.hideLoading();
-                                onSubmitCollectionError(throwable);
+//                    mAPIService = ApiUtils.getAPIService();
+//                    disposables.add(mAPIService.createNewCollection(offlineSavedDataViewModel.getAccesstoken(), request)
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe(response -> {
+//                                FragmentUtils.hideLoading();
+//                                Alert.showSuccess(getActivity(), response.getResponseMessage());
+//                                offlineSavedDataViewModel.deleteCollectionOnUpload(milkCollection);
+//                                if (milkCollections.isEmpty()) {
+//                                    uploadMilkCollection.setVisibility(View.GONE);
+//                                } else {
+//                                    uploadMilkCollection.setVisibility(View.VISIBLE);
+//                                }
+//
+//                                Log.i("RESPONSE", "RESPONSE IS SUCESSFULK");
+//                            }, throwable -> {
+//                                FragmentUtils.hideLoading();
+//                                onSubmitCollectionError(throwable);
+//
+//                            }));
 
-                            }));
-
-                }else {
-                    Alert.showFailed(getActivity(),"Unable to connect to the internet");
+                } else {
+                    Alert.showFailed(getActivity(), "Unable to connect to the internet");
                 }
 
 
-
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -327,28 +332,11 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
 
     @Override
     public void onSubmitCdsDataError(Throwable throwable) {
-//        Alert.showFailed(getActivity(),"Error");
-//        Log.i("THROWABLE",throwable.getMessage());
-//        try {
-//            if (throwable != null) {
-//                ANError error = (ANError) throwable;
-//                NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
-//                if (error.getErrorBody()!= null){
-//                    Alert.showFailed(getActivity(), response.getResponseMessage());
-//                    Alert.showFailed(getActivity(), response.getMessage());
-//                }
-//            }else{
-//                Alert.showFailed(getActivity(), " Unable to connect to the internet");
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException exception){
-//            Alert.showFailed(getActivity(), "An unknown error occurred");
-//        }
-
-
     }
 
     @Override
     public void onSubmitCollectionError(Throwable throwable) {
+        FragmentUtils.hideLoading();
         throwable.printStackTrace();
         try {
             if (throwable instanceof HttpException) {
@@ -384,7 +372,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
         FragmentUtils.hideLoading();
         milkCollectionDialog.cancel();
         AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
-        alertSuccess.setMessage(response.getMessage() + "!."+ "Continue with upload");
+        alertSuccess.setMessage(response.getMessage() + "!" + "Continue with upload");
         alertSuccess.setCancelable(false);
         alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "UPLOAD",
                 new DialogInterface.OnClickListener() {
@@ -406,16 +394,44 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
     @Override
     public void onMilkCollectionResponse(List<MilkCollection> milkCollections) {
         Log.i("MilkCollection", String.valueOf(milkCollections));
-        milkCollectionAdapter = new MilkCollectionAdapter(getActivity(),milkCollections,this);
+        milkCollectionAdapter = new MilkCollectionAdapter(getActivity(), milkCollections, this);
         milkCollectionRecyclerView.setAdapter(milkCollectionAdapter);
-        if (milkCollections.isEmpty()){
+        if (milkCollections.isEmpty()) {
             uploadMilkCollection.setVisibility(View.GONE);
         }
 
 
     }
 
-    public void addRecyclerViewDivider(RecyclerView recyclerView){
+    @Override
+    public void onCdsUploadResponse(NewCollectionResponse response, CdsDataCollection cdsDataCollection) {
+
+    }
+
+    @Override
+    public void onBdsUploadResponse(NewCollectionResponse response, BdsDataCollections bdsDataCollections) {
+
+    }
+
+    @Override
+    public void onPdsUploadResponse(NewCollectionResponse response, PdsDataCollection pdsDataCollections) {
+
+    }
+
+    @Override
+    public void onMilkCollectionUploadResponse(NewCollectionResponse response, MilkCollection milkCollection) {
+        FragmentUtils.hideLoading();
+        Alert.showSuccess(getActivity(), response.getResponseMessage());
+        offlineSavedDataViewModel.deleteCollectionOnUpload(milkCollection);
+        if (offlineSavedDataViewModel.checkIfMilkCollectionIsEmpty()) {
+            uploadMilkCollection.setVisibility(View.GONE);
+        } else {
+            uploadMilkCollection.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    public void addRecyclerViewDivider(RecyclerView recyclerView) {
         DividerItemDecoration divider = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.recycler_view_divider));
         recyclerView.addItemDecoration(divider);
@@ -425,23 +441,23 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
     public void deleteMilk(int position) {
         milkCollection = milkCollectionAdapter.getData().get(position);
         String farmerId = milkCollection.getFarmerId();
-        AlertDialog.Builder  builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = MilkCollectionSavedDataFragment.this.getLayoutInflater();
-        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal,null);
+        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal, null);
         builder.setView(view);
         builder.setCancelable(false);
         TextView deleteMessage = view.findViewById(R.id.deleteMessage);
         Button yes = view.findViewById(R.id.yes);
         Button no = view.findViewById(R.id.no);
-        String message = "Are you sure you want to delete\n" +  farmerId  + " from the collection list";
-        Spannable spannable=  new SpannableString(  message );
+        String message = "Are you sure you want to delete\n" + farmerId + " from the collection list";
+        Spannable spannable = new SpannableString(message);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#21523C")), message.indexOf(farmerId), message.indexOf(farmerId) + farmerId.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), message.indexOf(farmerId), message.indexOf(farmerId) + farmerId.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         deleteMessage.setText(spannable);
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             offlineSavedDataViewModel.deleteMilkCollection(milkCollection);
+                offlineSavedDataViewModel.deleteMilkCollection(milkCollection);
                 milkCollectionAdapter.deleteMilkData(position);
                 alertDialog.cancel();
             }
@@ -465,13 +481,13 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
     @Override
     public void detailMilk(int position) {
         milkCollection = milkCollectionAdapter.getData().get(position);
-        List<ChurnDetailsData>churnDetails = milkCollection.getChurnDetails();
+        List<ChurnDetailsData> churnDetails = milkCollection.getChurnDetails();
         String prefix = " ";
         String volumePrefix = " ";
         StringBuilder stringVolume = new StringBuilder();
         StringBuilder stringChurn = new StringBuilder();
-        Log.d("CHURNDETAIL",String.valueOf(churnDetails));
-        for (int i = 0; i< churnDetails.size(); i++ ){
+        Log.d("CHURNDETAIL", String.valueOf(churnDetails));
+        for (int i = 0; i < churnDetails.size(); i++) {
             ChurnDetailsData data = churnDetails.get(i);
             String volume = data.getVolume();
             String churnId = data.getChurnId();
@@ -481,14 +497,13 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
             stringChurn.append("\n");
 
 
-
             stringVolume.append(volume).append(" Litres");
             stringVolume.append("\n");
         }
 
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = MilkCollectionSavedDataFragment.this.getLayoutInflater();
-        View viewItem = inflater.inflate(R.layout.offline_collection_details_layout,null);
+        View viewItem = inflater.inflate(R.layout.offline_collection_details_layout, null);
         alertBuilder.setView(viewItem);
         alertBuilder.setCancelable(false);
         Button button = viewItem.findViewById(R.id.close);
@@ -496,7 +511,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
         TextView churnIdText = viewItem.findViewById(R.id.churnIdText);
         volumeText.setText(stringVolume);
         churnIdText.setText(stringChurn);
-        AlertDialog  alertDialog = alertBuilder.create();
+        AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -506,44 +521,25 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
             }
         });
 
-
-//        for (int i = 0; i< churnData.size(); i++ ){
-//            ChurnDetailsData churnDetails = churnData.get(i);
-//            String alertChurn= churnDetails.getChurnId() ;
-//            String alertVolume = churnDetails.getVolume() ;
-//            Log.i("ChurnId", alertChurn);
-//            Log.i("Volume",alertVolume);
-//            if (churnData.size() >1 && churnData.indexOf(churnDetails) == (churnData.size() -1)){
-//                stringChurn.append(" and ").append(alertChurn);
-//            }else {
-//                stringChurn.append(prefix);
-//                prefix = " , ";
-//                stringChurn.append(alertChurn);
-//            }
-//
-//            if (churnData.size() >1 && churnData.indexOf(churnDetails) == (churnData.size() -1)){
-//                stringVolume.append(" and ").append(alertVolume);
-//            }else {
-//                stringVolume.append(volumePrefix);
-//                volumePrefix = " , ";
-//                stringVolume.append(alertVolume);
-//            }
-//            alertMessage = "You have collected " + stringVolume + " litres of product with Churn_id of " + stringChurn + " respectively from " + farmerName + ".\nPlease tap continue to confirm Collection";
-//
-//        }
-
     }
 
     public void hideKeyboard() {
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
     }
 
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        Log.d("ON DESTROY","MILK COLLECTION FRAGMENT UNDESTROY CALLED");
+//        offlineSavedDataViewModel.dispose();
+//
+//    }
 
 
 }

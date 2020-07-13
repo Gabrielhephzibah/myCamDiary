@@ -16,4 +16,6 @@ public class FinishViewModel extends BaseViewModel<FinishNavigator> {
     public  String getCustomerName(){
         return getDataManager().getCustomerName();
     }
+
+    public String getCustomerPhoneNo(){return getDataManager().getCustomerPhoneNo();}
 }

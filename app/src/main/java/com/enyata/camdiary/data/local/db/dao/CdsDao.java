@@ -28,5 +28,8 @@ public interface CdsDao {
     @Delete
     Completable deleteCdsData(CdsDataCollection cdsData);
 
+    @Query("SELECT * FROM cds_data ORDER BY id DESC")
+    List<CdsDataCollection>getCdsListAndUpload();
+
 
 }

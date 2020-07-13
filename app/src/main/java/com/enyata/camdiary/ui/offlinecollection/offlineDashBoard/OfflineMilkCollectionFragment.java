@@ -49,23 +49,25 @@ public class OfflineMilkCollectionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         offlineDashboardViewModel = ViewModelProviders.of(requireActivity()).get(OfflineDashboardViewModel.class);
         if (!offlineDashboardViewModel.checkIfChurnDetailsIsEmpty()){
-            AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
-            alertSuccess.setMessage("Do you want to continue with unsaved volume and churn id?");
-            alertSuccess.setCancelable(false);
-            alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertSuccess.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
-                    dialogInterface.cancel();
-                }
-            });
-            alertSuccess.show();
+            offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
+
+//            AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
+//            alertSuccess.setMessage("Do you want to continue with unsaved volume and churn id?");
+//            alertSuccess.setCancelable(false);
+//            alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//            alertSuccess.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
+//                    dialogInterface.cancel();
+//                }
+//            });
+//            alertSuccess.show();
 
         }
     }
@@ -99,9 +101,12 @@ public class OfflineMilkCollectionFragment extends Fragment {
                     Alert.showFailed(getActivity(),"volume cannot be empty");
                     return;
                 }else if (TextUtils.isEmpty(milkChurn)){
-                    Alert.showFailed(getActivity(),"churn id cannot be empty");
+                    Alert.showFailed(getActivity(),"churn ID cannot be empty");
                     return;
-                }else {
+                }else if (milkChurn.length() >8 ){
+                    Alert.showFailed(getActivity(),"Churn ID must not exceed 8 characters");
+                }
+                else {
                     AlertDialog confirmationMessage = new AlertDialog.Builder(getActivity()).create();
                     confirmationMessage.setMessage("Are you sure you want to add more volume and churn ID");
                     confirmationMessage.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
@@ -152,10 +157,15 @@ public class OfflineMilkCollectionFragment extends Fragment {
                             Alert.showFailed(getActivity(),"Farmer ID cannot be empty");
                             radioGroup.clearCheck();
                             return;
-                        }else if (offlineDashboardViewModel.isChurnIdInArray()){
-                            Alert.showFailed(getActivity(),"Unsaved data contains churn id, please delete unsaved data and try again");
-                            radioGroup.clearCheck();
-                            return;
+                        }
+                        else if (offlineDashboardViewModel.isChurnIdInArray()){
+                            offlineDashboardViewModel.deleteChurnDetails(offlineDashboardViewModel.getChurnDetails());
+                            churnDetails = new ChurnDetailsData("0",milkVolume);
+                            offlineDashboardViewModel.saveChurnDetailsToLocalStorage(churnDetails);
+                            Intent intent = new Intent(getActivity(), MilkRejectionOfflineActivity.class);
+                            startActivity(intent);
+                            break;
+
                         }
                         else {
                            churnDetails = new ChurnDetailsData("0",milkVolume);
@@ -176,6 +186,7 @@ public class OfflineMilkCollectionFragment extends Fragment {
                 farmerIdText = farmerId.getText().toString().trim();
                 milkVolume =volume.getText().toString().trim();
                 milkChurn = churnId.getText().toString().trim();
+
                 if (TextUtils.isEmpty(farmerIdText)){
                     Alert.showFailed(getActivity(),"Farmer id is required");
                     return;
@@ -191,7 +202,10 @@ public class OfflineMilkCollectionFragment extends Fragment {
                 else if (radioGroup.getCheckedRadioButtonId() == -1){
                     Alert.showFailed(getActivity(),"Status cannot be empty");
                     return;
-                }else {
+                }else if (milkChurn.length() > 8){
+                    Alert.showFailed(getActivity(),"Churn ID must not exceed 8 characters");
+                }
+                else {
                     AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
                     alertSuccess.setMessage("Are you sure you want to save collection?");
                     alertSuccess.setCancelable(false);

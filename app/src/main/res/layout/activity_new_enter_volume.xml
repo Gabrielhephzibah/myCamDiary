@@ -211,12 +211,12 @@
 
                                 <Button
                                     android:id="@+id/acceptVolume"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="160dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginLeft="100dip"
+
                                     android:layout_marginTop="40dip"
-                                    android:layout_marginRight="100dip"
+
                                     android:background="@drawable/bg_and_nobg_button"
                                     android:fontFamily="@font/azo_san_bold"
                                     android:onClick="@{() -> viewModel.onAccept()}"
@@ -229,12 +229,12 @@
 
                                 <Button
                                     android:id="@+id/rejectVolume"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="160dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginLeft="100dip"
+
                                     android:layout_marginTop="24dip"
-                                    android:layout_marginRight="100dip"
+
                                     android:background="@drawable/bg_and_nobg_button"
                                     android:fontFamily="@font/azo_san_bold"
                                     android:onClick="@{() -> viewModel.onReject()}"

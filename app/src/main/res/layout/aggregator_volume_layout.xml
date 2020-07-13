@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:hint="Volume"
                 android:fontFamily="@font/azo_sans_light"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:textColor="#21523C"
                 android:textCursorDrawable= "@null" />
 
@@ -57,10 +57,9 @@
             android:layout_marginTop="36dp"
             android:layout_marginBottom="24dp">
 
-
             <TextView
                 android:id="@+id/back"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:fontFamily="@font/azo_san"
@@ -71,6 +70,19 @@
 
 
             <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/reject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/azo_san"
+                android:text="REJECT"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_alignParentRight="true"
                 android:id="@+id/accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

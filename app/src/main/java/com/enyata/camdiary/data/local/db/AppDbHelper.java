@@ -107,5 +107,10 @@ public class AppDbHelper implements DbHelper {
         return mAppDatabase.milkDao().deleteMilkCollection(milkCollection);
     }
 
+    @Override
+    public List<CdsDataCollection> getCdsDataAndUpload() {
+        return mAppDatabase.cdsDao().getCdsListAndUpload();
+    }
+
 
 }

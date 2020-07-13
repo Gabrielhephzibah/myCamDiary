@@ -91,22 +91,24 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
         Log.i("FramerId",newEnterVolumeViewModel.getFarmerVerificationNo());
 
         if (!newEnterVolumeViewModel.checkIfChurnDetailsIsEmpty()){
-            AlertDialog alertSuccess = new AlertDialog.Builder(NewEnterVolumeActivity.this).create();
-            alertSuccess.setMessage("Do you want to continue with unsaved volume and churn id?");
-            alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertSuccess.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    newEnterVolumeViewModel.deleteChurnDetails(newEnterVolumeViewModel.getChurnDetails());
-                    dialogInterface.cancel();
-                }
-            });
-            alertSuccess.show();
+            newEnterVolumeViewModel.deleteChurnDetails(newEnterVolumeViewModel.getChurnDetails());
+
+//            AlertDialog alertSuccess = new AlertDialog.Builder(NewEnterVolumeActivity.this).create();
+//            alertSuccess.setMessage("Do you want to continue with unsaved volume and churn id?");
+//            alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//            alertSuccess.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    newEnterVolumeViewModel.deleteChurnDetails(newEnterVolumeViewModel.getChurnDetails());
+//                    dialogInterface.cancel();
+//                }
+//            });
+//            alertSuccess.show();
         }
 
 
@@ -115,13 +117,17 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
             public void onClick(View view) {
                 volumeText = volume.getText().toString().trim();
                 churnIdText = churnId.getText().toString().trim();
+
                 if (TextUtils.isEmpty(volumeText)){
                     Alert.showFailed(getApplicationContext(),"Volume cannot be empty");
                     return;
                 }else if (TextUtils.isEmpty(churnIdText)){
                     Alert.showFailed(getApplicationContext(),"Churn Id cannot be empty");
                     return;
-                }else {
+                }else if (churnIdText.length() > 8){
+                    Alert.showFailed(getApplicationContext(),"Churn ID must not exceed 8 characters");
+                }
+                else {
                 AlertDialog alertSuccess = new AlertDialog.Builder(NewEnterVolumeActivity.this).create();
                 alertSuccess.setMessage("Are you sure you want to add more volume and churn ID");
                 alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
@@ -161,6 +167,9 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
         }else if (TextUtils.isEmpty(churnIdText)){
             Alert.showFailed(getApplicationContext(),"Enter Churn ID");
             return;
+        }else if (churnIdText.length()>8){
+            Alert.showFailed(getApplicationContext(),"Churn ID must not exceed 8 characters");
+
         }
         else {
             ChurnDetailsData churnDetailsData = new ChurnDetailsData(churnIdText,volumeText);
@@ -191,7 +200,11 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
                     volumePrefix = " , ";
                     stringVolume.append(alertVolume);
                 }
-                alertMessage = "You have collected " + stringVolume + " litres of product with Churn_id of " + stringChurn + " respectively from " + farmerName + ".\nPlease tap continue to confirm Collection";
+                if (churnData.size() > 1) {
+                    alertMessage = "You have collected " + stringVolume + " litres of product with Churn ID " + stringChurn + " respectively from " + farmerName + ".\nPlease tap continue to confirm Collection";
+                }else {
+                    alertMessage = "You have collected " + stringVolume + " litres of product with Churn ID " + stringChurn + " from " + farmerName + ".\nPlease tap continue to confirm Collection";
+                }
 
             }
              AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -264,8 +277,13 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
             Alert.showFailed(getApplicationContext(),"Churn id not allowed for rejection, churn id must be empty");
             return;
         }else if (newEnterVolumeViewModel.isChurnIdInArray()){
-            Alert.showFailed(getApplicationContext(),"Unsaved data contains churn id, please delete unsaved data and try again");
-            return;
+            newEnterVolumeViewModel.deleteChurnDetails(newEnterVolumeViewModel.getChurnDetails());
+            newEnterVolumeViewModel.setRejectedVolume(volumeText);
+            ChurnDetailsData rejected = new ChurnDetailsData("0",volumeText);
+            newEnterVolumeViewModel.saveChurnDetailsToLocalStorage(rejected);
+            Intent intent = new Intent(getApplicationContext(), NewReasonActivity.class);
+            startActivity(intent);
+
         }
         else {
             newEnterVolumeViewModel.setRejectedVolume(volumeText);
@@ -301,6 +319,7 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
                         Alert.showFailed(getApplicationContext(), error.getMessage());
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Alert.showFailed(getApplicationContext(),"An unknown error occurred");
                     }
 
                 } else {
@@ -341,5 +360,6 @@ public class NewEnterVolumeActivity extends BaseActivity<ActivityNewEnterVolumeB
     protected void onDestroy() {
         super.onDestroy();
         newEnterVolumeViewModel.dispose();
+        newEnterVolumeViewModel.onDisposableDispose();
     }
 }

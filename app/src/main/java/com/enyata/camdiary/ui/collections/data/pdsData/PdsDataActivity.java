@@ -184,7 +184,7 @@ public class PdsDataActivity extends BaseActivity<ActivityPdsDataBinding, PdsDat
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
 
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

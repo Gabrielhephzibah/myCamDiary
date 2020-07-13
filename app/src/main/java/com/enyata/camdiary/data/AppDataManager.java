@@ -14,6 +14,7 @@ import com.enyata.camdiary.data.model.api.request.CreateAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.DeliveryCollection;
 import com.enyata.camdiary.data.model.api.request.DispatcherSignUpRequest;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
+import com.enyata.camdiary.data.model.api.request.NewAggregationRequest;
 import com.enyata.camdiary.data.model.api.request.NewCreateCollectionRequest;
 import com.enyata.camdiary.data.model.api.request.PdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.ResetPasswordRequest;
@@ -25,7 +26,9 @@ import com.enyata.camdiary.data.model.api.request.Collection;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
+import com.enyata.camdiary.data.model.api.response.ChurnDetails;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
+import com.enyata.camdiary.data.model.api.response.CollectorCollectionResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
@@ -440,6 +443,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setCustomerPhoneNo(String customerPhoneNo) {
+        mPreferencesHelper.setCustomerPhoneNo(customerPhoneNo);
+    }
+
+    @Override
+    public String getCustomerPhoneNo() {
+        return mPreferencesHelper.getCustomerPhoneNo();
+    }
+
+    @Override
     public Single<CamLoginResponse> login(CamLogin.Request request) {
         return mApiHelper.login(request);
     }
@@ -616,6 +629,21 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Flowable<CollectorCollectionResponse> GetCollectorCollections(String collectorVerificationId) {
+        return mApiHelper.GetCollectorCollections(collectorVerificationId);
+    }
+
+    @Override
+    public Flowable<ChurnDetails> getChurnDetails(String collectorVerificationId, String churnId) {
+        return mApiHelper.getChurnDetails(collectorVerificationId,churnId);
+    }
+
+    @Override
+    public Single<NewCollectionResponse> newCreateAggregation(NewAggregationRequest.Request request) {
+        return mApiHelper.newCreateAggregation(request);
+    }
+
+    @Override
     public void setUserAsLoggedOut() {
 
     }
@@ -732,5 +760,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Completable deleteMilkCollectionData(MilkCollection milkCollection) {
         return mDbHelper.deleteMilkCollectionData(milkCollection);
+    }
+
+    @Override
+    public List<CdsDataCollection> getCdsDataAndUpload() {
+        return mDbHelper.getCdsDataAndUpload();
     }
 }

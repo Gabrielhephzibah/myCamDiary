@@ -258,10 +258,15 @@
     <style name="DialogTheme" parent="android:Theme.Dialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+
         <!-- No backgrounds, titles or window float -->
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/white</item>
+
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <style name="RoundedCornersDialog" parent="Theme.MaterialComponents.Dialog">

@@ -54,10 +54,12 @@ public class FinishActivity extends BaseActivity<ActivityFinishBinding,FinishVie
         activityFinishBinding = getViewDataBinding();
         TextView bottles =activityFinishBinding.bottles;
        TextView name = activityFinishBinding.customerName;
+       TextView phoneNumber = activityFinishBinding.phoneNumber;
        noOfBottles = getIntent().getStringExtra("Bottles");
         Log.i("BOTTLESSS", noOfBottles);
        bottles.setText(noOfBottles);
        name.setText(finishViewModel.getCustomerName());
+       phoneNumber.setText(finishViewModel.getCustomerPhoneNo());
 
     }
 

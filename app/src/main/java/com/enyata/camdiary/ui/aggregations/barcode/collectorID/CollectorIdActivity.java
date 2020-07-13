@@ -81,7 +81,7 @@ public class CollectorIdActivity extends BaseActivity<ActivityCollectorIdBinding
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException|NullPointerException|ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

@@ -33,8 +33,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -113,7 +118,7 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
@@ -167,13 +172,16 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
     public void getAggregationHistory(AggregationHistoryResponse response) {
         try {
 
-
             for (AggregationHistory history : response.getAggregationHistory()) {
-                String[] formatted = history.getDate().split(" ");
-                String[] formattedDate = formatted[0].split("-");
-                String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.ENGLISH);
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.ENGLISH);
+                Date date = inputFormat.parse(history.getDate());
+                String formattedDate = outputFormat.format(date);
+//                String[] formatted = history.getDate().split(" ");
+//                String[] formattedDate = formatted[0].split("-");
+//                String date = formattedDate[2] + "/" + formattedDate[1] + "/" + formattedDate[0];
 
-                aggregationList.add(new AggregationHistoryHeader(date));
+                aggregationList.add(new AggregationHistoryHeader(formattedDate));
                 List<AggregatorCollections> aggregatorCollections = history.getAggregatorCollections();
                 for (int i = 0; i < aggregatorCollections.size(); i++) {
                     AggregatorCollections collections = aggregatorCollections.get(i);
@@ -190,8 +198,9 @@ public class AggregatorHIstoryActivity extends BaseActivity<ActivityAggregatorHi
 
                 }
             }
-        }catch (NullPointerException e){
+        }catch (NullPointerException| ParseException e){
             e.printStackTrace();
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             Log.i("unknown error", e.getMessage());
         }
     }

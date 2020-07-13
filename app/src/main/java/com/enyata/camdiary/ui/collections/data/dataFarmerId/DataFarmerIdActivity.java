@@ -109,7 +109,7 @@ public class DataFarmerIdActivity extends BaseActivity<ActivityDataFarmerIdBindi
         }else{
             Alert.showFailed(getApplicationContext(), "Unable to connect to the internet");
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }

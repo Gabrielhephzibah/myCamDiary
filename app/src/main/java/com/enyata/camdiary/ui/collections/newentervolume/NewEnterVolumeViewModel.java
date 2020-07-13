@@ -143,6 +143,10 @@ public class NewEnterVolumeViewModel extends BaseViewModel<NewEnterVolumeNavigat
         onCleared();
     }
 
+    public void  onDisposableDispose(){
+        disposable.dispose();
+    }
+
     public void setRejectedVolume(String rejectedVolume){
         getDataManager().setRejectionVolumee(rejectedVolume);
     }

@@ -32,7 +32,10 @@ import com.enyata.camdiary.utils.Alert;
 import com.enyata.camdiary.utils.InternetConnection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.zxing.Result;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -214,7 +217,8 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
         progressDialog.dismiss();
         Log.i("ERRORRRR","FAILEEEEEDD");
         Log.i("ERRORR", "ERROR");
-        if (throwable != null ) {
+        try {
+            if (throwable != null ) {
             ANError error = (ANError) throwable;
             ResponseMessage response = gson.fromJson(error.getErrorBody(), ResponseMessage.class);
             if (error.getErrorBody()!= null){
@@ -227,6 +231,12 @@ public class AggregatorScanBarCode extends BaseActivity<ActivityAggregatorScanBa
             }
 
         }
+
+        }catch (JsonSyntaxException | NullPointerException | ClassCastException  | IllegalStateException exception){
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
+
+        }
+
     }
 
     @Override

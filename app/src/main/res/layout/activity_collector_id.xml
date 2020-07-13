@@ -122,12 +122,10 @@
         <Button
             android:onClick="@{() -> viewModel.onAccept()}"
             android:id="@+id/accept"
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="120dip"
             android:layout_marginTop="51dip"
-            android:layout_marginRight="120dip"
             android:background="@drawable/scan_barcode_button"
             android:fontFamily="@font/azo_san_bold"
             android:text="Accept"

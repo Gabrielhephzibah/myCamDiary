@@ -19,10 +19,9 @@ public class AggregatorHomepageAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if (position == 0){
+        if (position == 0) {
             return AggregatorSlideOneFragment.newInstance();
-        }else if (position == 1){
-            return  AggregatorSlideThreeFragment.newInstance();
+
         }else {
             return AggregatorSlideTwoFragment.newInstance();
         }
@@ -30,6 +29,6 @@ public class AggregatorHomepageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 }

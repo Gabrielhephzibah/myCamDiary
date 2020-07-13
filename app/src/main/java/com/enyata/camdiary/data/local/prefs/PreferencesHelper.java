@@ -152,6 +152,11 @@ public interface PreferencesHelper {
 
      String  getRejectedVolumee();
 
+     void setCustomerPhoneNo(String customerPhoneNo);
+
+     String getCustomerPhoneNo();
+
+
 
 
 

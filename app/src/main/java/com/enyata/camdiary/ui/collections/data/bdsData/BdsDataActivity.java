@@ -414,12 +414,12 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
+                Alert.showFailed(getApplicationContext(), response.getMessage());
             }
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
     }
@@ -607,7 +607,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
         }
 
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception){
             Alert.showFailed(getApplicationContext(),"An  unknown error occurred");
         }
     }

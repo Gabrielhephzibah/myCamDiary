@@ -10,6 +10,9 @@ public class SavedAggregationResponse {
     @SerializedName("collector_id")
     private String collectorId;
 
+    @Expose
+    @SerializedName("message")
+    private String message;
 
     @Expose
     @SerializedName("aggregation_collections")
@@ -22,5 +25,9 @@ public class SavedAggregationResponse {
 
     public  List<SavedAggregation>getAggregationCollection(){
         return aggregationCollection;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

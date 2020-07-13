@@ -85,40 +85,39 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class DataSurveySavedDataFragement extends Fragment implements OfflineSavedDataNavigator,CdsDataSurveyAdapter.onDataListener,PdsDataSurveyAdapter.onPdsDataListener,BdsDataSurveyAdapter.onBdsDataListener{
+public class DataSurveySavedDataFragement extends Fragment implements OfflineSavedDataNavigator,CdsDataSurveyAdapter.onDataListener,PdsDataSurveyAdapter.onPdsDataListener,BdsDataSurveyAdapter.onBdsDataListener {
     @Inject
     Gson gson = new Gson();
-     RelativeLayout openCds, openBds, openPds;
+    RelativeLayout openCds, openBds, openPds;
     LinearLayout cdsFragment, bdsFragment, pdsFragment;
     ImageView cdsToggleIcon, bdsToggleIcon, pdsToggleIcon;
-    RecyclerView cdsRecyclerView, pdsRecyclerView,bdsRecyclerview;
+    RecyclerView cdsRecyclerView, pdsRecyclerView, bdsRecyclerview;
     private OfflineSavedDataViewModel offlineSavedDataViewModel;
     private CdsDataCollection cdsDataCollection;
-    private Button uploadcds,uploadBds, uploadPds;
+    private Button uploadcds, uploadBds, uploadPds;
     private CdsDataSurveyAdapter cdsDataSurveyAdapter;
-    AlertDialog alertDialog,cdsDialog,bdsDialog,pdsDialog;
-    private   PdsDataCollection pdsDataCollection;
+    AlertDialog alertDialog, cdsDialog, bdsDialog, pdsDialog;
+    private PdsDataCollection pdsDataCollection;
     private PdsDataSurveyAdapter pdsDataSurveyAdapter;
     private BdsDataSurveyAdapter bdsDataSurveyAdapter;
     private BdsDataCollections bdsDataCollection;
     TextInputEditText password, email;
     Uri uri;
     Bitmap myBitmap;
-    TextView cdsDate,bdsDate,pdsDate;
+    TextView cdsDate, bdsDate, pdsDate;
     RelativeLayout forgotPassword;
-    String cloudImageUrl, cloudinaryId,cloudinaryImage;
-    private final CompositeDisposable disposables = new CompositeDisposable();
+    String cloudImageUrl, cloudinaryId, cloudinaryImage;
+    private CompositeDisposable disposables = new CompositeDisposable();
     String passWord, eMail;
 
 
-    public DataSurveySavedDataFragement(){
+    public DataSurveySavedDataFragement() {
         //leave
     }
 
     public static DataSurveySavedDataFragement newInstance() {
         return new DataSurveySavedDataFragement();
     }
-
 
 
     @Override
@@ -134,7 +133,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.data_survey_saved_data_layout,container, false);
+        View view = inflater.inflate(R.layout.data_survey_saved_data_layout, container, false);
         return view;
     }
 
@@ -162,7 +161,6 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         cdsDate.setText(offlineSavedDataViewModel.getCurrentDate());
 
 
-
         uploadcds = view.findViewById(R.id.uploadCds);
         uploadBds = view.findViewById(R.id.uploadBds);
         uploadPds = view.findViewById(R.id.uploadPds);
@@ -172,7 +170,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
             public void onClick(View view) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-                View viewItem = inflater.inflate(R.layout.offline_upload_modal,null);
+                View viewItem = inflater.inflate(R.layout.offline_upload_modal, null);
                 alertBuilder.setView(viewItem);
                 alertBuilder.setCancelable(false);
                 Button signInUpload = viewItem.findViewById(R.id.signInToUpload);
@@ -209,7 +207,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                                     }
 
                                     hideKeyboard();
-                                    offlineSavedDataViewModel.loginToUpload(eMail,passWord);
+                                    offlineSavedDataViewModel.loginToUpload(eMail, passWord);
                                     FragmentUtils.showLoading(getActivity());
                                 } else {
                                     Alert.showInfo(getActivity(), "Password length must be seven or more");
@@ -220,17 +218,16 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
                             }
 
-                        }else {
-                            Alert.showFailed(getActivity(),"Please check your internet connection and try again");
+                        } else {
+                            Alert.showFailed(getActivity(), "Please check your internet connection and try again");
 
                         }
 
 
-
                         Log.i("Email", eMail);
-                        Log.i("Password",passWord);
+                        Log.i("Password", passWord);
 
-                        Log.i("UPLOAD","Upload");
+                        Log.i("UPLOAD", "Upload");
                     }
                 });
                 cdsDialog = alertBuilder.create();
@@ -244,7 +241,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
             public void onClick(View view) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-                View viewItem = inflater.inflate(R.layout.offline_upload_modal,null);
+                View viewItem = inflater.inflate(R.layout.offline_upload_modal, null);
                 alertBuilder.setView(viewItem);
                 alertBuilder.setCancelable(false);
                 Button signInUpload = viewItem.findViewById(R.id.signInToUpload);
@@ -258,7 +255,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 //                        startActivity(intent);
 //                    }
 //                });
-                TextView close  = viewItem.findViewById(R.id.close);
+                TextView close = viewItem.findViewById(R.id.close);
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -278,7 +275,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                                         return;
                                     }
                                     hideKeyboard();
-                                    offlineSavedDataViewModel.loginToUploadPDS(eMail,passWord);
+                                    offlineSavedDataViewModel.loginToUploadPDS(eMail, passWord);
                                     FragmentUtils.showLoading(getActivity());
                                 } else {
                                     Alert.showInfo(getActivity(), "Password length must be seven or more");
@@ -289,8 +286,8 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
                             }
 
-                        }else {
-                            Alert.showFailed(getActivity(),"Please check your internet connection and try again");
+                        } else {
+                            Alert.showFailed(getActivity(), "Please check your internet connection and try again");
 
                         }
 
@@ -310,7 +307,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
             public void onClick(View view) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-                View viewItem = inflater.inflate(R.layout.offline_upload_modal,null);
+                View viewItem = inflater.inflate(R.layout.offline_upload_modal, null);
                 alertBuilder.setView(viewItem);
                 alertBuilder.setCancelable(false);
                 Button signInUpload = viewItem.findViewById(R.id.signInToUpload);
@@ -324,7 +321,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 //                        startActivity(intent);
 //                    }
 //                });
-                TextView close  = viewItem.findViewById(R.id.close);
+                TextView close = viewItem.findViewById(R.id.close);
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -344,7 +341,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                                         return;
                                     }
                                     hideKeyboard();
-                                    offlineSavedDataViewModel.loginToUploadBDS(eMail,passWord);
+                                    offlineSavedDataViewModel.loginToUploadBDS(eMail, passWord);
                                     FragmentUtils.showLoading(getActivity());
                                 } else {
                                     Alert.showInfo(getActivity(), "Password length must be seven or more");
@@ -355,8 +352,8 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
                             }
 
-                        }else {
-                            Alert.showFailed(getActivity(),"Please check your internet connection and try again");
+                        } else {
+                            Alert.showFailed(getActivity(), "Please check your internet connection and try again");
 
                         }
 
@@ -386,10 +383,10 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         openCds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cdsFragment.getVisibility() == View.GONE){
+                if (cdsFragment.getVisibility() == View.GONE) {
                     cdsFragment.setVisibility(View.VISIBLE);
                     cdsToggleIcon.setImageResource(R.drawable.ic_expand_less_icon);
-                }else {
+                } else {
                     cdsFragment.setVisibility(View.GONE);
                     cdsToggleIcon.setImageResource(R.drawable.ic_expand_more_icon);
                 }
@@ -401,10 +398,10 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         openBds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (bdsFragment.getVisibility() == View.GONE){
+                if (bdsFragment.getVisibility() == View.GONE) {
                     bdsFragment.setVisibility(View.VISIBLE);
                     bdsToggleIcon.setImageResource(R.drawable.ic_expand_less_icon);
-                }else {
+                } else {
                     bdsFragment.setVisibility(View.GONE);
                     bdsToggleIcon.setImageResource(R.drawable.ic_expand_more_icon);
                 }
@@ -415,10 +412,10 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         openPds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (pdsFragment.getVisibility() == View.GONE){
+                if (pdsFragment.getVisibility() == View.GONE) {
                     pdsFragment.setVisibility(View.VISIBLE);
                     pdsToggleIcon.setImageResource(R.drawable.ic_expand_less_icon);
-                }else {
+                } else {
                     pdsFragment.setVisibility(View.GONE);
                     pdsToggleIcon.setImageResource(R.drawable.ic_expand_more_icon);
                 }
@@ -429,7 +426,6 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     }
 
 
-
     @Override
     public void onBackToDashboard() {
 
@@ -437,31 +433,31 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
     @Override
     public void handleError(Throwable throwable) {
-        if (throwable!=null){
-            Alert.showFailed(getActivity(),  "Error while processing request");
+        if (throwable != null) {
+            Alert.showFailed(getActivity(), "Error while processing request");
         }
     }
 
     @Override
     public void onGetResponse(List<CdsDataCollection> cdsDataCollection) {
-        cdsDataSurveyAdapter = new CdsDataSurveyAdapter(getActivity(),cdsDataCollection,this);
+        cdsDataSurveyAdapter = new CdsDataSurveyAdapter(getActivity(), cdsDataCollection, this);
         cdsRecyclerView.setAdapter(cdsDataSurveyAdapter);
-        if (cdsDataCollection.isEmpty()){
+        if (cdsDataCollection.isEmpty()) {
             uploadcds.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onDeleteResponse() {
-        Log.i("DELETESUCCESSFUL","DELETESucessful");
-        Alert.showSuccess(getActivity()," Data deleted successfully!");
+        Log.i("DELETESUCCESSFUL", "DELETESucessful");
+        Alert.showSuccess(getActivity(), " Data deleted successfully!");
     }
 
     @Override
     public void onGetPdsResponse(List<PdsDataCollection> pdsDataCollections) {
-        pdsDataSurveyAdapter = new PdsDataSurveyAdapter(getActivity(),pdsDataCollections,this);
+        pdsDataSurveyAdapter = new PdsDataSurveyAdapter(getActivity(), pdsDataCollections, this);
         pdsRecyclerView.setAdapter(pdsDataSurveyAdapter);
-        if (pdsDataCollections.isEmpty()){
+        if (pdsDataCollections.isEmpty()) {
             uploadPds.setVisibility(View.GONE);
         }
 
@@ -469,9 +465,10 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
     @Override
     public void onGetBdsResponse(List<BdsDataCollections> bdsDataCollections) {
-        bdsDataSurveyAdapter = new BdsDataSurveyAdapter(getActivity(),bdsDataCollections,this);
+        Log.d("SAVED BDS FIRST", "GET AND SHOW ON RECYCLERVIEW");
+        bdsDataSurveyAdapter = new BdsDataSurveyAdapter(getActivity(), bdsDataCollections, this);
         bdsRecyclerview.setAdapter(bdsDataSurveyAdapter);
-        if (bdsDataCollections.isEmpty()){
+        if (bdsDataCollections.isEmpty()) {
             uploadBds.setVisibility(View.GONE);
         }
         Log.i("Success", "SUCESSFULL" + bdsDataCollections);
@@ -482,13 +479,14 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         FragmentUtils.hideLoading();
         cdsDialog.cancel();
         AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
-        alertSuccess.setMessage(loginResponse.getMessage() + "!."+ "Continue with upload");
+        alertSuccess.setMessage(loginResponse.getMessage() + "!." + "Continue with upload");
         alertSuccess.setCancelable(false);
         alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "UPLOAD",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                      offlineSavedDataViewModel.getAllCdsDataAndUpload();
+                        offlineSavedDataViewModel.getAllCdsDataAndUpload();
                         dialog.dismiss();
+
                     }
                 });
         alertSuccess.setButton(AlertDialog.BUTTON_NEGATIVE, "BACK", new DialogInterface.OnClickListener() {
@@ -504,13 +502,13 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     @Override
     public void onLoginError(Throwable throwable) {
         FragmentUtils.hideLoading();
-        if (cdsDialog!=null){
+        if (cdsDialog != null) {
             cdsDialog.cancel();
         }
-        if (bdsDialog!=null){
+        if (bdsDialog != null) {
             bdsDialog.cancel();
         }
-        if (pdsDialog!=null){
+        if (pdsDialog != null) {
             pdsDialog.cancel();
         }
 //        cdsDialog.cancel();
@@ -519,15 +517,15 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
             if (throwable != null) {
                 ANError error = (ANError) throwable;
                 ResetPasswordResponse response = gson.fromJson(error.getErrorBody(), ResetPasswordResponse.class);
-                if (error.getErrorBody()!= null){
-                    Alert.showFailed(getActivity(),response.getMessage());
-                }else {
+                if (error.getErrorBody() != null) {
+                    Alert.showFailed(getActivity(), response.getMessage());
+                } else {
 
                     Alert.showFailed(getActivity(), "Unable to connect to the Internet");
                 }
 
             }
-        }catch (IllegalStateException | JsonSyntaxException  | NullPointerException | ClassCastException  exception){
+        } catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception) {
             Alert.showFailed(getActivity(), "An unknown error occurred");
         }
 
@@ -541,59 +539,42 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     @Override
     public void onGetCdsUploadResponse(List<CdsDataCollection> cdsDataCollections) {
         try {
-            for (int i =  0 ; i <cdsDataCollections.size(); i++){
+            for (int i = 0; i < cdsDataCollections.size(); i++) {
                 CdsDataCollection cdsDataNew = cdsDataCollections.get(i);
                 cdsDataCollection = cdsDataSurveyAdapter.getData().get(i);
-                 String firstName = cdsDataNew.getFirstName();
-                 String lastName = cdsDataNew.getLastName();
-                 String gender = cdsDataNew.getGender();
-                 String age = cdsDataNew.getAge();
-                 String PhoneNumber = cdsDataNew.getPhone_no();
-                 String maritalStatus = cdsDataNew.getMarital_status();
-                 String adult18 = cdsDataNew.getAdult18Above();
-                 String electoralWard = cdsDataNew.getElectoralWard();
-                 String areaCouncil = cdsDataNew.getAreaCouncil();
-                 String communityName = cdsDataNew.getCommunityName();
-                 String Income = cdsDataNew.getIncome();
-                 String sourceOfcome = cdsDataNew.getSourcesOfIncome();
-                 String weeklyEarn = cdsDataNew.getWeekEarning();
-                 String monthlyEarn = cdsDataNew.getMonthlyEarning();
-                 String milkPerDay = cdsDataNew.getLitresOfMilkPerDay();
-                 String milkForSale = cdsDataNew.getMilkForSale();
-                 String challenges = cdsDataNew.getMilkChallenges();
-                 String cowInAbuja = cdsDataNew.getCowInAbuja();
-                 String totalCow = cdsDataNew.getTotalCow();
-                 String milkingCow = cdsDataNew.getMilkingCow();
-                 String feedback = cdsDataNew.getFeedback();
-                if (InternetConnection.getInstance(getActivity()).isOnline()){
-                    FragmentUtils.showLoading(getActivity());
+                String firstName = cdsDataNew.getFirstName();
+                String lastName = cdsDataNew.getLastName();
+                String gender = cdsDataNew.getGender();
+                String age = cdsDataNew.getAge();
+                String PhoneNumber = cdsDataNew.getPhone_no();
+                String maritalStatus = cdsDataNew.getMarital_status();
+                String adult18 = cdsDataNew.getAdult18Above();
+                String electoralWard = cdsDataNew.getElectoralWard();
+                String areaCouncil = cdsDataNew.getAreaCouncil();
+                String communityName = cdsDataNew.getCommunityName();
+                String Income = cdsDataNew.getIncome();
+                String sourceOfcome = cdsDataNew.getSourcesOfIncome();
+                String weeklyEarn = cdsDataNew.getWeekEarning();
+                String monthlyEarn = cdsDataNew.getMonthlyEarning();
+                String milkPerDay = cdsDataNew.getLitresOfMilkPerDay();
+                String milkForSale = cdsDataNew.getMilkForSale();
+                String challenges = cdsDataNew.getMilkChallenges();
+                String cowInAbuja = cdsDataNew.getCowInAbuja();
+                String totalCow = cdsDataNew.getTotalCow();
+                String milkingCow = cdsDataNew.getMilkingCow();
+                String feedback = cdsDataNew.getFeedback();
+                if (InternetConnection.getInstance(getActivity()).isOnline()) {
                     CdsDataRequest.Request request = new CdsDataRequest.Request(firstName, lastName, gender, age, maritalStatus, PhoneNumber, electoralWard, areaCouncil, communityName, Income, sourceOfcome, weeklyEarn, monthlyEarn, adult18, milkPerDay, milkForSale, challenges, cowInAbuja, totalCow, milkingCow, feedback);
-                    disposables.add( offlineSavedDataViewModel
-                          .submitCdsData(request)
-                            .subscribeOn(Schedulers.io())
-                          .observeOn(AndroidSchedulers.mainThread())
-                          .subscribe(response ->  {
-                              FragmentUtils.hideLoading();
-                            Alert.showSuccess(getActivity(),response.getResponseMessage());
-                              offlineSavedDataViewModel.deleteDataOnUpload(cdsDataCollection);
-                              if (cdsDataCollections.isEmpty()){
-                                  uploadcds.setVisibility(View.GONE);
-                              }else {
-                                  uploadcds.setVisibility(View.VISIBLE);
-                              }
-
-                    },throwable -> {
-                              FragmentUtils.hideLoading();
-                              onSubmitCdsDataError(throwable);
-                    }));
-                }else {
-                    Alert.showFailed(getActivity(),"Unable to connect to the internet");
+                    offlineSavedDataViewModel.submitCdsDataCollection(request,cdsDataCollection);
+                    FragmentUtils.showLoading(getActivity());
+                } else {
+                    Alert.showFailed(getActivity(), "Unable to connect to the internet");
                 }
 
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -603,7 +584,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     public void onGetPdsUploadResponse(List<PdsDataCollection> pdsDataCollections) {
         Log.i("ALL PDS DATA", String.valueOf(pdsDataCollections));
         try {
-            for (int i = 0; i<pdsDataCollections.size(); i++){
+            for (int i = 0; i < pdsDataCollections.size(); i++) {
                 PdsDataCollection pdsData = pdsDataCollections.get(i);
                 pdsDataCollection = pdsDataSurveyAdapter.getData().get(i);
                 String farmerVerificationId = pdsData.getFarmerId();
@@ -614,193 +595,172 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                 String market = pdsData.getMarketDays();
                 String milkPerday = pdsData.getLitresOfMilkPerDay();
                 String houseHoldConsume = pdsData.getHouseHoldConsumption();
-                String  milkForSale = pdsData.getMilkForSale();
+                String milkForSale = pdsData.getMilkForSale();
                 String challenges = pdsData.getMilkChallenges();
                 String abujaCow = pdsData.getCowInAbuja();
                 String totalCow = pdsData.getTotalCow();
                 String milkingCow = pdsData.getMilkingCow();
                 String recommend = pdsData.getRecommendations();
                 String feedback = pdsData.getFeedback();
-                if (InternetConnection.getInstance(getActivity()).isOnline()){
+                if (InternetConnection.getInstance(getActivity()).isOnline()) {
                     FragmentUtils.showLoading(getActivity());
-                    PdsDataRequest.Request request = new PdsDataRequest.Request(farmerVerificationId,sourcesIncome,mainIncome,weekEarning,monthEarning,market,milkPerday,houseHoldConsume,milkForSale,challenges,abujaCow,totalCow,milkingCow,recommend,feedback);
-                    disposables.add( offlineSavedDataViewModel
-                            .submitPDSData(request)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(response ->  {
-                                FragmentUtils.hideLoading();
-                                Alert.showSuccess(getActivity(),response.getResponseMessage());
-                                offlineSavedDataViewModel.deletePdsOnUpload(pdsDataCollection);
-                                if (pdsDataCollections.isEmpty()){
-                                    uploadPds.setVisibility(View.GONE);
-                                }else {
-                                    uploadPds.setVisibility(View.VISIBLE);
-                                }
-
-                            },throwable -> {
-                                FragmentUtils.hideLoading();
-                                onSubmitCdsDataError(throwable);
-                            }));
-                }else {
-                    Alert.showFailed(getActivity(),"Unable to connect to the internet");
+                    PdsDataRequest.Request request = new PdsDataRequest.Request(farmerVerificationId, sourcesIncome, mainIncome, weekEarning, monthEarning, market, milkPerday, houseHoldConsume, milkForSale, challenges, abujaCow, totalCow, milkingCow, recommend, feedback);
+                    offlineSavedDataViewModel.submitPdsDataCollection(request, pdsDataCollection);
+                    FragmentUtils.showLoading(getActivity());
+                } else {
+                    Alert.showFailed(getActivity(), "Unable to connect to the internet");
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
     @Override
     public void onGetBdsUploadResponse(List<BdsDataCollections> bdsDataCollections) {
-        Log.i("ALL  BDS DATA", String.valueOf(bdsDataCollections));
+        Log.d("BDS DATA ON SECOND", "GET FOR UPLOAD");
         try {
-            for (int i = 0; i<bdsDataCollections.size(); i++){
+            for (int i = 0; i < bdsDataCollections.size(); i++) {
                 BdsDataCollections bdsData = bdsDataCollections.get(i);
 
                 bdsDataCollection = bdsDataSurveyAdapter.getData().get(i);
+                String firstName = bdsData.getFirstName();
+                String lastName = bdsData.getLastName();
+                String age = bdsData.getAge();
+                String familyName = bdsData.getFamilyName();
+                String phoneNo = bdsData.getPhoneNo();
+                String childrenUnder18 = bdsData.getChildrenUnder18();
+                String below16 = bdsData.getChildrenBelow16();
+                String adult18Above = bdsData.getAdult18Above();
+                String below16InSch = bdsData.getChildrenBelow16InSch();
+                String communityName = bdsData.getCommunityName();
+                String sourcesIncome = bdsData.getSourcesOfIncome();
+                String mainIncome = bdsData.getMainIncome();
+                String weekEarning = bdsData.getWeekEarning();
+                String monthlyEarning = bdsData.getMonthlyEarning();
+                String marketDay = bdsData.getMarketDays();
+                String milkPerDay = bdsData.getLitresOfMilkPerDay();
+                String milkConsume = bdsData.getHouseHoldConsumption();
+                String milkForSale = bdsData.getMilkForSale();
+                String challenges = bdsData.getMilkChallenges();
+                String cowInAbuja = bdsData.getCowInAbuja();
+                String totalCow = bdsData.getTotalCow();
+                String milkingCow = bdsData.getMilkingCow();
+                String animalFeedQuatity = bdsData.getBagsOfAnimalFeed();
+                String recommendation = bdsData.getRecommendations();
+                String copereativeName = bdsData.getCooperativeName();
+                String feedback = bdsData.getFeedback();
+                String electoralWard = bdsData.getElectoralWard();
+                String areaCouncilWard = bdsData.getAreaCouncil();
+                String gender = bdsData.getGender();
+                String maritalStatus = bdsData.getMarital_status();
+                String animalFeedInterest = bdsData.getAnimalFeedInterest();
+                String farmerImageBitmap = bdsData.getImageUrl();
 
 
-            String firstName = bdsData.getFirstName();
-            String lastName = bdsData.getLastName();
-            String age = bdsData.getAge();
-            String familyName = bdsData.getFamilyName();
-            String phoneNo = bdsData.getPhoneNo();
-            String childrenUnder18 = bdsData.getChildrenUnder18();
-            String below16 = bdsData.getChildrenBelow16();
-            String adult18Above = bdsData.getAdult18Above();
-            String below16InSch = bdsData.getChildrenBelow16InSch();
-            String communityName = bdsData.getCommunityName();
-            String sourcesIncome = bdsData.getSourcesOfIncome();
-            String mainIncome = bdsData.getMainIncome();
-            String weekEarning = bdsData.getWeekEarning();
-            String monthlyEarning = bdsData.getMonthlyEarning();
-            String marketDay = bdsData.getMarketDays();
-            String milkPerDay = bdsData.getLitresOfMilkPerDay();
-            String milkConsume = bdsData.getHouseHoldConsumption();
-            String milkForSale = bdsData.getMilkForSale();
-            String challenges = bdsData.getMilkChallenges();
-            String cowInAbuja = bdsData.getCowInAbuja();
-            String totalCow = bdsData.getTotalCow();
-            String milkingCow = bdsData.getMilkingCow();
-            String animalFeedQuatity = bdsData.getBagsOfAnimalFeed();
-            String recommendation = bdsData.getRecommendations();
-            String copereativeName = bdsData.getCooperativeName();
-            String feedback = bdsData.getFeedback();
-            String electoralWard = bdsData.getElectoralWard();
-            String areaCouncilWard = bdsData.getAreaCouncil();
-            String gender = bdsData.getGender();
-            String maritalStatus = bdsData.getMarital_status();
-            String animalFeedInterest = bdsData.getAnimalFeedInterest();
-            String farmerImageBitmap  = bdsData.getImageUrl();
-
-
-                if (bdsData.getImageUrl()!=null){
-                    String farmerImageUri  = bdsData.getImageUrl();
+                if (bdsData.getImageUrl() != null) {
+                    String farmerImageUri = bdsData.getImageUrl();
                     uri = Uri.parse(farmerImageUri);
                     try {
-                        myBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),uri);
+                        myBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                         Log.i("Bitmappp", String.valueOf(myBitmap));
 
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            myBitmap.compress(Bitmap.CompressFormat.JPEG , 20, byteArrayOutputStream);
-                            byte[] partImage = byteArrayOutputStream.toByteArray();
-                            FragmentUtils.showLoading(getActivity());
-                            MediaManager.get().upload(partImage)
-                                    .option("resource_type", "image")
-                                    .unsigned("ht7lodiw")
-                                    .callback(new UploadCallback() {
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+                        byte[] partImage = byteArrayOutputStream.toByteArray();
+                        FragmentUtils.showLoading(getActivity());
+                        MediaManager.get().upload(partImage)
+                                .option("resource_type", "image")
+                                .unsigned("ht7lodiw")
+                                .callback(new UploadCallback() {
 
-                                        @Override
-                                        public void onStart(String requestId) {
-                                            Log.i("START", "STARTTTTT");
-                                          FragmentUtils.showLoading(getActivity());
-
-
-                                        }
-
-                                        @Override
-                                        public void onProgress(String requestId, long bytes, long totalBytes) {
-                                            Double progress = (double) bytes / totalBytes;
-                                            FragmentUtils.showLoading(getActivity());
-                                            Log.i("PROGRESS", "PROGRESS");
-
-                                        }
-
-                                        @Override
-                                        public void onSuccess(String requestId, Map resultData) {
-                                            if (resultData != null) {
-                                                Log.i("SUCCESS", "SUCCESS");
-                                               FragmentUtils.hideLoading();
-                                                cloudImageUrl = (String) resultData.get("url");
-                                                cloudinaryId = (String) resultData.get("public_id").toString();
-                                                cloudinaryImage = MediaManager.get().url().transformation(new Transformation()).resourceType("image").generate(cloudinaryId + ".jpg");
-                                                Alert.showSuccess(getActivity(),"Image uploaded successfully");
-                                                Log.i("imageURL", cloudImageUrl);
-                                                Log.i("cloudinaryID", cloudinaryId);
-
-                                                if (InternetConnection.getInstance(getActivity()).isOnline()) {
-                                                    FragmentUtils.showLoading(getActivity());
-                                                    BdsDataRequest.Request request = new BdsDataRequest.Request(cloudImageUrl, firstName, lastName, gender, age, maritalStatus, familyName, phoneNo, electoralWard, areaCouncilWard, communityName, copereativeName, sourcesIncome, mainIncome, weekEarning, monthlyEarning, marketDay, childrenUnder18, below16, below16InSch, adult18Above, milkPerDay, milkConsume, milkForSale, challenges, cowInAbuja, totalCow, milkingCow, animalFeedInterest, animalFeedQuatity, recommendation, feedback);
-//                                                    bdsViewModel.onSubmitBdsDataQuestion(request);
-                                                    disposables.add( offlineSavedDataViewModel
-                                                            .submitBDSData(request)
-                                                            .subscribeOn(Schedulers.io())
-                                                            .observeOn(AndroidSchedulers.mainThread())
-                                                            .subscribe(response ->  {
-                                                                FragmentUtils.hideLoading();
-                                                                Alert.showSuccess(getActivity(),response.getResponseMessage());
-                                                                offlineSavedDataViewModel.deleteBdsOnUpload(bdsDataCollection);
-                                                                if (bdsDataCollections.isEmpty()){
-                                                                    uploadBds.setVisibility(View.GONE);
-                                                                }else {
-                                                                    uploadBds.setVisibility(View.VISIBLE);
-                                                                }
-
-                                                            },throwable -> {
-                                                                FragmentUtils.hideLoading();
-                                                                onSubmitCdsDataError(throwable);
+                                    @Override
+                                    public void onStart(String requestId) {
+                                        Log.i("START", "STARTTTTT");
+                                        FragmentUtils.showLoading(getActivity());
 
 
+                                    }
 
-                                                            }));
+                                    @Override
+                                    public void onProgress(String requestId, long bytes, long totalBytes) {
+                                        Double progress = (double) bytes / totalBytes;
+                                        FragmentUtils.showLoading(getActivity());
+                                        Log.i("PROGRESS", "PROGRESS");
 
-                                                } else {
-                                                    Alert.showFailed(getActivity(), "Please check your internet connection and try again");
-                                                }
+                                    }
 
+                                    @Override
+                                    public void onSuccess(String requestId, Map resultData) {
+                                        if (resultData != null) {
+                                            Log.i("SUCCESS", "SUCCESS");
+                                            FragmentUtils.hideLoading();
+                                            cloudImageUrl = (String) resultData.get("url");
+                                            cloudinaryId = (String) resultData.get("public_id").toString();
+                                            cloudinaryImage = MediaManager.get().url().transformation(new Transformation()).resourceType("image").generate(cloudinaryId + ".jpg");
+                                            Alert.showSuccess(getActivity(), "Image uploaded successfully");
+                                            Log.i("imageURL", cloudImageUrl);
+                                            Log.i("cloudinaryID", cloudinaryId);
 
+                                            if (InternetConnection.getInstance(getActivity()).isOnline()) {
+                                                FragmentUtils.showLoading(getActivity());
+                                                BdsDataRequest.Request request = new BdsDataRequest.Request(cloudImageUrl, firstName, lastName, gender, age, maritalStatus, familyName, phoneNo, electoralWard, areaCouncilWard, communityName, copereativeName, sourcesIncome, mainIncome, weekEarning, monthlyEarning, marketDay, childrenUnder18, below16, below16InSch, adult18Above, milkPerDay, milkConsume, milkForSale, challenges, cowInAbuja, totalCow, milkingCow, animalFeedInterest, animalFeedQuatity, recommendation, feedback);
+                                                   offlineSavedDataViewModel.onSubmitBdsDataCollection(request,bdsDataCollection);
+                                                   FragmentUtils.showLoading(getActivity());
+
+//                                                disposables.add(offlineSavedDataViewModel
+//                                                        .submitBDSData(request)
+//                                                        .subscribeOn(Schedulers.io())
+//                                                        .observeOn(AndroidSchedulers.mainThread())
+//                                                        .subscribe(response -> {
+//                                                            FragmentUtils.hideLoading();
+//                                                            Alert.showSuccess(getActivity(), response.getResponseMessage());
+//                                                            offlineSavedDataViewModel.deleteBdsOnUpload(bdsDataCollection);
+//                                                            if (bdsDataCollections.isEmpty()) {
+//                                                                uploadBds.setVisibility(View.GONE);
+//                                                            } else {
+//                                                                uploadBds.setVisibility(View.VISIBLE);
+//                                                            }
+//
+//                                                        }, throwable -> {
+//                                                            FragmentUtils.hideLoading();
+//                                                            onSubmitCdsDataError(throwable);
+//
+//
+//                                                        }));
+
+                                            } else {
+                                                Alert.showFailed(getActivity(), "Please check your internet connection and try again");
                                             }
 
-                                        }
-
-                                        @Override
-                                        public void onError(String requestId, ErrorInfo error) {
-                                            Log.i("ERROR", "ERROR");
-                                            FragmentUtils.hideLoading();
-                                            Alert.showFailed(getActivity(), "Error Uploading Result, Please try again later ");
-                                        }
-
-                                        @Override
-                                        public void onReschedule(String requestId, ErrorInfo error) {
-                                            Log.i("SCHEDULE", "SCHEDULE");
-                                            FragmentUtils.hideLoading();
-
-                                            Alert.showFailed(getActivity(), "Uploading is taking time,please take picture again");
 
                                         }
-                                    })
-                                    .dispatch();
 
+                                    }
 
+                                    @Override
+                                    public void onError(String requestId, ErrorInfo error) {
+                                        Log.i("ERROR", "ERROR");
+                                        FragmentUtils.hideLoading();
+                                        Alert.showFailed(getActivity(), "Error Uploading Result, Please try again later ");
+                                    }
 
+                                    @Override
+                                    public void onReschedule(String requestId, ErrorInfo error) {
+                                        Log.i("SCHEDULE", "SCHEDULE");
+                                        FragmentUtils.hideLoading();
 
+                                        Alert.showFailed(getActivity(), "Uploading is taking time,please take picture again");
+
+                                    }
+                                })
+                                .dispatch();
 
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Alert.showFailed(getActivity(),"Image cannot be found in gallery");
+                        Alert.showFailed(getActivity(), "Image cannot be found in gallery");
                     }
 
                 }
@@ -808,47 +768,8 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
 
 
-
-
-
-
-//                Log.i("FIRSTName",firstName);
-//                Log.i("LASTName",lastName);
-//                Log.i("Age",age);
-//                Log.i("familyname",familyName);
-//                Log.i("PhoneNumber",phoneNo);
-//                Log.i("childrenUnder18",childrenUnder18);
-//                Log.i("below16",below16);
-//                Log.i("adult18",adult18Above);
-//                Log.i("below16insch",below16InSch);
-//                Log.i("CummunityText",communityName);
-//                Log.i("sourcesIncome",sourcesIncome);
-//                Log.i("mainincome",mainIncome);
-//                Log.i("weekearn",weekEarning);
-//                Log.i("monthearn",monthlyEarning);
-//                Log.i("marketday",marketDay);
-//                Log.i("milkPerDay",milkPerDay);
-//                Log.i("milkConsume",milkConsume);
-//                Log.i("milkForsale",milkForSale);
-//                Log.i("challengesText",challenges);
-//                Log.i("abujaCow",cowInAbuja);
-//                Log.i("totalCow",totalCow);
-//                Log.i("milkingCow",milkingCow);
-//                Log.i("animalfeedquantity",animalFeedQuatity);
-//                Log.i("recommendation",recommendation);
-//                Log.i("cooperativename",copereativeName);
-//                Log.i("feedback",feedback);
-//
-//                Log.i("ward", electoralWard);
-//                Log.i("areacouncil", areaCouncilWard);
-//                Log.i("gender", gender);
-//                Log.i("maritalstatus", maritalStatus);
-//                Log.i("animalfeedselected", animalFeedInterest);
-//                Log.i("image", farmerImageBitmap);
-
-
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -867,20 +788,21 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
 
     @Override
     public void onSubmitCdsDataError(Throwable throwable) {
-        Log.d("ERROR","ERROR");
+        Log.d("ERROR", "ERROR");
+        FragmentUtils.hideLoading();
         try {
             if (throwable != null) {
-                Log.d("NEW ERROR","NEWERROR");
+                Log.d("NEW ERROR", "NEWERROR");
                 ANError error = (ANError) throwable;
                 NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
-                if (error.getErrorBody()!= null){
-                    Alert.showFailed(getActivity(), response.getResponseMessage());
+                if (error.getErrorBody() != null) {
+                    Alert.showFailed(getActivity(), response.getMessage());
 //                    Alert.showFailed(getActivity(), response.getMessage());
                 }
-            }else{
+            } else {
                 Alert.showFailed(getActivity(), " Unable to connect to the internet");
             }
-        }catch (IllegalStateException | JsonSyntaxException  | NullPointerException | ClassCastException exception){
+        } catch (IllegalStateException | JsonSyntaxException | NullPointerException | ClassCastException exception) {
             Alert.showFailed(getActivity(), "An unknown error occurred");
         }
 
@@ -896,7 +818,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         FragmentUtils.hideLoading();
         pdsDialog.cancel();
         AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
-        alertSuccess.setMessage(response.getMessage() + "!."+ "Continue with upload");
+        alertSuccess.setMessage(response.getMessage() + "!." + "Continue with upload");
         alertSuccess.setCancelable(false);
         alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "UPLOAD",
                 new DialogInterface.OnClickListener() {
@@ -919,7 +841,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         FragmentUtils.hideLoading();
         bdsDialog.cancel();
         AlertDialog alertSuccess = new AlertDialog.Builder(getActivity()).create();
-        alertSuccess.setMessage(response.getMessage() + "!."+ "Continue with upload");
+        alertSuccess.setMessage(response.getMessage() + "!." + "Continue with upload");
         alertSuccess.setCancelable(false);
         alertSuccess.setButton(AlertDialog.BUTTON_POSITIVE, "UPLOAD",
                 new DialogInterface.OnClickListener() {
@@ -948,19 +870,65 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     }
 
     @Override
+    public void onCdsUploadResponse(NewCollectionResponse response, CdsDataCollection cdsDataCollection) {
+        FragmentUtils.hideLoading();
+        Alert.showSuccess(getActivity(),response.getResponseMessage());
+        offlineSavedDataViewModel.deleteDataOnUpload(cdsDataCollection);
+        if (offlineSavedDataViewModel.checkifCdsIsEmpty()) {
+            uploadcds.setVisibility(View.GONE);
+        } else {
+            uploadcds.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+    }
+
+    @Override
+    public void onBdsUploadResponse(NewCollectionResponse response, BdsDataCollections bdsDataCollections) {
+        FragmentUtils.hideLoading();
+        Alert.showSuccess(getActivity(),response.getResponseMessage());
+        offlineSavedDataViewModel.deleteBdsOnUpload(bdsDataCollections);
+        if (offlineSavedDataViewModel.checkIfBdsIsEmpty()) {
+            uploadBds.setVisibility(View.GONE);
+        } else {
+            uploadBds.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void onPdsUploadResponse(NewCollectionResponse response, PdsDataCollection pdsDataCollections) {
+        FragmentUtils.hideLoading();
+        Alert.showSuccess(getActivity(),response.getResponseMessage());
+        offlineSavedDataViewModel.deletePdsOnUpload(pdsDataCollections);
+        if (offlineSavedDataViewModel.checkIfPdsIsEmpty()) {
+            uploadPds.setVisibility(View.GONE);
+        } else {
+            uploadPds.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onMilkCollectionUploadResponse(NewCollectionResponse response, MilkCollection milkCollection) {
+
+    }
+
+    @Override
     public void onDataClick(int position) {
         cdsDataCollection = cdsDataSurveyAdapter.getData().get(position);
         String name = cdsDataCollection.getFirstName() + "  " + cdsDataCollection.getLastName();
-        AlertDialog.Builder  builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal,null);
+        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal, null);
         builder.setView(view);
         builder.setCancelable(false);
         TextView deleteMessage = view.findViewById(R.id.deleteMessage);
         Button yes = view.findViewById(R.id.yes);
         Button no = view.findViewById(R.id.no);
-        String message = "Are you sure you want to delete\n" +  name  + " from the  CDS data collection\n" + " list";
-        Spannable spannable=  new SpannableString(  message );
+        String message = "Are you sure you want to delete\n" + name + " from the  CDS data collection\n" + " list";
+        Spannable spannable = new SpannableString(message);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#21523C")), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         deleteMessage.setText(spannable);
@@ -986,9 +954,8 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
         alertDialog.show();
 
 
-
-        Log.i("Clicked", "position"+position);
-        Log.i("Clicked", "position"+ cdsDataCollection);
+        Log.i("Clicked", "position" + position);
+        Log.i("Clicked", "position" + cdsDataCollection);
 
 
     }
@@ -998,15 +965,15 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     public void onEditClick(int position) {
         cdsDataCollection = cdsDataSurveyAdapter.getData().get(position);
         Intent intent = new Intent(getActivity(), EditCdsOfflineActivity.class);
-        intent.putExtra("cds_data",cdsDataCollection);
+        intent.putExtra("cds_data", cdsDataCollection);
         startActivity(intent);
-        Log.i("ONEditButton","EditButton");
-        Log.i("POSITION","Click"+position);
-        Log.i("OBJECTCLICKED", "ObjectClick"+  cdsDataCollection);
+        Log.i("ONEditButton", "EditButton");
+        Log.i("POSITION", "Click" + position);
+        Log.i("OBJECTCLICKED", "ObjectClick" + cdsDataCollection);
 
     }
 
-    public void addRecyclerViewDivider(RecyclerView recyclerView){
+    public void addRecyclerViewDivider(RecyclerView recyclerView) {
         DividerItemDecoration divider = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.recycler_view_divider));
         recyclerView.addItemDecoration(divider);
@@ -1016,16 +983,16 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     public void onPdsDeleteClick(int position) {
         pdsDataCollection = pdsDataSurveyAdapter.getData().get(position);
         String name = pdsDataCollection.getFirstName() + " " + pdsDataCollection.getLastName();
-        AlertDialog.Builder  builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal,null);
+        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal, null);
         builder.setView(view);
         builder.setCancelable(false);
         TextView deleteMessage = view.findViewById(R.id.deleteMessage);
         Button yes = view.findViewById(R.id.yes);
         Button no = view.findViewById(R.id.no);
-        String message = "Are you sure you want to delete\n" +  name  + " from the  PDS data collection\n" + " list";
-        Spannable spannable=  new SpannableString(  message );
+        String message = "Are you sure you want to delete\n" + name + " from the  PDS data collection\n" + " list";
+        Spannable spannable = new SpannableString(message);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#21523C")), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         deleteMessage.setText(spannable);
@@ -1056,10 +1023,9 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     @Override
     public void onPdsEditClick(int position) {
         pdsDataCollection = pdsDataSurveyAdapter.getData().get(position);
-        Intent intent = new Intent( getActivity(), EditPdsOfflineActivity.class);
-        intent.putExtra("pds_data",pdsDataCollection);
+        Intent intent = new Intent(getActivity(), EditPdsOfflineActivity.class);
+        intent.putExtra("pds_data", pdsDataCollection);
         startActivity(intent);
-
 
 
     }
@@ -1068,16 +1034,16 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     public void onBdsDeleteClick(int position) {
         bdsDataCollection = bdsDataSurveyAdapter.getData().get(position);
         String name = bdsDataCollection.getFirstName() + " " + bdsDataCollection.getLastName();
-        AlertDialog.Builder  builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = DataSurveySavedDataFragement.this.getLayoutInflater();
-        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal,null);
+        View view = inflater.inflate(R.layout.offline_delete_confirmation_modal, null);
         builder.setView(view);
         builder.setCancelable(false);
         TextView deleteMessage = view.findViewById(R.id.deleteMessage);
         Button yes = view.findViewById(R.id.yes);
         Button no = view.findViewById(R.id.no);
-        String message = "Are you sure you want to delete\n" +  name  + " from then BDS data collection\n" + " list";
-        Spannable spannable=  new SpannableString(  message );
+        String message = "Are you sure you want to delete\n" + name + " from then BDS data collection\n" + " list";
+        Spannable spannable = new SpannableString(message);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#21523C")), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), message.indexOf(name), message.indexOf(name) + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         deleteMessage.setText(spannable);
@@ -1108,8 +1074,8 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     @Override
     public void onBdsEditClick(int position) {
         bdsDataCollection = bdsDataSurveyAdapter.getData().get(position);
-        Intent intent = new Intent( getActivity(), EditBdsOfflineActivity.class);
-        intent.putExtra("bds_data",bdsDataCollection);
+        Intent intent = new Intent(getActivity(), EditBdsOfflineActivity.class);
+        intent.putExtra("bds_data", bdsDataCollection);
         startActivity(intent);
 
     }
@@ -1117,19 +1083,20 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
     public void hideKeyboard() {
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        disposables.clear();
-    }
-
+//    @Override
+//    public void onDestroy() {
+//        Log.d("ONDESTROY","DATA SURVEY FRAGMENT UNDESTROY CALLED");
+//        super.onDestroy();
+//            offlineSavedDataViewModel.dispose();
+//
+//    }
 
 
 }

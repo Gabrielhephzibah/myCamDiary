@@ -81,6 +81,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void handleError(Throwable throwable) {
+        Alert.showFailed(getApplicationContext()," ON HANDLE ERROR");
         try {
             if (throwable != null) {
             ANError error = (ANError) throwable;
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             }
 
         }
-        }catch (IllegalStateException | JsonSyntaxException exception){
+        }catch (IllegalStateException | JsonSyntaxException | ClassCastException | NullPointerException exception){
             Alert.showFailed(getApplicationContext(), "An unknown error occurred");
         }
 
@@ -127,7 +128,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void goToDashBoard(String type) {
-        email.setText("");
+        try { email.setText("");
         password.setText("");
         Intent intent = null;
         if(type.equals("collector")){
@@ -139,9 +140,25 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         }else if(type.equals("data collector")){
             intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
         }
-//        showLoading();
-
         startActivity(intent);
+        }catch (NullPointerException |IllegalStateException|JsonSyntaxException|ClassCastException exception){
+          Log.d("An unknown error", "an unknown error");
+        }
+//        email.setText("");
+//        password.setText("");
+//        Intent intent = null;
+//        if(type.equals("collector")){
+//            intent = new Intent(getApplicationContext(), DashboardActivity.class);
+//        }else if(type.equals("aggregator")){
+//            intent = new Intent(getApplicationContext(), AggregatorDashboardActivity.class);
+//        }else if(type.equals("dispatcher")){
+//            intent = new Intent(getApplicationContext(), DeliveryDashboardActivity.class);
+//        }else if(type.equals("data collector")){
+//            intent = new Intent(getApplicationContext(), DataCollectorDashboardActivity.class);
+//        }
+//
+//
+//        startActivity(intent);
     }
 
     @Override
@@ -182,6 +199,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void onResponse(CamLoginResponse response) {
 
+    }
+
+    @Override
+    public void onCatchError() {
+        Alert.showFailed(getApplicationContext(),"User-type does not exist");
     }
 
     @Override

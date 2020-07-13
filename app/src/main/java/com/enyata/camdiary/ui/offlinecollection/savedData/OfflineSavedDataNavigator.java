@@ -36,6 +36,10 @@ public interface OfflineSavedDataNavigator {
     void onLoginCollectionResponse(CamLoginResponse response);
 
     void onMilkCollectionResponse(List<MilkCollection> milkCollections);
+    void onCdsUploadResponse(NewCollectionResponse response, CdsDataCollection cdsDataCollection);
+    void  onBdsUploadResponse(NewCollectionResponse response, BdsDataCollections bdsDataCollections);
+    void  onPdsUploadResponse(NewCollectionResponse response, PdsDataCollection pdsDataCollections);
+    void  onMilkCollectionUploadResponse(NewCollectionResponse response, MilkCollection milkCollection);
 
 
 
