@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="5dp">
+            android:layout_marginEnd="20dp">
 
             <LinearLayout
                 android:id="@+id/first"
@@ -87,17 +87,28 @@
                     android:layout_weight="1"
                     android:gravity="right">
 
-                    <Button
+                    <TextView
                         android:id="@+id/viewMoreBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/collection_button"
+                        android:text="@string/view_farmer"
+                        android:textColor="#21523C"
+                        android:textSize="10sp"
                         android:fontFamily="@font/azo_san"
-                        android:minHeight="35dp"
-                        android:text="View more"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="10sp" />
+                        android:layout_height="wrap_content"/>
+
+
+
+<!--                    <Button-->
+<!--                        android:id="@+id/viewMoreBtn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/collection_button"-->
+<!--                        android:fontFamily="@font/azo_san"-->
+<!--                        android:minHeight="35dp"-->
+<!--                        android:text="View more"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="10sp" />-->
 
 
                 </LinearLayout>

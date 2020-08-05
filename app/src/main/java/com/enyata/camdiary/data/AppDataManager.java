@@ -478,6 +478,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<AggregationVolume> getRejectedAggregationVolume() {
+        return mApiHelper.getRejectedAggregationVolume();
+    }
+
+    @Override
     public Single<NumberOfCollectors> getTotalAggregation() {
         return mApiHelper.getTotalAggregation();
     }
@@ -642,6 +647,7 @@ public class AppDataManager implements DataManager {
     public Single<NewCollectionResponse> newCreateAggregation(NewAggregationRequest.Request request) {
         return mApiHelper.newCreateAggregation(request);
     }
+
 
     @Override
     public void setUserAsLoggedOut() {

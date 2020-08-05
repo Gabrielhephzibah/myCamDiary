@@ -17,10 +17,17 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", '"https://stagingcamuserapi.enyata.com/v1"')
-            buildConfigField("String", "INVENTORY_BASE_URL", '"https://stagingcaminventoryapi.enyata.com/api/v1"')
-            buildConfigField("String", "TRANSACTION_BASE_URL", '"https://stagingcamtransactionapi.enyata.com/api/v1"')
+            buildConfigField("String", "BASE_URL", '"https://camuserapi.camdairies.com/v1"')
+            buildConfigField("String", "INVENTORY_BASE_URL", '"https://caminventoryapi.camdairies.com/api/v1"')
+            buildConfigField("String", "TRANSACTION_BASE_URL", '"https://camtransactionapi.camdiaries.com/api/v1"')
             buildConfigField("String", "API_KEY", '"http://www.mocky.io/v2"')
+            buildConfigField("String", "CLOUDINARY_NAME", '"cam-dairy-foods-limited"')
+            buildConfigField("String", "CLOUDINARY_API_KEY", '"791627279229181"')
+            buildConfigField("String", "CLOUDINARY_API_SECRET", '"QHP6z3v0sE6mY9uF1ktttvtlvyo"')
+            buildConfigField("String", "CLOUDINARY_UPLOAD_PRESET", '"kufpy01m"')
+
+
+
         }
         release {
             minifyEnabled true

@@ -64,7 +64,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     ViewModelProviderFactory factory;
     private AggregatorDashboardViewModel aggregatorDashboardViewModel;
     ViewPager pager;
-    int[] layouts = {R.layout.aggregator_first_slide, R.layout.aggregator_second_slide};
+    int[] layouts = {R.layout.aggregator_first_slide, R.layout.aggregator_third_slide, R.layout.aggregator_second_slide};
     private AggregatorDashboardAdapter aggregatorDashboardAdapter;
     LinearLayout slideLayout;
     ImageView[] slider_dash;
@@ -116,6 +116,7 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
             aggregatorDashboardViewModel.getTotalVolumeCollectedByAggregator();
             aggregatorDashboardViewModel.getTotalNumberOfCollectors();
             aggregatorDashboardViewModel.getAggregatorTodayCollection();
+            aggregatorDashboardViewModel.getTotalVolumeRejectedByAggregator();
         } else {
             Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again");
 
@@ -276,6 +277,11 @@ public class AggregatorDashboardActivity extends BaseActivity<ActivityAggregator
     public void onProfilePic() {
         Intent intent = new Intent( getApplicationContext(), AggregatorEditProfileActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void getRejectedAggregationVolume(AggregationVolume volume) {
+        aggregatorDashboardViewModel.setAggregationRejectedVolume(volume.getData());
     }
 
     @Override

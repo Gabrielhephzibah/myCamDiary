@@ -43,13 +43,13 @@
                     android:id="@+id/aggregator_litres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/azo_san_bold"
+                    android:letterSpacing="-0.03"
+                    android:paddingTop="13dip"
                     android:text="0 Litres"
                     android:textColor="#21523C"
                     android:textSize="25dp"
-                    android:letterSpacing="-0.03"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/azo_san_bold"
-                    android:paddingTop="13dip"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

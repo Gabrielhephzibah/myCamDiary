@@ -5,7 +5,7 @@ import javax.inject.Named;
 public class  ApiUtils {
     private ApiUtils() {}
 
-    public static final String BASE_URL = "https://stagingcaminventoryapi.enyata.com/api/v1/";
+    public static final String BASE_URL = "https://caminventoryapi.camdairies.com/api/v1/";
 
 
     public static APIService getAPIService() {

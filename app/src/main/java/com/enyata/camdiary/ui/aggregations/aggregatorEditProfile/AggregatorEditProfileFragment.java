@@ -29,6 +29,7 @@ import com.cloudinary.Transformation;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.enyata.camdiary.BuildConfig;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.data.model.api.request.EditProfileRequest;
 import com.enyata.camdiary.ui.collections.collectorEditProfile.CollectorEditProfileViewModel;
@@ -140,6 +141,7 @@ public class AggregatorEditProfileFragment extends Fragment {
                     startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
                 }catch(Exception exp){
                     Log.i("Error",exp.toString());
+                    Alert.showFailed(getActivity(),"An unknown error occurred");
                 }
 
             }
@@ -219,25 +221,25 @@ public class AggregatorEditProfileFragment extends Fragment {
             try {
                 dialog.show();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-                uploadImagetoCloudinary(bitmap);
-
+                uploadImagetoCloudinary(bitmap,userPix);
                 userPix.setImageBitmap(bitmap);
                 Log.i("BITMAP", String.valueOf(bitmap));
             } catch (IOException e) {
                 e.printStackTrace();
+                Alert.showFailed(getActivity(),"An unknown error occurred");
             }
         }
     }
 
 
 
-    public void uploadImagetoCloudinary(Bitmap bitmap){
+    public void uploadImagetoCloudinary(Bitmap bitmap, ImageView imageView){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG , 20, byteArrayOutputStream);
         byte[] partImage = byteArrayOutputStream.toByteArray();
         MediaManager.get().upload(partImage)
                 .option("resource_type", "image")
-                .unsigned("ht7lodiw")
+                .unsigned(BuildConfig.CLOUDINARY_UPLOAD_PRESET)
                 .callback(new UploadCallback() {
 
                     @Override
@@ -275,14 +277,16 @@ public class AggregatorEditProfileFragment extends Fragment {
                     public void onError(String requestId, ErrorInfo error) {
                         Log.i("ERROR", "ERROR");
                         dialog.dismiss();
-                        Alert.showFailed(getActivity(), "Error Uploading Result, Please try again later ");
+                        Alert.showFailed(getActivity(), "Error uploading image, Please try again later ");
+                        imageView.setImageResource(0);
                     }
 
                     @Override
                     public void onReschedule(String requestId, ErrorInfo error) {
                         Log.i("SCHEDULE", "SCHEDULE");
                         dialog.dismiss();
-                        Alert.showFailed(getActivity(), "Uploading is taking time,please take picture again");
+                        Alert.showFailed(getActivity(), "Uploading is taking time,please select picture again");
+                        imageView.setImageResource(0);
 
                     }
                 })

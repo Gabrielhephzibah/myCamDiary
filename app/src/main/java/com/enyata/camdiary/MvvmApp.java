@@ -52,9 +52,9 @@ public class MvvmApp extends Application implements HasActivityInjector {
 
         try {
             Map config = new HashMap();
-            config.put("cloud_name", "dtt1nmogz");
-            config.put("api_key", "754277299533971");
-            config.put("api_secret", "hwuDlRgCtSpxKOg9rcY43AtsZvw");
+            config.put("cloud_name", BuildConfig.CLOUDINARY_NAME);
+            config.put("api_key", BuildConfig.CLOUDINARY_API_KEY);
+            config.put("api_secret", BuildConfig.CLOUDINARY_API_SECRET);
             MediaManager.init(getApplicationContext().getApplicationContext(), config);
         } catch (IllegalStateException e) {
             Log.i("Exception", "Exception");

@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 
 public final class ApiEndPoint {
 
+
     public static final String LOGIN_URL = BuildConfig.BASE_URL + "/";
 
     public static final String ACCEPTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/collection?status=accepted";
@@ -26,7 +27,9 @@ public final class ApiEndPoint {
 
     public static final String NEW_COLLECTION = BuildConfig.INVENTORY_BASE_URL + "/collection";
 
-    public static final String COLLECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/aggregation/volume";
+    public static final String COLLECTED_VOLUME_URL = BuildConfig.INVENTORY_BASE_URL + "/aggregation/volume/?status=accepted";
+
+    public static  final String REJECTED_AGGREGATOR_VOLUME = BuildConfig.INVENTORY_BASE_URL +"/aggregation/volume?status=rejected";
 
     public static final String NO_OF_COLLECTORS = BuildConfig.INVENTORY_BASE_URL + "/aggregation/collectors";
 

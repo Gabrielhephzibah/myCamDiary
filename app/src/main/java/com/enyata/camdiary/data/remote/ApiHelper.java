@@ -23,10 +23,8 @@ import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.ChurnDetails;
-import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
@@ -43,7 +41,6 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
-import com.enyata.camdiary.data.model.db.CdsDataCollection;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -65,6 +62,8 @@ public interface ApiHelper {
     Single<VolumeResponse> getAcceptedVolume();
     //get aggregation volume
     Single<AggregationVolume> getAggregationVolume();
+
+    Single<AggregationVolume>getRejectedAggregationVolume();
     // Get All Collectors
     Single<NumberOfCollectors> getTotalAggregation();
     // Get Rejected Volume
@@ -131,6 +130,8 @@ public interface ApiHelper {
     Flowable<ChurnDetails>getChurnDetails(String collectorVerificationId, String churnId);
 
     Single<NewCollectionResponse>newCreateAggregation(NewAggregationRequest.Request request);
+
+
 
 
 

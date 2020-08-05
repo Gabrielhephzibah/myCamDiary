@@ -4,7 +4,6 @@ package com.enyata.camdiary.ui.login;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.enyata.camdiary.data.DataManager;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
@@ -91,6 +90,10 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public  String getUserType(){
         return  getDataManager().getUserType();
     }
+
+
+
+
 
 //    getDataManager().updateUserInfo(token,firstname,userEmail,image_url);
 

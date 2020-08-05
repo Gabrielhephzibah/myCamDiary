@@ -16,5 +16,6 @@ public interface AggregatorDashboardNavigator {
     void  getAggregatorTodayCollection(AggregationCollectionResponse todayCollection);
     void  onLogOut();
     void onProfilePic();
+    void  getRejectedAggregationVolume(AggregationVolume volume);
 
 }

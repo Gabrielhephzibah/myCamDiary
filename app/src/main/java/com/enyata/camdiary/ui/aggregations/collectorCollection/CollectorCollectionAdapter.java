@@ -56,7 +56,7 @@ public class CollectorCollectionAdapter extends RecyclerView.Adapter<CollectorCo
     public class CollectionViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
         TextView churnId,volume;
         LinearLayout parent;
-        Button viewMoreBtn;
+        TextView viewMoreBtn;
         onListItem onListItem;
 
         public CollectionViewHolder(@NonNull View itemView, onListItem onListItem)  {

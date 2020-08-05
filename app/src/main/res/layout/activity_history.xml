@@ -67,17 +67,17 @@
                             android:textColor="#21523C"
                             android:textSize="30sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@+id/collectorName"
-                            android:layout_marginBottom="-26dp"
-                            android:fontFamily="@font/azo_san"
-                            android:paddingTop="25dp"
-                            android:text="Here’s how far you’ve done"
-                            android:textAllCaps="false"
-                            android:textColor="#3333"
-                            android:textSize="14sp" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignBottom="@+id/collectorName"-->
+<!--                            android:layout_marginBottom="-26dp"-->
+<!--                            android:fontFamily="@font/azo_san"-->
+<!--                            android:paddingTop="25dp"-->
+<!--                            android:text="Here’s how far you’ve done"-->
+<!--                            android:textAllCaps="false"-->
+<!--                            android:textColor="#3333"-->
+<!--                            android:textSize="14sp" />-->
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/circle"
@@ -101,6 +101,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Here’s how far you’ve done"
@@ -112,6 +113,7 @@
 
 
                 <ListView
+                    android:layout_marginTop="10dp"
                     android:id="@+id/listView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -112,7 +112,7 @@
 
         <meta-data
             android:name="CLOUDINARY_URL"
-            android:value="cloudinary:dtt1nmogz" />
+            android:value="cloudinary:cam-dairy-foods-limited" />
     </application>
 
 </manifest>

@@ -86,7 +86,7 @@
 
 
     <!---Our String-->
-    <string name="app_name">CamDiary</string>
+    <string name="app_name">Câm</string>
     <string name="forget_password"><u>Forgot Password</u></string>
     <string name="edittext_hint"><font size="5">Answer</font></string>
     <string name="hint"><font size="12">Any other thing you would like us to know?</font></string>
@@ -100,6 +100,7 @@
     <string name="nextText">NEXT</string>
     <string name="finishText">FINISH</string>
     <string name="form_pick_photos">open</string>
+    <string name="view_farmer"><u>View farmers</u></string>
 
 
 </resources>

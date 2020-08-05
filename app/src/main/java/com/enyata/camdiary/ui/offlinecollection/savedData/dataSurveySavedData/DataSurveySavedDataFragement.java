@@ -38,6 +38,7 @@ import com.cloudinary.Transformation;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.enyata.camdiary.BuildConfig;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
 import com.enyata.camdiary.data.model.api.request.CdsDataRequest;
@@ -672,7 +673,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                         FragmentUtils.showLoading(getActivity());
                         MediaManager.get().upload(partImage)
                                 .option("resource_type", "image")
-                                .unsigned("ht7lodiw")
+                                .unsigned(BuildConfig.CLOUDINARY_UPLOAD_PRESET)
                                 .callback(new UploadCallback() {
 
                                     @Override
@@ -750,7 +751,6 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                                     public void onReschedule(String requestId, ErrorInfo error) {
                                         Log.i("SCHEDULE", "SCHEDULE");
                                         FragmentUtils.hideLoading();
-
                                         Alert.showFailed(getActivity(), "Uploading is taking time,please take picture again");
 
                                     }
@@ -796,7 +796,7 @@ public class DataSurveySavedDataFragement extends Fragment implements OfflineSav
                 ANError error = (ANError) throwable;
                 NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
                 if (error.getErrorBody() != null) {
-                    Alert.showFailed(getActivity(), response.getMessage());
+                    Alert.showFailed(getActivity(), response.getResponseMessage());
 //                    Alert.showFailed(getActivity(), response.getMessage());
                 }
             } else {

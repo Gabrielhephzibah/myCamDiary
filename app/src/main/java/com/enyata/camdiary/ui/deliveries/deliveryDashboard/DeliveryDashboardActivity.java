@@ -129,7 +129,7 @@ public class DeliveryDashboardActivity extends BaseActivity<ActivityDeliveryDash
 
         listView.setOnItemClickListener((adapterView, view, position, l) -> {
 
-            DeliveryList delivery = deliveryLists .get(position);
+            DeliveryList delivery = deliveryLists.get(position);
             String customerName = delivery.getMyName();
             String  customerAddress= delivery.getCustomerAdreess();
             String contactNo = delivery.getNumber();

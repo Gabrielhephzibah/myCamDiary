@@ -94,7 +94,7 @@
                             android:layout_height="50dp"
                             android:hint="@string/third_hint"
                             android:textColorHint="@color/hint_color"
-                            android:inputType="text|textMultiLine"
+                            android:inputType="number"
                             android:backgroundTint="#fff"
                             android:gravity="top"/>
 

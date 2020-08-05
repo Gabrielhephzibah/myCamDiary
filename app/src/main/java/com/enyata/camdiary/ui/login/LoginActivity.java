@@ -26,7 +26,6 @@ import com.enyata.camdiary.databinding.ActivityLoginBinding;
 import com.enyata.camdiary.ui.aggregations.dashboard.AggregatorDashboardActivity;
 import com.enyata.camdiary.ui.base.BaseActivity;
 import com.enyata.camdiary.ui.collections.dashboard.DashboardActivity;
-import com.enyata.camdiary.ui.collections.dashboard.DashboardSlideOneFragment;
 import com.enyata.camdiary.ui.datacollector.dataCollectorDashBoard.DataCollectorDashboardActivity;
 import com.enyata.camdiary.ui.deliveries.deliveryDashboard.DeliveryDashboardActivity;
 import com.enyata.camdiary.ui.offlinecollection.offlineDashBoard.OfflineDashboardActivity;
@@ -206,6 +205,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         Alert.showFailed(getApplicationContext(),"User-type does not exist");
     }
 
+
     @Override
     public void onBackPressed() {
         if (backButtonPressed >= 2) {
@@ -230,6 +230,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         mLoginViewModel.setNavigator(this);
         email = mActivityLoginBinding.emailTextView;
         password = mActivityLoginBinding.passwordTextView;
+
 
     }
 }

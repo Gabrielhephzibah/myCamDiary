@@ -33,7 +33,7 @@
                     android:id="@+id/volume_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Volume Collected"
+                    android:text="Volume Accepted"
                     android:letterSpacing="0.03"
                     android:textColor="#21523C"
                     android:textSize="14sp"

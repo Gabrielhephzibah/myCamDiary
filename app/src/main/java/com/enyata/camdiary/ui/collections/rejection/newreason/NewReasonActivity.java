@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,6 +59,7 @@ public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,New
     String rejectionVolume;
     List<ChurnDetailsData>churnRejection;
     RetrofitClient retrofitClient = new RetrofitClient();
+    CheckBox boxOne, boxTwo, boxThree, boxFour;
 
     EditText textarea;
     private String message;
@@ -86,11 +88,16 @@ public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,New
         newReasonViewModel.setNavigator(this);
         activityNewReasonBinding = getViewDataBinding();
         textarea = activityNewReasonBinding.textarea;
+        boxOne = activityNewReasonBinding.checkbox1;
+        boxTwo = activityNewReasonBinding.checkbox2;
+        boxThree = activityNewReasonBinding.checkbox3;
+        boxFour = activityNewReasonBinding.checkbox4;
         farmerName = newReasonViewModel.getFarmerFullName();
         farmerVerificationId = newReasonViewModel.getFarmerVerificationNo();
         Log.d("ChurnDetails",String.valueOf(newReasonViewModel.getChurnDetails()));
         churnRejection = newReasonViewModel.getChurnDetails();
         rejectionVolume = newReasonViewModel.getRejectedVolume();
+
         message = "nil";
         test_one = "passed";
         test_two = "passed";
@@ -116,42 +123,48 @@ public class NewReasonActivity extends BaseActivity<ActivityNewReasonBinding,New
 //           alertMessage =  "You have rejected "+ volume + " litres of product \nfrom " +farmerName + ".\nPlease tap continue to confirm \nrejection";
 //        }
 
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(NewReasonActivity.this);
-        LayoutInflater inflater = NewReasonActivity.this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(false);
-        TextView entry = (TextView) dialogView.findViewById(R.id.entry);
-        TextView dialogMessage = (TextView) dialogView.findViewById(R.id.message);
-        entry.setText("Rejection Accepted");
-        dialogMessage.setText("You have rejected "+ rejectionVolume + " litres of product \nfrom " +farmerName + ".\nPlease tap continue to confirm \nrejection");
-        TextView cancel =(TextView) dialogView.findViewById(R.id.cancelCollection);
-        TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
-        final AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-        continuee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-                if (newReasonViewModel.checkIfChurnDetailsIsEmpty()){
-                    Alert.showFailed(getApplicationContext(),"Churn ID and volume cannot be empty");
-                    return;
-                }
-                if (InternetConnection.getInstance(NewReasonActivity.this).isOnline()){
-                    NewCreateCollectionRequest request = new NewCreateCollectionRequest(farmerVerificationId, "Rejected", test_one, test_two, test_three, unapproved_container, message, churnRejection);
-                    newReasonViewModel.createCollection(request);
+        if (!(boxOne.isChecked() || boxTwo.isChecked() || boxThree.isChecked() || boxFour.isChecked() || !message.isEmpty())){
+            Alert.showFailed(getApplicationContext(),"Reason for rejection cannot be empty");
+        }else {
 
-                }else {
-                    Alert.showFailed(getApplicationContext(),"Please Check Your Internet Connection and try again");
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(NewReasonActivity.this);
+            LayoutInflater inflater = NewReasonActivity.this.getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.confirm_entry_layout, null);
+            dialog.setView(dialogView);
+            dialog.setCancelable(false);
+            TextView entry = (TextView) dialogView.findViewById(R.id.entry);
+            TextView dialogMessage = (TextView) dialogView.findViewById(R.id.message);
+            entry.setText("Rejection Accepted");
+            dialogMessage.setText("You have rejected " + rejectionVolume + " litres of product \nfrom " + farmerName + ".\nPlease tap continue to confirm \nrejection");
+            TextView cancel = (TextView) dialogView.findViewById(R.id.cancelCollection);
+            TextView continuee = (TextView) dialogView.findViewById(R.id.continuee);
+            final AlertDialog alertDialog = dialog.create();
+            alertDialog.show();
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
                 }
-            }
-        });
+            });
+            continuee.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                    if (newReasonViewModel.checkIfChurnDetailsIsEmpty()) {
+                        Alert.showFailed(getApplicationContext(), "Churn ID and volume cannot be empty");
+                        return;
+                    }
+                    if (InternetConnection.getInstance(NewReasonActivity.this).isOnline()) {
+                        NewCreateCollectionRequest request = new NewCreateCollectionRequest(farmerVerificationId, "Rejected", test_one, test_two, test_three, unapproved_container, message, churnRejection);
+                        newReasonViewModel.createCollection(request);
+
+                    } else {
+                        Alert.showFailed(getApplicationContext(), "Please Check Your Internet Connection and try again");
+                    }
+                }
+            });
+
+        }
 
 
     }

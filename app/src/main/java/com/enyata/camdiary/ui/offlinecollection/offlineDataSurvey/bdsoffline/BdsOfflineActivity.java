@@ -304,6 +304,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
             startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
         }catch(Exception exp){
             Log.i("Error",exp.toString());
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
 
@@ -502,6 +503,7 @@ public class BdsOfflineActivity extends BaseActivity<ActivityBdsOfflineBinding, 
                 Log.i("uri", String.valueOf(uri));
             } catch (IOException e) {
                 e.printStackTrace();
+                Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             }
         }
     }

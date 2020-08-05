@@ -40,8 +40,16 @@ public class AggregatorSlideThreeFragment extends Fragment {
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView AggregatorVolumeTextView = view.findViewById(R.id.aggregator_litres);
 
 
+        aggregatorDashboardViewModel.getAggregatorRejectedVolume().observe(requireActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                AggregatorVolumeTextView.setText(String.format("%s Litres",s));
+
+            }
+        });
 
     }
 

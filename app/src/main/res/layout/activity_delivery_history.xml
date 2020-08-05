@@ -108,6 +108,7 @@
                             </RelativeLayout>
 
                             <TextView
+                                android:layout_marginTop="5dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Here’s how far you’ve done"
@@ -121,7 +122,7 @@
                             android:id="@+id/listView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="85dp" />
 
 

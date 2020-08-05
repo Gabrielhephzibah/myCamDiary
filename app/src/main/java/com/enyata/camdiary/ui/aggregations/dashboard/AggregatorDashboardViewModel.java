@@ -45,6 +45,18 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
                 }));
     }
 
+    public void  getTotalVolumeRejectedByAggregator(){
+        getCompositeDisposable().add(getDataManager()
+                .getRejectedAggregationVolume()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getNavigator().getRejectedAggregationVolume(response);
+                }, throwable -> {
+                    getNavigator().handleError(throwable);
+                }));
+    }
+
 
     public void getTotalNumberOfCollectors(){
         getCompositeDisposable().add(getDataManager()
@@ -92,6 +104,7 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
      */
     private MutableLiveData<String> aggregatorVolume = new MutableLiveData<>();
     private MutableLiveData<String> totalAggregation  = new MutableLiveData<>();
+    private MutableLiveData<String> rejectedAggregationVolume = new MutableLiveData<>();
 
 
     public void setAggregatorVolume(String volume) {
@@ -106,6 +119,12 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
         totalAggregation.setValue(numberOfCollectors);
     }
 
+    public void setAggregationRejectedVolume(String volume){rejectedAggregationVolume.setValue(volume);}
+
+    public LiveData<String>getAggregatorRejectedVolume(){
+        return rejectedAggregationVolume;
+    }
+
 
 
     public LiveData<String>getTotalAggregation(){
@@ -115,6 +134,7 @@ public class AggregatorDashboardViewModel extends BaseViewModel<AggregatorDashbo
     public  String getAggregatorImage(){
         return getDataManager().getUserImageUrl();
     }
+
 
 
 }

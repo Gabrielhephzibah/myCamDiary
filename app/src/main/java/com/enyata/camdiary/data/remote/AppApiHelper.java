@@ -19,15 +19,12 @@ import com.enyata.camdiary.data.model.api.response.AggregationHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.AggregationVolume;
 import com.enyata.camdiary.data.model.api.request.CamLogin;
 import com.enyata.camdiary.data.model.api.request.Collection;
-import com.enyata.camdiary.data.model.api.response.AggregatorCollections;
 import com.enyata.camdiary.data.model.api.response.AllEntries;
 import com.enyata.camdiary.data.model.api.response.BottleInventoryResponse;
 import com.enyata.camdiary.data.model.api.response.CamLoginResponse;
 import com.enyata.camdiary.data.model.api.response.ChurnDetails;
-import com.enyata.camdiary.data.model.api.response.CollectionHistory;
 import com.enyata.camdiary.data.model.api.response.CollectionHistoryResponse;
 import com.enyata.camdiary.data.model.api.response.CollectorCollectionResponse;
-import com.enyata.camdiary.data.model.api.response.CollectorDetails;
 import com.enyata.camdiary.data.model.api.response.CollectorDetailsResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryCompletedResponse;
 import com.enyata.camdiary.data.model.api.response.DeliveryDetailResponse;
@@ -44,7 +41,6 @@ import com.enyata.camdiary.data.model.api.response.PendingDeliveryResponse;
 import com.enyata.camdiary.data.model.api.response.ResetPasswordResponse;
 import com.enyata.camdiary.data.model.api.response.SavedAggregationResponse;
 import com.enyata.camdiary.data.model.api.response.VolumeResponse;
-import com.enyata.camdiary.ui.aggregations.milkcollection.MilkCollectionActivity;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import javax.inject.Inject;
@@ -111,6 +107,14 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Single<AggregationVolume> getAggregationVolume() {
         return Rx2AndroidNetworking.get(ApiEndPoint.COLLECTED_VOLUME_URL)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(AggregationVolume.class);
+    }
+
+    @Override
+    public Single<AggregationVolume>getRejectedAggregationVolume() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.REJECTED_AGGREGATOR_VOLUME)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(AggregationVolume.class);
@@ -396,6 +400,8 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectSingle(NewCollectionResponse.class);
     }
+
+
 
 
 }

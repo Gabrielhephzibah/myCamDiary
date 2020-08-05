@@ -40,19 +40,36 @@
                <RelativeLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
-                  <TextView
+
+                  <LinearLayout
                       android:id="@+id/forgotPassword"
+                      android:orientation="horizontal"
                       android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_alignParentLeft="true"
-                      android:paddingTop="18dip"
-                      android:fontFamily="@font/azo_sans_light"
-                      android:gravity="center_vertical"
-                      android:lines="1"
-                      android:letterSpacing="-0.03"
-                      android:text="Data Collection"
-                      android:textColor="#21523C"
-                      android:textSize="30sp" />
+                      android:layout_height="wrap_content">
+                     <TextView
+                         android:id="@+id/dataTitle"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:paddingTop="18dip"
+                         android:fontFamily="@font/azo_sans_light"
+                         android:gravity="center_vertical"
+                         android:lines="1"
+                         android:letterSpacing="-0.03"
+                         android:text="Data Collection"
+                         android:textColor="#21523C"
+                         android:textSize="30sp" />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/azo_sans_light"
+                         android:text="(bds)"
+                         android:textSize="19sp"
+                         android:textAllCaps="true"
+                         android:textColor="#21523C"
+                        />
+
+                  </LinearLayout>
 
                   <androidx.cardview.widget.CardView
                       android:onClick="@{()->viewModel.onUploadPicture()}"

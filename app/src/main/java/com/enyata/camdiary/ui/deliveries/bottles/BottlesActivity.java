@@ -93,7 +93,7 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
         TextView cancel = dialogView.findViewById(R.id.cancelCollection);
         TextView continuee = dialogView.findViewById(R.id.continuee);
         TextView message = dialogView.findViewById(R.id.message);
-        message.setText(String.format("You have just delivered CamDiary Product to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
+        message.setText(String.format("You have just delivered CamDairy Product to \n%s.\nPlease tap continue to confirm \nDelivery", customerName));
         final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
@@ -104,7 +104,15 @@ public class BottlesActivity extends BaseActivity<ActivityBottlesBinding,Bottles
                 alertDialog.dismiss();
 
         if (InternetConnection.getInstance(BottlesActivity.this).isOnline()) {
-            DeliveryCollection.Request request = new DeliveryCollection.Request(activityBottlesBinding.editText.getText().toString(), bottlesViewModel.getOrderId());
+            String bottle = activityBottlesBinding.editText.getText().toString();
+            String newBottle;
+            if (bottle.isEmpty()){
+                newBottle = "0";
+            }else {
+                newBottle = activityBottlesBinding.editText.getText().toString();
+            }
+
+            DeliveryCollection.Request request = new DeliveryCollection.Request(newBottle, bottlesViewModel.getOrderId());
             bottlesViewModel.addNewDelivery(request);
 
         } else {

@@ -18,6 +18,9 @@ public class DispatcherSignUpResponse {
     @SerializedName("status")
     private String status;
 
+    @Expose
+    @SerializedName("responseMessage")
+    private String responseMessage;
 
 
     public String getMessage() {
@@ -30,5 +33,9 @@ public class DispatcherSignUpResponse {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getResponseMessage() {
+        return responseMessage;
     }
 }

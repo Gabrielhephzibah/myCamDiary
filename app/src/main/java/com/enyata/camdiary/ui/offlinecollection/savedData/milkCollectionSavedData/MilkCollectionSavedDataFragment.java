@@ -344,7 +344,7 @@ public class MilkCollectionSavedDataFragment extends Fragment implements Offline
                 Converter<ResponseBody, NewCollectionResponse> errorConverter = retrofitClient.getRetrofit().responseBodyConverter(NewCollectionResponse.class, new Annotation[0]);
                 try {
                     NewCollectionResponse error = errorConverter.convert(((HttpException) throwable).response().errorBody());
-                    Alert.showFailed(getActivity(), error.getMessage());
+                    Alert.showFailed(getActivity(), error.getError());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

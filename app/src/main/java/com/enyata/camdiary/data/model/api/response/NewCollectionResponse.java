@@ -17,6 +17,10 @@ public class NewCollectionResponse {
     @SerializedName("message")
     private String message;
 
+    @Expose
+    @SerializedName("error")
+    private String error;
+
 
     public String getResponseMessage() {
         return responseMessage;
@@ -27,4 +31,8 @@ public class NewCollectionResponse {
     }
 
     public String getMessage() { return message; }
+
+    public String getError() {
+        return error;
+    }
 }

@@ -68,6 +68,7 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
     String aggregatorVolume;
     String collectorName;
     String churnId;
+    TextView noCollectionText;
 //     ChurnDetailsAdapter churnDetailsAdapter;
 
     RecyclerView churnRecyclerView;
@@ -97,10 +98,11 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
         activityCollectorColletionBinding = getViewDataBinding();
         mRecyclerView = activityCollectorColletionBinding.collectionRecyclerView;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        addRecyclerViewDivider(mRecyclerView);
+//        addRecyclerViewDivider(mRecyclerView);
         collectorVerificationId = collectorCollectionViewModel.getCollectorVerificationId();
         collectorCollectionViewModel.getCollectorCollection(collectorVerificationId);
         collectorName = collectorCollectionViewModel.getCollectorName();
+        noCollectionText = activityCollectorColletionBinding.noCollectionText;
         Log.d("NAME", collectorName);
 
 
@@ -153,19 +155,23 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
     @Override
     public void onResponse(CollectorCollectionResponse response) {
         Log.d("RESPOSEEE","This is the reaponse"+response);
-        try {
-            for (ChurnData data : response.getData()) {
-                String churnId = data.getChurnId();
-                String volume = data.getVolume();
-                collectionListItems.add(new CollectorCollectionListItem(churnId,volume));
-                collectorCollectionAdapter = new CollectorCollectionAdapter(this,collectionListItems,this);
-                mRecyclerView.setAdapter(collectorCollectionAdapter);
+        if (response.getData().isEmpty()) {
+            noCollectionText.setVisibility(View.VISIBLE);
+        }else {
+            try {
+                for (ChurnData data : response.getData()) {
+                    String churnId = data.getChurnId();
+                    String volume = data.getVolume();
+                    collectionListItems.add(new CollectorCollectionListItem(churnId, volume));
+                    collectorCollectionAdapter = new CollectorCollectionAdapter(this, collectionListItems, this);
+                    mRecyclerView.setAdapter(collectorCollectionAdapter);
 
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("Error", e.getMessage());
             }
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d("Error",e.getMessage());
         }
 
     }
@@ -379,7 +385,7 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
                     alertDialog.setView(itemView);
                     EditText textArea = itemView.findViewById(R.id.textarea);
                     CheckBox checkBox = itemView.findViewById(R.id.checkbox1);
-                    String textAreaText = textArea.getText().toString();
+
                     Button submit = itemView.findViewById(R.id.submit);
                     ImageView back = itemView.findViewById(R.id.back);
                     alertTwo = alertDialog.create();
@@ -389,12 +395,20 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
                         @Override
                         public void onClick(View view) {
                             alertOne.dismiss();
+                            String textarea = textArea.getText().toString();
+                            if (!(checkBox.isChecked() || !textarea.isEmpty())){
+                                Alert.showFailed(getApplicationContext(),"Reason for rejection cannot be empty");
+                                Log.d("textarea", textarea);
+                                return;
+
+                            }else {
+                                Log.d("newTextArea", textarea);
                             View rejectView = inflater.inflate(R.layout.confirm_entry_layout, null);
                             alertBuilder.setView(rejectView);
                             TextView message = rejectView.findViewById(R.id.message);
                             TextView cancel = rejectView.findViewById(R.id.cancelCollection);
                             TextView continuee = rejectView.findViewById(R.id.continuee);
-                            message.setText("You have rejected " + aggregatorVolume +  " litres of product \nfrom "+ collectorName + ". \nPlease tap continue to confirm \nrejection");
+                            message.setText("You have rejected " + aggregatorVolume + " litres of product \nfrom " + collectorName + ". \nPlease tap continue to confirm \nrejection");
 
                             alertFour = alertBuilder.create();
                             alertFour.show();
@@ -409,30 +423,30 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
                                     String statusOfTest;
                                     String churn = churnId;
                                     String reason;
-                                    if (checkBox.isChecked()){
-                                         statusOfTest = "failed";
-                                    }else {
-                                         statusOfTest = "passed";
+                                    if (checkBox.isChecked()) {
+                                        statusOfTest = "failed";
+                                    } else {
+                                        statusOfTest = "passed";
                                     }
 
                                     if (!textAreaText.isEmpty()) {
-                                        reason = textArea.getText().toString() ;
-                                    }else {
-                                        reason  = "nil";
+                                        reason = textArea.getText().toString();
+                                    } else {
+                                        reason = "nil";
                                     }
-                                    Log.d("collectorID",collectorId);
-                                    Log.d("aggregationVolume",aggregationVolume);
-                                    Log.d("statusOfAggregation",statusOfAggregation);
-                                    Log.d("statusOfText",statusOfTest);
-                                    Log.d("reasonForRejection",reason);
+                                    Log.d("collectorID", collectorId);
+                                    Log.d("aggregationVolume", aggregationVolume);
+                                    Log.d("statusOfAggregation", statusOfAggregation);
+                                    Log.d("statusOfText", statusOfTest);
+                                    Log.d("reasonForRejection", reason);
 
-                                    if (InternetConnection.getInstance(CollectorCollectionActivity.this).isOnline()){
+                                    if (InternetConnection.getInstance(CollectorCollectionActivity.this).isOnline()) {
                                         alertFour.cancel();
                                         alertTwo.cancel();
-                                        NewAggregationRequest.Request request = new NewAggregationRequest.Request(collectorId,aggregationVolume,statusOfAggregation,statusOfTest,reason,churn);
-                                        collectorCollectionViewModel.createAggregation(request,position);
-                                    }else {
-                                        Alert.showFailed(getApplicationContext(),"No internet connection");
+                                        NewAggregationRequest.Request request = new NewAggregationRequest.Request(collectorId, aggregationVolume, statusOfAggregation, statusOfTest, reason, churn);
+                                        collectorCollectionViewModel.createAggregation(request, position);
+                                    } else {
+                                        Alert.showFailed(getApplicationContext(), "No internet connection");
                                     }
 
                                 }
@@ -445,7 +459,7 @@ public class CollectorCollectionActivity extends BaseActivity<ActivityCollectorC
                                 }
                             });
 
-
+                        }
                         }
                     });
 

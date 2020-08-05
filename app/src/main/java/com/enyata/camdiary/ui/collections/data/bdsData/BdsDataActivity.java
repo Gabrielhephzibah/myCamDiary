@@ -33,6 +33,7 @@ import com.cloudinary.Transformation;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.enyata.camdiary.BuildConfig;
 import com.enyata.camdiary.R;
 import com.enyata.camdiary.ViewModelProviderFactory;
 import com.enyata.camdiary.data.model.api.request.BdsDataRequest;
@@ -383,6 +384,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
         }catch(Exception exp){
             Log.i("Error",exp.toString());
+            Alert.showFailed(getApplicationContext(),"An unknown error occurred");
         }
 
 
@@ -414,7 +416,7 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             ANError error = (ANError) throwable;
             NewCollectionResponse response = gson.fromJson(error.getErrorBody(), NewCollectionResponse.class);
             if (error.getErrorBody()!= null){
-                Alert.showFailed(getApplicationContext(), response.getMessage());
+                Alert.showFailed(getApplicationContext(), response.getResponseMessage());
             }
         }else{
             Alert.showFailed(getApplicationContext(), " Unable to connect to the internet");
@@ -497,12 +499,12 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
             try {
                 dialog.show();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
-                uploadImagetoCloudinary(bitmap);
-
+                uploadImagetoCloudinary(bitmap,farmerImage);
                 farmerImage.setImageBitmap(bitmap);
                 Log.i("BITMAP", String.valueOf(bitmap));
             } catch (IOException e) {
                 e.printStackTrace();
+                Alert.showFailed(getApplicationContext(),"An unknown error occurred");
             }
         }
     }
@@ -510,13 +512,13 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
 
 
 
-    public void uploadImagetoCloudinary(Bitmap bitmap){
+    public void uploadImagetoCloudinary(Bitmap bitmap, ImageView image){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG , 20, byteArrayOutputStream);
         byte[] partImage = byteArrayOutputStream.toByteArray();
         MediaManager.get().upload(partImage)
                 .option("resource_type", "image")
-                .unsigned("ht7lodiw")
+                .unsigned(BuildConfig.CLOUDINARY_UPLOAD_PRESET)
                 .callback(new UploadCallback() {
 
                     @Override
@@ -557,15 +559,16 @@ public class BdsDataActivity extends BaseActivity<ActivityBdsDataBinding,BdsView
                     public void onError(String requestId, ErrorInfo error) {
                         Log.i("ERROR", "ERROR");
                         dialog.dismiss();
-                        Alert.showFailed(getApplicationContext(), "Error Uploading Result, Please try again later ");
+                        Alert.showFailed(getApplicationContext(), "Error Uploading image, Please try again later ");
+                        image.setImageResource(0);
                     }
 
                     @Override
                     public void onReschedule(String requestId, ErrorInfo error) {
                         Log.i("SCHEDULE", "SCHEDULE");
                         dialog.dismiss();
-
-                        Alert.showFailed(getApplicationContext(), "Uploading is taking time,please take picture again");
+                        Alert.showFailed(getApplicationContext(), "Uploading is taking time,please select picture again");
+                        image.setImageResource(0);
 
                     }
                 })
